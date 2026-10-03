@@ -235,15 +235,27 @@ export function SteamGrowthBanners() {
                     className={cn("queue-art", !motion && "is-paused")}
                     aria-hidden="true"
                   >
-                    {[0, 1, 2, 3].map((i) => (
-                      <span className={`queue-card queue-card-${i}`} key={i}>
-                        <span className="queue-card-image">
-                          <span />
-                        </span>
-                        <span className="queue-card-line" />
-                        <span className="queue-card-line short" />
+                    <span className="queue-rail">
+                      <span className="queue-track">
+                        {/* Identical groups give the track an exact, seamless half-width wrap. */}
+                        {[0, 1].map((copy) => (
+                          <span className="queue-sequence" key={copy}>
+                            {[0, 1, 2, 3].map((i) => (
+                              <span
+                                className={`queue-card queue-card-${i}`}
+                                key={i}
+                              >
+                                <span className="queue-card-image">
+                                  <span />
+                                </span>
+                                <span className="queue-card-line" />
+                                <span className="queue-card-line short" />
+                              </span>
+                            ))}
+                          </span>
+                        ))}
                       </span>
-                    ))}
+                    </span>
                   </span>
                 </button>
               </DialogTrigger>
@@ -274,7 +286,7 @@ export function SteamGrowthBanners() {
               <h2 className="mb-2 font-medium text-foreground">Reference</h2>
               <p>
                 Steam Growth Banners.mp4 · 11-second recording. The reward
-                strip, banner copy, and moving card stack are visible
+                strip, banner copy, and rolling card strip are visible
                 throughout. No click-through, scrolling, or sticky behavior is
                 shown.
               </p>
@@ -283,8 +295,9 @@ export function SteamGrowthBanners() {
               <h2 className="mb-2 font-medium text-foreground">Retained</h2>
               <p>
                 The two banners’ original writing, their relative hierarchy, the
-                three-card sticker fan, and the discovery card motion. “Now
-                through Oct 8” is reference copy, not a current offer.
+                three-card sticker fan, and the continuous, angled discovery
+                card marquee. “Now through Oct 8” is reference copy, not a
+                current offer.
               </p>
             </section>
           </div>

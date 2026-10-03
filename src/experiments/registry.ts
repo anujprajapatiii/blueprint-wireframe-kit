@@ -35,7 +35,7 @@ export const experiments: Experiment[] = [
     sourceAccess: "Inspected",
     observations: [
       "The 10.917-second video shows a static store page with a compact sticker reward strip above a wider discovery queue banner.",
-      "Three stickers fan out in the reward strip; the discovery queue card stack drifts and tilts automatically.",
+      "Three stickers fan out in the reward strip; landscape discovery cards roll continuously along one fixed tilted strip.",
       "The reference shows no scrolling, sticky behavior, clicks, or queue flow.",
     ],
     preservedCopy: [
@@ -52,6 +52,7 @@ export const experiments: Experiment[] = [
       "Local destination placeholders demonstrate entry actions; the next screens are not shown in the source.",
       "Narrow-screen reflow and motion controls are accessibility provisions added for this experiment.",
       "The date is preserved reference copy, not a current offer.",
+      "The fixed angle and marquee speed are estimated from the clip; seamless looping follows the user’s motion clarification.",
     ],
     reviewNotes: [
       "Build and 127 token contrast checks pass. Directory and banner page reflow at 320px.",

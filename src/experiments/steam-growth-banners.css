@@ -2,49 +2,57 @@
   min-height: 160px;
 }
 .queue-copy {
-  width: 68%;
+  width: 60%;
 }
 .queue-art {
+  --queue-card-width: 240px;
+  --queue-card-height: 156px;
+  --queue-cycle: 48s;
   position: absolute;
   inset: 0 0 0 auto;
-  width: 31%;
+  width: 40%;
+  overflow: hidden;
   pointer-events: none;
 }
-.queue-card {
+/* The rail owns the fixed angle. The track rolls along its local X axis. */
+.queue-rail {
   position: absolute;
+  left: -70px;
+  top: 36px;
+  transform: rotate(-12deg);
+  transform-origin: 0 0;
+}
+.queue-track {
+  display: flex;
+  width: max-content;
+  animation: queue-marquee var(--queue-cycle) linear infinite;
+}
+.queue-sequence {
+  display: flex;
+  flex: none;
+  gap: 10px;
+  padding-right: 10px;
+}
+.queue-card {
   display: block;
-  width: 146px;
-  height: 180px;
-  top: -7px;
+  flex: none;
+  width: var(--queue-card-width);
+  height: var(--queue-card-height);
   border: 1px solid var(--input);
   border-radius: var(--radius-sm);
   background: var(--surface-sunken);
   padding: 9px;
-  animation: queue-drift 10s ease-in-out infinite alternate;
-}
-.queue-card-0 {
-  left: 0;
-  --card-angle: -15deg;
 }
 .queue-card-1 {
-  left: 27%;
-  --card-angle: -10deg;
   background: var(--muted);
 }
 .queue-card-2 {
-  left: 55%;
-  --card-angle: -5deg;
   background: var(--surface-raised);
-}
-.queue-card-3 {
-  left: 83%;
-  --card-angle: 0deg;
-  background: var(--surface-sunken);
 }
 .queue-card-image {
   display: grid;
   place-items: center;
-  height: 112px;
+  height: calc(var(--queue-card-height) - 54px);
   border: 1px solid var(--border);
 }
 .queue-card-image > span {
@@ -53,6 +61,15 @@
   height: 25px;
   border: 1px solid var(--input);
   border-radius: var(--radius-sm);
+}
+.queue-card-1 .queue-card-image > span {
+  border-radius: var(--radius-full);
+}
+.queue-card-2 .queue-card-image > span {
+  width: 44px;
+}
+.queue-card-3 .queue-card-image > span {
+  transform: rotate(45deg);
 }
 .queue-card-line {
   display: block;
@@ -65,15 +82,15 @@
   width: 45%;
   margin-top: 8px;
 }
-.is-paused .queue-card {
+.is-paused .queue-track {
   animation-play-state: paused;
 }
-@keyframes queue-drift {
+@keyframes queue-marquee {
   from {
-    transform: translateX(12px) rotate(var(--card-angle));
+    transform: translateX(0);
   }
   to {
-    transform: translateX(-28px) rotate(calc(var(--card-angle) + 7deg));
+    transform: translateX(-50%);
   }
 }
 @media (max-width: 640px) {
@@ -82,28 +99,24 @@
   }
   .queue-copy {
     width: 100%;
-    padding-bottom: 130px;
+    padding-bottom: 140px;
   }
   .queue-art {
+    --queue-card-width: 180px;
+    --queue-card-height: 128px;
+    --queue-cycle: 36s;
     top: auto;
     bottom: 0;
-    height: 105px;
-    width: 85%;
+    height: 120px;
+    width: 100%;
   }
-  .queue-card {
-    top: 14px;
-    height: 150px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .queue-card {
-    animation: none;
-    transform: rotate(var(--card-angle));
+  .queue-rail {
+    top: 36px;
+    left: -60px;
   }
 }
-@media print {
-  .queue-card {
+@media (prefers-reduced-motion: reduce), print {
+  .queue-track {
     animation: none;
-    transform: rotate(var(--card-angle));
   }
 }
