@@ -11,7 +11,7 @@ The 2026-10-03 revision responds to the user's request to refine the index, prev
 - Use a two-column desktop gallery and one column on narrow screens. Keep preview aspect ratios consistent and landscape, with enough space to reveal the experiment's distinctive structure.
 - Use `surface-raised` for gallery cards with a quiet outline and small shadow so their content stays visibly separate from the page canvas. Keep thumbnails on the deeper preview surface.
 - Previews are recognition aids. Depict the feature selector and preview for Notion; depict the sticker reward and discovery sequence for Steam. Keep neutral blueprint surfaces and avoid decorative motion in the index.
-- Place the title and task-focused sentence directly under the preview. Show the source name in a simple pill using the kit Badge. Omit type, status, separator dots, and recording counts from cards; keep type available as a filter.
+- Place the title and task-focused sentence directly under the preview. Show the source, primary goal, and full added date in wrapping pills using the kit Badge. Store the original local-calendar addition date in `addedAt`, independently of `updatedAt`; format it as “Added 3 October 2026.” The initial Notion and Steam dates come from their first addition commits. Omit type, status, separator dots, and recording counts from cards; keep type available as a filter.
 - Use plain names: **Feature announcement** from Notion and **Discovery queue & rewards** from Steam. Preserve their existing IDs and URLs.
 - Keep instructions short and specific to the next action. Avoid long introductory explanations, repeated footer advice, decorative eyebrow text, or a competing marketing voice.
 - Make title and preview links open the experiment. Keep the design-intent disclosure separate from the link. Original references are accessed through the toggle inside each experiment, with no reference footer on index cards.
@@ -20,7 +20,7 @@ The 2026-10-03 revision responds to the user's request to refine the index, prev
 
 Use **Design intent**, not the nutritional metaphor. Preserve the structured classification and its distinctions in [the data contract](design-intent.md).
 
-Show the primary goal at a glance. Put the complete record in a single disclosure: Goal, Also supports when present, Audience, Journey, Mechanism, Format, and Proposed measure. Show reasoning and measurement limits as a plain footnote, without a second nested disclosure. Do not make the classification table taller or more visually dominant than the recognition preview by default.
+Show the primary goal in the pill row beside the source. Keep the disclosure summary to **Design intent** and its chevron. Put the complete record inside: Goal, Also supports when present, Audience, Journey, Mechanism, Format, and Proposed measure. Show reasoning and measurement limits as a plain footnote, without a second nested disclosure. Do not make the classification table taller or more visually dominant than the recognition preview by default.
 
 Keep the eight growth categories and three overarching outcomes unchanged. The kit's **Growth definitions** remain the shared source for their meaning. Proposed outcomes are hypotheses, not claims of observed improvement.
 

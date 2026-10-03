@@ -21,6 +21,12 @@ import { experiments, type Experiment, type ExperimentType } from "./registry";
 import { ExperimentPreview } from "./experiment-preview";
 
 const types: ExperimentType[] = ["Screen", "Flow", "Experience"];
+const addedDateFormat = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
 type Filters = {
   query: string;
   goal: GrowthCategoryId | "all";
@@ -103,9 +109,25 @@ function ExperimentCard({
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
             {experiment.summary}
           </p>
-          <Badge variant="outline" className="mt-4 rounded-full px-3 text-xs">
-            {experiment.sourceName}
-          </Badge>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <Badge variant="outline" className="rounded-full px-3 text-xs">
+              {experiment.sourceName}
+            </Badge>
+            <Badge variant="outline" className="rounded-full px-3 text-xs">
+              {goal.shortName}
+            </Badge>
+            <Badge
+              variant="outline"
+              className="rounded-full px-3 text-xs whitespace-nowrap"
+            >
+              <span>
+                Added{" "}
+                <time dateTime={experiment.addedAt}>
+                  {addedDateFormat.format(new Date(experiment.addedAt))}
+                </time>
+              </span>
+            </Badge>
+          </div>
         </div>
       </a>
       <div className="mx-5 border-t border-border sm:mx-6">
@@ -115,14 +137,11 @@ function ExperimentCard({
               Design intent
               <span className="sr-only"> for {experiment.title}</span>
             </span>
-            <span className="flex items-center gap-3 text-muted-foreground">
-              <span>{goal.shortName}</span>
-              <ChevronDown
-                size={16}
-                aria-hidden="true"
-                className="shrink-0 group-open/intent:rotate-180"
-              />
-            </span>
+            <ChevronDown
+              size={16}
+              aria-hidden="true"
+              className="shrink-0 text-muted-foreground group-open/intent:rotate-180"
+            />
           </summary>
           <DesignIntent
             name={experiment.title}

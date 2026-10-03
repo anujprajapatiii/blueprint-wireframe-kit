@@ -11,6 +11,8 @@ export interface Experiment {
   title: string;
   summary: string;
   sourceName: string;
+  /** Original addition date in the user's local calendar (YYYY-MM-DD). */
+  addedAt: string;
   updatedAt: string;
   preview: ExperimentPreviewKind;
   type: ExperimentType;
@@ -33,6 +35,7 @@ export const experiments: Experiment[] = [
     title: "Feature announcement",
     summary: "Select a feature to explore its details and preview.",
     sourceName: "Notion",
+    addedAt: "2026-10-03",
     updatedAt: "2026-10-03",
     preview: "feature-modal",
     type: "Screen",
@@ -93,6 +96,7 @@ export const experiments: Experiment[] = [
     summary:
       "A reward-led discovery flow, from store banners to queue completion.",
     sourceName: "Steam",
+    addedAt: "2026-10-03",
     updatedAt: "2026-10-03",
     preview: "discovery-queue",
     type: "Flow",
