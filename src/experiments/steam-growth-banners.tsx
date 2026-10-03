@@ -133,10 +133,12 @@ export function SteamGrowthBanners({
   design = savedSteamDesign,
   onTune,
   tuningOpen = false,
+  embedded = false,
 }: {
   design?: SteamDesign;
   onTune?: () => void;
   tuningOpen?: boolean;
+  embedded?: boolean;
 }) {
   const designStyle = steamDesignStyle(design);
   const [motion, setMotion] = useState(true);
@@ -158,54 +160,77 @@ export function SteamGrowthBanners({
     <main
       id="main-content"
       style={designStyle}
-      className="mx-auto max-w-[1280px] px-5 py-7 sm:px-8 sm:py-10"
+      className={cn(
+        "mx-auto max-w-[1280px] px-5 py-7 sm:px-8 sm:py-10",
+        embedded && "steam-embedded",
+      )}
     >
-      <a
-        href="?view=experiments"
-        className="mb-5 inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-      >
-        <ArrowLeft size={16} aria-hidden="true" /> All experiments
-      </a>
-      <div className="flex flex-wrap items-start justify-between gap-5">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-            Steam growth banners
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            A small reward prompt followed by an invitation to explore. Original
-            copy, neutral wireframe.
+      {embedded && (
+        <h1 className="sr-only">Store banners and discovery queue wireframe</h1>
+      )}
+      {!embedded && (
+        <>
+          <a
+            href="?view=experiments"
+            className="mb-5 inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft size={16} aria-hidden="true" /> All experiments
+          </a>
+          <div className="flex flex-wrap items-start justify-between gap-5">
+            <div>
+              <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                Steam growth banners
+              </h1>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                A small reward prompt followed by an invitation to explore.
+                Original copy, neutral wireframe.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {onTune && (
+                <Button
+                  id="open-design-controls"
+                  variant="secondary"
+                  onClick={onTune}
+                  aria-expanded={tuningOpen}
+                  aria-controls="design-controls"
+                >
+                  <SlidersHorizontal aria-hidden="true" />
+                  Tune design
+                </Button>
+              )}
+              <Button variant="outline" onClick={copyLink}>
+                {copyState === "Link copied" ? (
+                  <Check aria-hidden="true" />
+                ) : (
+                  <Copy aria-hidden="true" />
+                )}{" "}
+                Copy link
+              </Button>
+            </div>
+          </div>
+          <p
+            role="status"
+            aria-live="polite"
+            className="mt-2 min-h-5 text-sm text-muted-foreground"
+          >
+            {copyState}
           </p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {onTune && (
-            <Button
-              id="open-design-controls"
-              variant="secondary"
-              onClick={onTune}
-              aria-expanded={tuningOpen}
-              aria-controls="design-controls"
-            >
-              <SlidersHorizontal aria-hidden="true" />
-              Tune design
-            </Button>
-          )}
-          <Button variant="outline" onClick={copyLink}>
-            {copyState === "Link copied" ? (
-              <Check aria-hidden="true" />
-            ) : (
-              <Copy aria-hidden="true" />
-            )}{" "}
-            Copy link
+        </>
+      )}
+      {embedded && onTune && (
+        <div className="mb-4 flex justify-end">
+          <Button
+            id="open-design-controls"
+            variant="secondary"
+            onClick={onTune}
+            aria-expanded={tuningOpen}
+            aria-controls="design-controls"
+          >
+            <SlidersHorizontal aria-hidden="true" /> Tune design
           </Button>
         </div>
-      </div>
-      <p
-        role="status"
-        aria-live="polite"
-        className="mt-2 min-h-5 text-sm text-muted-foreground"
-      >
-        {copyState}
-      </p>
+      )}
 
       <section
         aria-label="Store banner wireframe"
@@ -317,80 +342,82 @@ export function SteamGrowthBanners({
         </div>
       </section>
 
-      <details className="mt-7 rounded-md border border-border px-5 py-1">
-        <summary className="min-h-12 py-3 text-sm font-medium">
-          Intent & reference notes
-        </summary>
-        <div className="grid gap-7 border-t py-6 text-sm leading-relaxed text-muted-foreground md:grid-cols-2">
-          <div className="space-y-5">
-            <section>
-              <h2 className="mb-2 font-medium text-foreground">
-                What this explores
-              </h2>
-              <p>
-                How a time-bound sticker reward creates a reason to browse, and
-                how the larger discovery banner provides the next action. Both
-                components remain together, in their original order.
-              </p>
-            </section>
-            <section>
-              <h2 className="mb-2 font-medium text-foreground">Reference</h2>
-              <p>
-                Steam Growth Banners.mp4 · 11-second recording. The reward
-                strip, banner copy, and rolling card strip are visible
-                throughout. Three additional screenshots show the immersive game
-                carousel and completion screen. Trailer autoplay follows the
-                user's description; no sticky behavior is established.
-              </p>
-            </section>
-            <section>
-              <h2 className="mb-2 font-medium text-foreground">Retained</h2>
-              <p>
-                The two banners’ original writing, their relative hierarchy, the
-                three-card sticker fan, and the continuous, angled discovery
-                card marquee. “Now through Oct 8” is reference copy, not a
-                current offer.
-              </p>
-            </section>
+      {!embedded && (
+        <details className="mt-7 rounded-md border border-border px-5 py-1">
+          <summary className="min-h-12 py-3 text-sm font-medium">
+            Intent & reference notes
+          </summary>
+          <div className="grid gap-7 border-t py-6 text-sm leading-relaxed text-muted-foreground md:grid-cols-2">
+            <div className="space-y-5">
+              <section>
+                <h2 className="mb-2 font-medium text-foreground">
+                  What this explores
+                </h2>
+                <p>
+                  How a time-bound sticker reward creates a reason to browse,
+                  and how the larger discovery banner provides the next action.
+                  Both components remain together, in their original order.
+                </p>
+              </section>
+              <section>
+                <h2 className="mb-2 font-medium text-foreground">Reference</h2>
+                <p>
+                  Steam Growth Banners.mp4 · 11-second recording. The reward
+                  strip, banner copy, and rolling card strip are visible
+                  throughout. Three additional screenshots show the immersive
+                  game carousel and completion screen. Trailer autoplay follows
+                  the user's description; no sticky behavior is established.
+                </p>
+              </section>
+              <section>
+                <h2 className="mb-2 font-medium text-foreground">Retained</h2>
+                <p>
+                  The two banners’ original writing, their relative hierarchy,
+                  the three-card sticker fan, and the continuous, angled
+                  discovery card marquee. “Now through Oct 8” is reference copy,
+                  not a current offer.
+                </p>
+              </section>
+            </div>
+            <div className="space-y-5">
+              <section>
+                <h2 className="mb-2 font-medium text-foreground">
+                  Reduced to wireframe
+                </h2>
+                <p>
+                  Game artwork, stickers, logos, promotional colors, gradients,
+                  and the store background become plain kit surfaces and
+                  outlines. Surrounding cards only establish page context.
+                </p>
+              </section>
+              <section>
+                <h2 className="mb-2 font-medium text-foreground">
+                  Prototype decisions
+                </h2>
+                <p>
+                  Sticker shadows and animated glyphs, mobile reflow,
+                  pause/resume, and local demonstration data are prototype
+                  additions. The queue opens a twelve-game carousel and reward
+                  summary. The marquee fades at its desktop edge; mobile has no
+                  fade and only clips at the visible banner boundary. Trailer
+                  artwork is a neutral placeholder; wishlist, ignore, stats, and
+                  Continue work locally. No Steam rewards are granted. Motion
+                  stops when reduced motion is requested.
+                </p>
+              </section>
+              <a
+                className="inline-flex min-h-10 items-center gap-2 text-foreground underline underline-offset-4"
+                href="https://github.com/anujprajapatiii/blueprint-wireframe-kit/blob/main/docs/experiments/steam-growth-banners.md"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Full experiment record{" "}
+                <ArrowUpRight size={14} aria-hidden="true" />
+              </a>
+            </div>
           </div>
-          <div className="space-y-5">
-            <section>
-              <h2 className="mb-2 font-medium text-foreground">
-                Reduced to wireframe
-              </h2>
-              <p>
-                Game artwork, stickers, logos, promotional colors, gradients,
-                and the store background become plain kit surfaces and outlines.
-                Surrounding cards only establish page context.
-              </p>
-            </section>
-            <section>
-              <h2 className="mb-2 font-medium text-foreground">
-                Prototype decisions
-              </h2>
-              <p>
-                Sticker shadows and animated glyphs, mobile reflow,
-                pause/resume, and local demonstration data are prototype
-                additions. The queue opens a twelve-game carousel and reward
-                summary. The marquee fades at its desktop edge; mobile has no
-                fade and only clips at the visible banner boundary. Trailer
-                artwork is a neutral placeholder; wishlist, ignore, stats, and
-                Continue work locally. No Steam rewards are granted. Motion
-                stops when reduced motion is requested.
-              </p>
-            </section>
-            <a
-              className="inline-flex min-h-10 items-center gap-2 text-foreground underline underline-offset-4"
-              href="https://github.com/anujprajapatiii/blueprint-wireframe-kit/blob/main/docs/experiments/steam-growth-banners.md"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Full experiment record{" "}
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
-          </div>
-        </div>
-      </details>
+        </details>
+      )}
     </main>
   );
 }

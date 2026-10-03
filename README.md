@@ -6,22 +6,24 @@ The app is a browsable component gallery inspired by the way shadcn presents exa
 
 ## Experiments
 
-[Browse the experiment directory](https://anujprajapatiii.github.io/blueprint-wireframe-kit/?view=experiments) · [Steam growth banners](https://anujprajapatiii.github.io/blueprint-wireframe-kit/?view=experiments&experiment=steam-growth-banners)
+[Browse the experiment directory](https://anujprajapatiii.github.io/blueprint-wireframe-kit/?view=experiments) · [Discovery queue & rewards](https://anujprajapatiii.github.io/blueprint-wireframe-kit/?view=experiments&experiment=steam-growth-banners)
 
 Experiments are lasting wireframes of screens, flows, and experiences. Keep useful source copy, structure, and observed interaction behavior; replace branding and visual detail with kit primitives. Preserve the user's intent alongside each experiment so later work can recover the reason for its design.
 
-Start with [the project rules](AGENTS.md) and [the reference-to-wireframe workflow](docs/experiment-rules.md). The first [experiment record](docs/experiments/steam-growth-banners.md) distinguishes observed reference behavior from prototype decisions. Original uploaded media is not bundled into the public site.
+Start with [the project rules](AGENTS.md), [the reference-to-wireframe workflow](docs/experiment-rules.md), and [the index design contract](docs/index-design.md). Experiment records distinguish observed reference behavior from prototype decisions. The directory uses landscape previews, plain descriptions, and expandable design intent to help you recognize and revisit useful interactions.
+
+The local revision includes the original Notion and Steam recordings at Anuj's request, available through each experiment's **Original reference** view. The three separate Steam queue screenshots are currently unavailable as files. Media is included only when explicitly requested; adding references does not publish the local revision.
 
 To add an experiment:
 
 1. Capture its intent, source, scope, observations, copy, and assumptions in `docs/experiments/<id>.md`.
-2. Add its typed metadata and growth nutrition label to `src/experiments/registry.ts`, and its view under `src/experiments/`.
-3. Register the view in `src/experiments/app.tsx`. Use `?view=experiments&experiment=<id>` for a stable link that refreshes directly on GitHub Pages.
-4. Verify the focused states and responsive layout, then update its status and review notes.
+2. Add its typed metadata and design intent to `src/experiments/registry.ts`, and its view under `src/experiments/`. Keep the title task-focused and the source name separate; supply a meaningful landscape preview and an accurate update date.
+3. Register the view in `src/experiments/app.tsx`. Use `?view=experiments&experiment=<id>` for a stable link that refreshes directly on GitHub Pages. Register any authorized original media with the shared reference viewer rather than building a separate viewer for each experiment.
+4. Verify the focused states, reference controls, responsive layout, and return to the filtered directory, then update its status and review notes.
 
 The component gallery and experiments load separately. Existing gallery anchors continue to work.
 
-Each index entry carries a **growth nutrition label**: one primary objective, optional secondary objectives, audience/account state, journey, mechanisms, format, and a proposed success measure. Use [the shared definitions](docs/growth-nutrition.md), available in the kit at `?#growth`. The eight categories are a working synthesis for classifying intent; they do not establish measured impact or a universal industry standard. Keep interpretations and unvalidated measures explicit when adding or revising an experiment.
+Each index entry has a **Design intent** disclosure: one primary objective, optional secondary objectives, audience/account state, journey, mechanisms, format, and a proposed success measure. Use [the shared definitions](docs/design-intent.md), available in the kit at `?#growth`. The eight categories are a working synthesis for classifying intent; they do not establish measured impact or a universal industry standard. Keep interpretations and unvalidated measures explicit when adding or revising an experiment.
 
 ## Local-first design workflow
 

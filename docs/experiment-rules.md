@@ -25,9 +25,9 @@ For each pasted link, text, screenshot, or video, record the following alongside
 
 Use the user's own explanation as the strongest evidence for intent. If it is incomplete, write a provisional interpretation and continue with the useful work supported by the reference. Ask only for information that materially blocks the focused experiment.
 
-## Add a growth nutrition label
+## Record design intent
 
-Every new experiment needs a growth label in `src/experiments/registry.ts`, surfaced in the index. Follow [the growth definitions and label contract](growth-nutrition.md), also available in the kit at `?#growth`: one primary category, optional secondary categories, audience/account state, journey, mechanisms, UI format, and a proposed success measure.
+Every new experiment needs structured design intent in `src/experiments/registry.ts`, available in the index. Follow [the shared definitions and data contract](design-intent.md), also available in the kit at `?#growth`: one primary category, optional secondary categories, audience/account state, journey, mechanisms, UI format, and a proposed success measure. Use **Design intent** in the interface; avoid the nutritional metaphor. Show a compact summary by default, with the full record in a disclosure.
 
 Classify the intended behavior rather than the component's appearance. Keep objective, journey, mechanism, and format distinct; record unknown user/account states and provisional interpretations explicitly. Treat proposed measures as hypotheses until actual evidence exists. Update the label when the experiment's intent changes, using the shared definitions instead of creating local category variants.
 
@@ -65,12 +65,17 @@ These rules capture how Anuj shaped the Steam experiment on 2026-10-03. They gui
 ## Keep the directory useful over time
 
 - Give every experiment a stable URL and a link back to the directory and kit.
+- Follow [the index design contract](index-design.md). Use a two-column desktop gallery with meaningful landscape previews, then a single column at narrow widths. Keep each title, source name, and task-focused description distinct; make the experiment easier to recognize than its metadata.
+- Preserve search and filter state in URLs when opening an experiment and returning. Use one registry for cards, search, classification, and reference assets instead of maintaining separate content copies.
+- Give each experiment consistent **Wireframe** and **Original reference** views. Use native media controls and descriptive asset labels, preserve media aspect ratio, and keep references available without requiring the user to restart the wireframe flow.
 - Organize implementation under `src/experiments/`; add shared components to the kit only when they are useful beyond one experiment.
 - Preserve the initial intent when updating a page. Record meaningful changes and conclusions so a later visit explains what was learned.
 - Create a separate variant or experiment when the question changes substantially. Keep old IDs resolvable; archive instead of silently repurposing them.
-- Store only necessary source metadata. Do not bundle uploaded videos, screenshots, or other source assets into the public repository or deployed site by default.
+- Store only necessary source metadata by default. When the user explicitly asks to include original references, add the authorized files through the shared, data-driven reference viewer and record provenance and availability. Do not publish private transfer URLs or filesystem paths. Keep missing assets marked as unavailable; an extracted video frame is not a substitute for a separately supplied screenshot.
 - Promote repeated preferences into these rules when the user expresses a reusable intent. Keep a one-off request in its experiment record rather than making it a universal rule.
 - Treat explicit later user instructions as authoritative and update the affected record or rule accordingly.
+
+On 2026-10-04, Anuj requested the original references inside each experiment. The current revision includes the two available source recordings locally. The three separately supplied Steam queue screenshots are not currently available as files and must not be fabricated or represented by video frames. This request authorizes including those references in the project; the index redesign remains subject to the existing separate publishing step.
 
 ## Review before publishing
 

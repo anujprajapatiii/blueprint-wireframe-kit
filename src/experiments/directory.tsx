@@ -1,288 +1,378 @@
-import { useState } from "react";
-import { ArrowUpRight, Search } from "lucide-react";
-import { Badge, Button, Input, Label } from "../components/kit";
-import { GrowthNutritionLabel } from "../components/growth-nutrition-label";
+import { useEffect, useMemo, useState } from "react";
+import {
+  ArrowRight,
+  BookOpen,
+  ChevronDown,
+  Film,
+  Search,
+  X,
+} from "lucide-react";
+import { Button, Input, Label } from "../components/kit";
+import { DesignIntent } from "../components/design-intent";
 import {
   growthCategories,
   growthCategoryById,
   type GrowthCategoryId,
 } from "../growth/taxonomy";
-import { experimentHref, experiments, type ExperimentType } from "./registry";
+import { experiments, type Experiment, type ExperimentType } from "./registry";
+import { ExperimentPreview } from "./experiment-preview";
+import { experimentReferences } from "./reference-manifest";
 
-const experimentTypes: ExperimentType[] = ["Screen", "Flow", "Experience"];
+const types: ExperimentType[] = ["Screen", "Flow", "Experience"];
+type Filters = {
+  query: string;
+  goal: GrowthCategoryId | "all";
+  type: ExperimentType | "all";
+  sort: "recent" | "title";
+};
+const defaults: Filters = {
+  query: "",
+  goal: "all",
+  type: "all",
+  sort: "recent",
+};
 
-function BannerPreview() {
-  return (
-    <div
-      aria-hidden="true"
-      className="flex min-h-48 min-w-0 flex-col justify-center gap-3 overflow-hidden border-b border-border bg-surface-sunken p-5 md:min-h-60 md:border-r md:border-b-0"
-    >
-      <div className="h-2 w-2/5 rounded-xs bg-border-subtle" />
-      <div className="flex items-center gap-3 rounded-sm border border-input bg-secondary p-3">
-        <div className="relative h-8 w-10 shrink-0">
-          <div className="absolute top-1 left-0 h-6 w-5 -rotate-12 rounded-xs border border-input bg-surface-sunken" />
-          <div className="absolute top-1 right-0 h-6 w-5 rotate-12 rounded-xs border border-input bg-surface-sunken" />
-          <div className="absolute top-0 left-2.5 h-7 w-5 rounded-xs border border-input bg-card" />
-        </div>
-        <div className="space-y-2">
-          <div className="h-2 w-20 rounded-xs bg-muted-foreground" />
-          <div className="h-1.5 w-24 max-w-full rounded-xs bg-border" />
-        </div>
-      </div>
-      <div className="flex min-h-20 items-center justify-between gap-3 overflow-hidden rounded-sm border border-input bg-card p-3">
-        <div className="space-y-2">
-          <div className="h-2 w-24 rounded-xs bg-muted-foreground" />
-          <div className="h-1.5 w-20 rounded-xs bg-border" />
-          <div className="h-5 w-16 rounded-xs border border-input" />
-        </div>
-        <div className="relative h-14 w-16 shrink-0">
-          <div className="absolute top-1 left-0 h-12 w-8 -rotate-12 rounded-xs border border-input bg-surface-sunken" />
-          <div className="absolute top-1 right-0 h-12 w-8 rotate-12 rounded-xs border border-input bg-surface-sunken" />
-          <div className="absolute top-0 left-4 h-14 w-8 rounded-xs border border-input bg-secondary" />
-        </div>
-      </div>
-    </div>
-  );
+function readFilters(): Filters {
+  const params = new URLSearchParams(location.search);
+  const goal = params.get("goal");
+  const type = params.get("type");
+  return {
+    query: params.get("q") ?? "",
+    goal: growthCategories.some((item) => item.id === goal)
+      ? (goal as GrowthCategoryId)
+      : "all",
+    type: types.includes(type as ExperimentType)
+      ? (type as ExperimentType)
+      : "all",
+    sort: params.get("sort") === "title" ? "title" : "recent",
+  };
 }
 
-function ModalPreview() {
+function filterParams(filters: Filters) {
+  const params = new URLSearchParams({ view: "experiments" });
+  if (filters.query.trim()) params.set("q", filters.query);
+  if (filters.goal !== "all") params.set("goal", filters.goal);
+  if (filters.type !== "all") params.set("type", filters.type);
+  if (filters.sort !== "recent") params.set("sort", filters.sort);
+  return params;
+}
+
+function experimentLink(
+  experiment: Experiment,
+  filters: Filters,
+  reference = false,
+) {
+  const params = filterParams(filters);
+  params.set("experiment", experiment.id);
+  if (reference) params.set("mode", "reference");
+  return `?${params}`;
+}
+
+function ExperimentCard({
+  experiment,
+  filters,
+}: {
+  experiment: Experiment;
+  filters: Filters;
+}) {
+  const goal = growthCategoryById[experiment.growth.primary];
+  const references = experimentReferences[experiment.id] ?? [];
   return (
-    <div
-      aria-hidden="true"
-      className="relative flex min-h-48 items-center justify-center overflow-hidden border-b border-border bg-surface-deep p-6 md:min-h-60 md:border-r md:border-b-0"
+    <article
+      aria-labelledby={`${experiment.id}-title`}
+      className="min-w-0 overflow-hidden rounded-lg border border-border bg-card"
     >
-      <div className="relative w-full max-w-72 rounded-md border border-input bg-card p-4 shadow-md">
-        <div className="mb-4 h-2 w-3/5 rounded-xs bg-muted-foreground" />
-        <div className="grid grid-cols-[0.9fr_1.1fr] gap-3">
-          <div className="space-y-2">
-            <div className="space-y-2 rounded-xs border border-input bg-secondary p-2">
-              <div className="h-1.5 w-4/5 rounded-xs bg-muted-foreground" />
-              <div className="h-1 w-full rounded-xs bg-border" />
-              <div className="h-1 w-3/5 rounded-xs bg-border" />
-            </div>
-            {[0, 1, 2].map((row) => (
-              <div
-                key={row}
-                className="flex h-4 items-center justify-between px-2"
-              >
-                <div className="h-1.5 w-3/5 rounded-xs bg-border" />
-                <div className="size-1.5 rotate-45 border-t border-r border-input" />
-              </div>
-            ))}
+      <a
+        href={experimentLink(experiment, filters)}
+        aria-label={`Open ${experiment.title} wireframe`}
+        className="group block rounded-t-lg focus-visible:outline-offset-[-4px]"
+      >
+        <div className="aspect-[12/7] overflow-hidden border-b border-border bg-surface-deep transition-colors duration-[var(--motion-fast)] group-hover:bg-surface-sunken motion-reduce:transition-none">
+          <ExperimentPreview kind={experiment.preview} />
+        </div>
+        <div className="p-5 pb-4 sm:p-6 sm:pb-5">
+          <div className="flex items-start justify-between gap-4">
+            <h2
+              id={`${experiment.id}-title`}
+              className="text-xl font-semibold tracking-tight sm:text-2xl"
+            >
+              {experiment.title}
+            </h2>
+            <ArrowRight
+              size={20}
+              aria-hidden="true"
+              className="mt-1 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground"
+            />
           </div>
-          <div className="flex flex-col justify-center gap-2 rounded-sm border border-border bg-surface-sunken p-3">
-            <div className="h-2 w-2/3 rounded-xs bg-border" />
-            <div className="grid grid-cols-2 gap-1.5">
-              <div className="h-9 rounded-xs border border-input bg-card" />
-              <div className="h-9 rounded-xs border border-input bg-secondary" />
-            </div>
-            <div className="h-1 w-4/5 rounded-xs bg-border" />
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            {experiment.summary}
+          </p>
+          <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+            <span className="font-medium text-foreground">
+              {experiment.sourceName}
+            </span>
+            <span aria-hidden="true">·</span>
+            <span>{experiment.type}</span>
+            <span aria-hidden="true">·</span>
+            <span>{experiment.status}</span>
           </div>
         </div>
-        <div className="mt-4 flex gap-2">
-          <div className="h-4 w-14 rounded-xs bg-muted-foreground" />
-          <div className="h-4 w-14 rounded-xs border border-input" />
-        </div>
+      </a>
+      <div className="mx-5 border-t border-border sm:mx-6">
+        <details className="group/intent">
+          <summary className="flex min-h-14 list-none items-center justify-between gap-3 rounded-sm py-3 text-sm [&::-webkit-details-marker]:hidden">
+            <span className="font-medium">
+              Design intent
+              <span className="sr-only"> for {experiment.title}</span>
+            </span>
+            <span className="flex items-center gap-3 text-muted-foreground">
+              <span>{goal.shortName}</span>
+              <ChevronDown
+                size={16}
+                aria-hidden="true"
+                className="shrink-0 group-open/intent:rotate-180"
+              />
+            </span>
+          </summary>
+          <DesignIntent
+            name={experiment.title}
+            intent={experiment.growth}
+            className="pb-5"
+          />
+        </details>
       </div>
-    </div>
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-5 py-2.5 sm:px-6">
+        <a
+          href={experimentLink(experiment, filters, true)}
+          className="inline-flex min-h-10 items-center gap-2 rounded-sm text-sm hover:underline hover:underline-offset-4"
+          aria-label={`View original reference for ${experiment.title}`}
+        >
+          <Film size={16} aria-hidden="true" />
+          Original reference
+        </a>
+        <span className="text-xs text-muted-foreground">
+          {references.length
+            ? `${references.length} ${references.length === 1 ? "recording" : "references"}`
+            : "Not added"}
+        </span>
+      </div>
+    </article>
   );
 }
 
 export function ExperimentDirectory() {
-  const [query, setQuery] = useState("");
-  const [type, setType] = useState<ExperimentType | "All types">("All types");
-  const [growth, setGrowth] = useState<GrowthCategoryId | "all">("all");
-  const normalizedQuery = query.trim().toLocaleLowerCase();
-  const matchingExperiments = experiments.filter((experiment) => {
-    const matchesType = type === "All types" || experiment.type === type;
-    const matchesGrowth =
-      growth === "all" ||
-      experiment.growth.primary === growth ||
-      experiment.growth.secondary.includes(growth);
-    const searchableText = [
-      experiment.title,
-      experiment.summary,
-      experiment.source,
-      ...experiment.focus,
-      growthCategoryById[experiment.growth.primary].name,
-      ...experiment.growth.secondary.map((id) => growthCategoryById[id].name),
-      experiment.growth.audience,
-      experiment.growth.journey,
-      ...experiment.growth.mechanisms,
-      experiment.growth.format,
-      experiment.growth.measure,
-    ]
-      .join(" ")
-      .toLocaleLowerCase();
-    return (
-      matchesType && matchesGrowth && searchableText.includes(normalizedQuery)
-    );
-  });
+  const [filters, setFilters] = useState<Filters>(readFilters);
+  const update = (change: Partial<Filters>) =>
+    setFilters((current) => ({ ...current, ...change }));
+  useEffect(() => {
+    const params = filterParams(filters);
+    if (new URLSearchParams(location.search).has("audit"))
+      params.set("audit", "1");
+    history.replaceState(history.state, "", `?${params}`);
+  }, [filters]);
+  useEffect(() => {
+    const restore = () => setFilters(readFilters());
+    addEventListener("popstate", restore);
+    return () => removeEventListener("popstate", restore);
+  }, []);
+
+  const results = useMemo(() => {
+    const query = filters.query.trim().toLocaleLowerCase();
+    return experiments
+      .filter((experiment) => {
+        const goal = experiment.growth;
+        const searchable = [
+          experiment.title,
+          experiment.summary,
+          experiment.sourceName,
+          experiment.source,
+          ...experiment.focus,
+          growthCategoryById[goal.primary].name,
+          ...goal.secondary.map((id) => growthCategoryById[id].name),
+          goal.audience,
+          goal.journey,
+          ...goal.mechanisms,
+          goal.format,
+          goal.measure,
+        ]
+          .join(" ")
+          .toLocaleLowerCase();
+        return (
+          (filters.type === "all" || experiment.type === filters.type) &&
+          (filters.goal === "all" ||
+            goal.primary === filters.goal ||
+            goal.secondary.includes(filters.goal)) &&
+          searchable.includes(query)
+        );
+      })
+      .sort((a, b) =>
+        filters.sort === "title"
+          ? a.title.localeCompare(b.title)
+          : b.updatedAt.localeCompare(a.updatedAt),
+      );
+  }, [filters]);
+  const filtered = Boolean(
+    filters.query.trim() || filters.type !== "all" || filters.goal !== "all",
+  );
+  const selectClass =
+    "h-11 w-full min-w-0 rounded-md border border-input bg-surface-sunken px-3 text-sm text-foreground";
 
   return (
     <main
       id="main-content"
-      className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-10 lg:py-14"
+      className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10"
     >
-      <div className="max-w-2xl space-y-3">
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Experiments
-        </h1>
-        <p className="text-base leading-7 text-muted-foreground">
-          A working archive of screens, flows, and experiences. References are
-          reduced to structure, copy, and interaction so the product idea stays
-          clear.
+      <header>
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            Experiments
+          </h1>
+          <a
+            href="?#growth"
+            aria-label="Growth definitions"
+            className="inline-flex min-h-11 items-center gap-2 rounded-md px-1 text-xs text-muted-foreground hover:text-foreground sm:px-3 sm:text-sm"
+          >
+            <BookOpen size={16} aria-hidden="true" />
+            Definitions
+          </a>
+        </div>
+        <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
+          Product experiences to study, test, and reuse.
         </p>
-        <a
-          href="?#growth"
-          className="inline-flex min-h-10 items-center gap-2 text-sm underline decoration-input underline-offset-4 hover:decoration-foreground"
-        >
-          Growth definitions & label guide{" "}
-          <ArrowUpRight size={14} aria-hidden="true" />
-        </a>
-      </div>
+      </header>
 
-      <div className="mt-8 flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:flex-wrap sm:items-end">
-        <div className="w-full space-y-2 sm:max-w-md">
-          <Label htmlFor="experiment-search">Search experiments</Label>
+      <form
+        role="search"
+        aria-label="Find experiments"
+        onSubmit={(event) => event.preventDefault()}
+        className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-[minmax(180px,1fr)_minmax(160px,.6fr)_minmax(112px,.35fr)]"
+      >
+        <div className="col-span-2 flex min-w-0 flex-col gap-2 sm:col-span-1">
+          <Label htmlFor="experiment-search">Search</Label>
           <div className="relative">
             <Search
               aria-hidden="true"
-              className="pointer-events-none absolute top-3 left-3 size-4 text-muted-foreground"
+              className="pointer-events-none absolute top-3.5 left-3 size-4 text-muted-foreground"
             />
             <Input
               id="experiment-search"
               type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search experiments or growth labels"
-              className="pl-9"
+              value={filters.query}
+              onChange={(event) => update({ query: event.target.value })}
+              placeholder="Search by name, source, or idea"
+              className="h-11 pl-9"
             />
           </div>
         </div>
-        <div className="flex flex-col gap-2 sm:w-64">
-          <Label htmlFor="experiment-growth">Growth category</Label>
+        <div className="flex min-w-0 flex-col gap-2">
+          <Label htmlFor="experiment-goal">Goal</Label>
           <select
-            id="experiment-growth"
-            value={growth}
+            id="experiment-goal"
+            value={filters.goal}
             onChange={(event) =>
-              setGrowth(event.target.value as GrowthCategoryId | "all")
+              update({ goal: event.target.value as Filters["goal"] })
             }
-            aria-describedby="growth-filter-help"
-            className="h-control-default w-full rounded-md border border-input bg-surface-sunken px-3 text-sm text-foreground"
+            className={selectClass}
           >
-            <option value="all">All growth categories</option>
+            <option value="all">All goals</option>
             {growthCategories.map((category) => (
               <option key={category.id} value={category.id}>
-                {category.name}
+                {category.shortName}
               </option>
             ))}
           </select>
-          <span id="growth-filter-help" className="sr-only">
-            Matches primary or secondary growth categories.
-          </span>
         </div>
-        <div className="space-y-2 sm:w-44">
+        <div className="flex min-w-0 flex-col gap-2">
           <Label htmlFor="experiment-type">Type</Label>
           <select
             id="experiment-type"
-            value={type}
+            value={filters.type}
             onChange={(event) =>
-              setType(event.target.value as ExperimentType | "All types")
+              update({ type: event.target.value as Filters["type"] })
             }
-            className="h-control-default w-full rounded-md border border-input bg-surface-sunken px-3 text-sm text-foreground"
+            className={selectClass}
           >
-            <option>All types</option>
-            {experimentTypes.map((experimentType) => (
-              <option key={experimentType}>{experimentType}</option>
+            <option value="all">All types</option>
+            {types.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
             ))}
+          </select>
+        </div>
+      </form>
+
+      <div className="mt-4 mb-5 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <p role="status" className="text-sm text-muted-foreground">
+            {filtered
+              ? `${results.length} of ${experiments.length} experiments`
+              : `${experiments.length} experiments`}
+          </p>
+          {filtered && (
+            <button
+              type="button"
+              onClick={() => setFilters({ ...defaults, sort: filters.sort })}
+              className="inline-flex min-h-10 items-center gap-1.5 rounded-sm px-2 text-xs hover:bg-secondary"
+            >
+              <X size={13} aria-hidden="true" />
+              Clear filters
+            </button>
+          )}
+        </div>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <label htmlFor="experiment-sort">Sort</label>
+          <select
+            id="experiment-sort"
+            value={filters.sort}
+            onChange={(event) =>
+              update({ sort: event.target.value as Filters["sort"] })
+            }
+            className="min-h-10 rounded-sm border-0 bg-transparent pr-1 pl-2 text-sm text-foreground"
+          >
+            <option value="recent">Recently updated</option>
+            <option value="title">Name A–Z</option>
           </select>
         </div>
       </div>
 
-      <p role="status" className="mt-5 text-sm text-muted-foreground">
-        {matchingExperiments.length} experiment
-        {matchingExperiments.length === 1 ? "" : "s"}
-        {query.trim() || type !== "All types" || growth !== "all"
-          ? " found"
-          : ""}
-      </p>
-
-      <div className="mt-4 space-y-4">
-        {matchingExperiments.map((experiment) => (
-          <article
-            key={experiment.id}
-            aria-labelledby={`${experiment.id}-title`}
-            className="overflow-hidden rounded-md border border-border bg-card md:grid md:grid-cols-[minmax(220px,0.8fr)_minmax(0,1.6fr)] lg:grid-cols-[200px_minmax(0,1fr)_minmax(0,1.15fr)]"
+      {results.length ? (
+        <div className="grid items-start gap-6 md:grid-cols-2">
+          {results.map((experiment) => (
+            <ExperimentCard
+              key={experiment.id}
+              experiment={experiment}
+              filters={filters}
+            />
+          ))}
+        </div>
+      ) : (
+        <section
+          className="rounded-lg border border-dashed border-input bg-surface-sunken px-5 py-14 text-center"
+          aria-labelledby="no-results-title"
+        >
+          <Search
+            size={24}
+            aria-hidden="true"
+            className="mx-auto mb-4 text-muted-foreground"
+          />
+          <h2 id="no-results-title" className="text-xl font-semibold">
+            {filters.query.trim()
+              ? `No experiments for “${filters.query.trim()}”`
+              : "No experiments match these filters"}
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            Try a different search or clear the filters to browse everything.
+          </p>
+          <Button
+            className="mt-5"
+            variant="outline"
+            onClick={() => setFilters(defaults)}
           >
-            {experiment.id === "notion-feature-modal" ? (
-              <ModalPreview />
-            ) : (
-              <BannerPreview />
-            )}
-            <div className="flex min-w-0 flex-col items-start p-5 sm:p-6">
-              <div className="flex w-full flex-wrap items-center justify-between gap-3">
-                <h2
-                  id={`${experiment.id}-title`}
-                  className="text-xl font-semibold tracking-tight"
-                >
-                  {experiment.title}
-                </h2>
-                <Badge variant="outline">{experiment.status}</Badge>
-              </div>
-              <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground">
-                {experiment.summary}
-              </p>
-              <dl className="mt-5 grid gap-x-4 gap-y-2 text-sm sm:grid-cols-[auto_1fr]">
-                <dt className="text-muted-foreground">Type</dt>
-                <dd>{experiment.type}</dd>
-                <dt className="text-muted-foreground">Focus</dt>
-                <dd>{experiment.focus.join(" · ")}</dd>
-              </dl>
-              <Button asChild variant="outline" className="mt-6">
-                <a
-                  href={experimentHref(experiment.id)}
-                  aria-label={`Open ${experiment.title}`}
-                >
-                  Open experiment
-                  <ArrowUpRight aria-hidden="true" />
-                </a>
-              </Button>
-            </div>
-            <div className="min-w-0 border-t border-border p-5 md:col-span-2 lg:col-span-1 lg:border-t-0 lg:border-l">
-              <GrowthNutritionLabel
-                name={experiment.title}
-                nutrition={experiment.growth}
-              />
-            </div>
-          </article>
-        ))}
-
-        {matchingExperiments.length === 0 && (
-          <div className="rounded-md border border-border bg-surface-sunken px-5 py-10 text-center">
-            <h2 className="text-lg font-medium">No matching experiments</h2>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Try another search or clear the type and growth filters.
-            </p>
-            <Button
-              variant="outline"
-              className="mt-5"
-              onClick={() => {
-                setQuery("");
-                setType("All types");
-                setGrowth("all");
-              }}
-            >
-              Clear filters
-            </Button>
-          </div>
-        )}
-      </div>
-
-      <p className="mt-6 max-w-2xl text-sm leading-6 text-muted-foreground">
-        Each experiment keeps its intent, source, and decisions alongside the
-        wireframe, ready to revisit and build on.
-      </p>
+            Show all experiments
+          </Button>
+        </section>
+      )}
     </main>
   );
 }

@@ -18,7 +18,11 @@ function recoverDraft(): SteamDesign {
   return savedSteamDesign;
 }
 
-export default function SteamWorkbench() {
+export default function SteamWorkbench({
+  embedded = false,
+}: {
+  embedded?: boolean;
+}) {
   const [open, setOpen] = useState(
     new URLSearchParams(location.search).has("tune"),
   );
@@ -81,6 +85,7 @@ export default function SteamWorkbench() {
     <div className={open ? "design-workbench is-open" : "design-workbench"}>
       <div className="min-w-0">
         <SteamGrowthBanners
+          embedded={embedded}
           design={draft}
           onTune={() => setOpen(!open)}
           tuningOpen={open}

@@ -1,6 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
-import { GrowthNutritionLabel } from "../components/growth-nutrition-label";
+import { DesignIntent } from "../components/design-intent";
 import {
   growthBoundaries,
   growthCategories,
@@ -58,7 +58,7 @@ export function GrowthReference() {
       <p className="mt-3 max-w-3xl text-base leading-7 text-muted-foreground">
         Classify a pattern by the behavior it is intended to change. Three
         overarching outcomes and eight practical categories give each experiment
-        a consistent growth nutrition label.
+        a consistent design-intent summary.
       </p>
       <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
         This is a working synthesis from the supplied growth-design research
@@ -173,7 +173,7 @@ export function GrowthReference() {
       </div>
 
       <div className="mt-6 space-y-3">
-        <ReferenceDisclosure title="Growth nutrition label format">
+        <ReferenceDisclosure title="Design intent format">
           <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
             Give each pattern one primary category, optional secondary
             categories, the user or account state, journey, mechanism, UI
@@ -184,10 +184,10 @@ export function GrowthReference() {
           <p className="mt-5 text-sm font-semibold">
             Example: Recommended product card
           </p>
-          <GrowthNutritionLabel
+          <DesignIntent
             name="Recommended product card"
             className="mt-3 max-w-xl"
-            nutrition={{
+            intent={{
               primary: "expansion",
               secondary: [],
               audience: "Existing paid account",

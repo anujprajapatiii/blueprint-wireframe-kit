@@ -1,8 +1,9 @@
-# Notion feature modal
+# Feature announcement
 
 | Field | Record |
 | --- | --- |
 | ID | `notion-feature-modal` |
+| Source name | Notion |
 | Direct URL | `?view=experiments&experiment=notion-feature-modal` |
 | Intent | Recreate the supplied feature-announcement modal as a neutral wireframe, preserving its copy, hierarchy, feature selection, and changes of state. |
 | Focus | A centered modal on a plain background, with an expandable feature selector and a changing preview. |
@@ -36,6 +37,7 @@ Source colors, typography, branding, illustrations, and mascot are replaced with
 ## User refinements
 
 - 2026-10-04: “Remove the background content. Keep it simple and plain.” The source’s document backdrop remains an observation, but the current experiment uses a plain background so the modal is the focus. The experiment’s intent and reference notes remain in this record and the directory registry.
+- 2026-10-03: The index now uses the task-focused title **Feature announcement**, with **Notion** shown separately as its source. Preserve the existing ID and direct URL. The user requested the original reference on each experiment page, so this revision includes the original recording locally in the shared **Original reference** view.
 
 ## Assumptions and scope
 
@@ -57,4 +59,10 @@ Source observations above are supported by the supplied clip. The local implemen
 - Production build and 127 token contrast checks pass. Axe reported no violations in tested states; some dialog checks leave ARIA-hidden focus and color contrast for manual review. This is not a formal accessibility certification.
 - Reduced-motion CSS uses a brief opacity-only transition. The stylesheet was reviewed, but an OS reduced-motion override was not exercised. Browser captures show feature changes and crossfade states; perceived smoothness still needs user review.
 
-No tuning controls were added, the Steam experiment was left unchanged, and the supplied video remains outside the public project. Publishing awaits an explicit request for this revision.
+No tuning controls were added. These checks describe the modal implementation before the later index and reference-viewer revision; they do not verify that revision. Publishing awaits an explicit request for the current revision.
+
+## Original reference — 2026-10-03
+
+The user explicitly requested the source media alongside the wireframe. Include the original **Notion Modal.mp4** recording, not a reconstructed sequence or a cropped replacement. Keep the source's visible workspace and document context in the original viewer; the wireframe continues to use the requested plain background. Use native video controls, a poster, and no autoplay. Keep private upload locations out of the public interface.
+
+The shared **Wireframe / Original reference** navigation keeps the recording reachable even though the wireframe opens its modal automatically. The original-reference URL opens the media directly. Direct entry, keyboard switching, narrow-screen reflow, media loading, and feature-state preservation passed the checks recorded in [the index review](../index-design.md#review--2026-10-03).

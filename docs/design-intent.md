@@ -1,25 +1,27 @@
-# Blueprint growth nutrition labels
+# Design intent
 
-Every experiment carries a small structured label explaining its intended growth behavior. The label classifies intent, not appearance: a modal, banner, or recommendation can support different objectives in different journeys.
+Every experiment carries a structured record explaining its intended growth behavior. It classifies intent, not appearance: a modal, banner, or recommendation can support different objectives in different journeys. The interface calls this **Design intent**.
 
 This is the working synthesis supplied by Anuj in **Pasted text.txt**, adopted for this library. It is not a universal or mutually exclusive industry standard. The source names established frameworks but contains unresolved citation placeholders; those references have not been independently verified here. The definitions are available in the kit at `?#growth`.
 
-## Label contract
+## Data and display contract
 
-Keep the label in the experiment's typed registry metadata as `growth: GrowthNutrition` so the index and any future detail view share one record. `src/growth/taxonomy.ts` owns the schema and definitions; `src/components/growth-nutrition-label.tsx` renders the reusable label. Use plain language and shared blueprint tokens; do not imply nutritional quantities, scores, or measured impact.
+Keep design intent in the experiment's typed registry metadata as `growth: GrowthIntent` so the index and detail views share one record. `src/growth/taxonomy.ts` owns the schema and definitions, and `src/components/design-intent.tsx` renders the shared record. Use plain language and shared blueprint tokens; do not imply nutritional quantities, scores, or measured impact.
+
+The index presents the goal and a concise mechanism summary without a large table competing with the preview. A **Design intent** disclosure contains the full record, including reasoning and measurement limits. Display labels may be clearer than internal property names; the taxonomy's meaning remains unchanged.
 
 | Field | What to record |
 | --- | --- |
-| Primary | Exactly one category: the principal behavior this experiment intends to change. |
-| Secondary | Optional categories for material supporting outcomes. Do not add every plausible downstream effect. |
-| Audience / state | The relevant person or account and their current relationship to the product. Record unknowns, including commercial status. |
+| Goal | Exactly one category: the principal behavior this experiment intends to change. |
+| Also supports | Optional categories for material supporting outcomes. Do not add every plausible downstream effect. |
+| Audience | The relevant person or account and their current relationship to the product. Record unknowns, including commercial status. |
 | Journey | The task or transition the person is undertaking. |
-| Mechanisms | Why the intervention might change behavior: clarity, reduced effort, relevance, trust, motivation, timely prompts, and similar explanations. |
+| Mechanism | Why the intervention might change behavior: clarity, reduced effort, relevance, trust, motivation, timely prompts, and similar explanations. |
 | Format | The UI format or channel: modal, banner, inline card, email, and so on. |
-| Success measure | A proposed observable outcome tied to the intended behavior. Distinguish it from a measured result; avoid relying on clicks alone when later value matters. |
-| Basis | Why the classification fits, what the reference establishes, and what remains an interpretation or hypothesis. |
+| Proposed measure | A proposed observable outcome tied to the intended behavior. Distinguish it from a measured result; avoid relying on clicks alone when later value matters. |
+| Reasoning (footnote) | Why the classification fits, what the reference establishes, and what remains an interpretation or hypothesis. |
 
-The registry field names are `primary`, `secondary`, `audience`, `journey`, `mechanisms`, `format`, `measure`, and `basis`. Explain provisional classifications and measurement limits alongside the label. A reference shows an interface and some behavior; it does not establish its actual business objective, causal effect, or performance. The initial labels state **Intent hypothesis · Measures not yet tested**.
+The registry field names are `primary`, `secondary`, `audience`, `journey`, `mechanisms`, `format`, `measure`, and `basis`. Explain provisional classifications and measurement limits with the expanded record. Render `basis` as a plain footnote, not another nested disclosure. A reference shows an interface and some behavior; it does not establish its actual business objective, causal effect, or performance. Use a short, plain statement that these are interpretations and the proposed measures have not been tested.
 
 ## Three overarching outcomes
 
@@ -64,11 +66,13 @@ These labels are unvalidated design interpretations. Suggested measures are not 
 
 | Experiment | Primary / secondary | Audience and journey | Mechanisms / format | Proposed measures |
 | --- | --- | --- | --- | --- |
-| Steam growth banners | Engagement & adoption / Monetization & purchase (secondary hypothesis) | Existing store users; discover games and progress through the queue toward useful consideration | Reward, relevance, progress / sticker banner, discovery banner, modal carousel | Queue completion and wishlist additions; the downstream purchase intent is a hypothesis |
-| Notion feature modal | Engagement & adoption / none | Existing workspace users; account tier unknown; discover and try features toward meaningful adoption | Contextual education, clear value, timely prompting / feature announcement modal | Feature adoption rate after viewing the announcement; no conversion or adoption result is available |
+| Discovery queue & rewards · Steam | Engagement & adoption / Monetization & purchase (secondary hypothesis) | Existing store users; discover games and progress through the queue toward useful consideration | Reward, relevance, progress / sticker banner, discovery banner, modal carousel | Queue completion and wishlist additions; the downstream purchase intent is a hypothesis |
+| Feature announcement · Notion | Engagement & adoption / none | Existing workspace users; account tier unknown; discover and try features toward meaningful adoption | Contextual education, clear value, timely prompting / feature announcement modal | Feature adoption rate after viewing the announcement; no conversion or adoption result is available |
 
 Revisit the primary objective when scope or evidence changes. Preserve the stable experiment ID and record why its classification changed.
 
-## Local review — 2026-10-04
+## Previous label review — 2026-10-04
 
 The index shows both labels, searches their fields, and filters by primary or secondary category together with experiment type. Checked matching and empty states, clearing filters, category deep links, keyboard disclosure, and 320px reflow of both labels and definitions without horizontal overflow. The build and 127 token contrast checks pass. Axe reported no violations in the tested index and kit states; the kit leaves some existing ARIA and contrast cases for manual review. This is a local design review, not a measured growth result or accessibility certification. Publishing remains a separate request.
+
+The later index redesign replaces the large always-visible labels with compact summaries and disclosures. The taxonomy and classifications are preserved. Previous checks do not verify the revised composition; its review is recorded separately in [the index design record](index-design.md).

@@ -1,8 +1,9 @@
-# Steam growth banners
+# Discovery queue & rewards
 
 | Field         | Record                                                                                                                             |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | ID            | `steam-growth-banners`                                                                                                             |
+| Source name   | Steam                                                                                                                              |
 | Direct URL    | [Open the experiment](https://anujprajapatiii.github.io/blueprint-wireframe-kit/?view=experiments&experiment=steam-growth-banners) |
 | Status        | Ready for review — implemented and checked on 2026-10-03.                                                                          |
 | Source        | User-supplied **Steam Growth Banners.mp4** and three screenshots of the carousel and end screen.                                              |
@@ -52,7 +53,7 @@ Any card-stack motion should demonstrate the observed movement with neutral outl
 - Narrow-screen stacking and wrapping are responsive extrapolations; the reference only establishes the desktop composition.
 - Pausing the artwork and adapting it for reduced motion are accessibility provisions, not observed source controls.
 - The experiment uses local demonstration content and does not connect to Steam, retrieve account data, or grant rewards.
-- Retain descriptive source metadata only. The supplied video is omitted from the public repository and deployed build.
+- Original media was initially excluded. The user's later request authorizes including the original recording in the project and shared reference viewer; see the provenance note below. Publishing remains a separate step.
 
 ## Review notes
 
@@ -114,3 +115,13 @@ Reduced motion removes the sliding transition and uses a 120ms opacity-only cue.
 The user clarified that the whole card must rotate into place, not slide its contents through a stationary frame. This supersedes the fixed-track viewport implementation above. Each persistent carousel panel now owns its border, background, clipping, and contents. Animate that entire panel with horizontal translation, a restrained 8° Y-axis turn, scale, and opacity, using the existing motion duration/easing. Side previews are the actual neighbouring cards, not decorative stand-ins; no preceding card exists at the first position. Keep the modal header, navigation, and progress controls fixed.
 
 Verified the animated transform on the framed panel itself, actual neighbouring card previews, one active non-inert panel, mobile reflow at 320px, and completion/Continue. Reduced-motion rules disable panel transitions while retaining the opacity-only state cue. Production build and token checks pass; no publishing performed.
+
+## Index and original reference — 2026-10-03
+
+The index uses the title **Discovery queue & rewards**, with **Steam** shown separately as its source. Preserve the existing ID and direct URL. The preview should show the reward and discovery structure clearly within a landscape frame; it should not become a decorative vertical strip beside metadata.
+
+The user explicitly requested the original references inside each experiment. This revision includes the original **Steam Growth Banners.mp4** recording locally in the shared **Original reference** view. Preserve the full recording, including visible source account context; it is reference evidence, not the wireframe's current user state. Use native video controls, a poster, and no autoplay. Keep private upload locations out of the public interface.
+
+The three separately supplied queue and completion screenshots were inspected during the original build, but their files are not currently available. Keep their provenance and unavailable state explicit; do not substitute extracted video frames or fabricated images. The recording only shows the store banners, so it does not replace those flow references.
+
+The revised gallery and reference viewer passed the checks recorded in [the index review](../index-design.md#review--2026-10-03). The current redesign remains local pending an explicit publishing request.

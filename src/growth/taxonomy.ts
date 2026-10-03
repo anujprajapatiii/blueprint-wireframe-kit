@@ -25,7 +25,7 @@ export type GrowthCategory = {
   measures: string[];
 };
 
-export type GrowthNutrition = {
+export type GrowthIntent = {
   primary: GrowthCategoryId;
   secondary: GrowthCategoryId[];
   audience: string;

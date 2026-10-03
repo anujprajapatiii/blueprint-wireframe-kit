@@ -1,4 +1,5 @@
-import type { GrowthNutrition } from "../growth/taxonomy";
+import type { GrowthIntent } from "../growth/taxonomy";
+import type { ExperimentPreviewKind } from "./experiment-preview";
 
 export type ExperimentType = "Screen" | "Flow" | "Experience";
 
@@ -9,6 +10,9 @@ export interface Experiment {
   id: string;
   title: string;
   summary: string;
+  sourceName: string;
+  updatedAt: string;
+  preview: ExperimentPreviewKind;
   type: ExperimentType;
   focus: string[];
   source: string;
@@ -20,15 +24,17 @@ export interface Experiment {
   neutralizedVisuals: string[];
   assumptions: string[];
   reviewNotes: string[];
-  growth: GrowthNutrition;
+  growth: GrowthIntent;
 }
 
 export const experiments: Experiment[] = [
   {
     id: "notion-feature-modal",
-    title: "Notion feature modal",
-    summary:
-      "Explore a feature-announcement modal with expandable details and changing previews.",
+    title: "Feature announcement",
+    summary: "Select a feature to explore its details and preview.",
+    sourceName: "Notion",
+    updatedAt: "2026-10-03",
+    preview: "feature-modal",
     type: "Screen",
     focus: ["Feature announcement", "Modal selection"],
     growth: {
@@ -83,9 +89,12 @@ export const experiments: Experiment[] = [
   },
   {
     id: "steam-growth-banners",
-    title: "Steam growth banners",
+    title: "Discovery queue & rewards",
     summary:
-      "Explore the sticker reward, discovery queue carousel, and completion flow.",
+      "A reward-led discovery flow, from store banners to queue completion.",
+    sourceName: "Steam",
+    updatedAt: "2026-10-03",
+    preview: "discovery-queue",
     type: "Flow",
     focus: ["Sticker reward", "Discovery queue"],
     growth: {

@@ -156,7 +156,11 @@ function McpPreview() {
   );
 }
 
-export function NotionFeatureModal() {
+export function NotionFeatureModal({
+  embedded = false,
+}: {
+  embedded?: boolean;
+}) {
   const [open, setOpen] = useState(true);
   const [feature, setFeature] = useState<Feature>("html");
   const [destination, setDestination] = useState(false);
@@ -172,24 +176,34 @@ export function NotionFeatureModal() {
   return (
     <main
       id="main-content"
-      className="mx-auto max-w-6xl px-5 py-7 sm:px-8 sm:py-10"
+      className={
+        embedded
+          ? "notion-embedded"
+          : "mx-auto max-w-6xl px-5 py-7 sm:px-8 sm:py-10"
+      }
     >
-      <a
-        href="?view=experiments"
-        className="mb-5 inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-      >
-        <ArrowLeft size={16} aria-hidden="true" />
-        All experiments
-      </a>
+      {embedded && <h1 className="sr-only">Feature announcement wireframe</h1>}
+      {!embedded && (
+        <a
+          href="?view=experiments"
+          className="mb-5 inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+        >
+          <ArrowLeft size={16} aria-hidden="true" />
+          All experiments
+        </a>
+      )}
       <div className="flex flex-wrap items-start justify-between gap-5">
-        <div>
-          <h1 className="text-3xl font-semibold tracking-tight">
-            Notion feature modal
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            A feature announcement with expandable copy and a changing preview.
-          </p>
-        </div>
+        {!embedded && (
+          <div>
+            <h1 className="text-3xl font-semibold tracking-tight">
+              Notion feature modal
+            </h1>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              A feature announcement with expandable copy and a changing
+              preview.
+            </p>
+          </div>
+        )}
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button variant="outline" onClick={reopen}>
@@ -264,7 +278,11 @@ export function NotionFeatureModal() {
                       value={item.id}
                       className="notion-feature-option"
                       aria-label={item.title}
-                      aria-describedby={feature === item.id ? `notion-feature-${item.id}-description` : undefined}
+                      aria-describedby={
+                        feature === item.id
+                          ? `notion-feature-${item.id}-description`
+                          : undefined
+                      }
                     >
                       <item.icon
                         className="notion-feature-icon"
@@ -282,7 +300,10 @@ export function NotionFeatureModal() {
                           {item.title}
                         </span>
                         {feature === item.id && (
-                          <span id={`notion-feature-${item.id}-description`} className="font-normal">
+                          <span
+                            id={`notion-feature-${item.id}-description`}
+                            className="font-normal"
+                          >
                             {" "}
                             {item.description}
                           </span>

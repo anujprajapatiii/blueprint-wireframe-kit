@@ -5,16 +5,45 @@ import { ExperimentDirectory } from "./directory";
 import { SteamGrowthBanners } from "./steam-growth-banners";
 import { NotionFeatureModal } from "./notion-feature-modal";
 import { experiments } from "./registry";
+import { ExperimentWorkspace } from "./experiment-workspace";
 const SteamWorkbench = import.meta.env.DEV
   ? lazy(() => import("./steam-workbench"))
   : null;
 
 export function ExperimentsApp() {
-  const id = new URLSearchParams(location.search).get("experiment");
+  const params = new URLSearchParams(location.search);
+  const id = params.get("experiment");
+  const embedded = params.get("embed") === "1";
+  const experiment = experiments.find((entry) => entry.id === id);
   useEffect(() => {
-    const experiment = experiments.find((entry) => entry.id === id);
     document.title = `${experiment?.title ?? "Experiments"} — Blueprint`;
-  }, [id]);
+  }, [experiment]);
+  if (embedded && experiment) {
+    return (
+      <div className="experiment-embedded">
+        {id === "notion-feature-modal" ? (
+          <NotionFeatureModal embedded />
+        ) : id === "steam-growth-banners" &&
+          SteamWorkbench &&
+          params.get("tune") === "1" ? (
+          <Suspense fallback={<p className="p-8">Loading local preview…</p>}>
+            <SteamWorkbench embedded />
+          </Suspense>
+        ) : id === "steam-growth-banners" ? (
+          <SteamGrowthBanners embedded />
+        ) : (
+          <main id="main-content" className="p-8">
+            <h1 className="text-xl font-semibold">
+              Wireframe not available yet
+            </h1>
+            <p className="mt-3 text-sm text-muted-foreground">
+              This experiment’s reference is ready to explore.
+            </p>
+          </main>
+        )}
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen">
       <a
@@ -62,16 +91,8 @@ export function ExperimentsApp() {
       </header>
       {!id ? (
         <ExperimentDirectory />
-      ) : id === "notion-feature-modal" ? (
-        <NotionFeatureModal />
-      ) : id === "steam-growth-banners" ? (
-        SteamWorkbench ? (
-          <Suspense fallback={<p className="p-8">Loading local preview…</p>}>
-            <SteamWorkbench />
-          </Suspense>
-        ) : (
-          <SteamGrowthBanners />
-        )
+      ) : experiment ? (
+        <ExperimentWorkspace key={experiment.id} experiment={experiment} />
       ) : (
         <main
           id="main-content"
