@@ -25,10 +25,10 @@ export const experiments: Experiment[] = [
     id: "steam-growth-banners",
     title: "Steam growth banners",
     summary:
-      "Explore how a sticker reward strip and a discovery queue banner invite browsing.",
-    type: "Screen",
+      "Explore the sticker reward, discovery queue carousel, and completion flow.",
+    type: "Flow",
     focus: ["Sticker reward", "Discovery queue"],
-    source: "Steam Growth Banners.mp4",
+    source: "Steam Growth Banners.mp4 and three queue screenshots",
     status: "Ready for review",
     intent:
       "Recreate the two banners as neutral wireframes, preserving useful source copy and interaction intent. Keep the rest of the page plain so the banners remain the focus.",
@@ -36,7 +36,7 @@ export const experiments: Experiment[] = [
     observations: [
       "The 10.917-second video shows a static store page with a compact sticker reward strip above a wider discovery queue banner.",
       "Three stickers fan out in the reward strip; landscape discovery cards roll continuously along one fixed tilted strip.",
-      "The reference shows no scrolling, sticky behavior, clicks, or queue flow.",
+      "Additional screenshots show the immersive game carousel and reward summary; trailer autoplay is described by the user.",
     ],
     preservedCopy: [
       "Earn free stickers by going through your discovery queue!",
@@ -49,7 +49,7 @@ export const experiments: Experiment[] = [
       "Supporting page content is plain scaffolding for placement and hierarchy.",
     ],
     assumptions: [
-      "Local destination placeholders demonstrate entry actions; the next screens are not shown in the source.",
+      "Twelve sample entries, local wishlist/ignore states and stats, responsive layout, and Continue replaying a sample queue are prototype decisions.",
       "Narrow-screen reflow and motion controls are accessibility provisions added for this experiment.",
       "The date is preserved reference copy, not a current offer.",
       "The fixed angle and marquee speed are estimated from the clip; seamless looping follows the user’s motion clarification.",

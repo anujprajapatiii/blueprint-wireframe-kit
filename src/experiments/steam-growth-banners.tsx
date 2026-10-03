@@ -20,6 +20,7 @@ import {
   cn,
 } from "../components/kit";
 import "./steam-growth-banners.css";
+import { DiscoveryQueue } from "./discovery-queue";
 import {
   savedSteamDesign,
   steamDesignStyle,
@@ -107,8 +108,9 @@ function Destination({
           {kind === "stickers" ? "Your stickers" : "Your discovery queue"}
         </DialogTitle>
         <DialogDescription>
-          This destination is a placeholder. The experiment focuses on the two
-          entry banners; the recording does not show the next screen.
+          This sticker collection is a placeholder. The discovery queue now
+          demonstrates browsing and completion; this separate destination is
+          outside the current flow.
         </DialogDescription>
       </DialogHeader>
       <div className="my-4 grid min-h-32 place-items-center rounded-md border border-dashed border-input bg-surface-sunken">
@@ -239,7 +241,7 @@ export function SteamGrowthBanners({
                 <h3 className="font-semibold">
                   Earn free stickers by going through your discovery queue!
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="-mt-1 text-muted-foreground">
                   Now through Oct 8 <span aria-hidden="true">- </span>
                   <Dialog>
                     <DialogTrigger className="inline-flex min-h-10 items-center rounded-sm text-foreground underline decoration-input underline-offset-4 hover:decoration-foreground">
@@ -308,11 +310,7 @@ export function SteamGrowthBanners({
                   </span>
                 </button>
               </DialogTrigger>
-              <Destination
-                kind="queue"
-                design={design}
-                designStyle={designStyle}
-              />
+              <DiscoveryQueue />
             </Dialog>
           </div>
           <ContextCards count={8} />
@@ -340,8 +338,9 @@ export function SteamGrowthBanners({
               <p>
                 Steam Growth Banners.mp4 · 11-second recording. The reward
                 strip, banner copy, and rolling card strip are visible
-                throughout. No click-through, scrolling, or sticky behavior is
-                shown.
+                throughout. Three additional screenshots show the immersive game
+                carousel and completion screen. Trailer autoplay follows the
+                user's description; no sticky behavior is established.
               </p>
             </section>
             <section>
@@ -371,11 +370,13 @@ export function SteamGrowthBanners({
               </h2>
               <p>
                 Sticker shadows and animated glyphs, mobile reflow,
-                pause/resume, and local destination placeholders are prototype
-                additions. The marquee fades at its desktop edge; mobile has no
-                fade and only clips at the visible banner boundary. The next
-                screens are intentionally left undefined. Motion stops when
-                reduced motion is requested.
+                pause/resume, and local demonstration data are prototype
+                additions. The queue opens a twelve-game carousel and reward
+                summary. The marquee fades at its desktop edge; mobile has no
+                fade and only clips at the visible banner boundary. Trailer
+                artwork is a neutral placeholder; wishlist, ignore, stats, and
+                Continue work locally. No Steam rewards are granted. Motion
+                stops when reduced motion is requested.
               </p>
             </section>
             <a

@@ -85,7 +85,8 @@
   --queue-cycle: var(--queue-duration-desktop, 48s);
   position: absolute;
   inset: 0 0 0 auto;
-  width: 40%;
+  /* Let the faded leading edge overlap the copy beneath its foreground layer. */
+  width: 60%;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(
     to right,

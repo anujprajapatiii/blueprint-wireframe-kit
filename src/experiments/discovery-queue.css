@@ -1,0 +1,285 @@
+/* Fixed, immersive shell. Only the slide scrolls; close and navigation stay reachable. */
+.discovery-dialog {
+  width: calc(100% - 32px);
+  max-width: 1760px;
+  height: min(84dvh, 960px);
+  max-height: calc(100dvh - 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: var(--surface-deep);
+}
+.discovery-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-height: 64px;
+  padding: 8px 64px 8px 56px;
+}
+.discovery-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  padding: 0 56px;
+}
+.discovery-slide {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  overflow: visible;
+}
+.discovery-game {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(280px, 3fr);
+  min-height: 100%;
+}
+.discovery-video {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  background: var(--surface-deep);
+  border-right: 1px solid var(--border);
+}
+.discovery-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  min-width: 0;
+  background: var(--card);
+}
+.discovery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+}
+.discovery-previous {
+  left: 6px;
+}
+.discovery-next {
+  right: 6px;
+}
+.discovery-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 4px 16px;
+}
+.discovery-progress {
+  display: flex;
+  justify-content: center;
+}
+.discovery-dot {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+}
+.discovery-dot span {
+  width: 16px;
+  height: 6px;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-sm);
+}
+.discovery-dot span[data-visited="true"] {
+  background: var(--muted-foreground);
+}
+.discovery-dot[aria-current] span {
+  width: 24px;
+  background: var(--foreground);
+}
+.discovery-completion {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 40px 28px;
+  text-align: center;
+}
+.discovery-reward {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 680px;
+  padding: 20px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+.discovery-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--border);
+}
+.discovery-stats > div {
+  padding: 16px 8px 0;
+}
+.discovery-stats > div + div {
+  border-left: 1px solid var(--border);
+}
+.discovery-stats dt,
+.discovery-stats span {
+  font-size: var(--type-sm);
+  color: var(--muted-foreground);
+}
+.discovery-stats dd {
+  font-size: var(--type-3xl);
+  font-weight: 600;
+  margin: 4px 0;
+}
+.discovery-stats button {
+  min-height: 40px;
+  font-size: var(--type-sm);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.discovery-collection {
+  max-width: 800px;
+  margin: auto;
+  padding: 32px;
+}
+/* Animate the entire framed card; there is no stationary clipping frame. */
+.discovery-track {
+  position: relative;
+  height: 100%;
+}
+.discovery-panel {
+  position: absolute;
+  inset: 0;
+  min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+  transform: translateX(calc(var(--card-offset) * (100% - 112px)))
+    perspective(1400px) rotateY(var(--card-angle)) scale(var(--card-scale));
+  transform-origin: center;
+  backface-visibility: hidden;
+  transition:
+    transform var(--motion-slow) var(--motion-ease),
+    opacity var(--motion-slow) var(--motion-ease);
+}
+.discovery-collection {
+  height: 100%;
+  overflow-y: auto;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+}
+@keyframes discovery-fade {
+  from {
+    opacity: 0.65;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 800px) {
+  .discovery-dialog {
+    width: calc(100% - 16px);
+    height: calc(100dvh - 16px);
+    max-height: calc(100dvh - 16px);
+  }
+  .discovery-header {
+    padding: 8px 48px 8px 16px;
+    gap: 8px;
+  }
+  .discovery-stage {
+    padding: 0 8px 52px;
+  }
+  .discovery-game {
+    display: flex;
+    flex-direction: column;
+  }
+  .discovery-video {
+    min-height: 0;
+    flex: none;
+    aspect-ratio: 16 / 9;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .discovery-video > p {
+    font-size: 12px;
+    top: 12px;
+    left: 12px;
+  }
+  .discovery-video > div > svg {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 8px;
+  }
+  .discovery-video > div > p {
+    font-size: 12px;
+  }
+  .discovery-details {
+    padding: 20px;
+    gap: 20px;
+    flex: 1;
+  }
+  .discovery-arrow {
+    top: auto;
+    bottom: 0;
+    transform: none;
+  }
+  .discovery-previous {
+    left: 16px;
+  }
+  .discovery-next {
+    right: 16px;
+  }
+  .discovery-panel {
+    transform: translateX(calc(var(--card-offset) * (100% + 16px)))
+      perspective(1400px) rotateY(var(--card-angle)) scale(var(--card-scale));
+  }
+  .discovery-dot {
+    width: 24px;
+  }
+  .discovery-dot[aria-current] span {
+    width: 20px;
+  }
+  .discovery-footer {
+    gap: 0;
+    padding: 0 8px 8px;
+  }
+  .discovery-completion {
+    padding: 28px 16px;
+    gap: 24px;
+  }
+  .discovery-reward {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px;
+    gap: 12px;
+  }
+  .discovery-collection {
+    padding: 24px 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .discovery-panel {
+    transition: none;
+  }
+  .discovery-panel[data-active="true"] {
+    animation: discovery-fade var(--motion-fast) ease-out;
+    /* Override the global motion reset for this opacity-only state cue. */
+    animation-duration: var(--motion-fast) !important;
+  }
+}

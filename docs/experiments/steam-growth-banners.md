@@ -5,10 +5,12 @@
 | ID            | `steam-growth-banners`                                                                                                             |
 | Direct URL    | [Open the experiment](https://anujprajapatiii.github.io/blueprint-wireframe-kit/?view=experiments&experiment=steam-growth-banners) |
 | Status        | Ready for review — implemented and checked on 2026-10-03.                                                                          |
-| Source        | User-supplied **Steam Growth Banners.mp4**, showing the Steam desktop client's store.                                              |
-| Source access | Inspected across the 10.917-second recording. No clicks or scrolling are shown.                                                    |
+| Source        | User-supplied **Steam Growth Banners.mp4** and three screenshots of the carousel and end screen.                                              |
+| Source access | Inspected the 10.917-second recording and all three stills. Autoplay is user-described.                                                    |
 
 ## Intent and scope
+
+Scope extension — 2026-10-03: build the next steps of the discovery queue from three user-supplied screenshots. The references show a large modal with a video area, game details, neighbouring slide previews, previous/next arrows, progress indicators, wishlist/ignore actions, and an end screen with a sticker reward, stats, Done, and Continue. The user establishes that videos autoplay; still images do not establish motion or timing. Keep video and game artwork as neutral placeholders, preserve useful copy, and add no tuning controls for this flow. Use twelve demonstration entries; unknown games, responsive layout, transition timing, local stats, and Continue starting another sample queue are prototype assumptions. No actual video or Steam account integration is required.
 
 This is the first entry in a lasting directory for wireframing experiences, screens, and flows. The user wants references reduced to neutral wireframes that preserve useful original writing and the product idea, so they can return to the experiments later.
 
@@ -46,7 +48,7 @@ Any card-stack motion should demonstrate the observed movement with neutral outl
 ## Assumptions and prototype extensions
 
 - Both banners stay in normal document flow. No sticky behavior is inferred from the recording or the user's abbreviated wording.
-- The sticker link and queue entry open plain local destination placeholders so their actions are reviewable. These destinations are prototype extensions: the recording does not show the actual sticker collection or queue flow. Do not present invented advancement, progress, completion, or reward mechanics as observed behavior.
+- Initially both entries opened placeholders. The queue now follows the additional carousel and completion screenshots. The separate sticker destination remains a placeholder. Sample game entries and local behaviour are prototype extensions, distinct from observed structure.
 - Narrow-screen stacking and wrapping are responsive extrapolations; the reference only establishes the desktop composition.
 - Pausing the artwork and adapting it for reduced motion are accessibility provisions, not observed source controls.
 - The experiment uses local demonstration content and does not connect to Steam, retrieve account data, or grant rewards.
@@ -64,7 +66,7 @@ Checked on 2026-10-03:
 - Copy-link success feedback and local direct-link refresh were checked.
 - axe-core reported zero violations in the tested directory, banner, and destination-dialog views. The directory and banner checks had no incomplete results; dialog scans left ARIA-hidden focus and some contrast cases for manual review. These results are not a full accessibility conformance audit.
 
-The prototype remains scoped to the two entry banners. No underlying Steam queue or sticker collection flow is reproduced.
+The original review above covered the two entry banners. The later scope extension adds the discovery queue flow; it does not connect to Steam.
 
 ## Motion correction — 2026-10-03
 
@@ -91,3 +93,24 @@ The local Tune design panel changes existing semantic surface, outline, radius, 
 Verified: token selection updates the rendered surface; Save writes the JSON file and survives reload; Revert restores settings; marquee angle updates the responsive slope; zero shadow strength produces transparent shadows. The endpoint rejects invalid settings (400) and foreign origins (403). The production bundle contains no editor or save-endpoint code. Token contrast checks still pass; changing composition still requires review before publishing.
 
 Narrow-screen review: the editor fits at 320px with no whole-page horizontal overflow. At the maximum 20° marquee angle, the mobile mask stays off and reserved space follows the new slope. Closing the panel returns keyboard focus to Tune design; opening brings the controls into view. Automated axe checks reported zero violations in tested editor views, with rendered colour contrast left for manual review. The existing 127 token-pair checks pass.
+
+
+## Discovery queue flow — 2026-10-03
+
+The discovery banner now opens a large accessible modal: neutral trailer area, game details, previous/next controls, twelve progress positions, wishlist and ignore toggles, and a completion slide. Preserve the source completion heading and reward copy. Replace the source account's lifetime total with explicitly labelled session demo stats; never reproduce private account data as current user state. The two identifiable game titles are retained, while other entries use plain numbered placeholders. Autoplay/pause is represented as a wireframe state, not a fetched or playable video.
+
+The end screen opens local sticker, wishlist, and ignored views. Done closes the modal; Continue repeats the sample queue. Store page and Learn More open plain explanatory views. The alternate classic queue is outside the requested flow and omitted. No new tuning controls were added. Existing banner settings are preserved. The desktop marquee also extends across 60% of the entry banner, with its fade overlapping the copy; reward text spacing is reduced by 4px.
+
+Verified locally: production build and 127 defined token contrast checks; next and keyboard-arrow navigation through all twelve entries; completion with twelve viewed, one wishlisted, and one ignored; wishlist contents; Continue; mobile game and summary layout at 320px without internal horizontal overflow; slide scroll resets on navigation; Escape dismissal and focus return to the entry banner. Reduced-motion CSS suppresses slide transitions. These are focused checks, not formal accessibility certification. This revision has not been published.
+
+## Carousel continuity — 2026-10-03
+
+User correction: the first game has no preceding card, and carousel navigation should animate smoothly. Applied the local `css-animations` and `animation-accessibility` skills. Hide the left preview until a preceding game exists. Keep all twelve slides and the completion slide on one persistent track, using the kit's 240ms motion duration and easing for a transform-only transition. Retargeting interpolates from the current position instead of restarting an entrance keyframe. Inactive panels are inert and hidden from assistive technology. Continue starts a fresh track without sweeping backwards through the finished queue.
+
+Reduced motion removes the sliding transition and uses a 120ms opacity-only cue. Verified this variant by temporarily activating its CSS in the local preview, then restoring its media query; no OS preference was changed. Verified the first-slide boundary, forward/reverse navigation, and one active accessible panel in Chrome. Build and token checks pass. Changes remain local.
+
+## Whole-card rotation — 2026-10-03
+
+The user clarified that the whole card must rotate into place, not slide its contents through a stationary frame. This supersedes the fixed-track viewport implementation above. Each persistent carousel panel now owns its border, background, clipping, and contents. Animate that entire panel with horizontal translation, a restrained 8° Y-axis turn, scale, and opacity, using the existing motion duration/easing. Side previews are the actual neighbouring cards, not decorative stand-ins; no preceding card exists at the first position. Keep the modal header, navigation, and progress controls fixed.
+
+Verified the animated transform on the framed panel itself, actual neighbouring card previews, one active non-inert panel, mobile reflow at 320px, and completion/Continue. Reduced-motion rules disable panel transitions while retaining the opacity-only state cue. Production build and token checks pass; no publishing performed.
