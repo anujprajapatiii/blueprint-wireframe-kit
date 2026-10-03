@@ -8,7 +8,9 @@ This is the working synthesis supplied by Anuj in **Pasted text.txt**, adopted f
 
 Keep design intent in the experiment's typed registry metadata as `growth: GrowthIntent` so the index and detail views share one record. `src/growth/taxonomy.ts` owns the schema and definitions, and `src/components/design-intent.tsx` renders the shared record. Use plain language and shared blueprint tokens; do not imply nutritional quantities, scores, or measured impact.
 
-The index presents the goal and a concise mechanism summary without a large table competing with the preview. A **Design intent** disclosure contains the full record, including reasoning and measurement limits. Display labels may be clearer than internal property names; the taxonomy's meaning remains unchanged.
+The index presents the goal beside the source and added-date pills without a large table competing with the preview. A **Design intent** disclosure contains the full record, including reasoning and measurement limits. Display labels may be clearer than internal property names; the taxonomy's meaning remains unchanged.
+
+Each field label uses one 16px Lucide icon from the existing icon system: Target for Goal, GitBranch for Also supports, Users for Audience, Route for Journey, Cog for Mechanism, PanelsTopLeft for Format, and ChartColumn for Proposed measure. Keep the visible label text, use the muted foreground token, and hide the decorative icon from assistive technology. The shared component owns this mapping across the index, experiment pages, and definitions.
 
 | Field | What to record |
 | --- | --- |
