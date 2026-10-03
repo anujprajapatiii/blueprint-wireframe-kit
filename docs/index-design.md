@@ -11,10 +11,10 @@ The 2026-10-03 revision responds to the user's request to refine the index, prev
 - Use a two-column desktop gallery and one column on narrow screens. Keep preview aspect ratios consistent and landscape, with enough space to reveal the experiment's distinctive structure.
 - Use `surface-raised` for gallery cards with a quiet outline and small shadow so their content stays visibly separate from the page canvas. Keep thumbnails on the deeper preview surface.
 - Previews are recognition aids. Depict the feature selector and preview for Notion; depict the sticker reward and discovery sequence for Steam. Keep neutral blueprint surfaces and avoid decorative motion in the index.
-- Place the title and task-focused sentence directly under the preview. Show the source name separately from the title and source filename. Keep supporting type and status metadata visually secondary.
+- Place the title and task-focused sentence directly under the preview. Show the source name in a simple pill using the kit Badge. Omit type, status, separator dots, and recording counts from cards; keep type available as a filter.
 - Use plain names: **Feature announcement** from Notion and **Discovery queue & rewards** from Steam. Preserve their existing IDs and URLs.
 - Keep instructions short and specific to the next action. Avoid long introductory explanations, repeated footer advice, decorative eyebrow text, or a competing marketing voice.
-- Make title and preview links open the experiment. Keep reference links and disclosures separate so interactive elements are not nested inside a whole-card link.
+- Make title and preview links open the experiment. Keep the design-intent disclosure separate from the link. Original references are accessed through the toggle inside each experiment, with no reference footer on index cards.
 
 ## Design intent
 
@@ -27,6 +27,7 @@ Keep the eight growth categories and three overarching outcomes unchanged. The k
 ## Find and return
 
 - Search titles, source names, summaries, focus, and design-intent fields. Use stable goal and type values from the shared definitions.
+- Use the kit's shared Select for goal, type, and sort controls so icon spacing, keyboard behavior, and menu styling stay consistent with the component library.
 - Show the result count and a useful empty state with one clear reset action. Preserve selected filters while editing the query.
 - Keep search and filters in the URL. Opening either an experiment or its original reference, then returning to the directory, should preserve that context. Existing unfiltered experiment links must continue to work.
 - Offer recently updated and alphabetical order. Avoid adding further sorting modes, favorites, tags, or management workflows until the library needs them. The registry and layout should accommodate more entries without requiring a new card design for each.

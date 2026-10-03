@@ -1,13 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
+import { ArrowRight, BookOpen, ChevronDown, Search, X } from "lucide-react";
 import {
-  ArrowRight,
-  BookOpen,
-  ChevronDown,
-  Film,
-  Search,
-  X,
-} from "lucide-react";
-import { Button, Input, Label } from "../components/kit";
+  Badge,
+  Button,
+  Input,
+  Label,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/kit";
 import { DesignIntent } from "../components/design-intent";
 import {
   growthCategories,
@@ -16,7 +19,6 @@ import {
 } from "../growth/taxonomy";
 import { experiments, type Experiment, type ExperimentType } from "./registry";
 import { ExperimentPreview } from "./experiment-preview";
-import { experimentReferences } from "./reference-manifest";
 
 const types: ExperimentType[] = ["Screen", "Flow", "Experience"];
 type Filters = {
@@ -57,14 +59,9 @@ function filterParams(filters: Filters) {
   return params;
 }
 
-function experimentLink(
-  experiment: Experiment,
-  filters: Filters,
-  reference = false,
-) {
+function experimentLink(experiment: Experiment, filters: Filters) {
   const params = filterParams(filters);
   params.set("experiment", experiment.id);
-  if (reference) params.set("mode", "reference");
   return `?${params}`;
 }
 
@@ -76,7 +73,6 @@ function ExperimentCard({
   filters: Filters;
 }) {
   const goal = growthCategoryById[experiment.growth.primary];
-  const references = experimentReferences[experiment.id] ?? [];
   return (
     <article
       aria-labelledby={`${experiment.id}-title`}
@@ -107,15 +103,9 @@ function ExperimentCard({
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
             {experiment.summary}
           </p>
-          <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-            <span className="font-medium text-foreground">
-              {experiment.sourceName}
-            </span>
-            <span aria-hidden="true">·</span>
-            <span>{experiment.type}</span>
-            <span aria-hidden="true">·</span>
-            <span>{experiment.status}</span>
-          </div>
+          <Badge variant="outline" className="mt-4 rounded-full px-3 text-xs">
+            {experiment.sourceName}
+          </Badge>
         </div>
       </a>
       <div className="mx-5 border-t border-border sm:mx-6">
@@ -140,21 +130,6 @@ function ExperimentCard({
             className="pb-5"
           />
         </details>
-      </div>
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-5 py-2.5 sm:px-6">
-        <a
-          href={experimentLink(experiment, filters, true)}
-          className="inline-flex min-h-10 items-center gap-2 rounded-sm text-sm hover:underline hover:underline-offset-4"
-          aria-label={`View original reference for ${experiment.title}`}
-        >
-          <Film size={16} aria-hidden="true" />
-          Original reference
-        </a>
-        <span className="text-xs text-muted-foreground">
-          {references.length
-            ? `${references.length} ${references.length === 1 ? "recording" : "references"}`
-            : "Not added"}
-        </span>
       </div>
     </article>
   );
@@ -214,9 +189,6 @@ export function ExperimentDirectory() {
   const filtered = Boolean(
     filters.query.trim() || filters.type !== "all" || filters.goal !== "all",
   );
-  const selectClass =
-    "h-11 w-full min-w-0 rounded-md border border-input bg-surface-sunken px-3 text-sm text-foreground";
-
   return (
     <main
       id="main-content"
@@ -266,39 +238,41 @@ export function ExperimentDirectory() {
         </div>
         <div className="flex min-w-0 flex-col gap-2">
           <Label htmlFor="experiment-goal">Goal</Label>
-          <select
-            id="experiment-goal"
+          <Select
             value={filters.goal}
-            onChange={(event) =>
-              update({ goal: event.target.value as Filters["goal"] })
-            }
-            className={selectClass}
+            onValueChange={(goal) => update({ goal: goal as Filters["goal"] })}
           >
-            <option value="all">All goals</option>
-            {growthCategories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.shortName}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger id="experiment-goal" className="h-11 min-w-0">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All goals</SelectItem>
+              {growthCategories.map((category) => (
+                <SelectItem key={category.id} value={category.id}>
+                  {category.shortName}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <div className="flex min-w-0 flex-col gap-2">
           <Label htmlFor="experiment-type">Type</Label>
-          <select
-            id="experiment-type"
+          <Select
             value={filters.type}
-            onChange={(event) =>
-              update({ type: event.target.value as Filters["type"] })
-            }
-            className={selectClass}
+            onValueChange={(type) => update({ type: type as Filters["type"] })}
           >
-            <option value="all">All types</option>
-            {types.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger id="experiment-type" className="h-11 min-w-0">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All types</SelectItem>
+              {types.map((type) => (
+                <SelectItem key={type} value={type}>
+                  {type}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </form>
 
@@ -322,17 +296,21 @@ export function ExperimentDirectory() {
         </div>
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <label htmlFor="experiment-sort">Sort</label>
-          <select
-            id="experiment-sort"
+          <Select
             value={filters.sort}
-            onChange={(event) =>
-              update({ sort: event.target.value as Filters["sort"] })
-            }
-            className="min-h-10 rounded-sm border-0 bg-transparent pr-1 pl-2 text-sm text-foreground"
+            onValueChange={(sort) => update({ sort: sort as Filters["sort"] })}
           >
-            <option value="recent">Recently updated</option>
-            <option value="title">Name A–Z</option>
-          </select>
+            <SelectTrigger
+              id="experiment-sort"
+              className="w-auto border-0 bg-transparent"
+            >
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="recent">Recently updated</SelectItem>
+              <SelectItem value="title">Name A–Z</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
