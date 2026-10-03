@@ -54,32 +54,36 @@ function ContextCards({
   );
 }
 
-function StickerStack() {
+function StickerStack({ paused = false }: { paused?: boolean }) {
   return (
-    <span aria-hidden="true" className="relative block h-14 w-24 shrink-0">
+    <span
+      aria-hidden="true"
+      className={cn("relative block h-14 w-24 shrink-0", paused && "is-paused")}
+    >
       {[-14, 0, 14].map((rotation, i) => (
         <span
           key={i}
-          className="absolute top-2 grid h-11 w-9 place-items-center rounded-sm border border-input bg-surface-raised"
+          className="sticker-card absolute top-2 grid h-11 w-9 place-items-center rounded-sm border border-input bg-surface-raised"
           style={{
             left: `${i * 24}px`,
             transform: `rotate(${rotation}deg)`,
             zIndex: i === 1 ? 2 : 1,
           }}
         >
-          <span
-            className={cn(
-              "h-4 w-4 border border-input",
-              i === 0 ? "rounded-full" : i === 1 ? "rotate-45" : "rounded-sm",
-            )}
-          />
+          <span className={`sticker-glyph sticker-glyph-${i}`} />
         </span>
       ))}
     </span>
   );
 }
 
-function Destination({ kind }: { kind: "stickers" | "queue" }) {
+function Destination({
+  kind,
+  paused = false,
+}: {
+  kind: "stickers" | "queue";
+  paused?: boolean;
+}) {
   return (
     <DialogContent>
       <DialogHeader>
@@ -93,7 +97,7 @@ function Destination({ kind }: { kind: "stickers" | "queue" }) {
       </DialogHeader>
       <div className="my-4 grid min-h-32 place-items-center rounded-md border border-dashed border-input bg-surface-sunken">
         {kind === "stickers" ? (
-          <StickerStack />
+          <StickerStack paused={paused} />
         ) : (
           <span className="text-sm text-muted-foreground">Queue content</span>
         )}
@@ -177,7 +181,7 @@ export function SteamGrowthBanners() {
             ) : (
               <Play aria-hidden="true" />
             )}
-            {motion ? "Pause card motion" : "Resume card motion"}
+            {motion ? "Pause animations" : "Resume animations"}
           </Button>
           <span className="hidden h-10 items-center text-xs text-muted-foreground motion-reduce:inline-flex">
             Motion reduced
@@ -190,7 +194,7 @@ export function SteamGrowthBanners() {
               aria-label="Sticker reward"
               className="flex items-center gap-3 px-1 sm:gap-5"
             >
-              <StickerStack />
+              <StickerStack paused={!motion} />
               <div className="min-w-0 py-2 text-sm leading-relaxed">
                 <h3 className="font-semibold">
                   Earn free stickers by going through your discovery queue!
@@ -201,7 +205,7 @@ export function SteamGrowthBanners() {
                     <DialogTrigger className="inline-flex min-h-10 items-center rounded-sm text-foreground underline decoration-input underline-offset-4 hover:decoration-foreground">
                       View your stickers
                     </DialogTrigger>
-                    <Destination kind="stickers" />
+                    <Destination kind="stickers" paused={!motion} />
                   </Dialog>
                 </p>
               </div>
@@ -317,10 +321,12 @@ export function SteamGrowthBanners() {
                 Prototype decisions
               </h2>
               <p>
-                Small-screen reflow, pause/resume, and local destination
-                placeholders are additions for this experiment. The next screens
-                are intentionally left undefined. Motion stops when reduced
-                motion is requested.
+                Sticker shadows and animated glyphs, mobile reflow,
+                pause/resume, and local destination placeholders are prototype
+                additions. The marquee fades at its desktop edge; mobile has no
+                fade and only clips at the visible banner boundary. The next
+                screens are intentionally left undefined. Motion stops when
+                reduced motion is requested.
               </p>
             </section>
             <a

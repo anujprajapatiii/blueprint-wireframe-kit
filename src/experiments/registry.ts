@@ -53,8 +53,10 @@ export const experiments: Experiment[] = [
       "Narrow-screen reflow and motion controls are accessibility provisions added for this experiment.",
       "The date is preserved reference copy, not a current offer.",
       "The fixed angle and marquee speed are estimated from the clip; seamless looping follows the user’s motion clarification.",
+      "User-requested refinements: shadowed sticker cards with looping neutral glyphs; a desktop marquee edge fade; no mobile fade or internal clipping boundary.",
     ],
     reviewNotes: [
+      "Sticker shadows, three glyph loops, shared pause/resume, desktop edge fading, and unclipped mobile layout at 320px and 640px were checked.",
       "Build and 127 token contrast checks pass. Directory and banner page reflow at 320px.",
       "Search, type filters, link feedback, motion pause/resume, destination dialogs, Escape, and focus return were checked in Chrome.",
       "Axe reported zero violations in tested directory, banner, and dialog states. Dialog checks leave ARIA-hidden and some contrast cases for manual review.",

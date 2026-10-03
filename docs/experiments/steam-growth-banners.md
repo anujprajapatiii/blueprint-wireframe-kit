@@ -73,3 +73,11 @@ The user clarified that the discovery cards should roll continuously at an angle
 Implement one rotated rail with a continuously translating track. Repeat the complete card sequence for a seamless wrap, maintain constant speed, and retain pause/resume and reduced-motion behavior. The approximately −12° angle and 21 px/s speed are visual estimates from the supplied recording. A full repeat cycle is not visible in the 11-second clip; looping is required by the user's marquee clarification.
 
 Correction verification: the production build and 127 token contrast checks pass. Browser inspection confirms a fixed −12° rail, linear forward-only translation, and two equal-length sequences (1000px each on desktop, 760px each at 320px) for the exact half-track wrap. Pause/resume and keyboard banner activation work. The 320px page has no horizontal overflow, and the mobile artwork stays below its copy.
+
+## Sticker motion and marquee edges — 2026-10-03
+
+User instruction: add shadows to all three sticker cards and simple looping graphics inside each. Fade the discovery marquee's text-facing edge on desktop, matching the reference. Mobile must have no fade and no invisible clipping boundary.
+
+Use the kit's deep surface token for restrained card shadows. Animate the existing neutral circle, diamond, and square inside stationary cards; one pause control and reduced-motion preference must stop all decorative loops. On desktop, use an alpha mask so the rolling cards fade into the actual banner surface. On mobile, place the angled strip below the copy in normal layout, reserve space for its sloped silhouette, and let only the visible outer banner boundary crop the cards. These sticker glyph animations and the mobile arrangement are requested prototype refinements, not transcriptions of the source artwork.
+
+Verification: production build and all 127 token contrast checks pass. Browser inspection confirms shadows on all three sticker cards, three running glyph loops, and the desktop alpha mask. The shared control pauses and resumes all four animations. At 320px and 640px, the mask is `none`, the marquee's internal overflow is visible, and the page has no horizontal overflow. The sloped strip is reserved below the copy and cropped only by the outer banner. Reduced-motion CSS disables all four loops; OS preference switching was not exercised.

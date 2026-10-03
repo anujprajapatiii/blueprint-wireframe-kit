@@ -1,5 +1,55 @@
+.sticker-card {
+  box-shadow:
+    0 2px 3px color-mix(in srgb, var(--surface-deep) 45%, transparent),
+    0 5px 9px color-mix(in srgb, var(--surface-deep) 35%, transparent);
+}
+.sticker-glyph {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--foreground);
+  border-radius: var(--radius-sm);
+}
+.sticker-glyph-0 {
+  border-radius: var(--radius-full);
+  animation: sticker-bounce 2.8s ease-in-out infinite;
+}
+.sticker-glyph-1 {
+  transform: rotate(45deg);
+  animation: sticker-turn 6s linear infinite;
+}
+.sticker-glyph-2 {
+  animation: sticker-pulse 3.2s ease-in-out infinite;
+}
+@keyframes sticker-bounce {
+  0%,
+  100% {
+    transform: translateY(2px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes sticker-turn {
+  from {
+    transform: rotate(45deg);
+  }
+  to {
+    transform: rotate(405deg);
+  }
+}
+@keyframes sticker-pulse {
+  0%,
+  100% {
+    transform: scale(0.75);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
 .queue-banner {
   min-height: 160px;
+  container-type: inline-size;
 }
 .queue-copy {
   width: 60%;
@@ -12,6 +62,8 @@
   inset: 0 0 0 auto;
   width: 40%;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 32%);
+  mask-image: linear-gradient(to right, transparent, black 32%);
   pointer-events: none;
 }
 /* The rail owns the fixed angle. The track rolls along its local X axis. */
@@ -82,7 +134,8 @@
   width: 45%;
   margin-top: 8px;
 }
-.is-paused .queue-track {
+.is-paused .queue-track,
+.is-paused .sticker-glyph {
   animation-play-state: paused;
 }
 @keyframes queue-marquee {
@@ -99,24 +152,31 @@
   }
   .queue-copy {
     width: 100%;
-    padding-bottom: 140px;
+    padding-bottom: 16px;
   }
   .queue-art {
     --queue-card-width: 180px;
     --queue-card-height: 128px;
     --queue-cycle: 36s;
-    top: auto;
-    bottom: 0;
-    height: 120px;
+    position: relative;
+    inset: auto;
+    display: block;
+    /* Reserve the slope as well as the card height; no internal crop line. */
+    height: calc(164px + 21.26cqw);
     width: 100%;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
   .queue-rail {
-    top: 36px;
+    /* tan(12deg) × the banner width keeps the far edge below the copy. */
+    top: calc(32px + 21.26cqw);
     left: -60px;
   }
 }
 @media (prefers-reduced-motion: reduce), print {
-  .queue-track {
+  .queue-track,
+  .sticker-glyph {
     animation: none;
   }
 }
