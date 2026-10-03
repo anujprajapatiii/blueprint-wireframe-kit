@@ -39,6 +39,51 @@ function BannerPreview() {
   );
 }
 
+function ModalPreview() {
+  return (
+    <div
+      aria-hidden="true"
+      className="relative flex min-h-48 items-center justify-center overflow-hidden border-b border-border bg-surface-deep p-6 md:min-h-60 md:border-r md:border-b-0"
+    >
+      <div className="absolute inset-x-6 top-6 space-y-3 opacity-30">
+        <div className="h-2 w-1/3 rounded-xs bg-border" />
+        <div className="h-1.5 w-4/5 rounded-xs bg-border" />
+        <div className="h-1.5 w-3/5 rounded-xs bg-border" />
+      </div>
+      <div className="relative w-full max-w-72 rounded-md border border-input bg-card p-4 shadow-md">
+        <div className="mb-4 h-2 w-3/5 rounded-xs bg-muted-foreground" />
+        <div className="grid grid-cols-[0.9fr_1.1fr] gap-3">
+          <div className="space-y-2">
+            <div className="space-y-2 rounded-xs border border-input bg-secondary p-2">
+              <div className="h-1.5 w-4/5 rounded-xs bg-muted-foreground" />
+              <div className="h-1 w-full rounded-xs bg-border" />
+              <div className="h-1 w-3/5 rounded-xs bg-border" />
+            </div>
+            {[0, 1, 2].map((row) => (
+              <div key={row} className="flex h-4 items-center justify-between px-2">
+                <div className="h-1.5 w-3/5 rounded-xs bg-border" />
+                <div className="size-1.5 rotate-45 border-t border-r border-input" />
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-col justify-center gap-2 rounded-sm border border-border bg-surface-sunken p-3">
+            <div className="h-2 w-2/3 rounded-xs bg-border" />
+            <div className="grid grid-cols-2 gap-1.5">
+              <div className="h-9 rounded-xs border border-input bg-card" />
+              <div className="h-9 rounded-xs border border-input bg-secondary" />
+            </div>
+            <div className="h-1 w-4/5 rounded-xs bg-border" />
+          </div>
+        </div>
+        <div className="mt-4 flex gap-2">
+          <div className="h-4 w-14 rounded-xs bg-muted-foreground" />
+          <div className="h-4 w-14 rounded-xs border border-input" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ExperimentDirectory() {
   const [query, setQuery] = useState("");
   const [type, setType] = useState<ExperimentType | "All types">("All types");
@@ -121,7 +166,7 @@ export function ExperimentDirectory() {
             aria-labelledby={`${experiment.id}-title`}
             className="overflow-hidden rounded-md border border-border bg-card md:grid md:grid-cols-[minmax(240px,0.8fr)_minmax(0,1.6fr)]"
           >
-            <BannerPreview />
+            {experiment.id === "notion-feature-modal" ? <ModalPreview /> : <BannerPreview />}
             <div className="flex min-w-0 flex-col items-start p-5 sm:p-6">
               <div className="flex w-full flex-wrap items-center justify-between gap-3">
                 <h2

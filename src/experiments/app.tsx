@@ -3,6 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "../components/kit";
 import { ExperimentDirectory } from "./directory";
 import { SteamGrowthBanners } from "./steam-growth-banners";
+import { NotionFeatureModal } from "./notion-feature-modal";
+import { experiments } from "./registry";
 const SteamWorkbench = import.meta.env.DEV
   ? lazy(() => import("./steam-workbench"))
   : null;
@@ -10,7 +12,8 @@ const SteamWorkbench = import.meta.env.DEV
 export function ExperimentsApp() {
   const id = new URLSearchParams(location.search).get("experiment");
   useEffect(() => {
-    document.title = `${id === "steam-growth-banners" ? "Steam growth banners" : "Experiments"} — Blueprint`;
+    const experiment = experiments.find((entry) => entry.id === id);
+    document.title = `${experiment?.title ?? "Experiments"} — Blueprint`;
   }, [id]);
   return (
     <div className="min-h-screen">
@@ -59,6 +62,8 @@ export function ExperimentsApp() {
       </header>
       {!id ? (
         <ExperimentDirectory />
+      ) : id === "notion-feature-modal" ? (
+        <NotionFeatureModal />
       ) : id === "steam-growth-banners" ? (
         SteamWorkbench ? (
           <Suspense fallback={<p className="p-8">Loading local preview…</p>}>

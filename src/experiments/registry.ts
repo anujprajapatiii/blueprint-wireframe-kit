@@ -22,6 +22,47 @@ export interface Experiment {
 
 export const experiments: Experiment[] = [
   {
+    id: "notion-feature-modal",
+    title: "Notion feature modal",
+    summary:
+      "Explore a feature-announcement modal with expandable details and changing previews.",
+    type: "Screen",
+    focus: ["Feature announcement", "Modal selection"],
+    source: "Notion Modal.mp4",
+    status: "Ready for review",
+    intent:
+      "Recreate the supplied modal as a neutral wireframe, preserving its copy, hierarchy, feature selection, and changes of state.",
+    sourceAccess: "Inspected",
+    observations: [
+      "The 6.84-second clip begins with a centered modal already open over dimmed document context.",
+      "The left selector expands the active feature’s description and changes the illustration on the right while the modal frame stays fixed.",
+      "HTML blocks changes to Skills at approximately 3 seconds, then MCP at approximately 4.6 seconds. Routines is marked Coming soon.",
+    ],
+    preservedCopy: [
+      "We’ve been cooking!",
+      "HTML blocks bring interactive visuals to any page and we can’t stop playing with them!",
+      "Skills are reusable instructions for all your agents — no more writing the same prompt twice",
+      "MCP gives your tools the context they need to complete tasks",
+      "HTML blocks", "Skills", "MCP", "Routines", "Coming soon",
+      "Try for free", "Save for later",
+    ],
+    neutralizedVisuals: [
+      "Source branding, typography, colors, and artwork use neutral blueprint tokens and structural previews.",
+      "The source eyebrow and mascot are omitted; document context remains plain scaffolding.",
+    ],
+    assumptions: [
+      "The opener, dismissal, CTA destinations, and Routines destination are not shown; any added behavior is an explicitly local prototype fallback.",
+      "Narrow-screen reflow, focus management, keyboard operation, and reduced motion are implementation provisions.",
+      "No tuning controls are added to this experiment.",
+    ],
+    reviewNotes: [
+      "Built locally from the inspected video; all three feature states, keyboard selection, focus trapping, dismissal, reopening, and local button actions were checked.",
+      "Narrow layout at 320px and short landscape layout at 850×480 were checked; the dialog scrolls when needed.",
+      "Production build and 127 token contrast checks pass. Axe reported no violations in tested states; some dialog checks require manual ARIA-hidden and contrast review.",
+      "Preview crossfades use shared motion tokens. Exact source easing is estimated; reduced-motion styling was inspected in code, not tested with an OS preference override.",
+    ],
+  },
+  {
     id: "steam-growth-banners",
     title: "Steam growth banners",
     summary:
