@@ -36,7 +36,7 @@ Classify the intended behavior rather than the component's appearance. Keep obje
 - Retain information hierarchy, sequence, placement, and behavior that matter to the question being studied.
 - Keep useful original writing verbatim when available. Do not introduce marketing copy, rewrite labels for style, or claim reconstructed text is an exact transcription.
 - Distinguish source copy from library writing. Experiment titles and summaries should be concise and useful for retrieval; original headings, offers, and calls to action stay faithful inside the wireframe. A filename alone does not establish an event's format or a control's behavior.
-- Use plain labels or placeholders for irrelevant surrounding content. A contextual header, repeated rows, or blank cards can establish scrolling and layout without recreating an entire source page.
+- Use plain labels or placeholders for irrelevant surrounding content. Preserve meaningful containers and spatial relationships: panel boundaries, columns, gutters, alignment, and neighboring modules can explain why a focal component sits where it does. Simplifying content does not mean isolating the component or erasing its layout context. Keep only the structure needed for the question; an explicitly requested plain backdrop remains appropriate.
 - Replace artwork, photography, logos, promotional treatments, gradients, and brand typography with neutral surfaces, boundaries, text, and simple placeholders from the kit.
 - Use color only through semantic kit roles to communicate hierarchy, selection, feedback, or state. Do not imitate source branding with one-off colors.
 - Remove decorative crosses, eyebrow labels, and rulers. Avoid adding decorative technical details that distract from the product question.
@@ -80,6 +80,8 @@ These rules capture how Anuj shaped the Steam experiment on 2026-10-03. They gui
 - Treat explicit later user instructions as authoritative and update the affected record or rule accordingly.
 
 Anuj requested original references inside each experiment as part of this ongoing library workflow. The authorized local assets include the Notion and Steam recordings and the subsequently supplied **GitHub Webinar Card.png** screenshot for the right-rail event-banner experiment. Preserve those originals in the shared viewer while abstracting irrelevant content in the wireframe. The three separately supplied Steam queue screenshots are not currently available as files and must not be fabricated or represented by video frames. Including references in the project remains separate from publishing the revision.
+
+The GitHub event-banner correction on 4 October 2026 clarified that abstracting the rest of a page should retain enough containers to explain the panel's placement. Its header, sidebar, central content groups, and neighboring right-rail card belong to that experiment's context; they are not required scaffolding for every experiment.
 
 ## Review before publishing
 

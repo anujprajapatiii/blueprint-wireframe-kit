@@ -7,7 +7,7 @@ This repository is a professional wireframing kit and a lasting directory of exp
 - Read `docs/experiment-rules.md` when creating or changing an experiment.
 - Treat a pasted reference or supplied file as evidence for an experiment. Record the user's intent and scope in the experiment record before implementation; carry forward relevant instructions when revising it.
 - Preserve useful original writing and observed interaction mechanics. Replace source branding, artwork, decorative styling, and visual polish with the shared neutral blueprint components and semantic tokens.
-- Keep the requested components as the focus. Use plain supporting scaffolding only where it helps explain placement, scrolling, or a flow.
+- Keep the requested components as the focus. Abstract surrounding content without removing containers, columns, gutters, or alignment that explain placement, scrolling, or a flow. Honor an explicit request for a plain backdrop where context is unnecessary.
 - Inspect references before describing their behavior. Separate observations, user instructions, and assumptions. If a reference cannot be opened, record that limitation and leave the affected behavior unverified; never invent observations.
 - Save decisions and reusable rules in this repository so future work can recover them. Do not claim that repository rules establish memory outside this project.
 

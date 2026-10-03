@@ -77,11 +77,11 @@ export const experiments: Experiment[] = [
     ],
     neutralizedVisuals: [
       "Brand artwork and logotype treatment become a neutral image placeholder and plain event-name text.",
-      "Repositories, composer, feed, changelog, and browser chrome are omitted or reduced to noninteractive structural context.",
+      "Dashboard content is reduced to neutral placeholders while retaining the header, sidebar surface, central composer/actions/feed containers, and neighboring changelog card to explain the event panel’s placement.",
     ],
     assumptions: [
       "Dismissal, restoration, and a local registration-handoff preview are review provisions; the reference shows only their entry controls.",
-      "Narrow-screen reflow prioritizes the card and reduces surrounding context; no mobile reference was supplied.",
+      "Narrow-screen reflow retains a compact header and the right-rail companion card while collapsing the sidebar and central feed; no mobile reference was supplied.",
       "The dates and saving are preserved reference copy, not a current event offer.",
       "No animation, sticky positioning, or tuning controls are inferred.",
     ],

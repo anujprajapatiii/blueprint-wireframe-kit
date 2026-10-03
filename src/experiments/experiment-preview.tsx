@@ -271,59 +271,147 @@ function DiscoveryPreview() {
 function EventPreview() {
   return (
     <>
-      <g fill={sunken} stroke="var(--border-subtle)">
-        <rect x="54" y="48" width="376" height="76" rx="8" />
-        <rect x="54" y="152" width="376" height="148" rx="8" />
-        <rect x="54" y="324" width="376" height="188" rx="8" />
+      <rect
+        x="32"
+        y="32"
+        width="896"
+        height="496"
+        rx="8"
+        fill="var(--background)"
+        stroke="var(--border)"
+      />
+      <path d="M32 78h896" stroke="var(--border)" />
+      <circle cx="55" cy="56" r="9" fill="var(--border)" />
+      <path
+        d="M76 56h86"
+        stroke="var(--border)"
+        strokeWidth="8"
+        strokeLinecap="round"
+      />
+      <rect x="32" y="79" width="124" height="449" fill={sunken} />
+      <path d="M156 79v449" stroke="var(--border)" />
+      <rect
+        x="46"
+        y="105"
+        width="96"
+        height="26"
+        rx="4"
+        fill="none"
+        stroke="var(--border)"
+      />
+      {[0, 1, 2, 3, 4, 5].map((item) => (
+        <g key={item} fill="var(--border)">
+          <circle cx="51" cy={155 + item * 30} r="5" />
+          <rect x="65" y={152 + item * 30} width="66" height="6" rx="3" />
+        </g>
+      ))}
+      <text x="180" y="115" fill={muted} fontSize="21" fontWeight="600">
+        Home
+      </text>
+      <g fill={sunken} stroke="var(--border)">
+        <rect x="180" y="138" width="402" height="92" rx="6" />
+        <rect x="180" y="320" width="402" height="94" rx="6" />
+        <rect x="180" y="430" width="402" height="98" rx="6" />
+        {[0, 1, 2, 3].map((item) => (
+          <rect
+            key={item}
+            x={180 + item * 104}
+            y="247"
+            width="90"
+            height="26"
+            rx="13"
+          />
+        ))}
       </g>
-      <g stroke="var(--border-subtle)" strokeWidth="9" strokeLinecap="round">
-        <path d="M78 82h148M78 184h98M78 216h322M78 244h242M78 357h118M78 389h322M78 418h290M78 447h202" />
+      <g stroke="var(--border-subtle)" strokeWidth="8" strokeLinecap="round">
+        <path d="M199 161h174M199 350h170M199 382h328M199 459h140M199 491h300" />
       </g>
       <rect
-        x="492"
-        y="48"
-        width="414"
-        height="464"
-        rx="10"
+        x="198"
+        y="195"
+        width="58"
+        height="20"
+        rx="3"
         fill={surface}
-        stroke={line}
+        stroke="var(--border)"
       />
-      <text x="516" y="92" fill={ink} fontSize="30" fontWeight="600">
-        UNIVERSE’26
+      <rect
+        x="264"
+        y="195"
+        width="100"
+        height="20"
+        rx="3"
+        fill={surface}
+        stroke="var(--border)"
+      />
+      <text x="180" y="301" fill={muted} fontSize="17">
+        Feed
       </text>
-      <path d="m864 72 12 12m0-12-12 12" stroke={muted} strokeWidth="2" />
-      <rect x="493" y="112" width="412" height="152" fill={sunken} />
-      <g fill="none" stroke={muted} strokeWidth="2">
-        <rect x="665" y="158" width="68" height="54" rx="5" />
-        <circle cx="686" cy="176" r="6" />
-        <path d="m670 205 19-17 12 10 13-16 14 23" />
+      <rect
+        x="610"
+        y="464"
+        width="306"
+        height="64"
+        rx="6"
+        fill={sunken}
+        stroke="var(--border)"
+      />
+      <text x="626" y="490" fill={muted} fontSize="16">
+        Latest from our changelog
+      </text>
+      <path
+        d="M628 511h200"
+        stroke="var(--border-subtle)"
+        strokeWidth="7"
+        strokeLinecap="round"
+      />
+      <g transform="translate(246 70) scale(.74)">
+        <rect
+          x="492"
+          y="48"
+          width="414"
+          height="464"
+          rx="10"
+          fill={surface}
+          stroke={line}
+        />
+        <text x="516" y="92" fill={ink} fontSize="30" fontWeight="600">
+          UNIVERSE’26
+        </text>
+        <path d="m864 72 12 12m0-12-12 12" stroke={muted} strokeWidth="2" />
+        <rect x="493" y="112" width="412" height="152" fill={sunken} />
+        <g fill="none" stroke={muted} strokeWidth="2">
+          <rect x="665" y="158" width="68" height="54" rx="5" />
+          <circle cx="686" cy="176" r="6" />
+          <path d="m670 205 19-17 12 10 13-16 14 23" />
+        </g>
+        <g stroke="var(--border)">
+          <path d="M493 112h412M493 264h412M493 322h412M493 423h412" />
+        </g>
+        <text x="516" y="299" fill={muted} fontSize="16">
+          OCT 28–29
+        </text>
+        <text x="650" y="299" fill={muted} fontSize="16">
+          SAN FRANCISCO, CA
+        </text>
+        <text x="516" y="361" fill={ink} fontSize="23" fontWeight="600">
+          <tspan x="516">Save $600 with Super Early</tspan>
+          <tspan x="516" dy="31">
+            Bird passes through July 8.
+          </tspan>
+        </text>
+        <rect x="516" y="443" width="366" height="48" rx="5" fill={ink} />
+        <text
+          x="699"
+          y="475"
+          fill="var(--primary-foreground)"
+          textAnchor="middle"
+          fontSize="20"
+          fontWeight="600"
+        >
+          Register now
+        </text>
       </g>
-      <g stroke="var(--border)">
-        <path d="M493 112h412M493 264h412M493 322h412M493 423h412" />
-      </g>
-      <text x="516" y="299" fill={muted} fontSize="16">
-        OCT 28–29
-      </text>
-      <text x="650" y="299" fill={muted} fontSize="16">
-        SAN FRANCISCO, CA
-      </text>
-      <text x="516" y="361" fill={ink} fontSize="23" fontWeight="600">
-        <tspan x="516">Save $600 with Super Early</tspan>
-        <tspan x="516" dy="31">
-          Bird passes through July 8.
-        </tspan>
-      </text>
-      <rect x="516" y="443" width="366" height="48" rx="5" fill={ink} />
-      <text
-        x="699"
-        y="475"
-        fill="var(--primary-foreground)"
-        textAnchor="middle"
-        fontSize="20"
-        fontWeight="600"
-      >
-        Register now
-      </text>
     </>
   );
 }
