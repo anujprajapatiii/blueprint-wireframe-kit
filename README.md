@@ -1,6 +1,6 @@
 # Blueprint Wireframe Kit
 
-A personal wireframe kit for thinking through product structure, content, and behavior. A deliberately limited blue-and-white palette, simple outlines, and a decorative drafting grid keep the visual language consistent while the ideas change.
+A professional wireframing foundation for exploring product structure, content, behavior, and states. A restrained blueprint palette keeps the work visually consistent. Semantic tokens provide darker surfaces, layered panels, inverse areas, accessible text, controls, and optional feedback colours without introducing a new styling decision for every screen.
 
 The app is a browsable component gallery inspired by the way shadcn presents examples. The reusable components live in this repository, so their source and styling stay under your control. This is a standalone kit, not the Blueprint.js library or a published shadcn registry.
 
@@ -20,18 +20,23 @@ npm run build
 npm run preview
 ```
 
-The build runs TypeScript checks, then writes the static site to `dist/`. The preview command serves that production build locally.
+The build regenerates token CSS, validates token references and contrast pairs, runs TypeScript checks, then writes the static site to `dist/`. The preview command serves that production build locally.
 
 ## Where to work
 
-| File                           | Purpose                                                                   |
-| ------------------------------ | ------------------------------------------------------------------------- |
-| `src/components/kit.tsx`       | Reusable React components and their variants                              |
-| `src/index.css`                | Tailwind v4 entry point, theme tokens, shared styles, and gallery styling |
-| `src/App.tsx`                  | Component gallery and interactive examples                                |
-| `src/main.tsx`                 | Application entry point                                                   |
-| `vite.config.ts`               | React, Tailwind, and the GitHub Pages base path                           |
-| `.github/workflows/deploy.yml` | Build and deploy to GitHub Pages                                          |
+| File                             | Purpose                                                     |
+| -------------------------------- | ----------------------------------------------------------- |
+| `src/components/kit.tsx`         | Reusable React components and their variants                |
+| `src/index.css`                  | Tailwind entry point, typography, shared and gallery styles |
+| `src/tokens.json`                | Canonical colour and foundation tokens                      |
+| `src/tokens.css`                 | Generated CSS variables and Tailwind utility mappings       |
+| `scripts/build-tokens.mjs`       | Validates references and generates the token stylesheet     |
+| `scripts/check-tokens.mjs`       | Checks the supported foreground/background contrast pairs   |
+| `src/components/foundations.tsx` | Live colour, layout, typography, and behaviour reference    |
+| `src/App.tsx`                    | Component gallery and interactive examples                  |
+| `src/main.tsx`                   | Application entry point                                     |
+| `vite.config.ts`                 | React, Tailwind, and the GitHub Pages base path             |
+| `.github/workflows/deploy.yml`   | Build and deploy to GitHub Pages                            |
 
 The stack is React, TypeScript, Vite, and Tailwind CSS v4. Radix UI supplies interaction primitives; Lucide supplies icons. `class-variance-authority`, `clsx`, and `tailwind-merge` support component variants and class composition.
 
@@ -62,7 +67,7 @@ export function ProjectName() {
 
 To use it in another React and TypeScript project:
 
-1. Copy `src/components/kit.tsx` and `src/index.css` into the equivalent source folders. Import the CSS once from your application entry point. The stylesheet also contains gallery styles, which you can remove when you no longer need them.
+1. Copy `src/components/kit.tsx`, `src/components/patterns.tsx`, `src/index.css`, and `src/tokens.css` into the equivalent source folders. Import `index.css` once from your application entry point. To maintain the token source in the destination project, also copy `src/tokens.json` and the two `scripts/*tokens.mjs` scripts. The stylesheet contains optional gallery styles you can remove.
 2. Install the component dependencies:
 
    ```bash
@@ -91,11 +96,51 @@ To use it in another React and TypeScript project:
 
 Do not copy this repository's GitHub Pages base path into a differently named project. Set that path for the destination where your app will actually be hosted.
 
+## Foundation contract
+
+`src/tokens.json` is the source of truth. Edit it, then run:
+
+```bash
+npm run tokens:build
+npm run tokens:check
+```
+
+Development startup and production builds regenerate `src/tokens.css` automatically. Do not edit that generated file by hand. Commit both JSON and generated CSS so the kit can also be copied into another project without the generator.
+
+Use semantic utilities in screens:
+
+```tsx
+<section className="bg-surface-sunken text-foreground p-6">
+  <div className="rounded-md border border-border bg-card p-6">
+    <h2 className="text-xl font-semibold">Project overview</h2>
+    <p className="text-muted-foreground">Supporting information</p>
+    <Button variant="secondary">Review details</Button>
+  </div>
+</section>
+```
+
+| Provision       | Intended use                                                                                            |
+| --------------- | ------------------------------------------------------------------------------------------------------- |
+| Blue palette    | Tonal ramp from near-black blue to near-white; primitives for extending the system                      |
+| Surfaces        | Deep shell, recessed areas, canvas, cards, floating content, and inverse areas                          |
+| Text            | Primary, supporting, subtle, inverse, links, and disabled content                                       |
+| Actions         | Primary, secondary, destructive, hover, pressed, selected, and disabled states                          |
+| Boundaries      | Decorative dividers, strong boundaries, form outlines, and focus rings                                  |
+| Feedback        | Info, success, warning, and error; pair colour with clear words or icons                                |
+| Layout and type | Spacing rhythm, type scale, radii, and compact/standard/touch control sizes                             |
+| Behaviour       | Motion durations and explicit stacking layers for sticky surfaces, popovers, dialogs, and notifications |
+
+Surface names describe purpose, not a brightness ladder: floating content is deliberately dark and opaque. Use matching `*-foreground` tokens on filled primary, secondary, inverse, and status surfaces. Use pale status colours as text on their matching subtle surfaces. Use the blue ramp directly only when adding a documented role; prefer semantic names throughout product screens.
+
+The contrast check covers intended pairs, not every possible combination of tokens. Faint `border` and `border-subtle` colours are for decoration. Use `input` or `border-strong` when a boundary is necessary to identify a control. Subtle text is still readable text; disabled tokens communicate inactivity and are not appropriate for body copy.
+
+The default control height is 40px. Compact controls are for dense desktop contexts, and touch sizing is available for touch-first flows. Changing a size token does not remove the need to check labels, zoom, wrapping, and keyboard focus in the full layout.
+
 ## Design rules
 
 - Use the shared theme tokens for blue canvas, white ink, surfaces, borders, and focus indicators. Adjust tokens centrally instead of adding unrelated colors to individual components.
 - Keep the drafting grid decorative. It must not carry instructions, statuses, or information needed to use a screen.
-- Use text and icons to distinguish states. Success, errors, selected items, and disabled controls must remain understandable within the monochrome palette.
+- Use text and icons to distinguish states. Success, errors, selected items, and disabled controls must remain understandable when colours are removed.
 - Use real headings, labels, buttons, links, and form controls. Wireframes should express the intended behavior as well as the intended layout.
 - Preserve visible focus indicators, readable text, clear hierarchy, and comfortable interaction targets when making components denser.
 - Favor reusable variants over one-off visual changes. Add new components to the gallery so their states can be reviewed together.
@@ -104,7 +149,15 @@ Do not copy this repository's GitHub Pages base path into a differently named pr
 
 The target is **WCAG 2.2 AA**. This is a development target, not an accessibility certification or a guarantee that every future screen made with the kit conforms. Radix primitives help with interaction patterns, but accessible names, content, contrast, and composition still need review in each use.
 
-Verification completed for this first version:
+Version 0.2 foundation checks:
+
+- **68 colour tokens** (12 palette primitives and 56 semantic roles), generated from one JSON source.
+- **127 intended contrast pairs pass**; minimum tested text contrast 4.53:1, meaningful boundary/focus contrast 3.26:1.
+- Automated axe checks reported zero violations in tested gallery and foundation views. Some ARIA and rendered contrast cases still need manual review.
+- All three foundation panels reflow at 320px without whole-page horizontal overflow. Single-token copying and full colour-variable export were checked in the browser.
+- Floating menus sit above dialogs in the layer scale so portal-based controls can be composed inside modal forms.
+
+Verification history for the initial gallery (v0.1):
 
 - TypeScript and the Vite production build pass.
 - axe-core reported **zero automated violations** on the gallery and open dialog (53 and 36 passed checks respectively). It left some ARIA and contrast cases for manual review; this is not a complete conformance audit.
@@ -116,7 +169,7 @@ For a development-only automated check, open the local gallery with `?audit=1` a
 
 A full screen-reader audit, browser zoom testing, and broader browser testing remain necessary before declaring formal conformance. Repeat relevant checks when changing colors or composing new flows.
 
-The gallery is a prototype and does not provide a backend. Connect the reusable components to real data and business logic when building a production feature.
+The gallery demonstrates real UI interactions with sample data and does not provide a backend. Connect the reusable components to real data and business logic when building a production feature.
 
 ## Publish with GitHub Pages
 

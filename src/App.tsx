@@ -8,7 +8,6 @@ import {
   Download,
   ExternalLink,
   Grid2X2,
-  Layers2,
   LayoutGrid,
   Menu,
   Minus,
@@ -92,6 +91,8 @@ import {
   TableRow,
   Toast,
 } from "./components/patterns";
+
+import { Foundations } from "./components/foundations";
 
 const repository = "https://github.com/anujprajapatiii/blueprint-wireframe-kit";
 const categories = [
@@ -303,7 +304,7 @@ function App() {
       id: "buttons",
       name: "Button",
       category: "Inputs",
-      code: '<Button>Continue</Button>\n<Button variant="outline">Secondary</Button>\n<Button variant="ghost">Quiet action</Button>\n<Button disabled>Unavailable</Button>',
+      code: '<Button>Continue</Button>\n<Button variant="secondary">Secondary</Button>\n<Button variant="outline">Outline</Button>\n<Button variant="ghost">Quiet action</Button>\n<Button variant="destructive">Delete item</Button>\n<Button disabled>Unavailable</Button>',
       content: (
         <div className="space-y-6">
           <div className="flex flex-wrap items-center gap-3">
@@ -311,7 +312,7 @@ function App() {
               Continue
             </Button>
             <Button
-              variant="outline"
+              variant="secondary"
               onClick={() => notify("Secondary action selected")}
             >
               Secondary
@@ -325,6 +326,22 @@ function App() {
               Quiet action
             </Button>
             <Button disabled>Unavailable</Button>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button
+              variant="outline"
+              onClick={() => notify("Outline action selected")}
+            >
+              Outline
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={() =>
+                notify("Destructive action preview — no data deleted")
+              }
+            >
+              Delete item
+            </Button>
           </div>
           <Separator />
           <div className="flex flex-wrap items-center gap-3">
@@ -367,9 +384,6 @@ function App() {
       content: (
         <Card className="border-input">
           <CardHeader>
-            <div className="mb-3">
-              <Badge variant="outline">EXPLORATION 01</Badge>
-            </div>
             <CardTitle>First things first.</CardTitle>
             <CardDescription>
               What should someone be able to do here?
@@ -633,16 +647,19 @@ function App() {
       id: "badge",
       name: "Badge",
       category: "Feedback",
-      code: '<Badge>Draft</Badge>\n<Badge variant="outline">In review</Badge>\n<Badge variant="outline"><Check size={12} /> Ready</Badge>',
+      code: '<Badge>Draft</Badge>\n<Badge variant="outline">In review</Badge>\n<Badge variant="success">Ready</Badge>\n<Badge variant="warning">Needs review</Badge>\n<Badge variant="error">Blocked</Badge>\n<Badge variant="info">New</Badge>',
       content: (
         <div className="space-y-5">
           <div className="flex flex-wrap gap-3">
             <Badge>Draft</Badge>
             <Badge variant="outline">In review</Badge>
-            <Badge variant="outline">
-              <Check size={12} />
+            <Badge variant="success">
+              <Check size={14} />
               Ready
             </Badge>
+            <Badge variant="warning">Needs review</Badge>
+            <Badge variant="error">Blocked</Badge>
+            <Badge variant="info">New</Badge>
           </div>
           <Separator />
           <p className="text-sm leading-6 text-muted-foreground">
@@ -816,6 +833,12 @@ function App() {
           </Alert>
           <Alert title="Ready for a second look" variant="success">
             Your changes have been saved.
+          </Alert>
+          <Alert title="Check the assumptions" variant="warning">
+            This direction still needs validation.
+          </Alert>
+          <Alert title="Something needs attention" variant="error">
+            Resolve the missing information before continuing.
           </Alert>
         </div>
       ),
@@ -994,13 +1017,10 @@ function App() {
       id: "typography",
       name: "Typography",
       category: "Structure",
-      code: '<h2 className="text-2xl font-semibold tracking-tight">A clear heading.</h2>\n<p className="text-sm text-muted-foreground">Supporting details.</p>\n<span className="font-mono text-xs">ANNOTATION / 01</span>',
+      code: '<h2 className="text-2xl font-semibold tracking-tight">A clear heading.</h2>\n<p className="text-sm text-muted-foreground">Supporting details.</p>',
       content: (
         <div>
-          <span className="font-mono text-xs tracking-wider text-muted-foreground">
-            ANNOTATION / 01
-          </span>
-          <h3 className="mt-3 text-2xl font-semibold tracking-tight">
+          <h3 className="text-2xl font-semibold tracking-tight">
             A clear heading.
           </h3>
           <p className="mt-3 text-sm leading-6 text-muted-foreground">
@@ -1079,7 +1099,7 @@ function App() {
         >
           Skip to components
         </a>
-        <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur-sm">
+        <header className="sticky top-0 z-[var(--layer-sticky)] border-b border-border bg-surface-sunken">
           <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-4 px-5 lg:px-8">
             <a
               href="#"
@@ -1125,9 +1145,6 @@ function App() {
               </a>
             </nav>
             <div className="flex items-center gap-2 sm:gap-4">
-              <span className="hidden font-mono text-xs text-muted-foreground lg:block">
-                PERSONAL EDITION · v0.1
-              </span>
               <a
                 href={repository}
                 target="_blank"
@@ -1166,10 +1183,7 @@ function App() {
           )}
         </header>
         <div className="mx-auto flex max-w-[1800px]">
-          <aside className="no-print sticky top-[72px] hidden h-[calc(100dvh-72px)] w-[216px] shrink-0 flex-col border-r border-border bg-background/80 px-5 py-8 lg:flex">
-            <p className="mb-4 pl-3 font-mono text-xs tracking-widest text-muted-foreground">
-              WORKBENCH
-            </p>
+          <aside className="no-print sticky top-[72px] hidden h-[calc(100dvh-72px)] w-[216px] shrink-0 flex-col border-r border-border bg-surface-sunken px-5 py-8 lg:flex">
             <nav aria-label="Component categories" className="space-y-1">
               {categories.map((c, i) => (
                 <button
@@ -1192,9 +1206,6 @@ function App() {
               ))}
             </nav>
             <Separator className="my-6" />
-            <p className="mb-3 pl-3 font-mono text-xs tracking-widest text-muted-foreground">
-              REFERENCE
-            </p>
             <a
               href="#foundations"
               className="px-3 py-3 text-sm text-muted-foreground hover:text-foreground"
@@ -1207,56 +1218,25 @@ function App() {
             >
               Using the kit
             </a>
-            <div className="mt-auto px-3">
-              <div className="mb-4 flex items-center gap-2 text-muted-foreground">
-                <Layers2 size={18} strokeWidth={1} />
-                <span className="font-mono text-xs">A WORK IN PROGRESS</span>
-              </div>
-              <p className="text-sm leading-6 text-muted-foreground">
-                Keep it rough.
-                <br />
-                Make the thinking clear.
-              </p>
-              <p className="mt-4 font-mono text-xs text-muted-foreground">
-                DESIGNED TO BE CHANGED.
-              </p>
-            </div>
+            <p className="mt-auto px-3 text-sm leading-6 text-muted-foreground">
+              Reusable foundations for product exploration.
+            </p>
           </aside>
           <main
             id="main-content"
-            className="min-w-0 flex-1 px-5 pb-12 pt-0 sm:px-8 lg:px-10"
+            className="min-w-0 flex-1 px-5 pb-12 pt-8 sm:px-8 lg:px-10"
           >
-            <div
-              aria-hidden="true"
-              className="ruler mb-8 flex h-7 justify-between border-b border-border/60 font-mono text-[10px] text-muted-foreground"
-            >
-              {["000", "100", "200", "300", "400", "500", "600", "700"].map(
-                (s) => (
-                  <span key={s}>{s}</span>
-                ),
-              )}
-            </div>
             <section id="components" className="scroll-mt-28">
               <div className="mb-8 flex flex-wrap items-end justify-between gap-5">
                 <div>
-                  <div className="mb-3 flex items-center gap-3 font-mono text-xs tracking-wider text-muted-foreground">
-                    <span>01 / COMPONENT LIBRARY</span>
-                    <span className="h-px w-8 bg-input" />
-                  </div>
                   <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
                     Wireframe components
                     <span className="text-muted-foreground">.</span>
                   </h1>
                   <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
-                    A deliberately simple kit for working through ideas.
+                    Reusable components and foundations for professional
+                    wireframing.
                   </p>
-                </div>
-                <div className="flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 font-mono text-xs text-muted-foreground">
-                  <span>REACT</span>
-                  <span className="mx-1">/</span>
-                  <span>TAILWIND</span>
-                  <span className="mx-1">/</span>
-                  <span>RADIX</span>
                 </div>
               </div>
               <div className="mb-6 flex flex-col justify-between gap-4 border-b border-border pb-5 xl:flex-row xl:items-center">
@@ -1349,113 +1329,17 @@ function App() {
                 </div>
               )}
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-muted-foreground">
-                <span>{filtered.length} LIVE PREVIEWS + CODE</span>
-                <span>BUILT FOR QUESTIONS, NOT PRESENTATIONS.</span>
+                <span>{filtered.length} component examples</span>
+                <span>React · Tailwind · Radix</span>
               </div>
             </section>
-            <section
-              id="foundations"
-              className="mt-20 scroll-mt-28 border-t border-border pt-8"
-            >
-              <span className="font-mono text-xs tracking-wider text-muted-foreground">
-                02 / FOUNDATIONS
-              </span>
-              <h2 className="mt-3 text-2xl font-semibold tracking-tight">
-                Fewer decisions. More consistency.
-              </h2>
-              <p className="mt-3 text-muted-foreground">
-                One palette, a small type scale, and a 4px spacing rhythm.
-              </p>
-              <div className="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                <div className="rounded-md border border-border bg-card p-5">
-                  <h3 className="mb-5 text-sm font-medium">Colour tokens</h3>
-                  <div className="space-y-4">
-                    {[
-                      ["Canvas", "#233B82", "background"],
-                      ["Ink", "#F3F6FF", "foreground"],
-                      ["Secondary ink", "#C1CEEC", "muted-foreground"],
-                      ["Control border", "#99AFD7", "input"],
-                    ].map(([a, b, c]) => (
-                      <div key={a} className="flex items-center gap-3 text-sm">
-                        <span
-                          className="h-8 w-8 rounded-sm border border-input"
-                          style={{ background: b }}
-                        />
-                        <span className="flex-1">
-                          {a}
-                          <span className="block font-mono text-xs text-muted-foreground">
-                            {c}
-                          </span>
-                        </span>
-                        <span className="font-mono text-xs">{b}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="rounded-md border border-border bg-card p-5">
-                  <h3 className="mb-5 text-sm font-medium">Spacing & shape</h3>
-                  <div className="flex h-16 items-end gap-4">
-                    {[4, 8, 12, 16, 24, 32].map((n) => (
-                      <div key={n} className="flex flex-col items-center gap-3">
-                        <div
-                          className="w-5 border border-input bg-muted"
-                          style={{ height: n }}
-                        />
-                        <span className="font-mono text-xs text-muted-foreground">
-                          {n}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <Separator className="my-6" />
-                  <dl className="space-y-3 text-sm">
-                    <div className="flex justify-between">
-                      <dt>Corner radius</dt>
-                      <dd className="font-mono">4px</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt>Control height</dt>
-                      <dd className="font-mono">40px</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt>Stroke width</dt>
-                      <dd className="font-mono">1px</dd>
-                    </div>
-                  </dl>
-                </div>
-                <div className="rounded-md border border-border bg-card p-5">
-                  <h3 className="mb-5 text-sm font-medium">
-                    Behaviour comes with it
-                  </h3>
-                  <ul className="space-y-4 text-sm text-muted-foreground">
-                    {[
-                      "Keyboard navigation & visible focus",
-                      "Labels and screen-reader semantics",
-                      "High-contrast text & control edges",
-                      "Responsive layouts & reduced motion",
-                    ].map((s) => (
-                      <li key={s} className="flex items-start gap-2">
-                        <Check size={16} className="mt-0.5 shrink-0" />
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-5 border-t border-border pt-4 text-xs leading-5 text-muted-foreground">
-                    Designed toward WCAG 2.2 AA. Check the full flow when you
-                    compose a new screen.
-                  </p>
-                </div>
-              </div>
-            </section>
+            <Foundations />
             <section
               id="usage"
               className="mt-16 scroll-mt-28 border-t border-border pt-8"
             >
-              <span className="font-mono text-xs tracking-wider text-muted-foreground">
-                03 / MAKE IT YOURS
-              </span>
-              <h2 className="mt-3 text-2xl font-semibold tracking-tight">
-                Your kit. Your next idea.
+              <h2 className="text-2xl font-semibold tracking-tight">
+                Using the kit
               </h2>
               <div className="mt-5 grid gap-8 lg:grid-cols-2">
                 <div>
@@ -1497,7 +1381,7 @@ function App() {
                 <div className="min-w-0 rounded-md border border-border bg-card p-5">
                   <div className="mb-5 flex items-center gap-2 font-mono text-xs text-muted-foreground">
                     <Code2 size={15} />
-                    YOUR-NEXT-IDEA.TSX
+                    NextIdea.tsx
                   </div>
                   <pre className="code-view text-sm leading-7">
                     <code>
@@ -1510,7 +1394,7 @@ function App() {
               </div>
             </section>
             <footer className="mt-16 flex flex-wrap justify-between gap-3 border-t border-border pt-6 font-mono text-xs text-muted-foreground">
-              <span>BLUEPRINT / PERSONAL WIREFRAME KIT</span>
+              <span>Blueprint wireframe kit</span>
               <a
                 href="https://blueprint-generator.vercel.app/"
                 target="_blank"
@@ -1519,7 +1403,7 @@ function App() {
               >
                 Inspired by Blueprint Generator
               </a>
-              <span>VERSION 0.1 · ALWAYS A DRAFT</span>
+              <span>Version 0.2</span>
             </footer>
           </main>
         </div>
@@ -1532,7 +1416,7 @@ function App() {
           {message}
         </div>
         {message && (
-          <div className="fixed bottom-5 right-5 z-[100] max-w-[calc(100vw-40px)]">
+          <div className="fixed bottom-5 right-5 z-[var(--layer-toast)] max-w-[calc(100vw-40px)]">
             <Toast
               announce={false}
               key={message}

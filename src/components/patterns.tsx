@@ -33,7 +33,14 @@ export function Alert({
   return (
     <div
       className={cn(
-        "flex gap-3 rounded-md border border-border bg-muted/50 p-4 text-foreground",
+        "flex gap-3 rounded-md border p-4",
+        {
+          info: "border-info bg-info-subtle text-info-text",
+          success: "border-success bg-success-subtle text-success-text",
+          warning: "border-warning bg-warning-subtle text-warning-text",
+          error:
+            "border-destructive bg-destructive-subtle text-destructive-text",
+        }[variant],
         className,
       )}
       {...props}
@@ -45,9 +52,7 @@ export function Alert({
           {title}
         </p>
         {children && (
-          <div className="text-sm leading-6 text-muted-foreground">
-            {children}
-          </div>
+          <div className="text-sm leading-6 text-foreground">{children}</div>
         )}
       </div>
     </div>
@@ -68,7 +73,7 @@ export function Table({ className, ...props }: ComponentProps<"table">) {
 export function TableHeader({ className, ...props }: ComponentProps<"thead">) {
   return (
     <thead
-      className={cn("border-b border-border bg-muted/50", className)}
+      className={cn("border-b border-border bg-surface-sunken", className)}
       {...props}
     />
   );
@@ -140,7 +145,7 @@ export function Breadcrumb({
           return (
             <li
               key={`${item.label}-${index}`}
-              className="flex min-h-10 items-center gap-2"
+              className="flex min-h-control-default items-center gap-2"
             >
               {index > 0 && (
                 <ChevronRight
@@ -158,7 +163,7 @@ export function Breadcrumb({
               ) : item.href && item.href !== "#" ? (
                 <a
                   href={item.href}
-                  className="inline-flex min-h-10 items-center rounded-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+                  className="inline-flex min-h-control-default items-center rounded-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
                 >
                   {item.label}
                 </a>
@@ -208,7 +213,7 @@ export function Pagination({
         <li>
           <Button
             variant="outline"
-            className="size-10 p-0"
+            className="size-control-default p-0"
             disabled={current === 1}
             aria-label="Previous page"
             onClick={() => onPageChange(current - 1)}
@@ -220,7 +225,7 @@ export function Pagination({
           <li key={number} className="flex items-center gap-1">
             {index > 0 && number - visiblePages[index - 1] > 1 && (
               <span
-                className="flex size-10 items-center justify-center text-muted-foreground"
+                className="flex size-control-default items-center justify-center text-muted-foreground"
                 aria-hidden="true"
               >
                 …
@@ -228,7 +233,7 @@ export function Pagination({
             )}
             <Button
               variant={number === current ? "default" : "ghost"}
-              className="size-10 p-0"
+              className="size-control-default p-0"
               aria-label={`Page ${number}`}
               aria-current={number === current ? "page" : undefined}
               onClick={() => onPageChange(number)}
@@ -240,7 +245,7 @@ export function Pagination({
         <li>
           <Button
             variant="outline"
-            className="size-10 p-0"
+            className="size-control-default p-0"
             disabled={current === count}
             aria-label="Next page"
             onClick={() => onPageChange(current + 1)}
@@ -297,7 +302,7 @@ export function ImagePlaceholder({
       role="img"
       aria-label={label}
       className={cn(
-        "relative flex aspect-video items-center justify-center overflow-hidden rounded-md border border-dashed border-border bg-muted/40",
+        "relative flex aspect-video items-center justify-center overflow-hidden rounded-md border border-dashed border-border bg-surface-sunken",
         className,
       )}
       {...props}
@@ -340,7 +345,7 @@ export function Toast({
   return (
     <div
       className={cn(
-        "flex w-full items-center gap-3 rounded-md border border-border bg-card p-3 text-foreground",
+        "flex w-full items-center gap-3 rounded-md border border-border-strong bg-popover p-3 text-popover-foreground",
         className,
       )}
       {...props}
@@ -355,7 +360,7 @@ export function Toast({
       </p>
       <Button
         variant="ghost"
-        className="size-10 shrink-0 p-0"
+        className="size-control-default shrink-0 p-0"
         aria-label="Dismiss notification"
         onClick={onDismiss}
       >
@@ -395,7 +400,7 @@ export function KeyboardKey({ className, ...props }: ComponentProps<"kbd">) {
   return (
     <kbd
       className={cn(
-        "inline-flex min-h-6 min-w-6 items-center justify-center rounded-sm border border-border bg-muted px-1.5 font-mono text-sm text-muted-foreground",
+        "inline-flex min-h-6 min-w-6 items-center justify-center rounded-sm border border-border-strong bg-surface-sunken px-1.5 font-mono text-sm text-muted-foreground",
         className,
       )}
       {...props}

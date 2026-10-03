@@ -1,13 +1,17 @@
 {
   "name": "blueprint-wireframe-kit",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "format": "prettier --write src vite.config.ts tsconfig.json package.json index.html README.md .github/workflows/deploy.yml"
+    "format": "prettier --write src scripts vite.config.ts tsconfig.json package.json index.html README.md .github/workflows/deploy.yml",
+    "tokens:build": "node scripts/build-tokens.mjs",
+    "tokens:check": "node scripts/check-tokens.mjs",
+    "predev": "npm run tokens:build",
+    "prebuild": "npm run tokens:build && npm run tokens:check"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

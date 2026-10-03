@@ -16,18 +16,27 @@ import {
 } from "radix-ui";
 import { Check, ChevronDown, ChevronUp, Minus, X } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
+
+// Teach class merging about the kit's custom Tailwind spacing namespace.
+// Consumer className values (e.g. h-12 or h-auto) can override default sizes.
+const mergeClasses = extendTailwindMerge({
+  extend: {
+    theme: { spacing: [(value: string) => value.startsWith("control-")] },
+  },
+});
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return mergeClasses(clsx(inputs));
 }
 
 const focus =
   "focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring";
-const disabled = "disabled:pointer-events-none disabled:opacity-45";
+const disabled =
+  "disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled disabled:text-disabled-foreground disabled:opacity-100 disabled:placeholder:text-disabled-foreground disabled:data-[placeholder]:text-disabled-foreground disabled:hover:border-disabled-border disabled:hover:bg-disabled disabled:active:border-disabled-border disabled:active:bg-disabled disabled:data-[state=checked]:border-disabled-border disabled:data-[state=checked]:bg-disabled disabled:data-[state=checked]:text-disabled-foreground disabled:data-[state=indeterminate]:border-disabled-border disabled:data-[state=indeterminate]:bg-disabled disabled:data-[state=indeterminate]:text-disabled-foreground disabled:data-[state=active]:border-disabled-border disabled:data-[state=active]:bg-disabled disabled:data-[state=active]:text-disabled-foreground";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "outline" | "ghost" | "destructive";
+  variant?: "default" | "secondary" | "outline" | "ghost" | "destructive";
   size?: "default" | "sm" | "icon";
   asChild?: boolean;
 }
@@ -50,22 +59,26 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={asChild ? undefined : type}
         className={cn(
-          "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md border font-medium text-sm transition-colors motion-reduce:transition-none [&_svg]:size-4 [&_svg]:shrink-0",
+          "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md border font-medium text-sm transition-colors duration-[var(--motion-fast)] motion-reduce:transition-none [&_svg]:size-4 [&_svg]:shrink-0",
           focus,
           disabled,
           {
             default:
-              "border-primary bg-primary text-primary-foreground hover:bg-primary/90",
+              "border-primary bg-primary text-primary-foreground hover:border-primary-hover hover:bg-primary-hover active:border-primary-active active:bg-primary-active",
+            secondary:
+              "border-input bg-secondary text-secondary-foreground hover:bg-secondary-hover active:bg-secondary-active",
             outline:
-              "border-input bg-transparent text-foreground hover:bg-muted",
+              "border-input bg-transparent text-foreground hover:bg-secondary active:bg-secondary-active",
             ghost:
-              "border-transparent bg-transparent text-foreground hover:bg-muted",
+              "border-transparent bg-transparent text-foreground hover:bg-secondary active:bg-secondary-active",
             destructive:
-              "border-destructive bg-destructive text-destructive-foreground hover:bg-destructive/90",
+              "border-destructive bg-destructive text-destructive-foreground hover:border-destructive-hover hover:bg-destructive-hover active:border-destructive-active active:bg-destructive-active",
           }[variant],
-          { default: "h-10 px-4", sm: "h-9 px-3 text-sm", icon: "size-10 p-0" }[
-            size
-          ],
+          {
+            default: "h-control-default px-4",
+            sm: "h-control-compact px-3 text-sm",
+            icon: "size-control-default p-0",
+          }[size],
           className,
         )}
         {...props}
@@ -80,15 +93,21 @@ export function Badge({
   variant = "default",
   ...props
 }: React.HTMLAttributes<HTMLSpanElement> & {
-  variant?: "default" | "outline";
+  variant?: "default" | "outline" | "success" | "warning" | "error" | "info";
 }) {
   return (
     <span
       className={cn(
         "inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-sm font-medium leading-5",
-        variant === "default"
-          ? "border-border bg-muted text-foreground"
-          : "border-input bg-transparent text-foreground",
+        {
+          default: "border-border bg-secondary text-secondary-foreground",
+          outline: "border-input bg-transparent text-foreground",
+          success: "border-success bg-success-subtle text-success-text",
+          warning: "border-warning bg-warning-subtle text-warning-text",
+          error:
+            "border-destructive bg-destructive-subtle text-destructive-text",
+          info: "border-info bg-info-subtle text-info-text",
+        }[variant],
         className,
       )}
       {...props}
@@ -104,7 +123,7 @@ export const Input = React.forwardRef<
     ref={ref}
     type={type}
     className={cn(
-      "flex h-10 w-full min-w-0 rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground file:mr-3 file:border-0 file:bg-transparent file:text-sm file:text-foreground aria-invalid:border-destructive",
+      "flex h-control-default w-full min-w-0 rounded-md border border-input bg-surface-sunken px-3 py-2 text-sm text-foreground placeholder:text-foreground-subtle file:mr-3 file:border-0 file:bg-transparent file:text-sm file:text-foreground aria-invalid:border-destructive",
       focus,
       disabled,
       className,
@@ -121,7 +140,7 @@ export const Textarea = React.forwardRef<
   <textarea
     ref={ref}
     className={cn(
-      "flex min-h-24 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground aria-invalid:border-destructive",
+      "flex min-h-24 w-full rounded-md border border-input bg-surface-sunken px-3 py-2 text-sm text-foreground placeholder:text-foreground-subtle aria-invalid:border-destructive",
       focus,
       disabled,
       className,
@@ -138,7 +157,7 @@ export const Label = React.forwardRef<
   <label
     ref={ref}
     className={cn(
-      "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-45",
+      "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:text-disabled-foreground",
       className,
     )}
     {...props}
@@ -153,7 +172,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-md border border-border bg-card text-foreground",
+        "rounded-md border border-border bg-card text-card-foreground",
         className,
       )}
       {...props}
@@ -270,7 +289,7 @@ export const Checkbox = React.forwardRef<
   <CheckboxPrimitive.Root
     ref={ref}
     className={cn(
-      "peer group relative flex size-5 shrink-0 items-center justify-center rounded-[3px] border border-input bg-background after:absolute after:-inset-1 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground",
+      "peer group relative flex size-5 shrink-0 items-center justify-center rounded-sm border border-input bg-surface-sunken after:absolute after:-inset-1 aria-invalid:border-destructive data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground",
       focus,
       disabled,
       className,
@@ -300,14 +319,14 @@ export const Switch = React.forwardRef<
   <SwitchPrimitive.Root
     ref={ref}
     className={cn(
-      "peer inline-flex h-6 w-11 shrink-0 items-center rounded-full border border-input bg-background p-0.5 data-[state=checked]:border-primary data-[state=checked]:bg-primary",
+      "peer group inline-flex h-6 w-11 shrink-0 items-center rounded-full border border-input bg-surface-sunken p-0.5 data-[state=checked]:border-primary data-[state=checked]:bg-primary",
       focus,
       disabled,
       className,
     )}
     {...props}
   >
-    <SwitchPrimitive.Thumb className="pointer-events-none block size-4 rounded-full bg-muted-foreground transition-transform data-[state=checked]:translate-x-5 data-[state=checked]:bg-primary-foreground data-[state=unchecked]:translate-x-0 motion-reduce:transition-none" />
+    <SwitchPrimitive.Thumb className="pointer-events-none block size-4 rounded-full bg-muted-foreground transition-transform duration-[var(--motion-fast)] data-[state=checked]:translate-x-5 data-[state=checked]:bg-primary-foreground data-[state=unchecked]:translate-x-0 group-disabled:bg-disabled-foreground group-disabled:data-[state=checked]:bg-disabled-foreground motion-reduce:transition-none" />
   </SwitchPrimitive.Root>
 ));
 Switch.displayName = "Switch";
@@ -330,19 +349,19 @@ export const Slider = React.forwardRef<
       <SliderPrimitive.Root
         ref={ref}
         className={cn(
-          "relative flex w-full touch-none select-none items-center py-2 data-[disabled]:opacity-45",
+          "group/slider relative flex w-full touch-none select-none items-center py-2 data-[disabled]:cursor-not-allowed",
           className,
         )}
         {...props}
       >
-        <SliderPrimitive.Track className="relative h-1.5 w-full grow overflow-hidden rounded-full border border-input bg-muted">
-          <SliderPrimitive.Range className="absolute h-full bg-primary" />
+        <SliderPrimitive.Track className="relative h-1.5 w-full grow overflow-hidden rounded-full border border-input bg-surface-sunken group-data-[disabled]/slider:border-disabled-border group-data-[disabled]/slider:bg-disabled">
+          <SliderPrimitive.Range className="absolute h-full bg-primary group-data-[disabled]/slider:bg-disabled-foreground" />
         </SliderPrimitive.Track>
         {values.map((_, index) => (
           <SliderPrimitive.Thumb
             key={index}
             className={cn(
-              "relative block size-4 rounded-full border-2 border-primary bg-background after:absolute after:-inset-2",
+              "relative block size-4 rounded-full border-2 border-primary bg-primary-foreground after:absolute after:-inset-2 data-[disabled]:border-disabled-border data-[disabled]:bg-disabled",
               focus,
             )}
             aria-label={
@@ -377,7 +396,7 @@ export const RadioGroupItem = React.forwardRef<
   <RadioGroupPrimitive.Item
     ref={ref}
     className={cn(
-      "relative size-5 shrink-0 rounded-full border border-input bg-background text-primary after:absolute after:-inset-1 data-[state=checked]:border-primary",
+      "relative size-5 shrink-0 rounded-full border border-input bg-surface-sunken text-primary after:absolute after:-inset-1 aria-invalid:border-destructive data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
       focus,
       disabled,
       className,
@@ -399,7 +418,7 @@ export const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "inline-flex h-10 items-center gap-1 rounded-md border border-border bg-muted p-1 text-muted-foreground",
+      "inline-flex h-auto min-h-control-default items-center gap-1 rounded-md border border-border bg-surface-sunken p-1 text-muted-foreground",
       className,
     )}
     {...props}
@@ -413,7 +432,7 @@ export const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex h-8 items-center justify-center whitespace-nowrap rounded-[3px] border border-transparent px-3 text-sm font-medium data-[state=active]:border-input data-[state=active]:bg-background data-[state=active]:text-foreground",
+      "inline-flex h-control-compact items-center justify-center whitespace-nowrap rounded-sm border border-transparent px-3 text-sm font-medium hover:bg-secondary data-[state=active]:border-input data-[state=active]:bg-selected data-[state=active]:text-selected-foreground",
       focus,
       disabled,
       className,
@@ -493,11 +512,11 @@ export const DialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <DialogPrimitive.Portal>
-    <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/60" />
+    <DialogPrimitive.Overlay className="fixed inset-0 z-[var(--layer-overlay)] bg-overlay" />
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed left-1/2 top-1/2 z-50 grid max-h-[85dvh] w-[calc(100%_-_2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-5 overflow-y-auto rounded-md border border-input bg-background p-6 text-foreground shadow-2xl",
+        "fixed left-1/2 top-1/2 z-[var(--layer-modal)] grid max-h-[85dvh] w-[calc(100%_-_2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-5 overflow-y-auto rounded-md border border-border-strong bg-popover p-6 text-popover-foreground shadow-2xl",
         className,
       )}
       {...props}
@@ -505,7 +524,7 @@ export const DialogContent = React.forwardRef<
       {children}
       <DialogPrimitive.Close
         className={cn(
-          "absolute right-3 top-3 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground",
+          "absolute right-3 top-3 inline-flex size-control-compact items-center justify-center rounded-md text-muted-foreground hover:bg-secondary hover:text-secondary-foreground active:bg-secondary-active",
           focus,
         )}
       >
@@ -567,7 +586,7 @@ export const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-44 rounded-md border border-input bg-card p-1 text-foreground shadow-xl",
+        "z-[var(--layer-dropdown)] min-w-44 rounded-md border border-border-strong bg-popover p-1 text-popover-foreground shadow-xl",
         className,
       )}
       {...props}
@@ -582,7 +601,7 @@ export const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex min-h-9 cursor-default select-none items-center gap-2 rounded-sm px-2.5 py-2 text-sm outline-none focus:bg-muted focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring data-[disabled]:pointer-events-none data-[disabled]:opacity-45 [&_svg]:size-4",
+      "relative flex min-h-9 cursor-default select-none items-center gap-2 rounded-sm px-2.5 py-2 text-sm outline-none focus:bg-selected focus:text-selected-foreground focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring data-[disabled]:cursor-not-allowed data-[disabled]:bg-disabled data-[disabled]:text-disabled-foreground data-[disabled]:opacity-100 data-[disabled]:focus:bg-disabled data-[disabled]:focus:text-disabled-foreground [&_svg]:size-4",
       className,
     )}
     {...props}
@@ -627,7 +646,7 @@ export const TooltipContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 max-w-64 rounded-md border border-input bg-primary px-3 py-2 text-sm leading-relaxed text-primary-foreground shadow-md",
+        "z-[var(--layer-tooltip)] max-w-64 rounded-md border border-inverse bg-inverse px-3 py-2 text-sm leading-relaxed text-inverse-foreground shadow-md",
         className,
       )}
       {...props}
@@ -648,7 +667,7 @@ export const PopoverContent = React.forwardRef<
       align={align}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 w-72 max-w-[calc(100vw_-_2rem)] rounded-md border border-input bg-card p-4 text-foreground shadow-xl",
+        "z-[var(--layer-dropdown)] w-72 max-w-[calc(100vw_-_2rem)] rounded-md border border-border-strong bg-popover p-4 text-popover-foreground shadow-xl",
         focus,
         className,
       )}
@@ -679,7 +698,7 @@ export const AvatarFallback = React.forwardRef<
   <AvatarPrimitive.Fallback
     ref={ref}
     className={cn(
-      "flex size-full items-center justify-center rounded-full bg-muted text-xs font-medium",
+      "flex size-full items-center justify-center rounded-full bg-secondary text-xs font-medium text-secondary-foreground",
       className,
     )}
     {...props}
@@ -696,7 +715,7 @@ export const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-10 w-full items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm data-[placeholder]:text-muted-foreground [&>span]:truncate",
+      "flex h-control-default w-full items-center justify-between gap-2 rounded-md border border-input bg-surface-sunken px-3 py-2 text-sm text-foreground aria-invalid:border-destructive data-[placeholder]:text-foreground-subtle [&>span]:truncate",
       focus,
       disabled,
       className,
@@ -727,7 +746,7 @@ export const SelectContent = React.forwardRef<
         position={position}
         sideOffset={sideOffset}
         className={cn(
-          "relative z-50 max-h-[var(--radix-select-content-available-height)] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border border-input bg-card text-foreground shadow-xl",
+          "relative z-[var(--layer-dropdown)] max-h-[var(--radix-select-content-available-height)] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border border-border-strong bg-popover text-popover-foreground shadow-xl",
           className,
         )}
         {...props}
@@ -753,7 +772,7 @@ export const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex min-h-9 w-full cursor-default select-none items-center rounded-sm py-2 pl-8 pr-3 text-sm outline-none focus:bg-muted focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring data-[disabled]:pointer-events-none data-[disabled]:opacity-45",
+      "relative flex min-h-9 w-full cursor-default select-none items-center rounded-sm py-2 pl-8 pr-3 text-sm outline-none focus:bg-selected focus:text-selected-foreground focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring data-[disabled]:cursor-not-allowed data-[disabled]:bg-disabled data-[disabled]:text-disabled-foreground data-[disabled]:opacity-100 data-[disabled]:focus:bg-disabled data-[disabled]:focus:text-disabled-foreground",
       className,
     )}
     {...props}
