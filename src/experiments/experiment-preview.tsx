@@ -270,149 +270,163 @@ function DiscoveryPreview() {
 
 function EventPreview() {
   return (
-    <>
+    <svg
+      x="32"
+      y="22"
+      width="896"
+      height="516"
+      viewBox="0 0 2048 1179"
+      overflow="hidden"
+    >
       <rect
-        x="32"
-        y="32"
-        width="896"
-        height="496"
-        rx="8"
+        width="2048"
+        height="1179"
+        rx="16"
         fill="var(--background)"
         stroke="var(--border)"
+        strokeWidth="2"
       />
-      <path d="M32 78h896" stroke="var(--border)" />
-      <circle cx="55" cy="56" r="9" fill="var(--border)" />
+      <path d="M0 76h2048" stroke="var(--border)" strokeWidth="2" />
+      <circle cx="88" cy="38" r="18" fill="var(--border)" />
       <path
-        d="M76 56h86"
+        d="M128 38h142"
         stroke="var(--border)"
-        strokeWidth="8"
+        strokeWidth="14"
         strokeLinecap="round"
       />
-      <rect x="32" y="79" width="124" height="449" fill={sunken} />
-      <path d="M156 79v449" stroke="var(--border)" />
+      <rect x="0" y="76" width="398" height="1103" fill={sunken} />
+      <path d="M398 76v1103" stroke="var(--border)" strokeWidth="2" />
+      <path
+        d="M29 120h164"
+        stroke="var(--border)"
+        strokeWidth="12"
+        strokeLinecap="round"
+      />
       <rect
-        x="46"
-        y="105"
-        width="96"
-        height="26"
-        rx="4"
+        x="29"
+        y="146"
+        width="340"
+        height="38"
+        rx="6"
         fill="none"
         stroke="var(--border)"
+        strokeWidth="2"
       />
-      {[0, 1, 2, 3, 4, 5].map((item) => (
+      {[0, 1, 2, 3, 4, 5, 6].map((item) => (
         <g key={item} fill="var(--border)">
-          <circle cx="51" cy={155 + item * 30} r="5" />
-          <rect x="65" y={152 + item * 30} width="66" height="6" rx="3" />
+          <circle cx="38" cy={215 + item * 35} r="8" />
+          <rect x="60" y={210 + item * 35} width="240" height="10" rx="5" />
         </g>
       ))}
-      <text x="180" y="115" fill={muted} fontSize="21" fontWeight="600">
+      <text x="481" y="155" fill={muted} fontSize="29" fontWeight="600">
         Home
       </text>
-      <g fill={sunken} stroke="var(--border)">
-        <rect x="180" y="138" width="402" height="92" rx="6" />
-        <rect x="180" y="320" width="402" height="94" rx="6" />
-        <rect x="180" y="430" width="402" height="98" rx="6" />
-        {[0, 1, 2, 3].map((item) => (
-          <rect
-            key={item}
-            x={180 + item * 104}
-            y="247"
-            width="90"
-            height="26"
-            rx="13"
-          />
+      <g fill={sunken} stroke="var(--border)" strokeWidth="2">
+        <rect x="481" y="184" width="1067" height="150" rx="15" />
+        <rect x="481" y="457" width="1067" height="243" rx="6" />
+        <rect x="481" y="719" width="1067" height="500" rx="6" />
+        {[
+          [617, 105],
+          [735, 154],
+          [904, 176],
+          [1093, 115],
+          [1220, 193],
+        ].map(([x, width]) => (
+          <rect key={x} x={x} y="348" width={width} height="47" rx="15" />
         ))}
       </g>
-      <g stroke="var(--border-subtle)" strokeWidth="8" strokeLinecap="round">
-        <path d="M199 161h174M199 350h170M199 382h328M199 459h140M199 491h300" />
+      <g stroke="var(--border-subtle)" strokeWidth="12" strokeLinecap="round">
+        <path d="M502 219h329M567 494h294M567 756h416M502 823h485" />
       </g>
-      <rect
-        x="198"
-        y="195"
-        width="58"
-        height="20"
-        rx="3"
-        fill={surface}
-        stroke="var(--border)"
-      />
-      <rect
-        x="264"
-        y="195"
-        width="100"
-        height="20"
-        rx="3"
-        fill={surface}
-        stroke="var(--border)"
-      />
-      <text x="180" y="301" fill={muted} fontSize="17">
+      <g fill={surface} stroke="var(--border)" strokeWidth="2">
+        <rect x="493" y="286" width="111" height="38" rx="6" />
+        <rect x="614" y="286" width="199" height="38" rx="6" />
+        <rect x="824" y="286" width="38" height="38" rx="6" />
+      </g>
+      <text x="481" y="435" fill={muted} fontSize="18" fontWeight="600">
         Feed
       </text>
+      <g fill="var(--border)">
+        <circle cx="525" cy="500" r="22" />
+        <circle cx="525" cy="762" r="22" />
+      </g>
+      <rect x="502" y="551" width="1025" height="129" rx="4" fill={surface} />
+      <rect x="502" y="892" width="1025" height="327" rx="4" fill={surface} />
+      <g stroke="var(--border-subtle)" strokeWidth="12" strokeLinecap="round">
+        <path d="M524 585h540M524 624h810M524 932h180M524 985h780M524 1024h710M524 1063h795M524 1102h745" />
+      </g>
       <rect
-        x="610"
-        y="464"
-        width="306"
-        height="64"
-        rx="6"
+        x="1595"
+        y="604"
+        width="370"
+        height="415"
+        rx="15"
         fill={sunken}
         stroke="var(--border)"
+        strokeWidth="2"
       />
-      <text x="626" y="490" fill={muted} fontSize="16">
+      <text x="1615" y="643" fill={muted} fontSize="18" fontWeight="600">
         Latest from our changelog
       </text>
-      <path
-        d="M628 511h200"
-        stroke="var(--border-subtle)"
-        strokeWidth="7"
-        strokeLinecap="round"
+      <path d="M1620 675v263" stroke="var(--border)" strokeWidth="2" />
+      {[675, 760, 845, 906].map((y) => (
+        <g key={y}>
+          <circle cx="1620" cy={y} r="5" fill="var(--border)" />
+          <path
+            d={`M1649 ${y}h78m-78 24h268m-268 24h220`}
+            stroke="var(--border-subtle)"
+            strokeWidth="9"
+            strokeLinecap="round"
+          />
+        </g>
+      ))}
+      <rect
+        x="1595"
+        y="122"
+        width="370"
+        height="462"
+        rx="15"
+        fill={surface}
+        stroke={line}
+        strokeWidth="2"
       />
-      <g transform="translate(246 70) scale(.74)">
-        <rect
-          x="492"
-          y="48"
-          width="414"
-          height="464"
-          rx="10"
-          fill={surface}
-          stroke={line}
-        />
-        <text x="516" y="92" fill={ink} fontSize="30" fontWeight="600">
-          UNIVERSE’26
-        </text>
-        <path d="m864 72 12 12m0-12-12 12" stroke={muted} strokeWidth="2" />
-        <rect x="493" y="112" width="412" height="152" fill={sunken} />
-        <g fill="none" stroke={muted} strokeWidth="2">
-          <rect x="665" y="158" width="68" height="54" rx="5" />
-          <circle cx="686" cy="176" r="6" />
-          <path d="m670 205 19-17 12 10 13-16 14 23" />
-        </g>
-        <g stroke="var(--border)">
-          <path d="M493 112h412M493 264h412M493 322h412M493 423h412" />
-        </g>
-        <text x="516" y="299" fill={muted} fontSize="16">
-          OCT 28–29
-        </text>
-        <text x="650" y="299" fill={muted} fontSize="16">
-          SAN FRANCISCO, CA
-        </text>
-        <text x="516" y="361" fill={ink} fontSize="23" fontWeight="600">
-          <tspan x="516">Save $600 with Super Early</tspan>
-          <tspan x="516" dy="31">
-            Bird passes through July 8.
-          </tspan>
-        </text>
-        <rect x="516" y="443" width="366" height="48" rx="5" fill={ink} />
-        <text
-          x="699"
-          y="475"
-          fill="var(--primary-foreground)"
-          textAnchor="middle"
-          fontSize="20"
-          fontWeight="600"
-        >
-          Register now
-        </text>
+      <text x="1615" y="165" fill={ink} fontSize="32" fontWeight="600">
+        UNIVERSE’26
+      </text>
+      <path d="m1926 150 10 10m0-10-10 10" stroke={muted} strokeWidth="2" />
+      <rect x="1596" y="186" width="368" height="146" fill={sunken} />
+      <g fill="none" stroke={muted} strokeWidth="2">
+        <rect x="1746" y="232" width="68" height="54" rx="5" />
+        <circle cx="1767" cy="250" r="6" />
+        <path d="m1751 279 19-17 12 10 13-16 14 23" />
       </g>
-    </>
+      <g stroke="var(--border)" strokeWidth="2">
+        <path d="M1596 186h368M1596 332h368M1596 392h368M1596 488h368" />
+      </g>
+      <text x="1615" y="367" fill={muted} fontSize="15">
+        OCT 28–29
+      </text>
+      <text x="1731" y="367" fill={muted} fontSize="15">
+        SAN FRANCISCO, CA
+      </text>
+      <text x="1615" y="436" fill={ink} fontSize="24" fontWeight="600">
+        <tspan x="1615">Save $600 with Super Early</tspan>
+        <tspan x="1615" dy="29">
+          Bird passes through July 8.
+        </tspan>
+      </text>
+      <rect x="1615" y="508" width="330" height="56" rx="7" fill={ink} />
+      <text
+        x="1780"
+        y="544"
+        fill="var(--primary-foreground)"
+        textAnchor="middle"
+        fontSize="20"
+        fontWeight="600"
+      >
+        Register now
+      </text>
+    </svg>
   );
 }
 

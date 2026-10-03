@@ -13,32 +13,42 @@ import {
   DialogTrigger,
 } from "../components/kit";
 import { ImagePlaceholder } from "../components/patterns";
+import "./github-event-banner.css";
 
 function DashboardContext() {
   return (
-    <div className="hidden min-w-0 space-y-6 md:block" aria-hidden="true">
-      <h2 className="text-2xl font-semibold tracking-tight">Home</h2>
-      <Card className="space-y-10 bg-surface-sunken p-5">
+    <div
+      className="github-feed-context hidden min-w-0 space-y-6 md:block"
+      aria-hidden="true"
+    >
+      <h2 className="github-home-title text-2xl font-semibold tracking-tight">
+        Home
+      </h2>
+      <Card className="github-composer space-y-10 bg-surface-sunken p-5">
         <div className="h-3 w-3/5 rounded-sm bg-border-subtle" />
         <div className="flex gap-2">
           <div className="h-8 w-16 rounded-sm border border-border bg-card" />
           <div className="h-8 w-28 rounded-sm border border-border bg-card" />
         </div>
       </Card>
-      <div className="flex gap-2">
-        {[0, 1, 2, 3].map((item) => (
+      <div className="github-context-actions flex gap-2">
+        {[105, 154, 176, 115, 193].map((width) => (
           <div
-            key={item}
-            className="h-8 flex-1 rounded-full border border-border bg-surface-sunken"
+            key={width}
+            style={{ flexGrow: width }}
+            className="h-8 basis-0 rounded-full border border-border bg-surface-sunken"
           />
         ))}
       </div>
-      <div className="flex items-center justify-between">
+      <div className="github-feed-toolbar flex items-center justify-between">
         <h3 className="text-sm font-medium">Feed</h3>
         <div className="h-7 w-16 rounded-sm border border-border bg-surface-sunken" />
       </div>
       {[0, 1].map((item) => (
-        <Card key={item} className="space-y-5 bg-surface-sunken p-5">
+        <Card
+          key={item}
+          className="github-feed-item space-y-5 bg-surface-sunken p-5"
+        >
           <div className="flex items-center gap-3">
             <div className="size-7 shrink-0 rounded-full bg-border-subtle" />
             <div className="h-3 w-1/2 rounded-sm bg-border-subtle" />
@@ -56,7 +66,7 @@ function DashboardContext() {
 function RepositoryContext() {
   return (
     <div
-      className="hidden space-y-5 border-r border-border bg-surface-sunken px-5 py-8 lg:block"
+      className="github-sidebar hidden space-y-5 border-r border-border bg-surface-sunken px-5 py-8 lg:block"
       aria-hidden="true"
     >
       <h2 className="text-sm font-medium">Top repositories</h2>
@@ -73,7 +83,7 @@ function RepositoryContext() {
 
 function ChangelogContext() {
   return (
-    <Card className="bg-surface-sunken p-5" aria-hidden="true">
+    <Card className="github-changelog bg-surface-sunken p-5" aria-hidden="true">
       <h3 className="text-sm font-medium">Latest from our changelog</h3>
       <div className="mt-5 ml-1 space-y-5 border-l border-border pl-4">
         {[0, 1, 2, 3].map((item) => (
@@ -107,10 +117,13 @@ export function GitHubEventBanner() {
   }
 
   return (
-    <main id="main-content" className="min-h-screen bg-background">
+    <main
+      id="main-content"
+      className="github-event-scene min-h-screen bg-background"
+    >
       <h1 className="sr-only">Event promotion wireframe</h1>
       <div
-        className="flex h-16 items-center justify-between gap-8 border-b border-border bg-surface-deep px-4 md:px-6"
+        className="github-app-header flex h-16 items-center justify-between gap-8 border-b border-border bg-surface-deep px-4 md:px-6"
         aria-hidden="true"
       >
         <div className="flex items-center gap-3">
@@ -120,12 +133,12 @@ export function GitHubEventBanner() {
         <div className="hidden h-8 w-48 rounded-md border border-border bg-surface-sunken sm:block" />
       </div>
 
-      <div className="grid min-h-[calc(100dvh-4rem)] lg:grid-cols-[13rem_minmax(0,1fr)] xl:grid-cols-[15rem_minmax(0,1fr)]">
+      <div className="github-app-body grid min-h-[calc(100dvh-4rem)] lg:grid-cols-[13rem_minmax(0,1fr)] xl:grid-cols-[15rem_minmax(0,1fr)]">
         <RepositoryContext />
-        <div className="grid min-w-0 items-start gap-6 p-4 md:grid-cols-[minmax(0,1fr)_20rem] md:p-6 xl:gap-8 xl:p-8">
+        <div className="github-content-grid grid min-w-0 items-start gap-6 p-4 md:grid-cols-[minmax(0,1fr)_20rem] md:p-6 xl:gap-8 xl:p-8">
           <DashboardContext />
 
-          <div className="mx-auto w-full max-w-80 space-y-4 md:mx-0">
+          <div className="github-right-rail mx-auto w-full max-w-80 space-y-4 md:mx-0">
             {dismissed ? (
               <div className="space-y-4 rounded-md border border-dashed border-border p-5">
                 <p role="status" className="text-sm text-muted-foreground">
@@ -142,8 +155,8 @@ export function GitHubEventBanner() {
                 </Button>
               </div>
             ) : (
-              <Card className="overflow-hidden bg-surface-raised shadow-sm">
-                <div className="flex items-center justify-between gap-3 px-4 py-3">
+              <Card className="github-event-card overflow-hidden bg-surface-raised shadow-sm">
+                <div className="github-event-heading flex items-center justify-between gap-3 px-4 py-3">
                   <h2 className="text-2xl font-semibold tracking-tight">
                     UNIVERSE’26
                   </h2>
@@ -160,19 +173,19 @@ export function GitHubEventBanner() {
 
                 <ImagePlaceholder
                   label="Event artwork"
-                  className="aspect-[5/2] rounded-none border-x-0 border-y border-solid"
+                  className="github-event-artwork aspect-[5/2] rounded-none border-x-0 border-y border-solid"
                 />
 
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-border px-4 py-4 font-mono text-xs leading-5">
+                <div className="github-event-details flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-border px-4 py-4 font-mono text-xs leading-5">
                   <span>OCT 28–29</span>
                   <span>SAN FRANCISCO, CA</span>
                 </div>
 
-                <p className="border-b border-border px-4 py-5 text-xl font-medium leading-7 tracking-tight">
+                <p className="github-event-offer border-b border-border px-4 py-5 text-xl font-medium leading-7 tracking-tight">
                   Save $600 with Super Early Bird passes through July 8.
                 </p>
 
-                <div className="p-4">
+                <div className="github-event-action p-4">
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button className="h-control-comfortable w-full">

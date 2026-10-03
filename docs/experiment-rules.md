@@ -43,6 +43,18 @@ Classify the intended behavior rather than the component's appearance. Keep obje
 - Reproduce only the motion necessary to explain the interaction, using the kit's motion tokens and reduced-motion support.
 - Start with the existing kit component for each control. Shared Select, Button, Badge, and dialog components own their icon spacing, focus treatment, and interaction conventions; do not recreate those provisions per experiment.
 
+## Preserve reference proportions
+
+Proportionate sizing is a default for every reference-based experiment. Low visual fidelity simplifies styling and content; it does not relax the accuracy of the composition.
+
+- Before implementation, identify the source viewport and content bounds, excluding browser and OS chrome. Record the important dimensions and ratios in the experiment document: column shares, panel and card widths and heights, padding, gutters, alignment, and visible content density. Mark approximate measurements as estimates.
+- Preserve those relationships when abstracting inner content. A placeholder should retain the space and hierarchy of what it replaces. Do not enlarge the focal banner, modal, or card simply because it is the subject of the experiment.
+- Use shared typography, spacing, and control tokens while checking their effect on the reference geometry. Make size adjustments deliberately; avoid arbitrarily inflating text, padding, or control height. Distinguish fixed, fluid, and maximum-width behavior only when the source supports it; record uncertain behavior as an implementation assumption.
+- Compare the wireframe and reference at a matched content-frame width, or apply the same scale to both. Account for the experiment viewer's own frame rather than comparing unrelated viewport sizes. Check the full composition as well as the focal component.
+- Keep narrow layouts readable and operable. Reflow where needed instead of shrinking the whole interface below usable sizes. If no narrow-screen reference exists, describe the mobile arrangement as a prototype adaptation, not observed source behavior.
+
+The GitHub event-banner sizing correction on 4 October 2026 established this rule for future experiments. Its measured values remain specific to that experiment.
+
 ## Make behavior reviewable
 
 Demonstrate the states needed for the focused experience: entry, active, completed, dismissed, or error states where relevant. Keep supporting controls understandable and accessible. A control that looks actionable should perform its local prototype behavior, or be clearly identified as unavailable in the prototype.

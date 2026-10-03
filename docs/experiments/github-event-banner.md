@@ -26,6 +26,28 @@ The first version reduced the surrounding dashboard too far. Anuj's correction o
 
 Include the unaltered source image in the shared Original reference view, following the user's established reference-viewer request. The surrounding browser and account context remains part of the original only; it is abstracted away in the wireframe. Save locally; publishing requires a separate request.
 
+## Reference proportions
+
+Anuj's sizing correction makes proportionate composition a requirement, including the directory thumbnail. Measurements below are approximate source pixels from the 2048 × 1323 screenshot. The application begins at y144; exclude that browser chrome when comparing vertical positions.
+
+| Region                    | Source measurement                                                |
+| ------------------------- | ----------------------------------------------------------------- |
+| Application header        | 76px high                                                         |
+| Repository sidebar        | 398px wide (19.4% of the frame)                                   |
+| Outer content gutters     | 83px each                                                         |
+| Central column            | 1067px wide (52.1%)                                               |
+| Gap before the right rail | 47px                                                              |
+| Right rail                | 370px wide (18.1%)                                                |
+| Event card                | 462px high; top at application y122                               |
+| Event sections            | Header 64px, artwork 146px, details 60px, offer 96px, footer 96px |
+| Companion panel           | 415px high, with a 20px gap after the event card                  |
+| Composer                  | 150px high                                                        |
+| First feed card           | 243px high, with a 129px inner panel                              |
+
+At desktop widths, scale these measurements against the experiment's own content frame using container-relative CSS units. At a 1374px frame, this gives a 267px sidebar, 716px center column, and 248px right rail. The old fixed 320px rail enlarged the focal card by about 29%. Keep semantic surface and control tokens; these measured dimensions are experiment-specific values, not new foundation tokens.
+
+Continuous desktop scaling is a prototype choice: one screenshot cannot establish the source's responsive rules. Below 1024px, use the readable responsive composition rather than shrinking the entire interface. Controls keep a minimum 24px target. The existing mobile reflow remains an explicitly unobserved adaptation.
+
 ## Design intent
 
 Primary: Monetization & purchase. Audience: people using the signed-in GitHub dashboard; event-attendance intent and ticket ownership are unknown. Journey: notice an event offer and consider registering. Mechanisms: contextual placement, event relevance, an explicit saving, and a dated offer. Format: dismissible right-rail event card. Proposed measure: completed ticket purchases attributed to the promotion, with CTA-to-registration completion and dismissal as supporting diagnostics. The paid-pass offer supports this interpretation; actual outcomes are not measured and the registration destination is unknown.
@@ -45,3 +67,5 @@ The initial version was checked locally on 4 October 2026 (Asia/Calcutta):
 Saved locally. No publishing performed.
 
 The subsequent layout-context correction was checked at desktop and 320px: the header, full-height sidebar, central content groups, and companion changelog panel now establish placement clearly. On mobile the header and companion card remain, while the sidebar and feed collapse; the 286px embedded viewport has no horizontal overflow. Production build and all 127 token contrast checks pass. The directory thumbnail follows the same container hierarchy. This revision changes structural context; the interaction checks above describe the retained banner behavior.
+
+The proportion correction was verified against rendered desktop geometry: at 1374px inside the viewer, the sidebar measures 267px, the central column 716px, and the right rail 248px. The event card is 312px high including its border, followed by a 13.4px gap to the companion panel. The directory thumbnail uses the same source-coordinate proportions. At a 320px viewport, the 286px embedded frame has no horizontal overflow and retains readable banner copy and controls. Production build, TypeScript, and all 127 defined token contrast checks pass. Saved locally without publishing.

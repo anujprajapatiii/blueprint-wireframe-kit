@@ -1,0 +1,242 @@
+.github-event-scene {
+  container: github-event / inline-size;
+}
+
+/* Reference geometry: 2048px-wide application, with browser chrome excluded.
+   These source measurements are experiment values, not new foundation tokens.
+   Below desktop, the existing readable stacked composition takes over. */
+@container github-event (min-width: 1024px) {
+  .github-app-header,
+  .github-app-body {
+    --github-unit: calc(100cqw / 2048);
+  }
+  .github-app-header {
+    height: calc(76 * var(--github-unit));
+    padding-inline: calc(20 * var(--github-unit));
+  }
+  .github-app-header > div:first-child {
+    gap: calc(16 * var(--github-unit));
+  }
+  .github-app-header > div:first-child > div {
+    width: calc(36 * var(--github-unit));
+    height: calc(36 * var(--github-unit));
+  }
+  .github-app-header span {
+    font-size: calc(18 * var(--github-unit));
+  }
+  .github-app-header > div:last-child {
+    width: calc(232 * var(--github-unit));
+    height: calc(38 * var(--github-unit));
+  }
+  .github-app-body {
+    grid-template-columns: calc(398 * var(--github-unit)) minmax(0, 1fr);
+    min-height: calc(100dvh - 76 * var(--github-unit));
+  }
+  .github-sidebar {
+    padding: calc(36 * var(--github-unit)) calc(28 * var(--github-unit));
+  }
+  .github-sidebar h2 {
+    font-size: calc(18 * var(--github-unit));
+    line-height: calc(24 * var(--github-unit));
+  }
+  .github-sidebar > * + * {
+    margin-block: calc(14 * var(--github-unit)) 0;
+  }
+  .github-sidebar > div:first-of-type {
+    height: calc(38 * var(--github-unit));
+  }
+  .github-sidebar > div:not(:first-of-type) {
+    height: calc(20 * var(--github-unit));
+    gap: calc(12 * var(--github-unit));
+  }
+  .github-sidebar > div:not(:first-of-type) > div:first-child {
+    width: calc(20 * var(--github-unit));
+    height: calc(20 * var(--github-unit));
+  }
+  .github-sidebar > div:not(:first-of-type) > div:last-child {
+    height: calc(8 * var(--github-unit));
+  }
+  .github-content-grid {
+    grid-template-columns: minmax(0, 1fr) calc(370 * var(--github-unit));
+    gap: calc(47 * var(--github-unit));
+    padding: calc(46 * var(--github-unit)) calc(83 * var(--github-unit));
+  }
+  .github-right-rail {
+    max-width: none;
+  }
+  .github-right-rail > * {
+    margin-block: 0;
+  }
+  .github-right-rail > * + * {
+    margin-block: calc(20 * var(--github-unit)) 0;
+  }
+  .github-event-card {
+    display: grid;
+    grid-template-rows:
+      calc(64 * var(--github-unit)) calc(146 * var(--github-unit))
+      calc(60 * var(--github-unit)) calc(96 * var(--github-unit))
+      calc(96 * var(--github-unit));
+    border-radius: calc(16 * var(--github-unit));
+  }
+  .github-event-heading {
+    gap: calc(12 * var(--github-unit));
+    padding: 0 calc(20 * var(--github-unit));
+  }
+  .github-event-heading h2 {
+    font-size: calc(32 * var(--github-unit));
+    line-height: 1.2;
+  }
+  .github-event-heading button {
+    width: max(24px, calc(40 * var(--github-unit)));
+    height: max(24px, calc(40 * var(--github-unit)));
+  }
+  .github-event-heading button svg {
+    width: calc(16 * var(--github-unit));
+    height: calc(16 * var(--github-unit));
+  }
+  .github-event-artwork {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .github-event-artwork > span {
+    padding: calc(6 * var(--github-unit)) calc(12 * var(--github-unit));
+    font-size: calc(16 * var(--github-unit));
+    line-height: 1.5;
+  }
+  .github-event-details {
+    flex-wrap: nowrap;
+    gap: calc(16 * var(--github-unit));
+    padding: 0 calc(20 * var(--github-unit));
+    font-size: calc(14 * var(--github-unit));
+    line-height: 1.5;
+  }
+  .github-event-details span {
+    white-space: nowrap;
+  }
+  .github-event-offer {
+    display: flex;
+    align-items: center;
+    padding: 0 calc(20 * var(--github-unit));
+    font-size: calc(24 * var(--github-unit));
+    line-height: calc(28 * var(--github-unit));
+    font-weight: 600;
+  }
+  .github-event-action {
+    display: flex;
+    align-items: center;
+    padding: 0 calc(20 * var(--github-unit));
+  }
+  .github-event-action > button {
+    height: max(24px, calc(58 * var(--github-unit)));
+    padding-inline: calc(16 * var(--github-unit));
+    font-size: calc(20 * var(--github-unit));
+  }
+  .github-changelog {
+    min-height: calc(415 * var(--github-unit));
+    padding: calc(20 * var(--github-unit));
+    border-radius: calc(16 * var(--github-unit));
+  }
+  .github-changelog h3 {
+    font-size: calc(18 * var(--github-unit));
+    line-height: calc(24 * var(--github-unit));
+  }
+  .github-changelog > div {
+    margin-top: calc(22 * var(--github-unit));
+    padding-left: calc(28 * var(--github-unit));
+  }
+  .github-changelog > div > div {
+    min-height: calc(56 * var(--github-unit));
+    margin-block: 0;
+  }
+  .github-changelog > div > div + div {
+    margin-top: calc(22 * var(--github-unit));
+  }
+  .github-changelog > div > div > div:not(:first-child) {
+    height: calc(8 * var(--github-unit));
+    margin-block: calc(10 * var(--github-unit)) 0;
+  }
+  .github-changelog > div > div > div:first-child {
+    left: calc(-32 * var(--github-unit));
+    width: calc(8 * var(--github-unit));
+    height: calc(8 * var(--github-unit));
+  }
+  .github-feed-context > * {
+    margin-block: 0;
+  }
+  .github-home-title {
+    height: calc(40 * var(--github-unit));
+    margin-bottom: calc(22 * var(--github-unit));
+    font-size: calc(30 * var(--github-unit));
+    line-height: calc(40 * var(--github-unit));
+  }
+  .github-composer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(150 * var(--github-unit));
+    padding: calc(20 * var(--github-unit));
+    border-radius: calc(16 * var(--github-unit));
+  }
+  .github-composer > div {
+    margin-block: 0;
+  }
+  .github-composer > div:first-child {
+    height: calc(12 * var(--github-unit));
+  }
+  .github-composer > div:last-child {
+    gap: calc(10 * var(--github-unit));
+  }
+  .github-composer > div:last-child > div {
+    height: calc(38 * var(--github-unit));
+  }
+  .github-context-actions {
+    width: calc(799 * var(--github-unit));
+    max-width: 100%;
+    gap: calc(14 * var(--github-unit));
+    margin: calc(15 * var(--github-unit)) auto calc(14 * var(--github-unit));
+  }
+  .github-context-actions > div {
+    height: calc(47 * var(--github-unit));
+  }
+  .github-feed-toolbar {
+    height: calc(38 * var(--github-unit));
+    margin-bottom: calc(10 * var(--github-unit));
+  }
+  .github-feed-toolbar h3 {
+    font-size: calc(18 * var(--github-unit));
+  }
+  .github-feed-toolbar > div {
+    width: calc(98 * var(--github-unit));
+    height: calc(38 * var(--github-unit));
+  }
+  .github-feed-item {
+    height: calc(243 * var(--github-unit));
+    padding: calc(20 * var(--github-unit));
+  }
+  .github-feed-item > div {
+    margin-block: 0;
+  }
+  .github-feed-item + .github-feed-item {
+    height: calc(470 * var(--github-unit));
+    margin-top: calc(20 * var(--github-unit));
+  }
+  .github-feed-item > div:first-child {
+    height: calc(56 * var(--github-unit));
+    gap: calc(12 * var(--github-unit));
+  }
+  .github-feed-item > div:first-child > div:first-child {
+    width: calc(40 * var(--github-unit));
+    height: calc(40 * var(--github-unit));
+  }
+  .github-feed-item > div:first-child > div:last-child {
+    height: calc(12 * var(--github-unit));
+  }
+  .github-feed-item > div:last-child {
+    height: calc(129 * var(--github-unit));
+    margin-top: calc(18 * var(--github-unit));
+    padding: calc(20 * var(--github-unit));
+  }
+  .github-feed-item + .github-feed-item > div:last-child {
+    height: calc(356 * var(--github-unit));
+  }
+}
