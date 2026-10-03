@@ -1,0 +1,327 @@
+import { useState } from "react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Check,
+  Copy,
+  Pause,
+  Play,
+} from "lucide-react";
+import {
+  Button,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  cn,
+} from "../components/kit";
+import "./steam-growth-banners.css";
+
+function ContextCards({
+  count = 4,
+  compact = false,
+}: {
+  count?: number;
+  compact?: boolean;
+}) {
+  return (
+    <div
+      aria-hidden="true"
+      className={cn(
+        "grid grid-cols-2 gap-3 md:grid-cols-4",
+        compact && "grid-cols-4 gap-2",
+      )}
+    >
+      {Array.from({ length: count }, (_, i) => (
+        <div
+          key={i}
+          className="min-w-0 border border-border-subtle bg-background p-3"
+        >
+          <div
+            className={cn(
+              "bg-surface-sunken",
+              compact ? "h-12 sm:h-16" : "h-20 sm:h-28",
+            )}
+          />
+          <div className="mt-3 h-1.5 w-2/3 bg-border-subtle" />
+          {!compact && <div className="mt-2 h-1 w-1/3 bg-border-subtle" />}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function StickerStack() {
+  return (
+    <span aria-hidden="true" className="relative block h-14 w-24 shrink-0">
+      {[-14, 0, 14].map((rotation, i) => (
+        <span
+          key={i}
+          className="absolute top-2 grid h-11 w-9 place-items-center rounded-sm border border-input bg-surface-raised"
+          style={{
+            left: `${i * 24}px`,
+            transform: `rotate(${rotation}deg)`,
+            zIndex: i === 1 ? 2 : 1,
+          }}
+        >
+          <span
+            className={cn(
+              "h-4 w-4 border border-input",
+              i === 0 ? "rounded-full" : i === 1 ? "rotate-45" : "rounded-sm",
+            )}
+          />
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function Destination({ kind }: { kind: "stickers" | "queue" }) {
+  return (
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>
+          {kind === "stickers" ? "Your stickers" : "Your discovery queue"}
+        </DialogTitle>
+        <DialogDescription>
+          This destination is a placeholder. The experiment focuses on the two
+          entry banners; the recording does not show the next screen.
+        </DialogDescription>
+      </DialogHeader>
+      <div className="my-4 grid min-h-32 place-items-center rounded-md border border-dashed border-input bg-surface-sunken">
+        {kind === "stickers" ? (
+          <StickerStack />
+        ) : (
+          <span className="text-sm text-muted-foreground">Queue content</span>
+        )}
+      </div>
+      <DialogClose asChild>
+        <Button className="w-full" variant="secondary">
+          Back to banners
+        </Button>
+      </DialogClose>
+    </DialogContent>
+  );
+}
+
+export function SteamGrowthBanners() {
+  const [motion, setMotion] = useState(true);
+  const [copyState, setCopyState] = useState("");
+  async function copyLink() {
+    try {
+      const url = new URL(location.href);
+      url.searchParams.delete("audit");
+      url.hash = "";
+      await navigator.clipboard.writeText(url.href);
+      setCopyState("Link copied");
+    } catch {
+      setCopyState(
+        "Copy the address from your browser to save this experiment.",
+      );
+    }
+  }
+  return (
+    <main
+      id="main-content"
+      className="mx-auto max-w-[1280px] px-5 py-7 sm:px-8 sm:py-10"
+    >
+      <a
+        href="?view=experiments"
+        className="mb-5 inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+      >
+        <ArrowLeft size={16} aria-hidden="true" /> All experiments
+      </a>
+      <div className="flex flex-wrap items-start justify-between gap-5">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+            Steam growth banners
+          </h1>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            A small reward prompt followed by an invitation to explore. Original
+            copy, neutral wireframe.
+          </p>
+        </div>
+        <Button variant="outline" onClick={copyLink}>
+          {copyState === "Link copied" ? (
+            <Check aria-hidden="true" />
+          ) : (
+            <Copy aria-hidden="true" />
+          )}{" "}
+          Copy link
+        </Button>
+      </div>
+      <p
+        role="status"
+        aria-live="polite"
+        className="mt-2 min-h-5 text-sm text-muted-foreground"
+      >
+        {copyState}
+      </p>
+
+      <section
+        aria-label="Store banner wireframe"
+        className="mt-5 overflow-hidden rounded-lg border border-input bg-surface-sunken"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b px-4 py-3 sm:px-6">
+          <h2 className="text-sm font-medium">Store</h2>
+          <Button
+            variant="ghost"
+            onClick={() => setMotion(!motion)}
+            className="h-10 px-3 text-xs motion-reduce:hidden"
+          >
+            {motion ? (
+              <Pause aria-hidden="true" />
+            ) : (
+              <Play aria-hidden="true" />
+            )}
+            {motion ? "Pause card motion" : "Resume card motion"}
+          </Button>
+          <span className="hidden h-10 items-center text-xs text-muted-foreground motion-reduce:inline-flex">
+            Motion reduced
+          </span>
+        </div>
+        <div className="mx-auto max-w-[1056px] px-4 py-5 sm:px-7 sm:py-7">
+          <ContextCards compact />
+          <div className="my-7 space-y-3 sm:my-8">
+            <section
+              aria-label="Sticker reward"
+              className="flex items-center gap-3 px-1 sm:gap-5"
+            >
+              <StickerStack />
+              <div className="min-w-0 py-2 text-sm leading-relaxed">
+                <h3 className="font-semibold">
+                  Earn free stickers by going through your discovery queue!
+                </h3>
+                <p className="text-muted-foreground">
+                  Now through Oct 8 <span aria-hidden="true">- </span>
+                  <Dialog>
+                    <DialogTrigger className="inline-flex min-h-10 items-center rounded-sm text-foreground underline decoration-input underline-offset-4 hover:decoration-foreground">
+                      View your stickers
+                    </DialogTrigger>
+                    <Destination kind="stickers" />
+                  </Dialog>
+                </p>
+              </div>
+            </section>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <button
+                  className="queue-banner group relative block w-full overflow-hidden rounded-md border border-input bg-card text-left transition-colors duration-[var(--motion-fast)] hover:bg-surface-raised"
+                  aria-label="Explore Your Discovery Queue"
+                  aria-describedby="queue-description"
+                >
+                  <span className="queue-copy relative z-10 block px-5 py-7 sm:px-8">
+                    <span className="flex items-center gap-3 text-lg font-semibold">
+                      Explore Your Discovery Queue{" "}
+                      <ArrowUpRight
+                        className="shrink-0"
+                        size={19}
+                        aria-hidden="true"
+                      />
+                    </span>
+                    <span
+                      id="queue-description"
+                      className="mt-2 block text-sm leading-relaxed text-muted-foreground"
+                    >
+                      Click to open your queue of top-selling, new, and
+                      recommended titles
+                    </span>
+                  </span>
+                  <span
+                    className={cn("queue-art", !motion && "is-paused")}
+                    aria-hidden="true"
+                  >
+                    {[0, 1, 2, 3].map((i) => (
+                      <span className={`queue-card queue-card-${i}`} key={i}>
+                        <span className="queue-card-image">
+                          <span />
+                        </span>
+                        <span className="queue-card-line" />
+                        <span className="queue-card-line short" />
+                      </span>
+                    ))}
+                  </span>
+                </button>
+              </DialogTrigger>
+              <Destination kind="queue" />
+            </Dialog>
+          </div>
+          <ContextCards count={8} />
+        </div>
+      </section>
+
+      <details className="mt-7 rounded-md border border-border px-5 py-1">
+        <summary className="min-h-12 py-3 text-sm font-medium">
+          Intent & reference notes
+        </summary>
+        <div className="grid gap-7 border-t py-6 text-sm leading-relaxed text-muted-foreground md:grid-cols-2">
+          <div className="space-y-5">
+            <section>
+              <h2 className="mb-2 font-medium text-foreground">
+                What this explores
+              </h2>
+              <p>
+                How a time-bound sticker reward creates a reason to browse, and
+                how the larger discovery banner provides the next action. Both
+                components remain together, in their original order.
+              </p>
+            </section>
+            <section>
+              <h2 className="mb-2 font-medium text-foreground">Reference</h2>
+              <p>
+                Steam Growth Banners.mp4 · 11-second recording. The reward
+                strip, banner copy, and moving card stack are visible
+                throughout. No click-through, scrolling, or sticky behavior is
+                shown.
+              </p>
+            </section>
+            <section>
+              <h2 className="mb-2 font-medium text-foreground">Retained</h2>
+              <p>
+                The two banners’ original writing, their relative hierarchy, the
+                three-card sticker fan, and the discovery card motion. “Now
+                through Oct 8” is reference copy, not a current offer.
+              </p>
+            </section>
+          </div>
+          <div className="space-y-5">
+            <section>
+              <h2 className="mb-2 font-medium text-foreground">
+                Reduced to wireframe
+              </h2>
+              <p>
+                Game artwork, stickers, logos, promotional colors, gradients,
+                and the store background become plain kit surfaces and outlines.
+                Surrounding cards only establish page context.
+              </p>
+            </section>
+            <section>
+              <h2 className="mb-2 font-medium text-foreground">
+                Prototype decisions
+              </h2>
+              <p>
+                Small-screen reflow, pause/resume, and local destination
+                placeholders are additions for this experiment. The next screens
+                are intentionally left undefined. Motion stops when reduced
+                motion is requested.
+              </p>
+            </section>
+            <a
+              className="inline-flex min-h-10 items-center gap-2 text-foreground underline underline-offset-4"
+              href="https://github.com/anujprajapatiii/blueprint-wireframe-kit/blob/main/docs/experiments/steam-growth-banners.md"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Full experiment record{" "}
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </details>
+    </main>
+  );
+}

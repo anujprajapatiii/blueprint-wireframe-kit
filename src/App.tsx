@@ -1143,6 +1143,12 @@ function App() {
               >
                 How to use
               </a>
+              <a
+                href="?view=experiments"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                Experiments
+              </a>
             </nav>
             <div className="flex items-center gap-2 sm:gap-4">
               <a
@@ -1179,6 +1185,7 @@ function App() {
                   {a}
                 </a>
               ))}
+              <a href="?view=experiments">Experiments</a>
             </nav>
           )}
         </header>
@@ -1403,7 +1410,7 @@ function App() {
               >
                 Inspired by Blueprint Generator
               </a>
-              <span>Version 0.2</span>
+              <span>Version 0.3</span>
             </footer>
           </main>
         </div>

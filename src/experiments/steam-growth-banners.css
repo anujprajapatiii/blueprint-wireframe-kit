@@ -1,0 +1,109 @@
+.queue-banner {
+  min-height: 160px;
+}
+.queue-copy {
+  width: 68%;
+}
+.queue-art {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 31%;
+  pointer-events: none;
+}
+.queue-card {
+  position: absolute;
+  display: block;
+  width: 146px;
+  height: 180px;
+  top: -7px;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  padding: 9px;
+  animation: queue-drift 10s ease-in-out infinite alternate;
+}
+.queue-card-0 {
+  left: 0;
+  --card-angle: -15deg;
+}
+.queue-card-1 {
+  left: 27%;
+  --card-angle: -10deg;
+  background: var(--muted);
+}
+.queue-card-2 {
+  left: 55%;
+  --card-angle: -5deg;
+  background: var(--surface-raised);
+}
+.queue-card-3 {
+  left: 83%;
+  --card-angle: 0deg;
+  background: var(--surface-sunken);
+}
+.queue-card-image {
+  display: grid;
+  place-items: center;
+  height: 112px;
+  border: 1px solid var(--border);
+}
+.queue-card-image > span {
+  display: block;
+  width: 25px;
+  height: 25px;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-sm);
+}
+.queue-card-line {
+  display: block;
+  height: 3px;
+  width: 75%;
+  margin-top: 12px;
+  background: var(--border);
+}
+.queue-card-line.short {
+  width: 45%;
+  margin-top: 8px;
+}
+.is-paused .queue-card {
+  animation-play-state: paused;
+}
+@keyframes queue-drift {
+  from {
+    transform: translateX(12px) rotate(var(--card-angle));
+  }
+  to {
+    transform: translateX(-28px) rotate(calc(var(--card-angle) + 7deg));
+  }
+}
+@media (max-width: 640px) {
+  .queue-banner {
+    min-height: 276px;
+  }
+  .queue-copy {
+    width: 100%;
+    padding-bottom: 130px;
+  }
+  .queue-art {
+    top: auto;
+    bottom: 0;
+    height: 105px;
+    width: 85%;
+  }
+  .queue-card {
+    top: 14px;
+    height: 150px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .queue-card {
+    animation: none;
+    transform: rotate(var(--card-angle));
+  }
+}
+@media print {
+  .queue-card {
+    animation: none;
+    transform: rotate(var(--card-angle));
+  }
+}

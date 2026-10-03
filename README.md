@@ -4,6 +4,23 @@ A professional wireframing foundation for exploring product structure, content, 
 
 The app is a browsable component gallery inspired by the way shadcn presents examples. The reusable components live in this repository, so their source and styling stay under your control. This is a standalone kit, not the Blueprint.js library or a published shadcn registry.
 
+## Experiments
+
+[Browse the experiment directory](https://anujprajapatiii.github.io/blueprint-wireframe-kit/?view=experiments) · [Steam growth banners](https://anujprajapatiii.github.io/blueprint-wireframe-kit/?view=experiments&experiment=steam-growth-banners)
+
+Experiments are lasting wireframes of screens, flows, and experiences. Keep useful source copy, structure, and observed interaction behavior; replace branding and visual detail with kit primitives. Preserve the user's intent alongside each experiment so later work can recover the reason for its design.
+
+Start with [the project rules](AGENTS.md) and [the reference-to-wireframe workflow](docs/experiment-rules.md). The first [experiment record](docs/experiments/steam-growth-banners.md) distinguishes observed reference behavior from prototype decisions. Original uploaded media is not bundled into the public site.
+
+To add an experiment:
+
+1. Capture its intent, source, scope, observations, copy, and assumptions in `docs/experiments/<id>.md`.
+2. Add its typed metadata to `src/experiments/registry.ts` and its view under `src/experiments/`.
+3. Register the view in `src/experiments/app.tsx`. Use `?view=experiments&experiment=<id>` for a stable link that refreshes directly on GitHub Pages.
+4. Verify the focused states and responsive layout, then update its status and review notes.
+
+The component gallery and experiments load separately. Existing gallery anchors continue to work.
+
 ## Run locally
 
 Use Node.js 22.12 or newer in the Node 22 release line, plus npm.
