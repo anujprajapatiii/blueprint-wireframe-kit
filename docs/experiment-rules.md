@@ -43,6 +43,19 @@ For a sticky element, document its observed trigger, position, release point, an
 
 Do not infer an entire hidden flow from a single screenshot. When a source is unavailable, the directory entry, intent record, and plain scaffold can still be prepared; keep reference-dependent content marked as awaiting inspection.
 
+## Iteration lessons from the first experiment
+
+These rules capture how Anuj shaped the Steam experiment on 2026-10-03. They guide future work without turning its particular visual choices into universal requirements.
+
+1. **Keep visuals simple and behavior precise.** Wireframe fidelity applies to artwork and styling, not to the accuracy of hierarchy, flow, spatial relationships, or interaction. Preserve useful reference copy. Neutral media placeholders are appropriate when the content is outside the question being explored.
+2. **Expand scope in useful increments.** Start with the focal components, refine their behavior, then connect the next screens and ending as new references or instructions arrive. Extend the existing experiment when the intent continues. Do not infer unseen flows or build unrelated surrounding pages.
+3. **Describe the moving object before coding motion.** Briefly identify the trigger, moving unit, stationary elements, direction, angle/depth, incoming and outgoing states, neighbouring items, and reduced-motion alternative. For example, a framed card rotating into view is different from content moving inside a fixed frame. State the interpretation and proceed when context supports it; ask only when a material ambiguity remains.
+4. **Review boundaries before polishing the middle.** Check the first item, next and previous navigation, final item, completion, dismissal, and restart where applicable. Show adjacent cards only when those items exist. Decide whether the sequence ends or wraps from evidence or explicit instructions.
+5. **Keep targeted edits targeted.** Resolve the selected element and the exact relationship being changed. Translate “one step” into the applicable token-scale increment, not an arbitrary value. Preserve unrelated layout, source copy, and user-saved tuning settings. Check overlap and legibility when changing layered compositions.
+6. **Use controls selectively.** Expose token choices and resolved values when exploration benefits from direct manipulation. Distinguish shared foundations from experiment-specific values. Adding a flow does not imply adding another editor; honor requests for no tuning controls.
+7. **Review motion as motion, and mobile as its own composition.** Inspect the transition in the local browser, including reversal or repeated navigation, rather than judging only static endpoints. Check mobile clipping, scrolling, reachable controls, and reduced motion separately. Report what was actually observed; compilation, CSS inspection, and screenshots alone do not prove smooth animation.
+8. **Promote the principle, retain the exception locally.** General workflow corrections belong in reusable rules. Specific angles, card counts, desktop fades, mobile fade exceptions, shadows, and graphic treatments belong in the experiment record. Keep the stable experiment URL and update current scope so later sessions recover the intent.
+
 ## Keep the directory useful over time
 
 - Give every experiment a stable URL and a link back to the directory and kit.

@@ -11,6 +11,14 @@ This repository is a professional wireframing kit and a lasting directory of exp
 - Inspect references before describing their behavior. Separate observations, user instructions, and assumptions. If a reference cannot be opened, record that limitation and leave the affected behavior unverified; never invent observations.
 - Save decisions and reusable rules in this repository so future work can recover them. Do not claim that repository rules establish memory outside this project.
 
+## Design iteration
+
+- Follow the session-derived iteration rules in `docs/experiment-rules.md`: low visual fidelity with precise behavior, progressive scope, targeted token-based edits, and explicit motion ownership.
+- Before animating, identify whether the whole component, its contents, or a track moves. Preserve the object's frame and neighbouring states through the transition; check first and last states as well as the middle.
+- Apply relevant installed design/animation skills to the requested work. Choose implementation skills for implementation requests; an advisory skill must not turn an authorized fix into an unnecessary approval or planning detour.
+- Validate the visible result against the user's correction. A passing build or a transform in computed styles does not by itself establish the correct motion or perceived smoothness.
+- Tuning controls are optional per scope. Do not add controls to every new screen or flow; preserve existing saved settings when making unrelated edits.
+
 ## Local-first design and publishing
 
 - Build and iterate locally first. Keep the local preview available for Anuj to review and tune.
