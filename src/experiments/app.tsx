@@ -1,8 +1,11 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "../components/kit";
 import { ExperimentDirectory } from "./directory";
 import { SteamGrowthBanners } from "./steam-growth-banners";
+const SteamWorkbench = import.meta.env.DEV
+  ? lazy(() => import("./steam-workbench"))
+  : null;
 
 export function ExperimentsApp() {
   const id = new URLSearchParams(location.search).get("experiment");
@@ -17,7 +20,7 @@ export function ExperimentsApp() {
       >
         Skip to content
       </a>
-      <header className="border-b bg-surface-sunken">
+      <header className="sticky top-0 z-[var(--layer-sticky)] border-b bg-surface-sunken">
         <div className="mx-auto flex min-h-[72px] max-w-[1440px] flex-wrap items-center justify-between gap-x-6 gap-y-2 px-5 py-3 lg:px-8">
           <a
             href="?"
@@ -57,7 +60,13 @@ export function ExperimentsApp() {
       {!id ? (
         <ExperimentDirectory />
       ) : id === "steam-growth-banners" ? (
-        <SteamGrowthBanners />
+        SteamWorkbench ? (
+          <Suspense fallback={<p className="p-8">Loading local preview…</p>}>
+            <SteamWorkbench />
+          </Suspense>
+        ) : (
+          <SteamGrowthBanners />
+        )
       ) : (
         <main
           id="main-content"

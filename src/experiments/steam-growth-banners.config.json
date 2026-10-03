@@ -1,0 +1,14 @@
+{
+  "bannerSurface": "card",
+  "stickerSurface": "surface-raised",
+  "outline": "input",
+  "radius": "md",
+  "headingSize": "lg",
+  "bannerGap": 12,
+  "tilt": 12,
+  "speed": 21,
+  "fade": 32,
+  "stickerFan": 14,
+  "shadow": 1,
+  "stickerTempo": 1
+}

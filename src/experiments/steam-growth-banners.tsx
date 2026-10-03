@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -6,6 +6,7 @@ import {
   Copy,
   Pause,
   Play,
+  SlidersHorizontal,
 } from "lucide-react";
 import {
   Button,
@@ -19,6 +20,11 @@ import {
   cn,
 } from "../components/kit";
 import "./steam-growth-banners.css";
+import {
+  savedSteamDesign,
+  steamDesignStyle,
+  type SteamDesign,
+} from "./steam-design";
 
 function ContextCards({
   count = 4,
@@ -54,13 +60,19 @@ function ContextCards({
   );
 }
 
-function StickerStack({ paused = false }: { paused?: boolean }) {
+function StickerStack({
+  paused = false,
+  fan = 14,
+}: {
+  paused?: boolean;
+  fan?: number;
+}) {
   return (
     <span
       aria-hidden="true"
       className={cn("relative block h-14 w-24 shrink-0", paused && "is-paused")}
     >
-      {[-14, 0, 14].map((rotation, i) => (
+      {[-fan, 0, fan].map((rotation, i) => (
         <span
           key={i}
           className="sticker-card absolute top-2 grid h-11 w-9 place-items-center rounded-sm border border-input bg-surface-raised"
@@ -80,12 +92,16 @@ function StickerStack({ paused = false }: { paused?: boolean }) {
 function Destination({
   kind,
   paused = false,
+  design,
+  designStyle,
 }: {
   kind: "stickers" | "queue";
   paused?: boolean;
+  design: SteamDesign;
+  designStyle: CSSProperties;
 }) {
   return (
-    <DialogContent>
+    <DialogContent style={designStyle}>
       <DialogHeader>
         <DialogTitle>
           {kind === "stickers" ? "Your stickers" : "Your discovery queue"}
@@ -97,7 +113,7 @@ function Destination({
       </DialogHeader>
       <div className="my-4 grid min-h-32 place-items-center rounded-md border border-dashed border-input bg-surface-sunken">
         {kind === "stickers" ? (
-          <StickerStack paused={paused} />
+          <StickerStack paused={paused} fan={design.stickerFan} />
         ) : (
           <span className="text-sm text-muted-foreground">Queue content</span>
         )}
@@ -111,7 +127,16 @@ function Destination({
   );
 }
 
-export function SteamGrowthBanners() {
+export function SteamGrowthBanners({
+  design = savedSteamDesign,
+  onTune,
+  tuningOpen = false,
+}: {
+  design?: SteamDesign;
+  onTune?: () => void;
+  tuningOpen?: boolean;
+}) {
+  const designStyle = steamDesignStyle(design);
   const [motion, setMotion] = useState(true);
   const [copyState, setCopyState] = useState("");
   async function copyLink() {
@@ -130,6 +155,7 @@ export function SteamGrowthBanners() {
   return (
     <main
       id="main-content"
+      style={designStyle}
       className="mx-auto max-w-[1280px] px-5 py-7 sm:px-8 sm:py-10"
     >
       <a
@@ -148,14 +174,28 @@ export function SteamGrowthBanners() {
             copy, neutral wireframe.
           </p>
         </div>
-        <Button variant="outline" onClick={copyLink}>
-          {copyState === "Link copied" ? (
-            <Check aria-hidden="true" />
-          ) : (
-            <Copy aria-hidden="true" />
-          )}{" "}
-          Copy link
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          {onTune && (
+            <Button
+              id="open-design-controls"
+              variant="secondary"
+              onClick={onTune}
+              aria-expanded={tuningOpen}
+              aria-controls="design-controls"
+            >
+              <SlidersHorizontal aria-hidden="true" />
+              Tune design
+            </Button>
+          )}
+          <Button variant="outline" onClick={copyLink}>
+            {copyState === "Link copied" ? (
+              <Check aria-hidden="true" />
+            ) : (
+              <Copy aria-hidden="true" />
+            )}{" "}
+            Copy link
+          </Button>
+        </div>
       </div>
       <p
         role="status"
@@ -189,12 +229,12 @@ export function SteamGrowthBanners() {
         </div>
         <div className="mx-auto max-w-[1056px] px-4 py-5 sm:px-7 sm:py-7">
           <ContextCards compact />
-          <div className="my-7 space-y-3 sm:my-8">
+          <div className="my-7 flex flex-col gap-[var(--banner-gap)] sm:my-8">
             <section
               aria-label="Sticker reward"
               className="flex items-center gap-3 px-1 sm:gap-5"
             >
-              <StickerStack paused={!motion} />
+              <StickerStack paused={!motion} fan={design.stickerFan} />
               <div className="min-w-0 py-2 text-sm leading-relaxed">
                 <h3 className="font-semibold">
                   Earn free stickers by going through your discovery queue!
@@ -205,7 +245,12 @@ export function SteamGrowthBanners() {
                     <DialogTrigger className="inline-flex min-h-10 items-center rounded-sm text-foreground underline decoration-input underline-offset-4 hover:decoration-foreground">
                       View your stickers
                     </DialogTrigger>
-                    <Destination kind="stickers" paused={!motion} />
+                    <Destination
+                      kind="stickers"
+                      paused={!motion}
+                      design={design}
+                      designStyle={designStyle}
+                    />
                   </Dialog>
                 </p>
               </div>
@@ -219,7 +264,7 @@ export function SteamGrowthBanners() {
                   aria-describedby="queue-description"
                 >
                   <span className="queue-copy relative z-10 block px-5 py-7 sm:px-8">
-                    <span className="flex items-center gap-3 text-lg font-semibold">
+                    <span className="queue-heading flex items-center gap-3 font-semibold">
                       Explore Your Discovery Queue{" "}
                       <ArrowUpRight
                         className="shrink-0"
@@ -263,7 +308,11 @@ export function SteamGrowthBanners() {
                   </span>
                 </button>
               </DialogTrigger>
-              <Destination kind="queue" />
+              <Destination
+                kind="queue"
+                design={design}
+                designStyle={designStyle}
+              />
             </Dialog>
           </div>
           <ContextCards count={8} />

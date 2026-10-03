@@ -11,6 +11,14 @@ This repository is a professional wireframing kit and a lasting directory of exp
 - Inspect references before describing their behavior. Separate observations, user instructions, and assumptions. If a reference cannot be opened, record that limitation and leave the affected behavior unverified; never invent observations.
 - Save decisions and reusable rules in this repository so future work can recover them. Do not claim that repository rules establish memory outside this project.
 
+## Local-first design and publishing
+
+- Build and iterate locally first. Keep the local preview available for Anuj to review and tune.
+- Publish only when Anuj explicitly asks to publish the current revision. An earlier deployment does not authorize publishing later design edits.
+- Local saves and local commits are fine during design; do not push a deployment-triggering branch or dispatch the Pages workflow without a publishing request.
+- The Pages workflow is manual. When publishing is requested, run the relevant checks, push the reviewed changes, explicitly dispatch the workflow, and verify the live result.
+- Use development-only tuning controls where helpful. Surface semantic token names, resolved values, and whether a setting is an experiment-specific value. Persist accepted settings to project source, not only browser memory. Keep the editor out of published builds.
+
 ## Implementation
 
 - Reuse `src/components/kit.tsx` and `src/components/patterns.tsx`. Put experiment-specific code under `src/experiments/` and register each experiment in the directory.

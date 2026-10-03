@@ -1,7 +1,20 @@
 .sticker-card {
+  background: var(--sticker-surface, var(--surface-raised));
+  border-color: var(--component-outline, var(--input));
+  border-radius: var(--component-radius, var(--radius-sm));
   box-shadow:
-    0 2px 3px color-mix(in srgb, var(--surface-deep) 45%, transparent),
-    0 5px 9px color-mix(in srgb, var(--surface-deep) 35%, transparent);
+    0 2px 3px
+      color-mix(
+        in srgb,
+        var(--surface-deep) calc(45% * var(--sticker-shadow-strength, 1)),
+        transparent
+      ),
+    0 5px 9px
+      color-mix(
+        in srgb,
+        var(--surface-deep) calc(35% * var(--sticker-shadow-strength, 1)),
+        transparent
+      );
 }
 .sticker-glyph {
   display: block;
@@ -12,14 +25,16 @@
 }
 .sticker-glyph-0 {
   border-radius: var(--radius-full);
-  animation: sticker-bounce 2.8s ease-in-out infinite;
+  animation: sticker-bounce var(--sticker-bounce-duration, 2.8s) ease-in-out
+    infinite;
 }
 .sticker-glyph-1 {
   transform: rotate(45deg);
-  animation: sticker-turn 6s linear infinite;
+  animation: sticker-turn var(--sticker-turn-duration, 6s) linear infinite;
 }
 .sticker-glyph-2 {
-  animation: sticker-pulse 3.2s ease-in-out infinite;
+  animation: sticker-pulse var(--sticker-pulse-duration, 3.2s) ease-in-out
+    infinite;
 }
 @keyframes sticker-bounce {
   0%,
@@ -50,6 +65,16 @@
 .queue-banner {
   min-height: 160px;
   container-type: inline-size;
+  background: var(--queue-surface, var(--card));
+  border-color: var(--component-outline, var(--input));
+  border-radius: var(--component-radius, var(--radius-md));
+}
+.queue-banner:hover {
+  background: var(--surface-raised);
+}
+.queue-heading {
+  font-size: var(--queue-heading-size, var(--type-lg));
+  line-height: 1.4;
 }
 .queue-copy {
   width: 60%;
@@ -57,13 +82,21 @@
 .queue-art {
   --queue-card-width: 240px;
   --queue-card-height: 156px;
-  --queue-cycle: 48s;
+  --queue-cycle: var(--queue-duration-desktop, 48s);
   position: absolute;
   inset: 0 0 0 auto;
   width: 40%;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 32%);
-  mask-image: linear-gradient(to right, transparent, black 32%);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black var(--queue-fade, 32%)
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black var(--queue-fade, 32%)
+  );
   pointer-events: none;
 }
 /* The rail owns the fixed angle. The track rolls along its local X axis. */
@@ -71,7 +104,7 @@
   position: absolute;
   left: -70px;
   top: 36px;
-  transform: rotate(-12deg);
+  transform: rotate(var(--queue-angle, -12deg));
   transform-origin: 0 0;
 }
 .queue-track {
@@ -90,8 +123,8 @@
   flex: none;
   width: var(--queue-card-width);
   height: var(--queue-card-height);
-  border: 1px solid var(--input);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--component-outline, var(--input));
+  border-radius: var(--component-radius, var(--radius-sm));
   background: var(--surface-sunken);
   padding: 9px;
 }
@@ -157,20 +190,20 @@
   .queue-art {
     --queue-card-width: 180px;
     --queue-card-height: 128px;
-    --queue-cycle: 36s;
+    --queue-cycle: var(--queue-duration-mobile, 36s);
     position: relative;
     inset: auto;
     display: block;
     /* Reserve the slope as well as the card height; no internal crop line. */
-    height: calc(164px + 21.26cqw);
+    height: calc(164px + var(--queue-slope, 21.26cqw));
     width: 100%;
     overflow: visible;
     -webkit-mask-image: none;
     mask-image: none;
   }
   .queue-rail {
-    /* tan(12deg) × the banner width keeps the far edge below the copy. */
-    top: calc(32px + 21.26cqw);
+    /* The angle's tangent reserves the slope, even while locally tuning. */
+    top: calc(32px + var(--queue-slope, 21.26cqw));
     left: -60px;
   }
 }

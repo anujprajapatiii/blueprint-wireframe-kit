@@ -21,6 +21,21 @@ To add an experiment:
 
 The component gallery and experiments load separately. Existing gallery anchors continue to work.
 
+## Local-first design workflow
+
+Design and review locally. Publish only when Anuj explicitly asks for the current revision; earlier publishing requests do not authorize later redeployments. Local saves do not change the live site.
+
+Start `npm run dev`, then open [the local design workbench](http://127.0.0.1:5173/blueprint-wireframe-kit/?view=experiments&experiment=steam-growth-banners&tune=1). The **Tune design** button opens the same panel.
+
+- **Tokens:** choose surfaces, outlines, corners, type, and spacing. Every choice shows its semantic token, resolved value, and Tailwind utility.
+- **Marquee / Stickers:** adjust angle, speed, fade, fan angle, shadow strength, and glyph tempo. These are identified as experiment-specific values or component recipes.
+- **Save to project:** writes the validated values to `src/experiments/steam-growth-banners.config.json`. Reloading and later production builds use the saved values.
+- **Revert:** returns the preview to the last saved project settings. Unsaved drafts survive a same-tab refresh when the source settings have not changed. **Copy values** copies the current settings for discussion.
+
+The editor and local save endpoint are development-only. The save endpoint accepts only same-origin requests on loopback and a fixed, validated settings file. Production contains the saved design, without the editor. Changing token choices here selects existing foundations; it does not rewrite `src/tokens.json` globally.
+
+The reusable editor is in `src/tuning/`. New experiments can supply their own field schema and settings, then add an explicit endpoint mapping. Keep save paths allowlisted and distinguish semantic tokens from experiment values.
+
 ## Run locally
 
 Use Node.js 22.12 or newer in the Node 22 release line, plus npm.
@@ -194,9 +209,9 @@ The Vite base path is `/blueprint-wireframe-kit/`, matching a repository named `
 
 1. Put the project at the root of that GitHub repository, including `package-lock.json` and `.github/workflows/deploy.yml`.
 2. In the repository's **Settings → Pages**, choose **GitHub Actions** as the build and deployment source.
-3. Push to `main`, or manually run **Deploy to GitHub Pages** from the **Actions** tab.
+3. After Anuj asks to publish, push the reviewed changes to `main`, then manually run **Deploy to GitHub Pages** from the **Actions** tab. A push alone does not deploy with the updated workflow.
 
-The workflow installs locked dependencies with `npm ci`, builds with Node 22, uploads `dist/`, and deploys through the `github-pages` environment. The successful deployment provides the published URL. No personal access token is needed in the workflow; it uses GitHub's built-in token with Pages permissions.
+The workflow installs locked dependencies with `npm ci`, builds with Node 22, uploads `dist/`, and deploys through the `github-pages` environment. Deployment is triggered by `workflow_dispatch` only. The successful deployment provides the published URL. No personal access token is needed in the workflow; it uses GitHub's built-in token with Pages permissions.
 
 For a different repository name, update `base` in `vite.config.ts` to `/<repository-name>/`. For an account root site or a custom domain served at the domain root, use `/`.
 

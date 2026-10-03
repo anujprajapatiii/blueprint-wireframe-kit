@@ -1,0 +1,32 @@
+.design-workbench.is-open {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 344px;
+  align-items: start;
+}
+.design-controls {
+  position: sticky;
+  top: 72px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - 72px);
+}
+@media (max-width: 1023px) {
+  .design-workbench.is-open {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .design-workbench > * {
+    width: 100%;
+  }
+  .design-controls {
+    position: relative;
+    top: auto;
+    height: auto;
+    max-height: 82dvh;
+  }
+}
+@media print {
+  .design-workbench.is-open {
+    display: block;
+  }
+}
