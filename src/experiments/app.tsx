@@ -4,6 +4,7 @@ import { Button } from "../components/kit";
 import { ExperimentDirectory } from "./directory";
 import { SteamGrowthBanners } from "./steam-growth-banners";
 import { NotionFeatureModal } from "./notion-feature-modal";
+import { GitHubEventBanner } from "./github-event-banner";
 import { experiments } from "./registry";
 import { ExperimentWorkspace } from "./experiment-workspace";
 const SteamWorkbench = import.meta.env.DEV
@@ -23,6 +24,8 @@ export function ExperimentsApp() {
       <div className="experiment-embedded">
         {id === "notion-feature-modal" ? (
           <NotionFeatureModal embedded />
+        ) : id === "github-event-banner" ? (
+          <GitHubEventBanner />
         ) : id === "steam-growth-banners" &&
           SteamWorkbench &&
           params.get("tune") === "1" ? (

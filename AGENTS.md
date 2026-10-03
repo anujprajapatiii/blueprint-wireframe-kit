@@ -29,12 +29,13 @@ This repository is a professional wireframing kit and a lasting directory of exp
 
 ## Implementation
 
-- Reuse `src/components/kit.tsx` and `src/components/patterns.tsx`. Put experiment-specific code under `src/experiments/` and register each experiment in the directory.
+- Inspect and reuse `src/components/kit.tsx` and `src/components/patterns.tsx` before making a control or local visual variant. Use the shared Select for styled dropdowns and Badge for pills; spacing and interaction corrections should benefit every instance. Put experiment-specific code under `src/experiments/` and register each experiment in the directory.
 - Give each experiment a stable ID, direct URL, clear title, scope, and status. Preserve existing links when revising it.
 - Follow `docs/index-design.md` for directory and reference-viewer changes. Prioritize recognizing, finding, opening, and revisiting experiments; keep full design intent available through progressive disclosure.
+- Keep index cards distinct from the canvas. Use a concise source/goal/full added-date pill row and the shared Design intent field icons; do not restore removed type/status labels, separator dots, or reference-count footers.
 - Use Tailwind CSS v4 and the semantic tokens in `src/tokens.json`. Change foundations centrally; regenerate `src/tokens.css` instead of editing it directly.
 - Keep decorative corner crosses, eyebrow labels, and rulers out of the interface. The grid is optional and must carry no meaning.
 - Use semantic HTML, accessible names, keyboard operation, visible focus, and meaningful states. Wireframe fidelity does not excuse broken interactions or inaccessible controls.
-- Keep reference media out of the public build by default. An explicit request to include original references authorizes adding those assets to the project and shared reference viewer; record that exception and the assets' provenance. Do not expose private attachment URLs or local paths. The current request authorizes the original Notion and Steam recordings. Adding media locally does not authorize deploying the current revision.
+- Keep reference media out of the public build by default. An explicit request to include original references authorizes adding those assets to the project and shared reference viewer; record that exception and the assets' provenance. In this ongoing experiment-library workflow, Anuj has requested original references in each experiment; that authorization covers the Notion and Steam recordings and the supplied GitHub event-banner screenshot. Do not expose private attachment URLs or local paths. Adding media locally does not authorize deploying the current revision.
 - Build and check the affected interaction, narrow-screen reflow, and relevant accessibility behavior. State verification limits honestly; never describe an automated check as certification.
 - Deploy this project through its existing GitHub Pages workflow. Do not migrate it to Sites or another hosting service unless the user explicitly changes that instruction.

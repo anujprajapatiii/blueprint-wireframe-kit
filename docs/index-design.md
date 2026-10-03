@@ -10,10 +10,11 @@ The 2026-10-03 revision responds to the user's request to refine the index, prev
 
 - Use a two-column desktop gallery and one column on narrow screens. Keep preview aspect ratios consistent and landscape, with enough space to reveal the experiment's distinctive structure.
 - Use `surface-raised` for gallery cards with a quiet outline and small shadow so their content stays visibly separate from the page canvas. Keep thumbnails on the deeper preview surface.
-- Previews are recognition aids. Depict the feature selector and preview for Notion; depict the sticker reward and discovery sequence for Steam. Keep neutral blueprint surfaces and avoid decorative motion in the index.
+- Previews are recognition aids. Emphasize the requested component: the feature selector for Notion, the reward and discovery sequence for Steam, and the right-rail event banner for GitHub. Abstract surrounding page content so it establishes placement without competing with the subject. Keep neutral blueprint surfaces and avoid decorative motion in the index.
 - Place the title and task-focused sentence directly under the preview. Show the source, primary goal, and full added date in wrapping pills using the kit Badge. Store the original local-calendar addition date in `addedAt`, independently of `updatedAt`; format it as “Added 3 October 2026.” The initial Notion and Steam dates come from their first addition commits. Omit type, status, separator dots, and recording counts from cards; keep type available as a filter.
 - Use plain names: **Feature announcement** from Notion and **Discovery queue & rewards** from Steam. Preserve their existing IDs and URLs.
 - Keep instructions short and specific to the next action. Avoid long introductory explanations, repeated footer advice, decorative eyebrow text, or a competing marketing voice.
+- Treat library titles and descriptions as navigation copy. Improve their clarity without rewriting the original copy preserved inside an experiment. Apply targeted feedback to the shared rule or component responsible, keeping unrelated composition intact.
 - Make title and preview links open the experiment. Keep the design-intent disclosure separate from the link. Original references are accessed through the toggle inside each experiment, with no reference footer on index cards.
 
 ## Design intent
@@ -21,6 +22,8 @@ The 2026-10-03 revision responds to the user's request to refine the index, prev
 Use **Design intent**, not the nutritional metaphor. Preserve the structured classification and its distinctions in [the data contract](design-intent.md).
 
 Show the primary goal in the pill row beside the source. Keep the disclosure summary to **Design intent** and its chevron. Put the complete record inside: Goal, Also supports when present, Audience, Journey, Mechanism, Format, and Proposed measure. Show reasoning and measurement limits as a plain footnote, without a second nested disclosure. Do not make the classification table taller or more visually dominant than the recognition preview by default.
+
+Use the shared `DesignIntent` renderer on cards, experiment pages, and examples. Its Lucide icons identify each field consistently: Target for Goal, GitBranch for Also supports, Users for Audience, Route for Journey, Cog for Mechanism, PanelsTopLeft for Format, and ChartColumn for Proposed measure. Keep these icons decorative beside visible labels; they do not replace the labels.
 
 Keep the eight growth categories and three overarching outcomes unchanged. The kit's **Growth definitions** remain the shared source for their meaning. Proposed outcomes are hypotheses, not claims of observed improvement.
 
@@ -38,13 +41,13 @@ Use one shared **Wireframe / Original reference** experience, driven by asset me
 
 Videos have native controls, a poster, and no autoplay. Images and videos retain their natural aspect ratio. Multiple assets form a labeled sequence so recordings and screenshots are distinct. Opening a reference directly must not flash or require dismissing the wireframe's modal first. Switching views must not leave hidden video playing.
 
-The user's request authorizes inclusion of the original Notion and Steam recordings in this revision. Preserve the original files; the reference viewer can show source branding and account/workspace context that the wireframe intentionally removes. Do not expose private attachment URLs or local filesystem paths.
+The user's ongoing request to include each experiment's original reference covers the Notion and Steam recordings and the supplied GitHub event-banner screenshot. Preserve the original files; the reference viewer can show source branding and account/workspace context that the wireframe intentionally removes. Do not expose private attachment URLs or local filesystem paths.
 
-The three separate Steam queue screenshots are currently unavailable as files. Preserve their provenance and state this limitation plainly; do not recreate or replace them with unrelated video frames. New media defaults to metadata-only unless the user authorizes including it.
+The three separate Steam queue screenshots are currently unavailable as files. Preserve their provenance and state this limitation plainly; do not recreate or replace them with unrelated video frames. Outside the authorized experiment-reference workflow, new media defaults to metadata-only unless the user authorizes including it.
 
 ## Ownership and publishing
 
-Registry metadata owns the title, source name, update date, preview choice, scope, classification, and asset relationships. Shared components own card composition, design-intent rendering, and media viewing. Individual experiments own their behavior and original copy.
+Registry metadata owns the title, source name, stable added date, update date, preview choice, scope, classification, and asset relationships. Shared components own card composition, design-intent rendering, and media viewing. Individual experiments own their behavior and original copy.
 
 This revision is local first. Including requested reference files does not authorize deployment of the redesigned index. Publish through the existing GitHub Pages workflow only after Anuj explicitly requests the current revision.
 

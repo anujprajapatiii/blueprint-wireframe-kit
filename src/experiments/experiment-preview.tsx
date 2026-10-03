@@ -1,4 +1,5 @@
-export type ExperimentPreviewKind = "feature-modal" | "discovery-queue";
+export type ExperimentPreviewKind =
+  "feature-modal" | "discovery-queue" | "event-banner";
 
 const surface = "var(--card)";
 const sunken = "var(--surface-sunken)";
@@ -267,8 +268,75 @@ function DiscoveryPreview() {
   );
 }
 
+function EventPreview() {
+  return (
+    <>
+      <g fill={sunken} stroke="var(--border-subtle)">
+        <rect x="54" y="48" width="376" height="76" rx="8" />
+        <rect x="54" y="152" width="376" height="148" rx="8" />
+        <rect x="54" y="324" width="376" height="188" rx="8" />
+      </g>
+      <g stroke="var(--border-subtle)" strokeWidth="9" strokeLinecap="round">
+        <path d="M78 82h148M78 184h98M78 216h322M78 244h242M78 357h118M78 389h322M78 418h290M78 447h202" />
+      </g>
+      <rect
+        x="492"
+        y="48"
+        width="414"
+        height="464"
+        rx="10"
+        fill={surface}
+        stroke={line}
+      />
+      <text x="516" y="92" fill={ink} fontSize="30" fontWeight="600">
+        UNIVERSE’26
+      </text>
+      <path d="m864 72 12 12m0-12-12 12" stroke={muted} strokeWidth="2" />
+      <rect x="493" y="112" width="412" height="152" fill={sunken} />
+      <g fill="none" stroke={muted} strokeWidth="2">
+        <rect x="665" y="158" width="68" height="54" rx="5" />
+        <circle cx="686" cy="176" r="6" />
+        <path d="m670 205 19-17 12 10 13-16 14 23" />
+      </g>
+      <g stroke="var(--border)">
+        <path d="M493 112h412M493 264h412M493 322h412M493 423h412" />
+      </g>
+      <text x="516" y="299" fill={muted} fontSize="16">
+        OCT 28–29
+      </text>
+      <text x="650" y="299" fill={muted} fontSize="16">
+        SAN FRANCISCO, CA
+      </text>
+      <text x="516" y="361" fill={ink} fontSize="23" fontWeight="600">
+        <tspan x="516">Save $600 with Super Early</tspan>
+        <tspan x="516" dy="31">
+          Bird passes through July 8.
+        </tspan>
+      </text>
+      <rect x="516" y="443" width="366" height="48" rx="5" fill={ink} />
+      <text
+        x="699"
+        y="475"
+        fill="var(--primary-foreground)"
+        textAnchor="middle"
+        fontSize="20"
+        fontWeight="600"
+      >
+        Register now
+      </text>
+    </>
+  );
+}
+
+const previews = {
+  "feature-modal": FeaturePreview,
+  "discovery-queue": DiscoveryPreview,
+  "event-banner": EventPreview,
+};
+
 /** A quiet, recognizable overview of the interaction, independent of live state. */
 export function ExperimentPreview({ kind }: { kind: ExperimentPreviewKind }) {
+  const Preview = previews[kind];
   return (
     <svg
       viewBox="0 0 960 560"
@@ -277,7 +345,7 @@ export function ExperimentPreview({ kind }: { kind: ExperimentPreviewKind }) {
       focusable="false"
       fontFamily="var(--font-sans)"
     >
-      {kind === "feature-modal" ? <FeaturePreview /> : <DiscoveryPreview />}
+      <Preview />
     </svg>
   );
 }

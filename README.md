@@ -12,18 +12,20 @@ Experiments are lasting wireframes of screens, flows, and experiences. Keep usef
 
 Start with [the project rules](AGENTS.md), [the reference-to-wireframe workflow](docs/experiment-rules.md), and [the index design contract](docs/index-design.md). Experiment records distinguish observed reference behavior from prototype decisions. The directory uses landscape previews, plain descriptions, and expandable design intent to help you recognize and revisit useful interactions.
 
-The local revision includes the original Notion and Steam recordings at Anuj's request, available through each experiment's **Original reference** view. The three separate Steam queue screenshots are currently unavailable as files. Media is included only when explicitly requested; adding references does not publish the local revision.
+At Anuj's request, experiment originals are available through the shared **Original reference** view. Authorized local assets include the Notion and Steam recordings and the supplied GitHub event-banner screenshot. The three separate Steam queue screenshots are currently unavailable as files. Adding references does not publish the local revision.
 
 To add an experiment:
 
 1. Capture its intent, source, scope, observations, copy, and assumptions in `docs/experiments/<id>.md`.
-2. Add its typed metadata and design intent to `src/experiments/registry.ts`, and its view under `src/experiments/`. Keep the title task-focused and the source name separate; supply a meaningful landscape preview and an accurate update date.
+2. Add its typed metadata and design intent to `src/experiments/registry.ts`, and its view under `src/experiments/`. Keep the title task-focused and the source name separate; supply a meaningful landscape preview, the original local-calendar `addedAt` date, and an accurate `updatedAt` date. Reuse kit controls and the existing card, pill, and Design intent components.
 3. Register the view in `src/experiments/app.tsx`. Use `?view=experiments&experiment=<id>` for a stable link that refreshes directly on GitHub Pages. Register any authorized original media with the shared reference viewer rather than building a separate viewer for each experiment.
 4. Verify the focused states, reference controls, responsive layout, and return to the filtered directory, then update its status and review notes.
 
 The component gallery and experiments load separately. Existing gallery anchors continue to work.
 
 Each index entry has a **Design intent** disclosure: one primary objective, optional secondary objectives, audience/account state, journey, mechanisms, format, and a proposed success measure. Use [the shared definitions](docs/design-intent.md), available in the kit at `?#growth`. The eight categories are a working synthesis for classifying intent; they do not establish measured impact or a universal industry standard. Keep interpretations and unvalidated measures explicit when adding or revising an experiment.
+
+Cards emphasize the preview, title, and a short description, with source, goal, and full added date in pills. The complete intent record uses shared Lucide field icons behind the disclosure. Focus new experiments on the requested component, preserve its useful source copy, and abstract unrelated page content.
 
 ## Local-first design workflow
 

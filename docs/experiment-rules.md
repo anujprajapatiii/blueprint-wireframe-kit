@@ -27,7 +27,7 @@ Use the user's own explanation as the strongest evidence for intent. If it is in
 
 ## Record design intent
 
-Every new experiment needs structured design intent in `src/experiments/registry.ts`, available in the index. Follow [the shared definitions and data contract](design-intent.md), also available in the kit at `?#growth`: one primary category, optional secondary categories, audience/account state, journey, mechanisms, UI format, and a proposed success measure. Use **Design intent** in the interface; avoid the nutritional metaphor. Show a compact summary by default, with the full record in a disclosure.
+Every new experiment needs structured design intent in `src/experiments/registry.ts`, available in the index. Follow [the shared definitions and data contract](design-intent.md), also available in the kit at `?#growth`: one primary category, optional secondary categories, audience/account state, journey, mechanisms, UI format, and a proposed success measure. Use **Design intent** in the interface; avoid the nutritional metaphor. Show the primary goal in the card's pill row, with the full record in a disclosure. Reuse the shared renderer and its Lucide field icons wherever the record appears.
 
 Classify the intended behavior rather than the component's appearance. Keep objective, journey, mechanism, and format distinct; record unknown user/account states and provisional interpretations explicitly. Treat proposed measures as hypotheses until actual evidence exists. Update the label when the experiment's intent changes, using the shared definitions instead of creating local category variants.
 
@@ -35,11 +35,13 @@ Classify the intended behavior rather than the component's appearance. Keep obje
 
 - Retain information hierarchy, sequence, placement, and behavior that matter to the question being studied.
 - Keep useful original writing verbatim when available. Do not introduce marketing copy, rewrite labels for style, or claim reconstructed text is an exact transcription.
+- Distinguish source copy from library writing. Experiment titles and summaries should be concise and useful for retrieval; original headings, offers, and calls to action stay faithful inside the wireframe. A filename alone does not establish an event's format or a control's behavior.
 - Use plain labels or placeholders for irrelevant surrounding content. A contextual header, repeated rows, or blank cards can establish scrolling and layout without recreating an entire source page.
 - Replace artwork, photography, logos, promotional treatments, gradients, and brand typography with neutral surfaces, boundaries, text, and simple placeholders from the kit.
 - Use color only through semantic kit roles to communicate hierarchy, selection, feedback, or state. Do not imitate source branding with one-off colors.
 - Remove decorative crosses, eyebrow labels, and rulers. Avoid adding decorative technical details that distract from the product question.
 - Reproduce only the motion necessary to explain the interaction, using the kit's motion tokens and reduced-motion support.
+- Start with the existing kit component for each control. Shared Select, Button, Badge, and dialog components own their icon spacing, focus treatment, and interaction conventions; do not recreate those provisions per experiment.
 
 ## Make behavior reviewable
 
@@ -66,6 +68,8 @@ These rules capture how Anuj shaped the Steam experiment on 2026-10-03. They gui
 
 - Give every experiment a stable URL and a link back to the directory and kit.
 - Follow [the index design contract](index-design.md). Use a two-column desktop gallery with meaningful landscape previews, then a single column at narrow widths. Keep each title, source name, and task-focused description distinct; make the experiment easier to recognize than its metadata.
+- Keep cards visibly separate from the page canvas through shared surface and shadow tokens. Show source, primary goal, and full added date in wrapping pills. Store `addedAt` as the original local-calendar addition date and `updatedAt` separately; later edits must not make an old experiment appear newly added.
+- Remove metadata that does not help recognition or retrieval. Type/status text, separator dots, and reference-count footers stay off cards; retain useful underlying data for filters and records. Keep field icons consistent through the shared Design intent component.
 - Preserve search and filter state in URLs when opening an experiment and returning. Use one registry for cards, search, classification, and reference assets instead of maintaining separate content copies.
 - Give each experiment consistent **Wireframe** and **Original reference** views. Use native media controls and descriptive asset labels, preserve media aspect ratio, and keep references available without requiring the user to restart the wireframe flow.
 - Organize implementation under `src/experiments/`; add shared components to the kit only when they are useful beyond one experiment.
@@ -75,7 +79,7 @@ These rules capture how Anuj shaped the Steam experiment on 2026-10-03. They gui
 - Promote repeated preferences into these rules when the user expresses a reusable intent. Keep a one-off request in its experiment record rather than making it a universal rule.
 - Treat explicit later user instructions as authoritative and update the affected record or rule accordingly.
 
-On 2026-10-04, Anuj requested the original references inside each experiment. The current revision includes the two available source recordings locally. The three separately supplied Steam queue screenshots are not currently available as files and must not be fabricated or represented by video frames. This request authorizes including those references in the project; the index redesign remains subject to the existing separate publishing step.
+Anuj requested original references inside each experiment as part of this ongoing library workflow. The authorized local assets include the Notion and Steam recordings and the subsequently supplied **GitHub Webinar Card.png** screenshot for the right-rail event-banner experiment. Preserve those originals in the shared viewer while abstracting irrelevant content in the wireframe. The three separately supplied Steam queue screenshots are not currently available as files and must not be fabricated or represented by video frames. Including references in the project remains separate from publishing the revision.
 
 ## Review before publishing
 

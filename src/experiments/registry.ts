@@ -31,6 +31,65 @@ export interface Experiment {
 
 export const experiments: Experiment[] = [
   {
+    id: "github-event-banner",
+    title: "Event promotion",
+    summary:
+      "An event offer in the dashboard’s right rail, with registration and dismissal.",
+    sourceName: "GitHub",
+    addedAt: "2026-10-04",
+    updatedAt: "2026-10-04",
+    preview: "event-banner",
+    type: "Screen",
+    focus: ["Event promotion", "Right rail", "Dismissal"],
+    growth: {
+      primary: "monetization",
+      secondary: [],
+      audience:
+        "Signed-in dashboard users; event interest and ticket ownership unknown",
+      journey: "Notice an event offer and consider registering",
+      mechanisms: [
+        "Contextual placement",
+        "Event relevance",
+        "Explicit saving",
+        "Dated offer",
+      ],
+      format: "Dismissible right-rail event card",
+      measure: "Completed ticket purchases attributed to the promotion",
+      basis:
+        "The paid-pass offer supports a purchase intent. Registration completion and dismissal are useful supporting diagnostics; the screenshot does not establish the destination, actual ticket sales, or the promotion’s effect.",
+    },
+    source: "GitHub Webinar Card.png",
+    status: "Ready for review",
+    intent:
+      "Study the event banner on the right, preserving its copy and structure while abstracting the surrounding dashboard.",
+    sourceAccess: "Inspected",
+    observations: [
+      "A rounded, bordered event card sits at the top of the dashboard’s right rail.",
+      "Its header contains the event name and close icon, followed by artwork, date and location, a saving and deadline, and a full-width registration CTA.",
+      "A still image does not establish animation, sticky behavior, dismissal persistence, or the registration destination.",
+    ],
+    preservedCopy: [
+      "UNIVERSE’26",
+      "OCT 28–29",
+      "SAN FRANCISCO, CA",
+      "Save $600 with Super Early Bird passes through July 8.",
+      "Register now",
+    ],
+    neutralizedVisuals: [
+      "Brand artwork and logotype treatment become a neutral image placeholder and plain event-name text.",
+      "Repositories, composer, feed, changelog, and browser chrome are omitted or reduced to noninteractive structural context.",
+    ],
+    assumptions: [
+      "Dismissal, restoration, and a local registration-handoff preview are review provisions; the reference shows only their entry controls.",
+      "Narrow-screen reflow prioritizes the card and reduces surrounding context; no mobile reference was supplied.",
+      "The dates and saving are preserved reference copy, not a current event offer.",
+      "No animation, sticky positioning, or tuning controls are inferred.",
+    ],
+    reviewNotes: [
+      "Local implementation and review are recorded in docs/experiments/github-event-banner.md.",
+    ],
+  },
+  {
     id: "notion-feature-modal",
     title: "Feature announcement",
     summary: "Select a feature to explore its details and preview.",

@@ -9,8 +9,19 @@ export type ReferenceAsset = {
   duration?: string;
 };
 
-/** User-supplied source recordings. Posters are previews; videos retain the original bytes. */
+/** User-supplied originals. Posters are previews; source files retain their original bytes. */
 export const experimentReferences: Record<string, ReferenceAsset[]> = {
+  "github-event-banner": [
+    {
+      id: "github-event-screenshot",
+      kind: "image",
+      src: "references/github-event-banner/original.png",
+      title: "GitHub event promotion",
+      description:
+        "Original screenshot of the GitHub dashboard. The Universe ’26 promotion at the top of the right rail is the focus of this experiment; surrounding dashboard content is abstracted in the wireframe.",
+      alt: "GitHub dashboard with a Universe ’26 event card in the right rail: October 28–29 in San Francisco, a $600 early-bird saving through July 8, a Register now button, and a close control.",
+    },
+  ],
   "steam-growth-banners": [
     {
       id: "steam-banners-recording",
