@@ -24,14 +24,14 @@ The build runs TypeScript checks, then writes the static site to `dist/`. The pr
 
 ## Where to work
 
-| File | Purpose |
-| --- | --- |
-| `src/components/kit.tsx` | Reusable React components and their variants |
-| `src/index.css` | Tailwind v4 entry point, theme tokens, shared styles, and gallery styling |
-| `src/App.tsx` | Component gallery and interactive examples |
-| `src/main.tsx` | Application entry point |
-| `vite.config.ts` | React, Tailwind, and the GitHub Pages base path |
-| `.github/workflows/deploy.yml` | Build and deploy to GitHub Pages |
+| File                           | Purpose                                                                   |
+| ------------------------------ | ------------------------------------------------------------------------- |
+| `src/components/kit.tsx`       | Reusable React components and their variants                              |
+| `src/index.css`                | Tailwind v4 entry point, theme tokens, shared styles, and gallery styling |
+| `src/App.tsx`                  | Component gallery and interactive examples                                |
+| `src/main.tsx`                 | Application entry point                                                   |
+| `vite.config.ts`               | React, Tailwind, and the GitHub Pages base path                           |
+| `.github/workflows/deploy.yml` | Build and deploy to GitHub Pages                                          |
 
 The stack is React, TypeScript, Vite, and Tailwind CSS v4. Radix UI supplies interaction primitives; Lucide supplies icons. `class-variance-authority`, `clsx`, and `tailwind-merge` support component variants and class composition.
 
@@ -40,16 +40,23 @@ The stack is React, TypeScript, Vite, and Tailwind CSS v4. Radix UI supplies int
 Inside this project, import components and compose them with normal React state and Tailwind layout utilities:
 
 ```tsx
-import { Button, Input } from './components/kit'
+import { Button, Input } from "./components/kit";
 
 export function ProjectName() {
   return (
-    <form className="flex max-w-sm flex-col gap-3" onSubmit={(event) => event.preventDefault()}>
+    <form
+      className="flex max-w-sm flex-col gap-3"
+      onSubmit={(event) => event.preventDefault()}
+    >
       <label htmlFor="project-name">Project name</label>
-      <Input id="project-name" name="projectName" placeholder="Onboarding exploration" />
+      <Input
+        id="project-name"
+        name="projectName"
+        placeholder="Onboarding exploration"
+      />
       <Button type="submit">Create project</Button>
     </form>
-  )
+  );
 }
 ```
 
@@ -71,13 +78,13 @@ To use it in another React and TypeScript project:
    Add Tailwind to your existing Vite plugins:
 
    ```ts
-   import { defineConfig } from 'vite'
-   import react from '@vitejs/plugin-react'
-   import tailwindcss from '@tailwindcss/vite'
+   import { defineConfig } from "vite";
+   import react from "@vitejs/plugin-react";
+   import tailwindcss from "@tailwindcss/vite";
 
    export default defineConfig({
      plugins: [react(), tailwindcss()],
-   })
+   });
    ```
 
 4. Keep the stylesheet's `@import "tailwindcss"` and theme declarations. Import the components into your screens, then add your own content and application logic.
