@@ -9,6 +9,7 @@ The 2026-10-03 revision responds to the user's request to refine the index, prev
 ## Composition and writing
 
 - Use a two-column desktop gallery and one column on narrow screens. Keep preview aspect ratios consistent and landscape, with enough space to reveal the experiment's distinctive structure.
+- Use `surface-raised` for gallery cards with a quiet outline and small shadow so their content stays visibly separate from the page canvas. Keep thumbnails on the deeper preview surface.
 - Previews are recognition aids. Depict the feature selector and preview for Notion; depict the sticker reward and discovery sequence for Steam. Keep neutral blueprint surfaces and avoid decorative motion in the index.
 - Place the title and task-focused sentence directly under the preview. Show the source name separately from the title and source filename. Keep supporting type and status metadata visually secondary.
 - Use plain names: **Feature announcement** from Notion and **Discovery queue & rewards** from Steam. Preserve their existing IDs and URLs.

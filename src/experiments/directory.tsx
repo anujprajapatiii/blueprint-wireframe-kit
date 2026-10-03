@@ -80,7 +80,7 @@ function ExperimentCard({
   return (
     <article
       aria-labelledby={`${experiment.id}-title`}
-      className="min-w-0 overflow-hidden rounded-lg border border-border bg-card"
+      className="min-w-0 overflow-hidden rounded-lg border border-border bg-surface-raised shadow-sm"
     >
       <a
         href={experimentLink(experiment, filters)}
