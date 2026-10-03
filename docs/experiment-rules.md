@@ -25,6 +25,12 @@ For each pasted link, text, screenshot, or video, record the following alongside
 
 Use the user's own explanation as the strongest evidence for intent. If it is incomplete, write a provisional interpretation and continue with the useful work supported by the reference. Ask only for information that materially blocks the focused experiment.
 
+## Add a growth nutrition label
+
+Every new experiment needs a growth label in `src/experiments/registry.ts`, surfaced in the index. Follow [the growth definitions and label contract](growth-nutrition.md), also available in the kit at `?#growth`: one primary category, optional secondary categories, audience/account state, journey, mechanisms, UI format, and a proposed success measure.
+
+Classify the intended behavior rather than the component's appearance. Keep objective, journey, mechanism, and format distinct; record unknown user/account states and provisional interpretations explicitly. Treat proposed measures as hypotheses until actual evidence exists. Update the label when the experiment's intent changes, using the shared definitions instead of creating local category variants.
+
 ## Preserve meaning, reduce visual detail
 
 - Retain information hierarchy, sequence, placement, and behavior that matter to the question being studied.

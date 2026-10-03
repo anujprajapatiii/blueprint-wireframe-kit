@@ -15,11 +15,13 @@ Start with [the project rules](AGENTS.md) and [the reference-to-wireframe workfl
 To add an experiment:
 
 1. Capture its intent, source, scope, observations, copy, and assumptions in `docs/experiments/<id>.md`.
-2. Add its typed metadata to `src/experiments/registry.ts` and its view under `src/experiments/`.
+2. Add its typed metadata and growth nutrition label to `src/experiments/registry.ts`, and its view under `src/experiments/`.
 3. Register the view in `src/experiments/app.tsx`. Use `?view=experiments&experiment=<id>` for a stable link that refreshes directly on GitHub Pages.
 4. Verify the focused states and responsive layout, then update its status and review notes.
 
 The component gallery and experiments load separately. Existing gallery anchors continue to work.
+
+Each index entry carries a **growth nutrition label**: one primary objective, optional secondary objectives, audience/account state, journey, mechanisms, format, and a proposed success measure. Use [the shared definitions](docs/growth-nutrition.md), available in the kit at `?#growth`. The eight categories are a working synthesis for classifying intent; they do not establish measured impact or a universal industry standard. Keep interpretations and unvalidated measures explicit when adding or revising an experiment.
 
 ## Local-first design workflow
 

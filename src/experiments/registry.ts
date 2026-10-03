@@ -1,3 +1,5 @@
+import type { GrowthNutrition } from "../growth/taxonomy";
+
 export type ExperimentType = "Screen" | "Flow" | "Experience";
 
 export type ExperimentStatus =
@@ -18,6 +20,7 @@ export interface Experiment {
   neutralizedVisuals: string[];
   assumptions: string[];
   reviewNotes: string[];
+  growth: GrowthNutrition;
 }
 
 export const experiments: Experiment[] = [
@@ -28,6 +31,17 @@ export const experiments: Experiment[] = [
       "Explore a feature-announcement modal with expandable details and changing previews.",
     type: "Screen",
     focus: ["Feature announcement", "Modal selection"],
+    growth: {
+      primary: "engagement",
+      secondary: [],
+      audience: "Existing workspace users; account tier unknown",
+      journey: "Discover a feature and try it in their work",
+      mechanisms: ["Contextual education", "Clear value", "Timely prompting"],
+      format: "Feature-announcement modal",
+      measure: "Feature adoption rate after viewing the announcement",
+      basis:
+        "The visible flow introduces new capabilities to someone already in a workspace. We infer engagement intent from feature discovery. “Try for free” alone does not establish a paid conversion or an expansion goal.",
+    },
     source: "Notion Modal.mp4",
     status: "Ready for review",
     intent:
@@ -43,12 +57,17 @@ export const experiments: Experiment[] = [
       "HTML blocks bring interactive visuals to any page and we can’t stop playing with them!",
       "Skills are reusable instructions for all your agents — no more writing the same prompt twice",
       "MCP gives your tools the context they need to complete tasks",
-      "HTML blocks", "Skills", "MCP", "Routines", "Coming soon",
-      "Try for free", "Save for later",
+      "HTML blocks",
+      "Skills",
+      "MCP",
+      "Routines",
+      "Coming soon",
+      "Try for free",
+      "Save for later",
     ],
     neutralizedVisuals: [
       "Source branding, typography, colors, and artwork use neutral blueprint tokens and structural previews.",
-      "The source eyebrow and mascot are omitted; document context remains plain scaffolding.",
+      "The source eyebrow and mascot are omitted. At the user’s request, document context and visible intent notes are removed, leaving a plain background with simple experiment navigation, title, and modal opener.",
     ],
     assumptions: [
       "The opener, dismissal, CTA destinations, and Routines destination are not shown; any added behavior is an explicitly local prototype fallback.",
@@ -69,6 +88,18 @@ export const experiments: Experiment[] = [
       "Explore the sticker reward, discovery queue carousel, and completion flow.",
     type: "Flow",
     focus: ["Sticker reward", "Discovery queue"],
+    growth: {
+      primary: "engagement",
+      secondary: ["monetization"],
+      audience: "Existing store users browsing games",
+      journey: "Explore recommended games and complete a discovery queue",
+      mechanisms: ["Rewards", "Relevance", "Progress feedback"],
+      format: "Reward banner + discovery carousel",
+      measure:
+        "Queue completion rate and wishlist additions per completed queue",
+      basis:
+        "The observed reward and queue encourage deeper product discovery. Monetization is a possible downstream intent because the queue introduces games for purchase; neither purchase lift nor retention is established by the reference. Track eventual purchases separately if that hypothesis is tested.",
+    },
     source: "Steam Growth Banners.mp4 and three queue screenshots",
     status: "Ready for review",
     intent:

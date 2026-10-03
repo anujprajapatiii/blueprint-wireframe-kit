@@ -5,7 +5,7 @@
 | ID | `notion-feature-modal` |
 | Direct URL | `?view=experiments&experiment=notion-feature-modal` |
 | Intent | Recreate the supplied feature-announcement modal as a neutral wireframe, preserving its copy, hierarchy, feature selection, and changes of state. |
-| Focus | A centered modal over plain document context, with an expandable feature selector and a changing preview. |
+| Focus | A centered modal on a plain background, with an expandable feature selector and a changing preview. |
 | Source | User-supplied `Notion Modal.mp4`, 6.84 seconds. |
 | Source access | Inspected. The clip begins with the modal already open and shows two feature changes. |
 | Status | Ready for review locally; not published. |
@@ -31,7 +31,11 @@
 
 ## Neutralized visuals
 
-Source colors, typography, branding, illustrations, and mascot are replaced with semantic blueprint surfaces, boundaries, and simple structural previews. The “Just shipped” eyebrow is omitted under the kit’s existing rule. Supporting document content remains plain scaffolding.
+Source colors, typography, branding, illustrations, and mascot are replaced with semantic blueprint surfaces, boundaries, and simple structural previews. The “Just shipped” eyebrow is omitted under the kit’s existing rule. At the user’s request, the document backdrop and visible intent notes are removed; the surrounding page retains only simple experiment navigation, a title, and the modal opener.
+
+## User refinements
+
+- 2026-10-04: “Remove the background content. Keep it simple and plain.” The source’s document backdrop remains an observation, but the current experiment uses a plain background so the modal is the focus. The experiment’s intent and reference notes remain in this record and the directory registry.
 
 ## Assumptions and scope
 

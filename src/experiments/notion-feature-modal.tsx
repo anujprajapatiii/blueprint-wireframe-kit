@@ -390,57 +390,6 @@ export function NotionFeatureModal() {
           </>
         )}
       </p>
-      <section
-        aria-label="Plain document context"
-        className="mt-7 grid min-h-[540px] overflow-hidden rounded-md border border-input bg-surface-sunken md:grid-cols-[190px_1fr]"
-      >
-        <aside
-          aria-hidden="true"
-          className="hidden space-y-5 border-r p-6 md:block"
-        >
-          {Array.from({ length: 8 }, (_, i) => (
-            <div key={i} className="h-2 w-4/5 bg-border-subtle" />
-          ))}
-        </aside>
-        <div className="mx-auto w-full max-w-2xl px-6 py-12 sm:px-10">
-          <h2 className="text-2xl font-semibold">Conversation Guide</h2>
-          <p className="mt-5 text-sm text-muted-foreground">
-            Conversational Skills Guide
-          </p>
-          <div aria-hidden="true" className="mt-10 space-y-9">
-            {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="space-y-3">
-                <div className="h-2 w-full bg-border-subtle" />
-                <div className="h-2 w-11/12 bg-border-subtle" />
-                <div className="h-2 w-3/4 bg-border-subtle" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <details className="mt-7 rounded-md border border-border px-5 py-1">
-        <summary className="min-h-12 py-3 text-sm font-medium">
-          Intent & reference notes
-        </summary>
-        <div className="space-y-4 border-t py-5 text-sm leading-relaxed text-muted-foreground">
-          <p>
-            Reference: Notion Modal.mp4, 6.84 seconds. The modal stays fixed
-            while HTML blocks, Skills, and MCP change the expanded copy and the
-            corresponding preview.
-          </p>
-          <p>
-            Original writing is retained. Artwork, logos, the mascot, and the
-            “Just shipped” eyebrow are removed. Previews use neutral wireframe
-            shapes; the surrounding document is plain context.
-          </p>
-          <p>
-            The clip begins with the modal open. Opening, closing, mobile
-            layout, the disabled Coming soon row, and local button destinations
-            are prototype decisions. Save for later dismisses the modal with
-            session-only feedback. No account or trial is created.
-          </p>
-        </div>
-      </details>
     </main>
   );
 }

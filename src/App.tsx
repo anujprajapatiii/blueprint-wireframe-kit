@@ -93,6 +93,7 @@ import {
 } from "./components/patterns";
 
 import { Foundations } from "./components/foundations";
+import { GrowthReference } from "./growth/reference";
 
 const repository = "https://github.com/anujprajapatiii/blueprint-wireframe-kit";
 const categories = [
@@ -1138,6 +1139,12 @@ function App() {
                 Foundations
               </a>
               <a
+                href="#growth"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                Growth
+              </a>
+              <a
                 href="#usage"
                 className="text-muted-foreground hover:text-foreground"
               >
@@ -1179,6 +1186,7 @@ function App() {
               {[
                 ["Components", "components"],
                 ["Foundations", "foundations"],
+                ["Growth", "growth"],
                 ["How to use", "usage"],
               ].map(([a, b]) => (
                 <a key={b} href={`#${b}`} onClick={() => setMobileNav(false)}>
@@ -1218,6 +1226,12 @@ function App() {
               className="px-3 py-3 text-sm text-muted-foreground hover:text-foreground"
             >
               Design tokens
+            </a>
+            <a
+              href="#growth"
+              className="px-3 py-3 text-sm text-muted-foreground hover:text-foreground"
+            >
+              Growth definitions
             </a>
             <a
               href="#usage"
@@ -1341,6 +1355,7 @@ function App() {
               </div>
             </section>
             <Foundations />
+            <GrowthReference />
             <section
               id="usage"
               className="mt-16 scroll-mt-28 border-t border-border pt-8"
