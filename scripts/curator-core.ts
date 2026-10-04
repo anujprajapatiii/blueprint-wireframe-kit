@@ -145,6 +145,7 @@ function observations(value: unknown, field: string): Observation[] {
     const item = object(
       entry,
       `${field} entry ${index + 1} must be an object.`,
+      true,
     );
     const id = inputText(item.id, `${field} entry ID`, 40);
     if (!/^[a-z][a-z0-9_-]*$/.test(id) || RESERVED_IDS.has(id) || ids.has(id)) {
@@ -555,10 +556,10 @@ function composeReport(
     const answer = answers[`evidence_${item.id}`];
     return answer.type === "noul" && answer.noul >= CURATOR_THRESHOLDS.evidence;
   });
-  const confidentGrowth =
+  // Goal taxonomy can remain unresolved without erasing an evidenced intervention.
+  const establishedGrowth =
     reliable(admission) &&
     modelDecision === "include" &&
-    !!goal &&
     !!mechanism &&
     mechanism.id !== "other" &&
     !!targetAction &&
@@ -568,7 +569,7 @@ function composeReport(
     let role: ComponentRole = "unclear";
     if (reliable(answer)) {
       if (answer.choice === "context") role = "context";
-      if (answer.choice === "growth" && confidentGrowth) role = "growth";
+      if (answer.choice === "growth" && establishedGrowth) role = "growth";
     }
     return { ...item, role, confidence: answer.confidence };
   });
@@ -615,7 +616,8 @@ function composeReport(
       ? "context_only"
       : "needs_review";
   if (
-    confidentGrowth &&
+    establishedGrowth &&
+    !!goal &&
     components.some((item) => item.role === "growth") &&
     !components.some((item) => item.role === "unclear")
   )

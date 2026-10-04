@@ -184,6 +184,17 @@ test("validates bounded observation input without discarding exact source copy",
     () => validateCuratorInput({ ...input, binaryUpload: "not accepted" }),
     /unsupported/,
   );
+  for (const field of ["observations", "components", "actions"]) {
+    for (const malformed of [null, "not an object", []]) {
+      assert.throws(
+        () => validateCuratorInput({ ...input, [field]: [malformed] }),
+        (error: unknown) =>
+          error instanceof CuratorValidationError &&
+          error.code === "invalid_input" &&
+          error.status === 400,
+      );
+    }
+  }
   assert.throws(
     () =>
       validateCuratorInput({
@@ -314,9 +325,52 @@ test("context-only cannot turn yellow, including under an explicit user inclusio
   assert.equal(exception.answers.admission.type, "choice");
 });
 
-test("unknown goal/action, missing evidence and unsupported mechanism never produce automatic inclusion", async () => {
+test("uncertain goal keeps an evidenced growth boundary yellow while requiring review", async () => {
+  for (const goalState of ["unknown", "split"]) {
+    const payload = fixture();
+    if (goalState === "unknown") {
+      setChoice(payload, "goal", "unknown");
+    } else {
+      const answer = payload.answers.goal;
+      answer.choice = "expansion";
+      answer.confidence = 0.68;
+      answer.probabilities = Object.fromEntries(
+        Object.keys(answer.probabilities as Record<string, number>).map(
+          (label) => [
+            label,
+            label === "expansion"
+              ? 0.72
+              : label === "monetization"
+                ? 0.27
+                : label === "unknown"
+                  ? 0.01
+                  : 0,
+          ],
+        ),
+      );
+    }
+    const report = await evaluateCurator(
+      input,
+      KEY,
+      undefined,
+      fakeFetch(payload),
+    );
+    assert.equal(report.decision, "needs_review", goalState);
+    assert.equal(report.modelDecision, "include", goalState);
+    assert.equal(report.goal, null, goalState);
+    assert.deepEqual(
+      report.components.map((component) => component.role),
+      ["growth", "context"],
+      goalState,
+    );
+    assert.deepEqual(report.reviewNotes, [
+      "The primary growth goal is not established with sufficient confidence.",
+    ]);
+  }
+});
+
+test("missing action/evidence and unsupported mechanism block yellow boundaries and automatic inclusion", async () => {
   const cases: [string, (payload: FakePayload) => void][] = [
-    ["goal", (payload) => setChoice(payload, "goal", "unknown")],
     ["action", (payload) => setChoice(payload, "target_action", "unknown")],
     [
       "evidence",
