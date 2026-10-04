@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { localDesignPlugin } from "./scripts/local-design-plugin";
 import { privateReferencePlugin } from "./scripts/private-reference-plugin";
 import { curatorPlugin } from "./scripts/curator-plugin";
+import { searchPlugin } from "./scripts/search-plugin";
 export default defineConfig({
   plugins: [
     react(),
@@ -11,6 +12,7 @@ export default defineConfig({
     localDesignPlugin(),
     privateReferencePlugin(),
     curatorPlugin(),
+    searchPlugin(),
   ],
   server: {
     host: "127.0.0.1",

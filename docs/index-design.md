@@ -30,12 +30,12 @@ Keep the eight growth categories and three overarching outcomes unchanged. The k
 ## Find and return
 
 - Search titles, source names, summaries, focus, observed behavior, original copy, inspection limits, and design-intent fields. Match both primary and secondary goals. Use stable goal and type values from the shared definitions.
-- Put the primary goal filter first: a row of rectangular icon buttons above the search field and finer Source/Type/sort controls. Include **All** and only categories with coverage in the active catalog, including supported secondary goals. Use the shared taxonomy for labels and ordering so newly represented goals appear automatically; do not maintain a separate hard-coded category list or show empty taxonomy categories.
-- Keep the goal row keyboard-operable with visible selection and focus, and let it wrap on narrow screens. Icons accompany visible labels. Do not duplicate goal selection in a dropdown below it.
+- Put a large, full-width search field above the rectangular goal buttons. Support finding a known name and describing a design need. Keep the search surface blue; it is a library control. Follow it with the goal row, then finer Source/Type/sort controls. Include **All** and only categories with coverage in the active catalog, including supported secondary goals. Use the shared taxonomy for labels and ordering so newly represented goals appear automatically; do not maintain a separate hard-coded category list or show empty taxonomy categories.
+- Keep the goal row keyboard-operable with visible selection and focus, and let it scroll within its own container on narrow screens. Icons accompany visible labels. Do not duplicate goal selection in a dropdown below it.
 - Use the kit's shared Select for Source, Type, and sort controls so icon spacing, keyboard behavior, and menu styling stay consistent with the component library.
 - Show the result count and a useful empty state with one clear reset action. Preserve selected filters while editing the query.
-- Keep search and filters in the URL. Opening either an experiment or its original reference, then returning to the directory, should preserve that context. Existing unfiltered experiment links must continue to work.
-- Offer recently updated and alphabetical order. Avoid adding further sorting modes, favorites, tags, or management workflows until the library needs them. The registry and layout should accommodate more entries without requiring a new card design for each.
+- Keep search, search mode, sort, and filters in the URL. Opening either an experiment or its original reference, then returning to the directory, should preserve that context. Existing unfiltered experiment links must continue to work.
+- Offer recently updated and alphabetical order, plus Best match while a query is present. Typing gives keyword matches; submitting an idea in the local library uses TypeSafe to rank the active catalog. Goal, source, and type refine those ranked results without extra inference. Never apply the old literal-query filter again after semantic retrieval. A meaningful no-match is preferable to forced unrelated suggestions. See [Search behavior](search.md).
 
 ## Original references
 

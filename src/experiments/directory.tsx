@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   BookOpen,
@@ -15,6 +15,7 @@ import {
   TrendingUp,
   Share2,
   FileSearch,
+  LoaderCircle,
 } from "lucide-react";
 import {
   Badge,
@@ -37,6 +38,7 @@ import {
 } from "../growth/taxonomy";
 import { experiments, type Experiment, type ExperimentType } from "./registry";
 import { ExperimentPreview } from "./experiment-preview";
+import { useLibrarySearch } from "../search/use-library-search";
 
 const types: ExperimentType[] = ["Screen", "Flow", "Experience"];
 const goalIcons = {
@@ -109,7 +111,8 @@ type Filters = {
   goal: GrowthCategoryId | "all";
   type: ExperimentType | "all";
   source: string;
-  sort: "recent" | "title";
+  sort: "recent" | "title" | "relevance";
+  search: "keyword" | "meaning";
 };
 const defaults: Filters = {
   query: "",
@@ -117,6 +120,7 @@ const defaults: Filters = {
   type: "all",
   source: "all",
   sort: "recent",
+  search: "keyword",
 };
 
 function readFilters(): Filters {
@@ -124,8 +128,9 @@ function readFilters(): Filters {
   const goal = params.get("goal");
   const type = params.get("type");
   const source = params.get("source");
+  const query = (params.get("q") ?? "").slice(0, 300);
   return {
-    query: params.get("q") ?? "",
+    query,
     goal: growthCategories.some((item) => item.id === goal)
       ? (goal as GrowthCategoryId)
       : "all",
@@ -133,7 +138,16 @@ function readFilters(): Filters {
       ? (type as ExperimentType)
       : "all",
     source: source && sources.includes(source) ? source : "all",
-    sort: params.get("sort") === "title" ? "title" : "recent",
+    sort:
+      params.get("sort") === "title"
+        ? "title"
+        : params.get("sort") === "relevance" && query.trim()
+          ? "relevance"
+          : "recent",
+    search:
+      params.get("search") === "meaning" && query.trim()
+        ? "meaning"
+        : "keyword",
   };
 }
 
@@ -143,7 +157,13 @@ function filterParams(filters: Filters) {
   if (filters.goal !== "all") params.set("goal", filters.goal);
   if (filters.type !== "all") params.set("type", filters.type);
   if (filters.source !== "all") params.set("source", filters.source);
-  if (filters.sort !== "recent") params.set("sort", filters.sort);
+  if (
+    filters.sort !== "recent" &&
+    (filters.sort !== "relevance" || filters.query.trim())
+  )
+    params.set("sort", filters.sort);
+  if (filters.query.trim() && filters.search === "meaning")
+    params.set("search", "meaning");
   return params;
 }
 
@@ -240,8 +260,27 @@ function ExperimentCard({
 
 export function ExperimentDirectory() {
   const [filters, setFilters] = useState<Filters>(readFilters);
+  const searchInput = useRef<HTMLInputElement>(null);
+  const semantic = useLibrarySearch(
+    filters.query,
+    filters.search === "meaning",
+  );
   const update = (change: Partial<Filters>) =>
     setFilters((current) => ({ ...current, ...change }));
+  const search = (query = filters.query) => {
+    const clean = query.trim().replace(/\s+/g, " ");
+    if (!clean) return;
+    if (
+      filters.search === "meaning" &&
+      clean === filters.query.trim().replace(/\s+/g, " ")
+    )
+      semantic.retry();
+    update({
+      query: clean,
+      search: import.meta.env.DEV ? "meaning" : "keyword",
+      sort: "relevance",
+    });
+  };
   useEffect(() => {
     const params = filterParams(filters);
     if (new URLSearchParams(location.search).has("audit"))
@@ -256,6 +295,11 @@ export function ExperimentDirectory() {
 
   const results = useMemo(() => {
     const query = filters.query.trim().toLocaleLowerCase();
+    const terms = query.split(/\s+/).filter(Boolean);
+    const ranked = semantic.result
+      ? new Map(semantic.result.matches.map((match) => [match.id, match.score]))
+      : null;
+    const keywordScores = new Map<string, number>();
     return experiments
       .filter((experiment) => {
         const goal = experiment.growth;
@@ -280,6 +324,21 @@ export function ExperimentDirectory() {
         ]
           .join(" ")
           .toLocaleLowerCase();
+        const title = experiment.title.toLocaleLowerCase();
+        const source = experiment.sourceName.toLocaleLowerCase();
+        const summary = experiment.summary.toLocaleLowerCase();
+        keywordScores.set(
+          experiment.id,
+          (title === query ? 100 : title.includes(query) ? 20 : 0) +
+            terms.reduce(
+              (score, term) =>
+                score +
+                (title.includes(term) ? 5 : 0) +
+                (source.includes(term) ? 4 : 0) +
+                (summary.includes(term) ? 2 : 0),
+              0,
+            ),
+        );
         return (
           (filters.type === "all" || experiment.type === filters.type) &&
           (filters.source === "all" ||
@@ -287,15 +346,21 @@ export function ExperimentDirectory() {
           (filters.goal === "all" ||
             goal.primary === filters.goal ||
             goal.secondary.includes(filters.goal)) &&
-          searchable.includes(query)
+          (ranked
+            ? ranked.has(experiment.id)
+            : terms.every((term) => searchable.includes(term)))
         );
       })
       .sort((a, b) =>
         filters.sort === "title"
           ? a.title.localeCompare(b.title)
-          : b.updatedAt.localeCompare(a.updatedAt),
+          : filters.sort === "relevance"
+            ? ((ranked ?? keywordScores).get(b.id) ?? 0) -
+                ((ranked ?? keywordScores).get(a.id) ?? 0) ||
+              a.title.localeCompare(b.title)
+            : b.updatedAt.localeCompare(a.updatedAt),
       );
-  }, [filters]);
+  }, [filters, semantic.result]);
   const filtered = Boolean(
     filters.query.trim() ||
     filters.type !== "all" ||
@@ -335,10 +400,155 @@ export function ExperimentDirectory() {
         </p>
       </header>
 
+      <form
+        role="search"
+        aria-label="Search the library"
+        onSubmit={(event) => {
+          event.preventDefault();
+          search();
+        }}
+        className="mt-8"
+      >
+        <Label htmlFor="experiment-search" className="sr-only">
+          Search the library
+        </Label>
+        <div className="flex min-w-0 flex-wrap items-center gap-2 rounded-lg border border-input bg-surface-sunken p-3 text-foreground shadow-sm focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring sm:flex-nowrap sm:gap-4 sm:p-4">
+          <Search
+            aria-hidden="true"
+            className="ml-1 size-6 shrink-0 text-muted-foreground sm:ml-2 sm:size-7"
+          />
+          <Input
+            id="experiment-search"
+            ref={searchInput}
+            type="search"
+            value={filters.query}
+            maxLength={300}
+            autoComplete="off"
+            aria-describedby="experiment-search-help"
+            onChange={(event) =>
+              update({
+                query: event.target.value,
+                search: "keyword",
+                ...(event.target.value.trim() ? {} : { sort: "recent" }),
+              })
+            }
+            placeholder={
+              import.meta.env.DEV
+                ? "Search patterns or ideas"
+                : "Search names or goals"
+            }
+            className="h-12 w-0 flex-1 rounded-none border-0 bg-transparent px-1 text-base shadow-none focus-visible:outline-none sm:h-14 sm:text-xl [&::-webkit-search-cancel-button]:hidden"
+          />
+          {filters.query && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label="Clear search"
+              onClick={() => {
+                update({ query: "", search: "keyword", sort: "recent" });
+                searchInput.current?.focus();
+              }}
+              className="shrink-0"
+            >
+              <X aria-hidden="true" />
+            </Button>
+          )}
+          <Button
+            type="submit"
+            disabled={!filters.query.trim() || semantic.loading}
+            className="h-11 w-full gap-2 px-6 sm:h-12 sm:w-auto"
+          >
+            {semantic.loading ? (
+              <LoaderCircle
+                aria-hidden="true"
+                className="motion-safe:animate-spin"
+              />
+            ) : (
+              <ArrowRight aria-hidden="true" />
+            )}
+            {semantic.loading ? "Searching…" : "Search"}
+          </Button>
+        </div>
+        <p
+          id="experiment-search-help"
+          className="mt-3 text-sm text-muted-foreground"
+        >
+          {import.meta.env.DEV
+            ? "Find a pattern by name, or describe what you want people to do."
+            : "Find patterns by name, source, behavior, or growth goal."}
+        </p>
+        {import.meta.env.DEV && (
+          <div className="mt-1 flex flex-wrap items-center gap-x-1 gap-y-0 text-xs text-muted-foreground">
+            <span className="mr-1">Try</span>
+            {[
+              [
+                "Explain an upgrade",
+                "Explain a paid upgrade when someone hits a premium feature",
+              ],
+              [
+                "Introduce a feature",
+                "Introduce a new feature with benefits and a clear way to try it",
+              ],
+              [
+                "Reward exploration",
+                "Reward people for exploring recommendations",
+              ],
+            ].map(([label, query]) => (
+              <button
+                key={label}
+                type="button"
+                disabled={semantic.loading}
+                onClick={() => search(query)}
+                className="min-h-10 rounded-sm px-2 underline decoration-border underline-offset-4 hover:text-foreground disabled:opacity-50"
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
+        {filters.search === "meaning" && semantic.error && (
+          <p
+            role="status"
+            className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted-foreground"
+          >
+            {semantic.error}
+            <button
+              type="button"
+              onClick={semantic.retry}
+              className="min-h-10 rounded-sm px-1 text-foreground underline underline-offset-4"
+            >
+              Try again
+            </button>
+          </p>
+        )}
+        {filters.search === "meaning" &&
+          !semantic.error &&
+          semantic.connection !== "ready" &&
+          semantic.connection !== "checking" && (
+            <p role="status" className="mt-3 text-sm text-muted-foreground">
+              {import.meta.env.DEV ? (
+                <>
+                  Searching by keyword.{" "}
+                  <a
+                    className="text-foreground underline underline-offset-4"
+                    href={`?${filterParams(filters)}&tool=curator`}
+                  >
+                    Connect TypeSafe
+                  </a>{" "}
+                  to search by idea.
+                </>
+              ) : (
+                "Showing keyword matches. Idea search is available in the local library."
+              )}
+            </p>
+          )}
+      </form>
+
       <div
         role="group"
         aria-label="Filter by growth goal"
-        className="mt-8 flex gap-3 overflow-x-auto px-1 pt-1 pb-3 -mx-1"
+        className="mt-7 flex gap-3 overflow-x-auto px-1 pt-1 pb-3 -mx-1"
       >
         {[
           {
@@ -393,29 +603,11 @@ export function ExperimentDirectory() {
         ))}
       </div>
 
-      <form
-        role="search"
-        aria-label="Search the library"
-        onSubmit={(event) => event.preventDefault()}
-        className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-cols-[minmax(250px,1fr)_minmax(160px,.42fr)_minmax(144px,.36fr)]"
+      <div
+        role="group"
+        aria-label="Refine results"
+        className="mt-5 grid grid-cols-2 gap-4 sm:max-w-lg"
       >
-        <div className="col-span-2 flex min-w-0 flex-col gap-2 lg:col-span-1">
-          <Label htmlFor="experiment-search">Search</Label>
-          <div className="relative">
-            <Search
-              aria-hidden="true"
-              className="pointer-events-none absolute top-3.5 left-3 size-4 text-muted-foreground"
-            />
-            <Input
-              id="experiment-search"
-              type="search"
-              value={filters.query}
-              onChange={(event) => update({ query: event.target.value })}
-              placeholder="Search by name, source, or idea"
-              className="h-11 pl-9"
-            />
-          </div>
-        </div>
         <div className="flex min-w-0 flex-col gap-2">
           <Label htmlFor="experiment-source">Source</Label>
           <Select
@@ -454,17 +646,29 @@ export function ExperimentDirectory() {
             </SelectContent>
           </Select>
         </div>
-      </form>
+      </div>
 
       <div className="mt-4 mb-7 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-3">
           <p role="status" className="text-sm text-muted-foreground">
-            {results.length} {results.length === 1 ? "wireframe" : "wireframes"}
+            {semantic.loading ? (
+              "Finding relevant patterns…"
+            ) : (
+              <>
+                {results.length}{" "}
+                {results.length === 1 ? "wireframe" : "wireframes"}
+                {semantic.result
+                  ? " matching your idea"
+                  : filters.query.trim()
+                    ? " matching your keywords"
+                    : ""}
+              </>
+            )}
           </p>
           {filtered && (
             <button
               type="button"
-              onClick={() => setFilters({ ...defaults, sort: filters.sort })}
+              onClick={() => setFilters(defaults)}
               className="inline-flex min-h-10 items-center gap-1.5 rounded-sm px-2 text-xs hover:bg-secondary"
             >
               <X size={13} aria-hidden="true" />
@@ -486,6 +690,9 @@ export function ExperimentDirectory() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
+              {filters.query.trim() && (
+                <SelectItem value="relevance">Best match</SelectItem>
+              )}
               <SelectItem value="recent">Recently updated</SelectItem>
               <SelectItem value="title">Name A–Z</SelectItem>
             </SelectContent>
@@ -493,7 +700,18 @@ export function ExperimentDirectory() {
         </div>
       </div>
 
-      {results.length ? (
+      {semantic.loading ? (
+        <div
+          role="status"
+          className="flex min-h-56 items-center justify-center gap-3 rounded-lg border border-border bg-surface-sunken px-5 text-muted-foreground"
+        >
+          <LoaderCircle
+            aria-hidden="true"
+            className="size-5 motion-safe:animate-spin"
+          />
+          <p>Looking for the right patterns…</p>
+        </div>
+      ) : results.length ? (
         <div className="grid items-start gap-x-8 gap-y-10 md:grid-cols-2 lg:gap-x-10 lg:gap-y-12">
           {results.map((experiment) => (
             <ExperimentCard

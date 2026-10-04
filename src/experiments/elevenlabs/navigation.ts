@@ -6,7 +6,7 @@ export function relatedExperimentHref(id: string) {
   const params = new URLSearchParams({ view: "experiments" });
   if (active) params.set("experiment", id);
   const current = new URLSearchParams(location.search);
-  for (const key of ["q", "source", "goal", "type", "sort"]) {
+  for (const key of ["q", "source", "goal", "type", "sort", "search"]) {
     const value = current.get(key);
     if (value) params.set(key, value);
   }

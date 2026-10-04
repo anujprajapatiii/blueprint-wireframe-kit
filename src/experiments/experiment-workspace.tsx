@@ -45,7 +45,7 @@ function currentMode(): ViewMode {
 function directoryHref() {
   const current = new URLSearchParams(location.search);
   const params = new URLSearchParams({ view: "experiments" });
-  for (const key of ["q", "goal", "type", "source", "sort"]) {
+  for (const key of ["q", "goal", "type", "source", "sort", "search"]) {
     const value = current.get(key);
     if (value) params.set(key, value);
   }
@@ -59,7 +59,7 @@ function wireframeHref(id: string) {
     embed: "1",
   });
   const current = new URLSearchParams(location.search);
-  for (const key of ["q", "source", "goal", "type", "sort"]) {
+  for (const key of ["q", "source", "goal", "type", "sort", "search"]) {
     const value = current.get(key);
     if (value) params.set(key, value);
   }
