@@ -10,6 +10,7 @@
     "format": "prettier --write src scripts vite.config.ts tsconfig.json package.json index.html README.md .github/workflows/deploy.yml",
     "tokens:build": "node scripts/build-tokens.mjs",
     "tokens:check": "node scripts/check-tokens.mjs",
+    "curator:check": "node --experimental-strip-types --test scripts/curator-core.test.ts",
     "predev": "npm run tokens:build",
     "prebuild": "npm run tokens:build && npm run tokens:check"
   },

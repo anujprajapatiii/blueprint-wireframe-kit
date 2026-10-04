@@ -14,6 +14,7 @@ import {
   CreditCard,
   TrendingUp,
   Share2,
+  FileSearch,
 } from "lucide-react";
 import {
   Badge,
@@ -311,14 +312,23 @@ export function ExperimentDirectory() {
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             Experiments
           </h1>
-          <a
-            href="?#growth"
-            aria-label="Growth definitions"
-            className="inline-flex min-h-11 items-center gap-2 rounded-md px-1 text-xs text-muted-foreground hover:text-foreground sm:px-3 sm:text-sm"
-          >
-            <BookOpen size={16} aria-hidden="true" />
-            Definitions
-          </a>
+          <div className="flex flex-wrap items-center gap-3">
+            {import.meta.env.DEV && (
+              <Button asChild variant="outline" size="sm">
+                <a href={`?${filterParams(filters)}&tool=curator`}>
+                  <FileSearch aria-hidden="true" /> Review a reference
+                </a>
+              </Button>
+            )}
+            <a
+              href="?#growth"
+              aria-label="Growth definitions"
+              className="inline-flex min-h-11 items-center gap-2 rounded-md px-1 text-xs text-muted-foreground hover:text-foreground sm:px-3 sm:text-sm"
+            >
+              <BookOpen size={16} aria-hidden="true" />
+              Definitions
+            </a>
+          </div>
         </div>
         <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
           Growth patterns to study, test, and reuse.

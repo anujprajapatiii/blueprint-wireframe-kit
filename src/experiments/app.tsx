@@ -47,9 +47,13 @@ function LegacyElevenLabsLink() {
 const SteamWorkbench = import.meta.env.DEV
   ? lazy(() => import("./steam-workbench"))
   : null;
+const CuratorPage = import.meta.env.DEV
+  ? lazy(() => import("../curator/curator-page"))
+  : null;
 
 export function ExperimentsApp() {
   const params = new URLSearchParams(location.search);
+  const curator = Boolean(CuratorPage && params.get("tool") === "curator");
   const id = params.get("experiment");
   const collectionId = params.get("collection");
   const collection = collectionId ? collectionById[collectionId] : undefined;
@@ -59,8 +63,8 @@ export function ExperimentsApp() {
   const embedded = params.get("embed") === "1";
   const experiment = experiments.find((entry) => entry.id === id);
   useEffect(() => {
-    document.title = `${pattern?.title ?? collection?.title ?? experiment?.title ?? "Experiments"} — Blueprint`;
-  }, [experiment, collection, pattern]);
+    document.title = `${curator ? "Review a reference" : (pattern?.title ?? collection?.title ?? experiment?.title ?? "Experiments")} — Blueprint`;
+  }, [experiment, collection, pattern, curator]);
   const archivedElevenLabsEntry =
     id &&
     !experiment &&
@@ -145,7 +149,17 @@ export function ExperimentsApp() {
           </nav>
         </div>
       </header>
-      {collectionId ? (
+      {curator && CuratorPage ? (
+        <Suspense
+          fallback={
+            <main id="main-content" className="p-8" role="status">
+              Loading reference review…
+            </main>
+          }
+        >
+          <CuratorPage />
+        </Suspense>
+      ) : collectionId ? (
         collection ? (
           <Suspense
             fallback={

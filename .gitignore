@@ -6,3 +6,6 @@ dist/
 
 # Authenticated research originals stay on this device and out of Pages.
 local-references/
+
+# Curator source observations and local assessment drafts may be private.
+local-curator/

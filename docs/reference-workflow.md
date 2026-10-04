@@ -26,6 +26,10 @@ Save originals once and reuse their asset IDs across related experiments. Put au
 
 When no intervention is established, preserve useful evidence and state the limit instead of inventing a growth rationale or adding ordinary product work to the index. Surrounding product UI may still be reconstructed as blue context inside a qualifying experiment. An explicit request to build or include a specific experience overrides this default; record its scope honestly. The [4 October curation record](reviews/2026-10-04/index-curation.md) documents the boundary applied to existing entries.
 
+### Review the admission with Jev
+
+Use the local [growth curator](curator.md) after inspecting the original. Codex prepares the observed evidence, components, and visible actions; the user does not need to transcribe the source. Jev proposes admission, taxonomy, a mechanism, an observed target action, and yellow/blue roles through typed judgments. Keep uncertain results and explicit user inclusion overrides visible. Submit only the necessary extracted text; originals, private URLs, and the API key stay local. Its saved report is a draft brief. For an admitted pattern, continue every remaining step below to produce and file the working experiment. If credentials or the service are unavailable, apply the admission gate from the evidence and record that the model review was not run.
+
 ## 3. Map the composition and flow
 
 Measure the important source relationships before styling: app frame, navigation, column shares, focal panel dimensions, gutters, padding, alignment, and visible density. Label estimates. Capture the states and transitions supported by the source, including boundaries such as first/last, dismiss/reopen, completion, and restart where observed.
