@@ -13,7 +13,11 @@
     "curator:check": "node --experimental-strip-types --test scripts/curator-core.test.ts",
     "search:check": "node --experimental-strip-types --test scripts/search-core.test.ts",
     "predev": "npm run tokens:build",
-    "prebuild": "npm run tokens:build && npm run tokens:check"
+    "prebuild": "npm run tokens:build && npm run tokens:check",
+    "search:worker:check": "node workers/search/build-catalog.mjs && tsc --project workers/search/tsconfig.json && node --experimental-strip-types --test workers/search/*.test.ts",
+    "search:worker:build": "wrangler deploy --config workers/search/wrangler.toml --dry-run",
+    "search:worker:dev": "wrangler dev --config workers/search/wrangler.toml --local",
+    "search:worker:deploy": "wrangler deploy --config workers/search/wrangler.toml"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -32,9 +36,11 @@
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.3",
     "axe-core": "^4.13.0",
+    "esbuild": "^0.28.2",
     "prettier": "^3.9.9",
     "tailwindcss": "^4.1.13",
     "typescript": "~5.9.2",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "wrangler": "^4.147.0"
   }
 }

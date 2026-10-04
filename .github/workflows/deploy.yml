@@ -32,7 +32,11 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        env:
+          VITE_SEARCH_API_URL: ${{ vars.JEV_SEARCH_API_URL }}
+        run: |
+          node scripts/check-hosted-search.mjs
+          npm run build
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v5

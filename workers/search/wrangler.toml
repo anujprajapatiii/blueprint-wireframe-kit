@@ -1,0 +1,25 @@
+name = "blueprint-jev-search"
+main = "index.ts"
+compatibility_date = "2026-10-04"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+preview_urls = false
+
+[build]
+command = "node workers/search/build-catalog.mjs"
+cwd = "."
+
+[vars]
+TYPESAFE_MODEL = "jev-latest"
+DAILY_UPSTREAM_LIMIT = "100"
+
+[[durable_objects.bindings]]
+name = "SEARCH_COORDINATOR"
+class_name = "SearchCoordinator"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["SearchCoordinator"]
+
+[observability]
+enabled = false

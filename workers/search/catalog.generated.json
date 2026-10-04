@@ -1,0 +1,401 @@
+[
+  {
+    "id": "el-v4-discovery-to-trial",
+    "title": "Discover a new model",
+    "summary": "Launch messages connect new-model benefits to the speech tool and model settings.",
+    "sourceName": "ElevenLabs",
+    "type": "Flow",
+    "focus": [
+      "Speech & sound",
+      "Home announcement → speech synthesis → model settings",
+      "Launch banner, feature card, and inline prompt"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Feature discovery",
+      "Benefit-led education",
+      "A direct path from announcement to relevant tool"
+    ],
+    "format": "Launch banner, feature card, and inline prompt"
+  },
+  {
+    "id": "el-adjacent-tool-discovery",
+    "title": "Discover adjacent tools",
+    "summary": "An in-tool promotion introduces image and video creation alongside speech settings.",
+    "sourceName": "ElevenLabs",
+    "type": "Screen",
+    "focus": [
+      "Speech & sound",
+      "Speech synthesis → settings promotion",
+      "Dismissible settings promotion"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Contextual cross-feature discovery",
+      "Show a broader workflow benefit"
+    ],
+    "format": "Dismissible settings promotion"
+  },
+  {
+    "id": "el-plan-value-ladder",
+    "title": "Compare paid tiers",
+    "summary": "A capability ladder, popular tier, and sales route make larger plans easier to compare.",
+    "sourceName": "ElevenLabs",
+    "type": "Flow",
+    "focus": [
+      "Subscription & billing",
+      "Subscription → plan comparison",
+      "Plan cards, comparison table, and recommended-tier badge"
+    ],
+    "goals": [
+      "expansion"
+    ],
+    "mechanisms": [
+      "Explain incremental paid value",
+      "Provide a salient recommended tier",
+      "Offer a sales-assisted route"
+    ],
+    "format": "Plan cards, comparison table, and recommended-tier badge"
+  },
+  {
+    "id": "el-annual-cadence-framing",
+    "title": "Compare annual savings",
+    "summary": "Annual plans show monthly-equivalent prices, a price comparison, and the billing commitment.",
+    "sourceName": "ElevenLabs",
+    "type": "Screen",
+    "focus": [
+      "Subscription & billing",
+      "Subscription → billing-cadence comparison",
+      "Billing-cadence toggle and pricing cards"
+    ],
+    "goals": [
+      "monetization"
+    ],
+    "mechanisms": [
+      "Savings framing",
+      "Price anchoring",
+      "Compare commitment options with a common monthly unit"
+    ],
+    "format": "Billing-cadence toggle and pricing cards"
+  },
+  {
+    "id": "el-annual-upgrade-intercept",
+    "title": "Offer annual billing",
+    "summary": "An annual-savings offer appears after choosing a monthly upgrade.",
+    "sourceName": "ElevenLabs",
+    "type": "Flow",
+    "focus": [
+      "Subscription & billing",
+      "Monthly Creator upgrade → annual offer → chosen cadence",
+      "Upgrade intercept modal"
+    ],
+    "goals": [
+      "expansion",
+      "monetization"
+    ],
+    "mechanisms": [
+      "Present a savings alternative at high purchase intent",
+      "Revisit billing commitment without removing the monthly route"
+    ],
+    "format": "Upgrade intercept modal"
+  },
+  {
+    "id": "el-basic-seat-collaboration-bridge",
+    "title": "Invite with Basic Seats",
+    "summary": "A collaboration offer explains Basic Seats and points to the paid Full Seats tier.",
+    "sourceName": "ElevenLabs",
+    "type": "Flow",
+    "focus": [
+      "Collaboration",
+      "Persistent invitation card → Basic Seats invitation",
+      "Persistent invitation card and invitation dialog"
+    ],
+    "goals": [
+      "engagement",
+      "expansion"
+    ],
+    "mechanisms": [
+      "Reduce uncertainty about joining another workspace",
+      "Explain a low-friction collaboration option",
+      "Connect greater collaboration needs to a paid tier"
+    ],
+    "format": "Persistent invitation card and invitation dialog"
+  },
+  {
+    "id": "el-professional-clone-capability-gate",
+    "title": "Explain a premium gate",
+    "summary": "A visible locked capability names the exact paid tier needed to use it.",
+    "sourceName": "ElevenLabs",
+    "type": "Screen",
+    "focus": [
+      "Voice creation",
+      "Create voice → Professional Voice Clone gate",
+      "Disabled method card with inline plan requirement"
+    ],
+    "goals": [
+      "expansion"
+    ],
+    "mechanisms": [
+      "Connect a desired capability to a specific paid tier",
+      "Explain the gate in context instead of hiding the option"
+    ],
+    "format": "Disabled method card with inline plan requirement"
+  },
+  {
+    "id": "el-project-context-collaboration-invite",
+    "title": "Invite while sharing",
+    "summary": "A team invitation appears beside access controls when sharing a project.",
+    "sourceName": "ElevenLabs",
+    "type": "Flow",
+    "focus": [
+      "Collaboration",
+      "Studio project → Share project",
+      "Project-sharing dialog with invitation card"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Prompt collaboration at a concrete project handoff",
+      "Connect the invitation to work already available to discuss"
+    ],
+    "format": "Project-sharing dialog with invitation card"
+  },
+  {
+    "id": "el-flows-first-visit-introduction",
+    "title": "Introduce a new workflow",
+    "summary": "A short benefits modal explains the Flows canvas before its first setup action.",
+    "sourceName": "ElevenLabs",
+    "type": "Flow",
+    "focus": [
+      "Flows",
+      "Open Flows → introductory modal → Get started",
+      "First-visit feature introduction modal"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Introduce the workflow's mental model",
+      "Explain the benefit before asking for setup",
+      "Give a clear entry action"
+    ],
+    "format": "First-visit feature introduction modal"
+  },
+  {
+    "id": "el-image-video-example-to-action",
+    "title": "Build from visual examples",
+    "summary": "Image and video examples offer starting actions that connect to creation tools.",
+    "sourceName": "ElevenLabs",
+    "type": "Flow",
+    "focus": [
+      "Image & Video",
+      "Image & Video introduction → Explore → example actions",
+      "Feature introduction and actionable sample gallery"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Demonstrate possibilities before asking for an original idea",
+      "Provide actions that carry an example into creation",
+      "Connect adjacent creative tools"
+    ],
+    "format": "Feature introduction and actionable sample gallery"
+  },
+  {
+    "id": "el-dubbing-launch-sample-entry",
+    "title": "Preview a new capability",
+    "summary": "A dubbing announcement pairs benefit statements with samples and a direct start action.",
+    "sourceName": "ElevenLabs",
+    "type": "Flow",
+    "focus": [
+      "Dubbing",
+      "Dubbing launch modal → samples or creation entry",
+      "Launch modal with sample and setup actions"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Translate a technical release into user benefits",
+      "Offer evaluation before committing source material",
+      "Provide a direct setup route"
+    ],
+    "format": "Launch modal with sample and setup actions"
+  },
+  {
+    "id": "el-voice-supplier-earnings-checklist",
+    "title": "Guide contributor setup",
+    "summary": "An earnings proposition becomes a three-step voice contribution checklist.",
+    "sourceName": "ElevenLabs",
+    "type": "Flow",
+    "focus": [
+      "Creator earnings",
+      "Voices Earnings → professional clone → payout setup → publish",
+      "Contributor onboarding checklist"
+    ],
+    "goals": [
+      "engagement",
+      "expansion"
+    ],
+    "mechanisms": [
+      "Offer an economic reason to contribute supply",
+      "Break setup into explicit prerequisites",
+      "Connect a supplier capability to a required paid tier"
+    ],
+    "format": "Contributor onboarding checklist"
+  },
+  {
+    "id": "el-demand-guided-voice-supply",
+    "title": "Show unmet demand",
+    "summary": "A ranked opportunities table helps voice contributors identify gaps in the marketplace.",
+    "sourceName": "ElevenLabs",
+    "type": "Screen",
+    "focus": [
+      "Creator earnings",
+      "Voices Earnings → Opportunities",
+      "Supply-opportunity table with demand indicators"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Reduce uncertainty about where to contribute",
+      "Direct supplier effort toward apparent gaps in the marketplace"
+    ],
+    "format": "Supply-opportunity table with demand indicators"
+  },
+  {
+    "id": "el-affiliate-advocacy-entry",
+    "title": "Reward recommendations",
+    "summary": "An affiliate offer explains rewards and gives established creators a separate partnership route.",
+    "sourceName": "ElevenLabs",
+    "type": "Screen",
+    "focus": [
+      "Referral",
+      "Account menu → ElevenLabs Affiliate Program",
+      "Affiliate-program dialog"
+    ],
+    "goals": [
+      "referral"
+    ],
+    "mechanisms": [
+      "Reward advocacy and referral",
+      "Segment potential partners by audience reach",
+      "Explain the external program handoff"
+    ],
+    "format": "Affiliate-program dialog"
+  },
+  {
+    "id": "el-agents-template-assisted-onboarding",
+    "title": "Start an agent from a template",
+    "summary": "Use-case templates and a contextual assistant help users choose a first agent setup.",
+    "sourceName": "ElevenLabs",
+    "type": "Experience",
+    "focus": [
+      "Platforms, Agents & API",
+      "ElevenAgents → onboarding templates",
+      "Onboarding template gallery with assistant panel"
+    ],
+    "goals": [
+      "activation",
+      "engagement"
+    ],
+    "mechanisms": [
+      "Translate an abstract platform into concrete jobs",
+      "Make setup options and integration complexity visible",
+      "Offer contextual assistance before configuration"
+    ],
+    "format": "Onboarding template gallery with assistant panel"
+  },
+  {
+    "id": "el-api-time-bounded-model-offer",
+    "title": "Time a model offer",
+    "summary": "A dated price promotion gives users an incentive to consider a new API model.",
+    "sourceName": "ElevenLabs",
+    "type": "Screen",
+    "focus": [
+      "Platforms, Agents & API",
+      "ElevenAPI → Model Pricing",
+      "Model-pricing cards with dated offer"
+    ],
+    "goals": [
+      "engagement",
+      "expansion"
+    ],
+    "mechanisms": [
+      "Give model trial a time-bounded economic incentive",
+      "Compare discounted and reference unit prices",
+      "Connect capacity needs to a subscription ladder"
+    ],
+    "format": "Model-pricing cards with dated offer"
+  },
+  {
+    "id": "github-event-banner",
+    "title": "Event promotion",
+    "summary": "An event offer in the dashboard’s right rail, with registration and dismissal.",
+    "sourceName": "GitHub",
+    "type": "Screen",
+    "focus": [
+      "Event promotion",
+      "Right rail",
+      "Dismissal"
+    ],
+    "goals": [
+      "monetization"
+    ],
+    "mechanisms": [
+      "Contextual placement",
+      "Event relevance",
+      "Explicit saving",
+      "Dated offer"
+    ],
+    "format": "Dismissible right-rail event card"
+  },
+  {
+    "id": "notion-feature-modal",
+    "title": "Feature announcement",
+    "summary": "Select a feature to explore its details and preview.",
+    "sourceName": "Notion",
+    "type": "Screen",
+    "focus": [
+      "Feature announcement",
+      "Modal selection"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Contextual education",
+      "Clear value",
+      "Timely prompting"
+    ],
+    "format": "Feature-announcement modal"
+  },
+  {
+    "id": "steam-growth-banners",
+    "title": "Discovery queue & rewards",
+    "summary": "A reward-led discovery flow, from store banners to queue completion.",
+    "sourceName": "Steam",
+    "type": "Flow",
+    "focus": [
+      "Sticker reward",
+      "Discovery queue"
+    ],
+    "goals": [
+      "engagement",
+      "monetization"
+    ],
+    "mechanisms": [
+      "Rewards",
+      "Relevance",
+      "Progress feedback"
+    ],
+    "format": "Reward banner + discovery carousel"
+  }
+]

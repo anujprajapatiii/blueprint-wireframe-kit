@@ -39,6 +39,7 @@ import {
 import { experiments, type Experiment, type ExperimentType } from "./registry";
 import { ExperimentPreview } from "./experiment-preview";
 import { useLibrarySearch } from "../search/use-library-search";
+import { supportsIdeaSearch } from "../search/config";
 
 const types: ExperimentType[] = ["Screen", "Flow", "Experience"];
 const goalIcons = {
@@ -266,7 +267,7 @@ export function ExperimentDirectory() {
     filters.search === "meaning",
   );
   const ideaSearch =
-    import.meta.env.DEV &&
+    supportsIdeaSearch &&
     filters.search === "meaning" &&
     Boolean(filters.query.trim());
   const searchUnavailable = ideaSearch && !semantic.loading && !semantic.result;
@@ -282,7 +283,7 @@ export function ExperimentDirectory() {
       semantic.retry();
     update({
       query: clean,
-      search: import.meta.env.DEV ? "meaning" : "keyword",
+      search: supportsIdeaSearch ? "meaning" : "keyword",
       sort: "relevance",
     });
   };
@@ -438,7 +439,7 @@ export function ExperimentDirectory() {
               })
             }
             placeholder={
-              import.meta.env.DEV
+              supportsIdeaSearch
                 ? "Search patterns or ideas"
                 : "Search names or goals"
             }
@@ -479,11 +480,11 @@ export function ExperimentDirectory() {
           id="experiment-search-help"
           className="mt-3 text-sm text-muted-foreground"
         >
-          {import.meta.env.DEV
+          {supportsIdeaSearch
             ? "Describe what you want people to do, then press Enter to search by meaning."
-            : "Keyword search on this site. Search by meaning with Jev in the local library."}
+            : "Find patterns by name, source, behavior, or growth goal."}
         </p>
-        {import.meta.env.DEV && (
+        {supportsIdeaSearch && (
           <div className="mt-1 flex flex-wrap items-center gap-x-1 gap-y-0 text-xs text-muted-foreground">
             <span className="mr-1">Try</span>
             {[
@@ -693,18 +694,18 @@ export function ExperimentDirectory() {
             className="mx-auto mb-4 size-6 text-muted-foreground"
           />
           <h2 id="search-unavailable-title" className="text-xl font-semibold">
-            {semantic.connection === "unconfigured"
+            {semantic.connection === "unconfigured" && import.meta.env.DEV
               ? "Connect idea search"
               : "Idea search couldn’t finish"}
           </h2>
           <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-muted-foreground">
-            {semantic.connection === "unconfigured"
+            {semantic.connection === "unconfigured" && import.meta.env.DEV
               ? "Connect TypeSafe to find patterns by meaning. Keyword search is available without it."
               : (semantic.error ??
                 "The search service couldn’t connect. Try again to reconnect.")}
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
-            {semantic.connection === "unconfigured" ? (
+            {semantic.connection === "unconfigured" && import.meta.env.DEV ? (
               <Button asChild>
                 <a href={`?${filterParams(filters)}&tool=curator`}>
                   Connect TypeSafe
@@ -747,7 +748,7 @@ export function ExperimentDirectory() {
               : "Nothing matches these filters"}
           </h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
-            {import.meta.env.DEV && filters.query.trim() && !semantic.result
+            {supportsIdeaSearch && filters.query.trim() && !semantic.result
               ? "Press Jev Search or Enter to find patterns by meaning, including related words and ideas."
               : "Try a different search or clear the filters to browse everything."}
           </p>
