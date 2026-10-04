@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createServer } from "node:http";
 import test from "node:test";
 import { buildSearchCatalog } from "../src/search/catalog.ts";
 import type { Experiment } from "../src/experiments/registry.ts";
@@ -228,7 +229,7 @@ test("transport sends one bounded typed request to the fixed endpoint", async ()
     calls += 1;
     assert.equal(url, "https://api.typesafe.ai/v1/systemone");
     assert.equal(options?.method, "POST");
-    assert.equal(options?.redirect, "error");
+    assert.equal(options?.redirect, "manual");
     assert.equal(
       new Headers(options?.headers).get("Authorization"),
       "Bearer test-key",
@@ -247,6 +248,50 @@ test("transport sends one bounded typed request to the fixed endpoint", async ()
   );
   assert.equal(calls, 1);
   assert.equal(found.model, "jev-test");
+});
+
+test("upstream redirects fail without retrying or forwarding the credential", async () => {
+  const received: {
+    path: string | undefined;
+    authorization: string | undefined;
+  }[] = [];
+  const server = createServer((request, response) => {
+    received.push({
+      path: request.url,
+      authorization: request.headers.authorization,
+    });
+    if (request.url === "/provider") {
+      response.writeHead(307, { Location: "/redirect-target" });
+      response.end();
+    } else {
+      response.writeHead(200, { "Content-Type": "application/json" });
+      response.end(JSON.stringify(payload()));
+    }
+  });
+  await new Promise<void>((resolve, reject) => {
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", resolve);
+  });
+  try {
+    const address = server.address();
+    assert.ok(address && typeof address !== "string");
+    const localFetch = (async (url, options) => {
+      assert.equal(url, "https://api.typesafe.ai/v1/systemone");
+      // Exercise real Fetch redirect behavior, with no external request.
+      return fetch(`http://127.0.0.1:${address.port}/provider`, options);
+    }) as typeof fetch;
+    await assert.rejects(
+      evaluateSearch("offer", catalog, "test-key", "jev-latest", localFetch),
+      errorCode("search_unavailable"),
+    );
+    assert.deepEqual(received, [
+      { path: "/provider", authorization: "Bearer test-key" },
+    ]);
+  } finally {
+    await new Promise<void>((resolve, reject) => {
+      server.close((error) => (error ? reject(error) : resolve()));
+    });
+  }
 });
 
 test("authentication and upstream failures never echo provider text or retry authentication", async () => {

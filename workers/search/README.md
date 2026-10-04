@@ -28,11 +28,13 @@ dry run confirms that the actual Worker bundles successfully with `nodejs_compat
 ## Deploy after authentication
 
 ```sh
-npx wrangler login
+npx wrangler login --scopes account:read user:read workers_scripts:write
 npx wrangler deploy --config workers/search/wrangler.toml
 npx wrangler secret put TYPESAFE_API_KEY --config workers/search/wrangler.toml
 ```
 
+Wrangler adds renewable offline access to these scopes. Deployment requires the
+specific `workers_scripts:write` scope; `workers:write` alone is insufficient.
 The secret prompt accepts the existing TypeSafe key. Do not put a key directly in
 a shell command. The initial deploy can happen before setting the secret: the
 status route then reports `configured: false` and searches fail closed.

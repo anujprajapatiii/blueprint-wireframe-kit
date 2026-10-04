@@ -250,7 +250,9 @@ export async function evaluateSearch(
         },
         body: JSON.stringify(request),
         signal: controller.signal,
-        redirect: "error",
+        // Workers rejects redirect:"error". Manual mode also keeps the key on
+        // this fixed endpoint; every 3xx response fails below without following.
+        redirect: "manual",
       });
       if (response.ok)
         return composeSearchResult(query, catalog, await boundedJson(response));
