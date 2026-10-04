@@ -66,3 +66,7 @@ These presentation rules belong to [Index design](../../index-design.md); the ad
 - All 19 goal badges use the yellow theme. The 16 verb-led titles highlight their opening word; the three noun-led titles remain unchanged. The index's 477 sampled HTML text elements had no reported contrast failures.
 
 Full visible viewport captures: [index](index-refined.jpg), [cards and badges](index-refined-cards.jpg), and [mobile index](index-refined-mobile.jpg). [Route observations](index-route-review.json) preserve the current initial-view checks. This revision remains local.
+
+## Publication
+
+Published on 4 October 2026 after Anuj's explicit request. GitHub Pages [deployment 37193484507](https://github.com/anujprajapatiii/blueprint-wireframe-kit/actions/runs/37193484507) succeeded for source commit `4424c62027ff04ce0b06ab23b8e44e519fff5b26`. The [live index](https://anujprajapatiii.github.io/blueprint-wireframe-kit/?view=experiments) shows 19 experiments; the Monetization filter returns four and resetting restores all 19. [Full-viewport release capture](published-index.jpg).
