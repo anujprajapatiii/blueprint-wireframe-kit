@@ -1,0 +1,249 @@
+/* Palette boundaries only. Components own explicit surface/foreground pairs.
+ * Do not paint backgrounds here: transparent controls and SVG groups cannot
+ * safely infer a surface. Source colours live in tokens.json.
+ */
+
+/*
+ * Snapshot the document theme at the root. Custom-property references resolve
+ * here, so descendants inherit the original values even after growth overrides.
+ * Scope components below the document root; do not apply growth-scope to html.
+ * These aliases deliberately contain no copied palette values.
+ */
+:root {
+  --context-background: var(--background);
+  --context-surface-deep: var(--surface-deep);
+  --context-surface-sunken: var(--surface-sunken);
+  --context-card: var(--card);
+  --context-card-foreground: var(--card-foreground);
+  --context-popover: var(--popover);
+  --context-popover-foreground: var(--popover-foreground);
+  --context-muted: var(--muted);
+  --context-surface-raised: var(--surface-raised);
+  --context-inverse: var(--inverse);
+  --context-inverse-foreground: var(--inverse-foreground);
+  --context-overlay: var(--overlay);
+  --context-foreground: var(--foreground);
+  --context-muted-foreground: var(--muted-foreground);
+  --context-foreground-subtle: var(--foreground-subtle);
+  --context-link: var(--link);
+  --context-link-hover: var(--link-hover);
+  --context-primary: var(--primary);
+  --context-primary-foreground: var(--primary-foreground);
+  --context-primary-hover: var(--primary-hover);
+  --context-primary-active: var(--primary-active);
+  --context-secondary: var(--secondary);
+  --context-secondary-foreground: var(--secondary-foreground);
+  --context-secondary-hover: var(--secondary-hover);
+  --context-secondary-active: var(--secondary-active);
+  --context-accent: var(--accent);
+  --context-accent-foreground: var(--accent-foreground);
+  --context-selected: var(--selected);
+  --context-selected-foreground: var(--selected-foreground);
+  --context-border: var(--border);
+  --context-border-subtle: var(--border-subtle);
+  --context-border-strong: var(--border-strong);
+  --context-input: var(--input);
+  --context-ring: var(--ring);
+  --context-ring-inverse: var(--ring-inverse);
+  --context-disabled: var(--disabled);
+  --context-disabled-foreground: var(--disabled-foreground);
+  --context-disabled-border: var(--disabled-border);
+  --context-destructive: var(--destructive);
+  --context-destructive-foreground: var(--destructive-foreground);
+  --context-destructive-hover: var(--destructive-hover);
+  --context-destructive-active: var(--destructive-active);
+  --context-destructive-subtle: var(--destructive-subtle);
+  --context-destructive-text: var(--destructive-text);
+  --context-success: var(--success);
+  --context-success-foreground: var(--success-foreground);
+  --context-success-subtle: var(--success-subtle);
+  --context-success-text: var(--success-text);
+  --context-warning: var(--warning);
+  --context-warning-foreground: var(--warning-foreground);
+  --context-warning-subtle: var(--warning-subtle);
+  --context-warning-text: var(--warning-text);
+  --context-info: var(--info);
+  --context-info-foreground: var(--info-foreground);
+  --context-info-subtle: var(--info-subtle);
+  --context-info-text: var(--info-text);
+}
+
+.growth-scope {
+  --background: var(--growth-background);
+  --surface-deep: var(--growth-surface-deep);
+  --surface-sunken: var(--growth-surface-sunken);
+  --card: var(--growth-card);
+  --card-foreground: var(--growth-card-foreground);
+  --popover: var(--growth-popover);
+  --popover-foreground: var(--growth-popover-foreground);
+  --muted: var(--growth-muted);
+  --surface-raised: var(--growth-surface-raised);
+  --inverse: var(--growth-inverse);
+  --inverse-foreground: var(--growth-inverse-foreground);
+  --overlay: var(--growth-overlay);
+  --foreground: var(--growth-foreground);
+  --muted-foreground: var(--growth-muted-foreground);
+  --foreground-subtle: var(--growth-foreground-subtle);
+  --link: var(--growth-link);
+  --link-hover: var(--growth-link-hover);
+  --primary: var(--growth-primary);
+  --primary-foreground: var(--growth-primary-foreground);
+  --primary-hover: var(--growth-primary-hover);
+  --primary-active: var(--growth-primary-active);
+  --secondary: var(--growth-secondary);
+  --secondary-foreground: var(--growth-secondary-foreground);
+  --secondary-hover: var(--growth-secondary-hover);
+  --secondary-active: var(--growth-secondary-active);
+  --accent: var(--growth-accent);
+  --accent-foreground: var(--growth-accent-foreground);
+  --selected: var(--growth-selected);
+  --selected-foreground: var(--growth-selected-foreground);
+  --border: var(--growth-border);
+  --border-subtle: var(--growth-border-subtle);
+  --border-strong: var(--growth-border-strong);
+  --input: var(--growth-input);
+  --ring: var(--growth-ring);
+  --ring-inverse: var(--growth-ring-inverse);
+  --disabled: var(--growth-disabled);
+  --disabled-foreground: var(--growth-disabled-foreground);
+  --disabled-border: var(--growth-disabled-border);
+  --destructive-subtle: var(--growth-destructive-subtle);
+  --destructive-text: var(--growth-destructive-text);
+  --success-subtle: var(--growth-success-subtle);
+  --success-text: var(--growth-success-text);
+  --warning-subtle: var(--growth-warning-subtle);
+  --warning-text: var(--growth-warning-text);
+  --info-subtle: var(--growth-info-subtle);
+  --info-text: var(--growth-info-text);
+}
+
+/* Explicitly restore environment styling inside a focused component. */
+.growth-context {
+  --background: var(--context-background);
+  --surface-deep: var(--context-surface-deep);
+  --surface-sunken: var(--context-surface-sunken);
+  --card: var(--context-card);
+  --card-foreground: var(--context-card-foreground);
+  --popover: var(--context-popover);
+  --popover-foreground: var(--context-popover-foreground);
+  --muted: var(--context-muted);
+  --surface-raised: var(--context-surface-raised);
+  --inverse: var(--context-inverse);
+  --inverse-foreground: var(--context-inverse-foreground);
+  --overlay: var(--context-overlay);
+  --foreground: var(--context-foreground);
+  --muted-foreground: var(--context-muted-foreground);
+  --foreground-subtle: var(--context-foreground-subtle);
+  --link: var(--context-link);
+  --link-hover: var(--context-link-hover);
+  --primary: var(--context-primary);
+  --primary-foreground: var(--context-primary-foreground);
+  --primary-hover: var(--context-primary-hover);
+  --primary-active: var(--context-primary-active);
+  --secondary: var(--context-secondary);
+  --secondary-foreground: var(--context-secondary-foreground);
+  --secondary-hover: var(--context-secondary-hover);
+  --secondary-active: var(--context-secondary-active);
+  --accent: var(--context-accent);
+  --accent-foreground: var(--context-accent-foreground);
+  --selected: var(--context-selected);
+  --selected-foreground: var(--context-selected-foreground);
+  --border: var(--context-border);
+  --border-subtle: var(--context-border-subtle);
+  --border-strong: var(--context-border-strong);
+  --input: var(--context-input);
+  --ring: var(--context-ring);
+  --ring-inverse: var(--context-ring-inverse);
+  --disabled: var(--context-disabled);
+  --disabled-foreground: var(--context-disabled-foreground);
+  --disabled-border: var(--context-disabled-border);
+  --destructive: var(--context-destructive);
+  --destructive-foreground: var(--context-destructive-foreground);
+  --destructive-hover: var(--context-destructive-hover);
+  --destructive-active: var(--context-destructive-active);
+  --destructive-subtle: var(--context-destructive-subtle);
+  --destructive-text: var(--context-destructive-text);
+  --success: var(--context-success);
+  --success-foreground: var(--context-success-foreground);
+  --success-subtle: var(--context-success-subtle);
+  --success-text: var(--context-success-text);
+  --warning: var(--context-warning);
+  --warning-foreground: var(--context-warning-foreground);
+  --warning-subtle: var(--context-warning-subtle);
+  --warning-text: var(--context-warning-text);
+  --info: var(--context-info);
+  --info-foreground: var(--context-info-foreground);
+  --info-subtle: var(--context-info-subtle);
+  --info-text: var(--context-info-text);
+}
+
+/* Direct --color-* consumers and Tailwind utilities share the same roles. */
+.growth-scope,
+.growth-context {
+  --color-background: var(--background);
+  --color-surface-deep: var(--surface-deep);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-surface-raised: var(--surface-raised);
+  --color-inverse: var(--inverse);
+  --color-inverse-foreground: var(--inverse-foreground);
+  --color-overlay: var(--overlay);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-foreground-subtle: var(--foreground-subtle);
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-active: var(--secondary-active);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-selected: var(--selected);
+  --color-selected-foreground: var(--selected-foreground);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-inverse: var(--ring-inverse);
+  --color-disabled: var(--disabled);
+  --color-disabled-foreground: var(--disabled-foreground);
+  --color-disabled-border: var(--disabled-border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-active: var(--destructive-active);
+  --color-destructive-subtle: var(--destructive-subtle);
+  --color-destructive-text: var(--destructive-text);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-subtle: var(--success-subtle);
+  --color-success-text: var(--success-text);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-text: var(--warning-text);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-subtle: var(--info-subtle);
+  --color-info-text: var(--info-text);
+}
+
+@layer base {
+  :where(.growth-scope) {
+    color-scheme: light;
+  }
+
+  :where(.growth-context) {
+    color-scheme: dark;
+  }
+}

@@ -18,6 +18,8 @@ Stable ID: `github-event-banner`. Source name: GitHub. The image shows an event 
 
 ## Wireframe decisions
 
+Growth education revision — 2026-10-04: use the shared yellow semantic palette only for the event promotion and its local registration handoff. The header, sidebar, feed, and neighboring changelog remain blue context. **Guide me** explains the contextual offer, explicit saving/deadline, and registration action without claiming a measured result. Definitions stay attached to the focal regions without separate help controls; retain the measured card and column geometry. No additional registration states are inferred from the screenshot.
+
 Use shared kit controls, Lucide icons, and semantic blueprint tokens. Replace branded art and logotype styling with a neutral image placeholder and plain event-name text. Keep the original event date and offer as reference copy; they are not a current availability claim.
 
 Provide local dismissal and a restore action for repeatable review. The registration CTA ends in a clearly labeled local handoff preview because no destination or registration flow is supplied. These are prototype provisions, not observed source behavior. No tuning controls or decorative animation.

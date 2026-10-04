@@ -72,7 +72,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ghost:
               "border-transparent bg-transparent text-foreground hover:bg-secondary active:bg-secondary-active",
             destructive:
-              "border-destructive bg-destructive text-destructive-foreground hover:border-destructive-hover hover:bg-destructive-hover active:border-destructive-active active:bg-destructive-active",
+              "border-destructive-text bg-destructive text-destructive-foreground hover:bg-destructive-hover active:bg-destructive-active",
           }[variant],
           {
             default: "h-control-default px-4",
@@ -123,7 +123,7 @@ export const Input = React.forwardRef<
     ref={ref}
     type={type}
     className={cn(
-      "flex h-control-default w-full min-w-0 rounded-md border border-input bg-surface-sunken px-3 py-2 text-sm text-foreground placeholder:text-foreground-subtle file:mr-3 file:border-0 file:bg-transparent file:text-sm file:text-foreground aria-invalid:border-destructive",
+      "flex h-control-default w-full min-w-0 rounded-md border border-input bg-surface-sunken px-3 py-2 text-sm text-foreground placeholder:text-foreground-subtle file:mr-3 file:border-0 file:bg-transparent file:text-sm file:text-foreground aria-invalid:border-destructive-text",
       focus,
       disabled,
       className,
@@ -140,7 +140,7 @@ export const Textarea = React.forwardRef<
   <textarea
     ref={ref}
     className={cn(
-      "flex min-h-24 w-full rounded-md border border-input bg-surface-sunken px-3 py-2 text-sm text-foreground placeholder:text-foreground-subtle aria-invalid:border-destructive",
+      "flex min-h-24 w-full rounded-md border border-input bg-surface-sunken px-3 py-2 text-sm text-foreground placeholder:text-foreground-subtle aria-invalid:border-destructive-text",
       focus,
       disabled,
       className,
@@ -289,7 +289,7 @@ export const Checkbox = React.forwardRef<
   <CheckboxPrimitive.Root
     ref={ref}
     className={cn(
-      "peer group relative flex size-5 shrink-0 items-center justify-center rounded-sm border border-input bg-surface-sunken after:absolute after:-inset-1 aria-invalid:border-destructive data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground",
+      "peer group relative flex size-5 shrink-0 items-center justify-center rounded-sm border border-input bg-surface-sunken after:absolute after:-inset-1 aria-invalid:border-destructive-text data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground",
       focus,
       disabled,
       className,
@@ -396,7 +396,7 @@ export const RadioGroupItem = React.forwardRef<
   <RadioGroupPrimitive.Item
     ref={ref}
     className={cn(
-      "relative size-5 shrink-0 rounded-full border border-input bg-surface-sunken text-primary after:absolute after:-inset-1 aria-invalid:border-destructive data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
+      "relative size-5 shrink-0 rounded-full border border-input bg-surface-sunken text-primary after:absolute after:-inset-1 aria-invalid:border-destructive-text data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
       focus,
       disabled,
       className,
@@ -516,7 +516,7 @@ export const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed left-1/2 top-1/2 z-[var(--layer-modal)] grid max-h-[85dvh] w-[calc(100%_-_2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-5 overflow-y-auto rounded-md border border-border-strong bg-popover p-6 text-popover-foreground shadow-2xl",
+        "fixed left-1/2 top-1/2 z-[var(--layer-modal)] grid max-h-[85dvh] w-[calc(100%_-_2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 grid-cols-[minmax(0,1fr)] gap-5 overflow-y-auto rounded-md border border-border-strong bg-popover p-6 text-popover-foreground shadow-2xl",
         className,
       )}
       {...props}
@@ -586,7 +586,7 @@ export const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-[var(--layer-dropdown)] min-w-44 rounded-md border border-border-strong bg-popover p-1 text-popover-foreground shadow-xl",
+        "z-[var(--layer-dropdown)] min-w-44 max-w-[calc(100vw_-_1rem)] max-h-[var(--radix-dropdown-menu-content-available-height)] overflow-y-auto overscroll-contain rounded-md border border-border-strong bg-popover p-1 text-popover-foreground shadow-xl",
         className,
       )}
       {...props}
@@ -667,7 +667,7 @@ export const PopoverContent = React.forwardRef<
       align={align}
       sideOffset={sideOffset}
       className={cn(
-        "z-[var(--layer-dropdown)] w-72 max-w-[calc(100vw_-_2rem)] rounded-md border border-border-strong bg-popover p-4 text-popover-foreground shadow-xl",
+        "z-[var(--layer-dropdown)] w-72 max-w-[calc(100vw_-_2rem)] max-h-[var(--radix-popover-content-available-height)] overflow-y-auto overscroll-contain rounded-md border border-border-strong bg-popover p-4 text-popover-foreground shadow-xl",
         focus,
         className,
       )}
@@ -715,7 +715,7 @@ export const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-control-default w-full items-center justify-between gap-2 rounded-md border border-input bg-surface-sunken px-3 py-2 text-sm text-foreground aria-invalid:border-destructive data-[placeholder]:text-foreground-subtle [&>span]:truncate",
+      "flex h-control-default w-full items-center justify-between gap-2 rounded-md border border-input bg-surface-sunken px-3 py-2 text-sm text-foreground aria-invalid:border-destructive-text data-[placeholder]:text-foreground-subtle [&>span]:truncate",
       focus,
       disabled,
       className,

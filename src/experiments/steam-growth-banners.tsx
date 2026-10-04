@@ -20,6 +20,7 @@ import {
   cn,
 } from "../components/kit";
 import "./steam-growth-banners.css";
+import { growthTarget } from "../components/growth-education";
 import { DiscoveryQueue } from "./discovery-queue";
 import {
   savedSteamDesign,
@@ -102,11 +103,23 @@ function Destination({
   designStyle: CSSProperties;
 }) {
   return (
-    <DialogContent style={designStyle}>
+    <DialogContent
+      className="growth-scope"
+      style={designStyle}
+      {...growthTarget({
+        id: "steam-sticker-destination",
+        title: "Make the reward tangible",
+        description:
+          "A collection destination lets people inspect the promised reward. Only the reward strip and queue are evidenced here, so this collection is a local placeholder and does not grant stickers.",
+        order: 3,
+      })}
+    >
       <DialogHeader>
-        <DialogTitle>
-          {kind === "stickers" ? "Your stickers" : "Your discovery queue"}
-        </DialogTitle>
+        <div className="flex items-center gap-3">
+          <DialogTitle>
+            {kind === "stickers" ? "Your stickers" : "Your discovery queue"}
+          </DialogTitle>
+        </div>
         <DialogDescription>
           This sticker collection is a placeholder. The discovery queue now
           demonstrates browsing and completion; this separate destination is
@@ -259,13 +272,23 @@ export function SteamGrowthBanners({
           <div className="my-7 flex flex-col gap-[var(--banner-gap)] sm:my-8">
             <section
               aria-label="Sticker reward"
-              className="flex items-center gap-3 px-1 sm:gap-5"
+              className="growth-scope sticker-reward flex items-center gap-3 px-1 sm:gap-5"
+              style={designStyle}
+              {...growthTarget({
+                id: "steam-reward",
+                title: "Reward-led exploration",
+                description:
+                  "A collectible reward gives people a reason to complete the discovery queue. The dated offer adds urgency; the blue store cards are the surrounding shopping context. This is a proposed engagement mechanism, not evidence of measured impact.",
+                order: 1,
+              })}
             >
               <StickerStack paused={!motion} fan={design.stickerFan} />
               <div className="min-w-0 py-2 text-sm leading-relaxed">
-                <h3 className="font-semibold">
-                  Earn free stickers by going through your discovery queue!
-                </h3>
+                <div className="flex items-start gap-2">
+                  <h3 className="font-semibold">
+                    Earn free stickers by going through your discovery queue!
+                  </h3>
+                </div>
                 <p className="-mt-1 text-muted-foreground">
                   Now through Oct 8 <span aria-hidden="true">- </span>
                   <Dialog>
@@ -283,60 +306,70 @@ export function SteamGrowthBanners({
               </div>
             </section>
 
-            <Dialog>
-              <DialogTrigger asChild>
-                <button
-                  className="queue-banner group relative block w-full overflow-hidden rounded-md border border-input bg-card text-left transition-colors duration-[var(--motion-fast)] hover:bg-surface-raised"
-                  aria-label="Explore Your Discovery Queue"
-                  aria-describedby="queue-description"
-                >
-                  <span className="queue-copy relative z-10 block px-5 py-7 sm:px-8">
-                    <span className="queue-heading flex items-center gap-3 font-semibold">
-                      Explore Your Discovery Queue{" "}
-                      <ArrowUpRight
-                        className="shrink-0"
-                        size={19}
-                        aria-hidden="true"
-                      />
-                    </span>
-                    <span
-                      id="queue-description"
-                      className="mt-2 block text-sm leading-relaxed text-muted-foreground"
-                    >
-                      Click to open your queue of top-selling, new, and
-                      recommended titles
-                    </span>
-                  </span>
-                  <span
-                    className={cn("queue-art", !motion && "is-paused")}
-                    aria-hidden="true"
+            <div className="queue-growth-entry relative">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button
+                    className="growth-scope queue-banner group relative block w-full overflow-hidden rounded-md border border-input bg-card text-card-foreground text-left transition-colors duration-[var(--motion-fast)] hover:bg-surface-raised focus-visible:outline-ring-inverse"
+                    style={designStyle}
+                    {...growthTarget({
+                      id: "steam-queue-entry",
+                      title: "A clear next step",
+                      description:
+                        "The invitation connects the reward promise to one action: open the queue. The moving cards preview browsing without asking people to choose a game first. Open it to explore the recommendation and completion steps.",
+                      order: 2,
+                    })}
+                    aria-label="Explore Your Discovery Queue"
+                    aria-describedby="queue-description"
                   >
-                    <span className="queue-rail">
-                      <span className="queue-track">
-                        {/* Identical groups give the track an exact, seamless half-width wrap. */}
-                        {[0, 1].map((copy) => (
-                          <span className="queue-sequence" key={copy}>
-                            {[0, 1, 2, 3].map((i) => (
-                              <span
-                                className={`queue-card queue-card-${i}`}
-                                key={i}
-                              >
-                                <span className="queue-card-image">
-                                  <span />
-                                </span>
-                                <span className="queue-card-line" />
-                                <span className="queue-card-line short" />
-                              </span>
-                            ))}
-                          </span>
-                        ))}
+                    <span className="queue-copy relative z-10 block px-5 py-7 sm:px-8">
+                      <span className="queue-heading flex items-center gap-3 font-semibold">
+                        Explore Your Discovery Queue{" "}
+                        <ArrowUpRight
+                          className="shrink-0"
+                          size={19}
+                          aria-hidden="true"
+                        />
+                      </span>
+                      <span
+                        id="queue-description"
+                        className="mt-2 block text-sm leading-relaxed text-muted-foreground"
+                      >
+                        Click to open your queue of top-selling, new, and
+                        recommended titles
                       </span>
                     </span>
-                  </span>
-                </button>
-              </DialogTrigger>
-              <DiscoveryQueue />
-            </Dialog>
+                    <span
+                      className={cn("queue-art", !motion && "is-paused")}
+                      aria-hidden="true"
+                    >
+                      <span className="queue-rail">
+                        <span className="queue-track">
+                          {/* Identical groups give the track an exact, seamless half-width wrap. */}
+                          {[0, 1].map((copy) => (
+                            <span className="queue-sequence" key={copy}>
+                              {[0, 1, 2, 3].map((i) => (
+                                <span
+                                  className={`queue-card queue-card-${i}`}
+                                  key={i}
+                                >
+                                  <span className="queue-card-image">
+                                    <span />
+                                  </span>
+                                  <span className="queue-card-line" />
+                                  <span className="queue-card-line short" />
+                                </span>
+                              ))}
+                            </span>
+                          ))}
+                        </span>
+                      </span>
+                    </span>
+                  </button>
+                </DialogTrigger>
+                <DiscoveryQueue />
+              </Dialog>
+            </div>
           </div>
           <ContextCards count={8} />
         </div>

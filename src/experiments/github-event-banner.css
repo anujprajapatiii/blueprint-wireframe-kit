@@ -126,7 +126,7 @@
     align-items: center;
     padding: 0 calc(20 * var(--github-unit));
   }
-  .github-event-action > button {
+  .github-event-action > .github-registration-trigger {
     height: max(24px, calc(58 * var(--github-unit)));
     padding-inline: calc(16 * var(--github-unit));
     font-size: calc(20 * var(--github-unit));

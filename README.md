@@ -10,16 +10,13 @@ The app is a browsable component gallery inspired by the way shadcn presents exa
 
 Experiments are lasting wireframes of screens, flows, and experiences. Keep useful source copy, structure, and observed interaction behavior; replace branding and visual detail with kit primitives. Preserve the user's intent alongside each experiment so later work can recover the reason for its design.
 
-Start with [the project rules](AGENTS.md), [the reference-to-wireframe workflow](docs/experiment-rules.md), and [the index design contract](docs/index-design.md). Experiment records distinguish observed reference behavior from prototype decisions. The directory uses landscape previews, plain descriptions, and expandable design intent to help you recognize and revisit useful interactions.
+A pasted screenshot, video, or link starts the [reference-to-index workflow](docs/reference-workflow.md). Follow it to inspect and retain the full-context original, identify a specific growth intervention, then build its proportionate interactive wireframe, add **Guide me** explanations, and file a normal, independently filterable experiment. Ordinary product functionality stays context unless explicitly requested; [the curation record](docs/reviews/2026-10-04/index-curation.md) explains the current 19-item catalog. The [project rules](AGENTS.md) make this the default for future work in this repository; [the record template](docs/templates/experiment-record.md) keeps evidence and assumptions short and recoverable.
 
-At Anuj's request, experiment originals are available through the shared **Original reference** view. Authorized local assets include the Notion and Steam recordings and the supplied GitHub event-banner screenshot. The three separate Steam queue screenshots are currently unavailable as files. Adding references does not publish the local revision.
+**Yellow marks the studied growth mechanism; blue retains its product context.** Guide me supplies the optional step-by-step education. Original product copy stays intact, and separate growth tooltip buttons are omitted.
 
-To add an experiment:
+Each experiment includes a distinctive landscape preview, shared Design intent, a stable direct URL, and a **Wireframe / Original reference** toggle. Preserve full-screen surrounding context in captures and thumbnails. Keep original media unchanged, with private account captures available through the local reference viewer. The existing public originals are the Notion and Steam recordings and GitHub event screenshot; the three separate Steam queue screenshots remain unavailable as files.
 
-1. Capture its intent, source, scope, observations, copy, and assumptions in `docs/experiments/<id>.md`.
-2. Add its typed metadata and design intent to `src/experiments/registry.ts`, and its view under `src/experiments/`. Keep the title task-focused and the source name separate; supply a meaningful landscape preview, the original local-calendar `addedAt` date, and an accurate `updatedAt` date. Reuse kit controls and the existing card, pill, and Design intent components.
-3. Register the view in `src/experiments/app.tsx`. Use `?view=experiments&experiment=<id>` for a stable link that refreshes directly on GitHub Pages. Register any authorized original media with the shared reference viewer rather than building a separate viewer for each experiment.
-4. Verify the focused states, reference controls, responsive layout, and return to the filtered directory, then update its status and review notes.
+Design and review locally, then publish only on an explicit request for the current revision. See [the index contract](docs/index-design.md) for card, filter, and reference-viewer behavior.
 
 The component gallery and experiments load separately. Existing gallery anchors continue to work.
 
@@ -135,6 +132,8 @@ To use it in another React and TypeScript project:
 Do not copy this repository's GitHub Pages base path into a differently named project. Set that path for the destination where your app will actually be hosted.
 
 ## Foundation contract
+
+Browse **Foundations → Blue context / Yellow growth** for both 11-shade palettes, semantic roles, calculated contrast pairings, and live shared-control specimens. [Colour tokens and theme boundaries](docs/tokens.md) documents the approved composition rules and where to make systemic fixes.
 
 `src/tokens.json` is the source of truth. Edit it, then run:
 

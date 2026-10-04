@@ -4,6 +4,12 @@ Every experiment carries a structured record explaining its intended growth beha
 
 This is the working synthesis supplied by Anuj in **Pasted text.txt**, adopted for this library. It is not a universal or mutually exclusive industry standard. The source names established frameworks but contains unresolved citation placeholders; those references have not been independently verified here. The definitions are available in the kit at `?#growth`.
 
+## Admit the pattern before classifying it
+
+The taxonomy classifies an evidenced growth intervention; it does not turn every useful interface into a growth pattern. First apply the admission gate in [Reference workflow](reference-workflow.md): identify the visible proposition, prompt, incentive, premium boundary, or targeted onboarding and the behavior it invites. Generic clarity, fewer steps, navigation, configuration, validation, and ordinary payment execution are insufficient by themselves.
+
+Keep surrounding functional UI as product context, even when it supports the same journey. An attractive proposed metric or a category match does not replace intervention evidence. Retained intent and causal mechanisms remain interpretations, not measured lift. Explicit user requests for a specific reconstruction or inclusion take precedence; document the scope without inventing a growth explanation. The [4 October curation record](reviews/2026-10-04/index-curation.md) distinguishes active patterns from preserved research.
+
 ## Data and display contract
 
 Keep design intent in the experiment's typed registry metadata as `growth: GrowthIntent` so the index and detail views share one record. `src/growth/taxonomy.ts` owns the schema and definitions, and `src/components/design-intent.tsx` renders the shared record. Use plain language and shared blueprint tokens; do not imply nutritional quantities, scores, or measured impact.
@@ -12,41 +18,41 @@ The index presents the goal beside the source and added-date pills without a lar
 
 Each field label uses one 16px Lucide icon from the existing icon system: Target for Goal, GitBranch for Also supports, Users for Audience, Route for Journey, Cog for Mechanism, PanelsTopLeft for Format, and ChartColumn for Proposed measure. Keep the visible label text, use the muted foreground token, and hide the decorative icon from assistive technology. The shared component owns this mapping across the index, experiment pages, and definitions.
 
-| Field | What to record |
-| --- | --- |
-| Goal | Exactly one category: the principal behavior this experiment intends to change. |
-| Also supports | Optional categories for material supporting outcomes. Do not add every plausible downstream effect. |
-| Audience | The relevant person or account and their current relationship to the product. Record unknowns, including commercial status. |
-| Journey | The task or transition the person is undertaking. |
-| Mechanism | Why the intervention might change behavior: clarity, reduced effort, relevance, trust, motivation, timely prompts, and similar explanations. |
-| Format | The UI format or channel: modal, banner, inline card, email, and so on. |
-| Proposed measure | A proposed observable outcome tied to the intended behavior. Distinguish it from a measured result; avoid relying on clicks alone when later value matters. |
-| Reasoning (footnote) | Why the classification fits, what the reference establishes, and what remains an interpretation or hypothesis. |
+| Field                | What to record                                                                                                                                              |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Goal                 | Exactly one category: the principal behavior this experiment intends to change.                                                                             |
+| Also supports        | Optional categories for material supporting outcomes. Do not add every plausible downstream effect.                                                         |
+| Audience             | The relevant person or account and their current relationship to the product. Record unknowns, including commercial status.                                 |
+| Journey              | The task or transition the person is undertaking.                                                                                                           |
+| Mechanism            | Why the intervention might change behavior: clarity, reduced effort, relevance, trust, motivation, timely prompts, and similar explanations.                |
+| Format               | The UI format or channel: modal, banner, inline card, email, and so on.                                                                                     |
+| Proposed measure     | A proposed observable outcome tied to the intended behavior. Distinguish it from a measured result; avoid relying on clicks alone when later value matters. |
+| Reasoning (footnote) | Why the classification fits, what the reference establishes, and what remains an interpretation or hypothesis.                                              |
 
 The registry field names are `primary`, `secondary`, `audience`, `journey`, `mechanisms`, `format`, `measure`, and `basis`. Explain provisional classifications and measurement limits with the expanded record. Render `basis` as a plain footnote, not another nested disclosure. A reference shows an interface and some behavior; it does not establish its actual business objective, causal effect, or performance. Use a short, plain statement that these are interpretations and the proposed measures have not been tested.
 
 ## Three overarching outcomes
 
-| Outcome | Meaning | Categories |
-| --- | --- | --- |
-| Acquire users | Bring additional people or accounts into the product. | Acquisition; Referral, advocacy & distribution |
-| Retain users | Help people experience value, continue receiving it, and return after lapsing. | Activation; Engagement & adoption; Retention & churn prevention; Reactivation & win-back |
-| Monetize value | Generate revenue and grow the commercial relationship. | Monetization & purchase; Expansion |
+| Outcome        | Meaning                                                                        | Categories                                                                               |
+| -------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Acquire users  | Bring additional people or accounts into the product.                          | Acquisition; Referral, advocacy & distribution                                           |
+| Retain users   | Help people experience value, continue receiving it, and return after lapsing. | Activation; Engagement & adoption; Retention & churn prevention; Reactivation & win-back |
+| Monetize value | Generate revenue and grow the commercial relationship.                         | Monetization & purchase; Expansion                                                       |
 
 These are nested meanings: activation can contribute to the broad retention outcome, while narrow retention work concerns continuity. Expansion is a form of monetization within an existing commercial relationship.
 
 ## Eight growth categories
 
-| Category | Behavioral job | Typical patterns | Example measures |
-| --- | --- | --- | --- |
-| Acquisition | Help suitable prospects discover, understand, evaluate, and start using the offering. | Value propositions, comparisons, demos, lead capture, signup, installation | Qualified signups or leads, acquisition cost, downstream activation |
-| Activation | Help a new user or account reach meaningful initial value. | Setup, import, integrations, starter templates, useful empty states, guided first tasks | Activation rate, time to value, first successful outcome |
-| Engagement & adoption | Help existing users receive more value through deeper, broader, or appropriately repeated use. | Feature discovery, contextual education, recommendations, progress feedback, recurring workflows | Valuable feature adoption, breadth/depth of use, core-action frequency |
-| Retention & churn prevention | Preserve an existing usage or customer relationship. | Renewals, value summaries, loyalty benefits, at-risk interventions, recovery, pause/downgrade options | Cohort retention, renewal rate, churn, retained revenue |
-| Reactivation & win-back | Restore a relationship after meaningful inactivity or departure. | Win-back messages, return incentives, what's changed, resume previous work, re-onboarding | Reactivation rate, sustained use after return, recovered customers |
-| Monetization & purchase | Help users choose, understand, and complete a commercial exchange. | Pricing, plans, trials, paywalls, checkout, payment methods, billing cadence | Paid conversion, completed purchases, net revenue, revenue per user |
-| Expansion | Increase value and revenue within an existing commercial relationship. | Paid upgrades, more seats or usage, add-ons, cross-sell, bundles, purchasing approvals | Expansion revenue, paid seats, add-on adoption, account revenue |
-| Referral, advocacy & distribution | Turn existing users, relationships, or product outputs into sources of new users. | Referral rewards, invitations, shareable outputs, public pages, embeds, reviews, advocacy | Referred users who activate, invite acceptance, acquisition from shared outputs |
+| Category                          | Behavioral job                                                                                 | Typical patterns                                                                                      | Example measures                                                                |
+| --------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Acquisition                       | Help suitable prospects discover, understand, evaluate, and start using the offering.          | Value propositions, comparisons, demos, lead capture, signup, installation                            | Qualified signups or leads, acquisition cost, downstream activation             |
+| Activation                        | Help a new user or account reach meaningful initial value.                                     | Setup, import, integrations, starter templates, useful empty states, guided first tasks               | Activation rate, time to value, first successful outcome                        |
+| Engagement & adoption             | Help existing users receive more value through deeper, broader, or appropriately repeated use. | Feature discovery, contextual education, recommendations, progress feedback, recurring workflows      | Valuable feature adoption, breadth/depth of use, core-action frequency          |
+| Retention & churn prevention      | Preserve an existing usage or customer relationship.                                           | Renewals, value summaries, loyalty benefits, at-risk interventions, recovery, pause/downgrade options | Cohort retention, renewal rate, churn, retained revenue                         |
+| Reactivation & win-back           | Restore a relationship after meaningful inactivity or departure.                               | Win-back messages, return incentives, what's changed, resume previous work, re-onboarding             | Reactivation rate, sustained use after return, recovered customers              |
+| Monetization & purchase           | Help users choose, understand, and complete a commercial exchange.                             | Pricing, plans, trials, paywalls, checkout, payment methods, billing cadence                          | Paid conversion, completed purchases, net revenue, revenue per user             |
+| Expansion                         | Increase value and revenue within an existing commercial relationship.                         | Paid upgrades, more seats or usage, add-ons, cross-sell, bundles, purchasing approvals                | Expansion revenue, paid seats, add-on adoption, account revenue                 |
+| Referral, advocacy & distribution | Turn existing users, relationships, or product outputs into sources of new users.              | Referral rewards, invitations, shareable outputs, public pages, embeds, reviews, advocacy             | Referred users who activate, invite acceptance, acquisition from shared outputs |
 
 ## Classification boundaries
 
@@ -66,10 +72,10 @@ Accessibility, performance, and localization are cross-cutting improvements. Att
 
 These labels are unvalidated design interpretations. Suggested measures are not instrumented or measured in these wireframes.
 
-| Experiment | Primary / secondary | Audience and journey | Mechanisms / format | Proposed measures |
-| --- | --- | --- | --- | --- |
-| Discovery queue & rewards · Steam | Engagement & adoption / Monetization & purchase (secondary hypothesis) | Existing store users; discover games and progress through the queue toward useful consideration | Reward, relevance, progress / sticker banner, discovery banner, modal carousel | Queue completion and wishlist additions; the downstream purchase intent is a hypothesis |
-| Feature announcement · Notion | Engagement & adoption / none | Existing workspace users; account tier unknown; discover and try features toward meaningful adoption | Contextual education, clear value, timely prompting / feature announcement modal | Feature adoption rate after viewing the announcement; no conversion or adoption result is available |
+| Experiment                        | Primary / secondary                                                    | Audience and journey                                                                                 | Mechanisms / format                                                              | Proposed measures                                                                                   |
+| --------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Discovery queue & rewards · Steam | Engagement & adoption / Monetization & purchase (secondary hypothesis) | Existing store users; discover games and progress through the queue toward useful consideration      | Reward, relevance, progress / sticker banner, discovery banner, modal carousel   | Queue completion and wishlist additions; the downstream purchase intent is a hypothesis             |
+| Feature announcement · Notion     | Engagement & adoption / none                                           | Existing workspace users; account tier unknown; discover and try features toward meaningful adoption | Contextual education, clear value, timely prompting / feature announcement modal | Feature adoption rate after viewing the announcement; no conversion or adoption result is available |
 
 Revisit the primary objective when scope or evidence changes. Preserve the stable experiment ID and record why its classification changed.
 

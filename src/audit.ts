@@ -23,7 +23,13 @@ async function audit() {
             summary: n.failureSummary,
           })),
         })),
-        incomplete: result.incomplete.map((v) => v.id),
+        incomplete: result.incomplete.map((v) => ({
+          id: v.id,
+          nodes: v.nodes.map((n) => ({
+            target: n.target,
+            summary: n.failureSummary,
+          })),
+        })),
         passes: result.passes.length,
       }),
     );

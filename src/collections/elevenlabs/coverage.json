@@ -1,0 +1,164 @@
+[
+  {
+    "flow": "Home and launch surfaces",
+    "observed": "Goal composer, task shortcuts, samples, launch hero, quickstarts and collaboration prompt",
+    "stoppingPoint": "No creation prompt submitted",
+    "status": "Observed entry"
+  },
+  {
+    "flow": "Text to Speech",
+    "observed": "Restored context, settings cross-sell, v4 prompt, model recommendation and credit context",
+    "stoppingPoint": "No generation or model change; private draft excluded",
+    "status": "Partial"
+  },
+  {
+    "flow": "Creative subscription",
+    "observed": "Monthly/yearly ladder, annual intercept and final upgrade confirmation",
+    "stoppingPoint": "Cancelled before payment; no billing change",
+    "status": "Through confirmation"
+  },
+  {
+    "flow": "Team invitation",
+    "observed": "Basic Seats offer and Scale Full Seats upgrade link",
+    "stoppingPoint": "No email entered or invitation sent",
+    "status": "Through invite form"
+  },
+  {
+    "flow": "Voice creation",
+    "observed": "Route picker, premium clone gate, prompt starters and clone prerequisite stepper",
+    "stoppingPoint": "No recording, upload or generation",
+    "status": "Partial"
+  },
+  {
+    "flow": "Voice discovery",
+    "observed": "Trending/use-case collections, public preview, use/save controls, availability education",
+    "stoppingPoint": "Preview only; no voice added",
+    "status": "Partial"
+  },
+  {
+    "flow": "Studio",
+    "observed": "Inspiration gallery, populated sample, assistant suggestions, sharing access choices and export options",
+    "stoppingPoint": "One sample draft created automatically; no generate/export/share",
+    "status": "Partial"
+  },
+  {
+    "flow": "Flows",
+    "observed": "Feature introduction and inspiration gallery",
+    "stoppingPoint": "No template or new flow opened",
+    "status": "Observed entry"
+  },
+  {
+    "flow": "Music",
+    "observed": "Marketplace, use-case categories, suggestions, model tooltip and credit estimate",
+    "stoppingPoint": "No generated track or paid action",
+    "status": "Observed entry"
+  },
+  {
+    "flow": "Sound Effects",
+    "observed": "Public library, prompt assistance, cost estimate and Explore-sharing disclosure",
+    "stoppingPoint": "No generation or sharing-setting change",
+    "status": "Observed entry"
+  },
+  {
+    "flow": "Image & Video",
+    "observed": "Introduction, public sample actions, avatars and composer",
+    "stoppingPoint": "No Recreate/Edit/Generate action",
+    "status": "Observed entry"
+  },
+  {
+    "flow": "Dubbing",
+    "observed": "v2 alpha introduction and file/URL upload composer",
+    "stoppingPoint": "No file/URL supplied, no dub generated",
+    "status": "Observed entry"
+  },
+  {
+    "flow": "Audiobooks",
+    "observed": "Production/publishing split, character-casting promotion, guided upload and publishing dialog",
+    "stoppingPoint": "No manuscript upload or new audiobook",
+    "status": "Partial"
+  },
+  {
+    "flow": "Speech to Text",
+    "observed": "Scribe launch banner and transcription input-source tabs",
+    "stoppingPoint": "No upload, microphone, demo or transcription; setup screenshot saved",
+    "status": "Observed entry"
+  },
+  {
+    "flow": "Voice Isolator",
+    "observed": "Upload/record and cost context",
+    "stoppingPoint": "No input submitted; ordinary setup, no additional unique pattern",
+    "status": "Observed entry"
+  },
+  {
+    "flow": "Voice Changer",
+    "observed": "Upload/record, credit context, voice controls and repeated image/video cross-sell",
+    "stoppingPoint": "No input, generation or setting changes",
+    "status": "Observed entry"
+  },
+  {
+    "flow": "Creative Chat",
+    "observed": "Task-led composer and four job suggestions",
+    "stoppingPoint": "No prompt or suggestion submitted",
+    "status": "Observed entry"
+  },
+  {
+    "flow": "Voice earnings",
+    "observed": "Three-step contributor checklist and demand-versus-supply opportunities",
+    "stoppingPoint": "No payout setup, clone creation or publication",
+    "status": "Partial"
+  },
+  {
+    "flow": "Affiliate program",
+    "observed": "Recommendation reward, established-creator route and PartnerStack disclosure",
+    "stoppingPoint": "No third-party signup or terms acceptance",
+    "status": "Through offer"
+  },
+  {
+    "flow": "ElevenAgents",
+    "observed": "Product switch, automatic onboarding template gallery and Architect welcome",
+    "stoppingPoint": "No agent creation, test, integration or deployment",
+    "status": "Observed onboarding entry"
+  },
+  {
+    "flow": "Developers / ElevenAPI",
+    "observed": "First-request scaffold, manual and automatic top-up dialogs, model pricing",
+    "stoppingPoint": "No key access/creation, API request, payment or auto-top-up change",
+    "status": "Partial"
+  },
+  {
+    "flow": "ElevenAgents subscription",
+    "observed": "Call-minute/concurrency plan ladder, Popular tier and annual framing",
+    "stoppingPoint": "No upgrade",
+    "status": "Observed offer"
+  },
+  {
+    "flow": "Signup and free-account conversion",
+    "observed": "Existing signed-in paid account did not expose a fresh signup journey",
+    "stoppingPoint": "A separate new/free-account walkthrough would be required",
+    "status": "Not observed"
+  },
+  {
+    "flow": "Cancellation and win-back",
+    "observed": "Cancellation, save-offer, and win-back steps were outside the completed walkthrough",
+    "stoppingPoint": "No subscription resumption, cancellation change, or save offer tested",
+    "status": "Not observed"
+  },
+  {
+    "flow": "Exhausted credits and limits",
+    "observed": "No exhausted-credit state was observed in this walkthrough",
+    "stoppingPoint": "Did not consume credits to trigger limit states",
+    "status": "Not observed"
+  },
+  {
+    "flow": "Lifecycle emails and push",
+    "observed": "Outside the authenticated app walkthrough",
+    "stoppingPoint": "No inbox or notification campaign collection",
+    "status": "Not observed"
+  },
+  {
+    "flow": "Mobile and experiments by cohort",
+    "observed": "Desktop Chrome only; one account and locale",
+    "stoppingPoint": "No mobile capture or A/B cohort comparison",
+    "status": "Not observed"
+  }
+]

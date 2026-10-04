@@ -1,0 +1,512 @@
+{
+  "date": "2026-10-04",
+  "method": "Read-only computed styles of rendered HTML text with effective ancestor background composition. SVG previews audited separately. Images, gradients, opacity, occlusion and focus/border visuals require manual review. This is not WCAG certification.",
+  "desktop": [
+    {
+      "id": "el-home-intent-to-creation",
+      "count": 43,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-v4-discovery-to-trial",
+      "count": 44,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-adjacent-tool-discovery",
+      "count": 35,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-model-choice-guidance",
+      "count": 40,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-balance-context-upgrade",
+      "count": 31,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-plan-value-ladder",
+      "count": 67,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-annual-cadence-framing",
+      "count": 75,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-annual-upgrade-intercept",
+      "count": 9,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-upgrade-commitment-clarity",
+      "count": 13,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-basic-seat-collaboration-bridge",
+      "count": 10,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-voice-pathway-effort-guidance",
+      "count": 20,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-professional-clone-capability-gate",
+      "count": 20,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-voice-design-prompt-starters",
+      "count": 13,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-instant-clone-guided-prerequisites",
+      "count": 21,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-curated-voice-discovery",
+      "count": 65,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-inspiration-to-populated-project",
+      "count": 24,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-studio-agent-task-starters",
+      "count": 37,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-project-context-collaboration-invite",
+      "count": 15,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-flows-first-visit-introduction",
+      "count": 11,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-music-browse-or-create",
+      "count": 50,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-sound-effects-community-reuse",
+      "count": 50,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-image-video-example-to-action",
+      "count": 14,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-dubbing-launch-sample-entry",
+      "count": 11,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-audiobook-create-or-publish",
+      "count": 16,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-voice-supplier-earnings-checklist",
+      "count": 37,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-demand-guided-voice-supply",
+      "count": 116,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-affiliate-advocacy-entry",
+      "count": 13,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-product-switcher-positioning",
+      "count": 7,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-agents-template-assisted-onboarding",
+      "count": 53,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-api-first-request-scaffold",
+      "count": 31,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-api-topup-amount-scaffold",
+      "count": 21,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-api-auto-topup-continuity",
+      "count": 17,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-api-time-bounded-model-offer",
+      "count": 68,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "github-event-banner",
+      "count": 9,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "notion-feature-modal",
+      "count": 12,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "steam-growth-banners",
+      "count": 11,
+      "failures": [],
+      "uncertain": []
+    }
+  ],
+  "narrow": [
+    {
+      "id": "el-home-intent-to-creation",
+      "page": 320,
+      "viewport": 320,
+      "count": 29,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-v4-discovery-to-trial",
+      "page": 320,
+      "viewport": 320,
+      "count": 30,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-adjacent-tool-discovery",
+      "page": 320,
+      "viewport": 320,
+      "count": 27,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-model-choice-guidance",
+      "page": 320,
+      "viewport": 320,
+      "count": 32,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-balance-context-upgrade",
+      "page": 320,
+      "viewport": 320,
+      "count": 30,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-plan-value-ladder",
+      "page": 320,
+      "viewport": 320,
+      "count": 60,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-annual-cadence-framing",
+      "page": 320,
+      "viewport": 320,
+      "count": 68,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-annual-upgrade-intercept",
+      "page": 320,
+      "viewport": 320,
+      "count": 9,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-upgrade-commitment-clarity",
+      "page": 320,
+      "viewport": 320,
+      "count": 13,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-basic-seat-collaboration-bridge",
+      "page": 320,
+      "viewport": 320,
+      "count": 10,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-voice-pathway-effort-guidance",
+      "page": 320,
+      "viewport": 320,
+      "count": 20,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-professional-clone-capability-gate",
+      "page": 320,
+      "viewport": 320,
+      "count": 20,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-voice-design-prompt-starters",
+      "page": 320,
+      "viewport": 320,
+      "count": 13,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-instant-clone-guided-prerequisites",
+      "page": 320,
+      "viewport": 320,
+      "count": 21,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-curated-voice-discovery",
+      "page": 320,
+      "viewport": 320,
+      "count": 58,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-inspiration-to-populated-project",
+      "page": 320,
+      "viewport": 320,
+      "count": 20,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-studio-agent-task-starters",
+      "page": 320,
+      "viewport": 320,
+      "count": 37,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-project-context-collaboration-invite",
+      "page": 320,
+      "viewport": 320,
+      "count": 14,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-flows-first-visit-introduction",
+      "page": 320,
+      "viewport": 320,
+      "count": 11,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-music-browse-or-create",
+      "page": 320,
+      "viewport": 320,
+      "count": 41,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-sound-effects-community-reuse",
+      "page": 320,
+      "viewport": 320,
+      "count": 42,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-image-video-example-to-action",
+      "page": 320,
+      "viewport": 320,
+      "count": 14,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-dubbing-launch-sample-entry",
+      "page": 320,
+      "viewport": 320,
+      "count": 11,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-audiobook-create-or-publish",
+      "page": 320,
+      "viewport": 320,
+      "count": 16,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-voice-supplier-earnings-checklist",
+      "page": 320,
+      "viewport": 320,
+      "count": 30,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-demand-guided-voice-supply",
+      "page": 320,
+      "viewport": 320,
+      "count": 109,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-affiliate-advocacy-entry",
+      "page": 320,
+      "viewport": 320,
+      "count": 13,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-product-switcher-positioning",
+      "page": 320,
+      "viewport": 320,
+      "count": 7,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-agents-template-assisted-onboarding",
+      "page": 320,
+      "viewport": 320,
+      "count": 53,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-api-first-request-scaffold",
+      "page": 320,
+      "viewport": 320,
+      "count": 31,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-api-topup-amount-scaffold",
+      "page": 320,
+      "viewport": 320,
+      "count": 21,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-api-auto-topup-continuity",
+      "page": 320,
+      "viewport": 320,
+      "count": 17,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "el-api-time-bounded-model-offer",
+      "page": 320,
+      "viewport": 320,
+      "count": 68,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "github-event-banner",
+      "page": 320,
+      "viewport": 320,
+      "count": 9,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "notion-feature-modal",
+      "page": 320,
+      "viewport": 320,
+      "count": 12,
+      "failures": [],
+      "uncertain": []
+    },
+    {
+      "id": "steam-growth-banners",
+      "page": 320,
+      "viewport": 320,
+      "count": 11,
+      "failures": [],
+      "uncertain": []
+    }
+  ]
+}

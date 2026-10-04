@@ -14,6 +14,7 @@ import {
 } from "../components/kit";
 import { ImagePlaceholder } from "../components/patterns";
 import "./github-event-banner.css";
+import { growthTarget } from "../components/growth-education";
 
 function DashboardContext() {
   return (
@@ -155,11 +156,21 @@ export function GitHubEventBanner() {
                 </Button>
               </div>
             ) : (
-              <Card className="github-event-card overflow-hidden bg-surface-raised shadow-sm">
+              <Card
+                className="growth-scope github-event-card overflow-hidden bg-surface-raised shadow-sm"
+                {...growthTarget({
+                  id: "github-event-offer",
+                  title: "A timely offer in context",
+                  description:
+                    "The event promotion sits beside the dashboard without replacing the main task. An explicit $600 saving and a dated early-bird deadline give a reason to consider registering. The yellow card is the promotion; the blue feed and changelog explain its placement.",
+                  order: 1,
+                })}
+              >
                 <div className="github-event-heading flex items-center justify-between gap-3 px-4 py-3">
                   <h2 className="text-2xl font-semibold tracking-tight">
                     UNIVERSE’26
                   </h2>
+
                   <Button
                     ref={dismissRef}
                     variant="ghost"
@@ -185,16 +196,36 @@ export function GitHubEventBanner() {
                   Save $600 with Super Early Bird passes through July 8.
                 </p>
 
-                <div className="github-event-action p-4">
+                <div
+                  className="github-event-action flex items-center gap-2 p-4"
+                  {...growthTarget({
+                    id: "github-event-register",
+                    title: "One clear registration action",
+                    description:
+                      "Register now gives the offer one next step. A useful measure would follow through to completed registrations, not just clicks. The reference supplies only this banner, so the preview stops at a local handoff and makes no registration.",
+                    order: 2,
+                  })}
+                >
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button className="h-control-comfortable w-full">
+                      <Button className="github-registration-trigger h-control-comfortable min-w-0 flex-1">
                         Register now
                       </Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent
+                      className="growth-scope"
+                      {...growthTarget({
+                        id: "github-registration-handoff",
+                        title: "The evidence stops at the handoff",
+                        description:
+                          "The banner promises an event registration step, but no destination was supplied. This local screen keeps that boundary explicit. A complete evaluation would follow registrations or purchases after the click and include dismissals as a diagnostic.",
+                        order: 3,
+                      })}
+                    >
                       <DialogHeader>
-                        <DialogTitle>Registration preview</DialogTitle>
+                        <div className="flex items-center gap-3">
+                          <DialogTitle>Registration preview</DialogTitle>
+                        </div>
                         <DialogDescription>
                           The reference shows this banner only. The registration
                           destination and next steps weren’t provided.

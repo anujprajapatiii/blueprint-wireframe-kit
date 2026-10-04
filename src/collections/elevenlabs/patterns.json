@@ -1,0 +1,1374 @@
+[
+  {
+    "id": "el-home-intent-to-creation",
+    "title": "Start with a goal",
+    "summary": "Task shortcuts and suggested prompts connect a creation goal to the right tool.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Home → creation entry",
+    "flowGroup": "Home & Chat",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing user on a paid Starter plan",
+      "journey": "Home → creation entry",
+      "mechanisms": [
+        "Reduce blank-page effort",
+        "Frame tools around desired outcomes"
+      ],
+      "format": "Goal composer, task shortcuts, and prompt cards",
+      "measure": "Successful creation after a Home entry, segmented by composer versus shortcut; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Home",
+    "observed": "The central entry asks what the user wants to create, supplies an example task in the composer, and presents output-oriented shortcuts including Speech, Music, Voice Clone and Video. Recents and Quickstarts are adjacent options below. The dedicated Creative Chat entry uses the same creation-goal framing and supplies four task suggestions: Product launch voiceover, Podcast intro music, Images for a blog post, and Product explainer video.",
+    "nextState": "Quickstarts was selected. No creation prompt was submitted in this inspection.",
+    "limit": "The example and task framing are observed; improved creation or adoption is an interpretation. This existing account does not establish first-user activation. Creative Chat suggestion cards were inspected but not selected; no prompt was submitted. The screenshot supports a task-starter interpretation, not completed agent capabilities or outcomes.",
+    "copy": [
+      "What would you like to create?",
+      "Make a podcast intro with music...",
+      "Quickstarts",
+      "Recents",
+      "Product launch voiceover",
+      "Podcast intro music",
+      "Images for a blog post",
+      "Product explainer video"
+    ],
+    "evidenceIds": [
+      "01-home",
+      "28-creative-chat-entry"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/home",
+    "relatedUrls": [
+      "https://elevenlabs.io/app/creative-agent"
+    ]
+  },
+  {
+    "id": "el-v4-discovery-to-trial",
+    "title": "Discover a new model",
+    "summary": "Launch messages connect new-model benefits to the speech tool and model settings.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Home announcement → speech synthesis → model settings",
+    "flowGroup": "Speech & sound",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing users who may be using an earlier speech model",
+      "journey": "Home announcement → speech synthesis → model settings",
+      "mechanisms": [
+        "Feature discovery",
+        "Benefit-led education",
+        "A direct path from announcement to relevant tool"
+      ],
+      "format": "Launch banner, feature card, and inline prompt",
+      "measure": "Meaningful first use of v4 following an announcement, then repeat use; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "View Home or open speech settings",
+    "observed": "A top launch banner and Home feature card promote Eleven v4 with benefit copy and trial actions. In speech settings, an inline model promotion repeats the trial action beside the current model control.",
+    "nextState": "The banner exposes a deep link selecting v4 in Text to Speech. Speech settings and the model selector were inspected; no new generation was submitted.",
+    "limit": "Several placements belong to the same observed model-adoption proposition and are grouped here. No usage lift or persistent dismissal behavior was measured.",
+    "copy": [
+      "Eleven v4 is here — our fastest and most emotive voice model yet.",
+      "Try it out",
+      "Introducing Eleven v4",
+      "Try v4",
+      "Learn more",
+      "Our most expressive model",
+      "Try Eleven v4"
+    ],
+    "evidenceIds": [
+      "01-home",
+      "02-speech-settings"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/speech-synthesis/text-to-speech?model_id=eleven_v4"
+  },
+  {
+    "id": "el-adjacent-tool-discovery",
+    "title": "Discover adjacent tools",
+    "summary": "An in-tool promotion introduces image and video creation alongside speech settings.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Speech synthesis → settings promotion",
+    "flowGroup": "Speech & sound",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing speech-synthesis users",
+      "journey": "Speech synthesis → settings promotion",
+      "mechanisms": [
+        "Contextual cross-feature discovery",
+        "Show a broader workflow benefit"
+      ],
+      "format": "Dismissible settings promotion",
+      "measure": "Successful use of the introduced capability after viewing the promotion; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open the speech Settings panel",
+    "observed": "A dismissible Image & Video promotion sits above the voice and model controls. Its copy links images, video and lipsync to a seamless workflow.",
+    "nextState": "The contextual promotion was inspected. The Image & Video entry and gallery were subsequently inspected through navigation and are documented separately.",
+    "limit": "No price or paid dependency was established here, so this is classified as adoption rather than paid cross-sell.",
+    "copy": [
+      "Introducing Image & Video generation",
+      "Generate images, videos and lipsync with your favorite models in a seamless flow."
+    ],
+    "evidenceIds": [
+      "02-speech-settings"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/speech-synthesis/text-to-speech"
+  },
+  {
+    "id": "el-model-choice-guidance",
+    "title": "Choose the right model",
+    "summary": "Model cards explain trade-offs and recommend a fit for the selected voice.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Speech settings → model selection",
+    "flowGroup": "Speech & sound",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing users selecting a speech model for a task and voice",
+      "journey": "Speech settings → model selection",
+      "mechanisms": [
+        "Reduce decision uncertainty",
+        "Contextual recommendation",
+        "Progressive disclosure"
+      ],
+      "format": "Model-selection dialog with recommendation badges",
+      "measure": "Successful generation after model selection and subsequent retry or model-switch frequency; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open the Model selector",
+    "observed": "Selectable model cards explain expressiveness, language coverage, prompting effort and suitable use cases. The current choice is marked; one option carries Studio Quality and a recommendation for the currently selected voice. A Show all models action keeps additional choice behind disclosure.",
+    "nextState": "The model-choice panel was opened. A new model choice or generation was not committed during this inspection.",
+    "limit": "The recommendation label is observed; its algorithm and actual suitability are unknown.",
+    "copy": [
+      "Select a model",
+      "Our fastest and most emotive model. Supports 90+ languages.",
+      "Requires more prompt engineering than our previous models.",
+      "Studio Quality",
+      "Recommended for",
+      "Show all models"
+    ],
+    "evidenceIds": [
+      "03-model-selection"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/speech-synthesis/text-to-speech"
+  },
+  {
+    "id": "el-balance-context-upgrade",
+    "title": "Upgrade from usage context",
+    "summary": "Remaining capacity and the upgrade route appear together in the account menu.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Account menu → subscription plans",
+    "flowGroup": "Subscription & billing",
+    "growth": {
+      "primary": "expansion",
+      "secondary": [],
+      "audience": "Existing paid Starter customer",
+      "journey": "Account menu → subscription plans",
+      "mechanisms": [
+        "Connect capacity awareness to a commercial action",
+        "Keep an upgrade route available at the point of account review"
+      ],
+      "format": "Account-menu balance panel",
+      "measure": "Completed paid expansion from the balance entry and subsequent useful consumption; proposed, not measured.",
+      "basis": "The observed paid-account context supports an increase in plan, seat, or usage capacity. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open the account menu",
+    "observed": "An Upgrade button sits in the balance panel beside total and remaining credit labels. The current plan and a Subscription navigation item are visible in the same menu.",
+    "nextState": "Subscription plans were inspected at /app/subscription/creative.",
+    "limit": "This was not an exhausted-credit or blocked-generation state. No threshold-triggered warning was established. Personal balances are intentionally omitted.",
+    "copy": [
+      "Balance",
+      "Total",
+      "Remaining",
+      "Upgrade",
+      "Starter plan",
+      "Subscription"
+    ],
+    "evidenceIds": [
+      "04-account-upgrade",
+      "05-plans-monthly"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/subscription/creative"
+  },
+  {
+    "id": "el-plan-value-ladder",
+    "title": "Compare paid tiers",
+    "summary": "A capability ladder, popular tier, and sales route make larger plans easier to compare.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Subscription → plan comparison",
+    "flowGroup": "Subscription & billing",
+    "growth": {
+      "primary": "expansion",
+      "secondary": [],
+      "audience": "Existing paid Starter customer comparing larger plans",
+      "journey": "Subscription → plan comparison",
+      "mechanisms": [
+        "Explain incremental paid value",
+        "Provide a salient recommended tier",
+        "Offer a sales-assisted route"
+      ],
+      "format": "Plan cards, comparison table, and recommended-tier badge",
+      "measure": "Completed upgrades by selected tier, with subsequent use of newly available value; proposed, not measured.",
+      "basis": "The observed paid-account context supports an increase in plan, seat, or usage capacity. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open the ElevenCreative subscription page",
+    "observed": "Plans are arranged as a capability and capacity ladder. The current Starter tier is marked, Creator has a Popular badge and prominent Upgrade action, and higher tiers enumerate incremental capabilities. A Talk to Sales route is available alongside the plan controls. The ElevenAgents version repeats this ladder in job-relevant units: included call minutes, concurrent calls and workspace seats. Creator is marked Popular, and enterprise routes lead to sales.",
+    "nextState": "Choosing monthly Creator Upgrade opened an annual-billing offer before final upgrade confirmation.",
+    "limit": "Popular is the interface's claim, not independently verified popularity. No purchase or sales inquiry was completed. Agent plan prices and entitlements were observed in the UI only; no plan change or call was made.",
+    "copy": [
+      "Current plan",
+      "Creator",
+      "Popular",
+      "Upgrade",
+      "Professional Voice Cloning",
+      "Additional credits through Pay as you go",
+      "Everything in Starter",
+      "Talk to Sales"
+    ],
+    "evidenceIds": [
+      "05-plans-monthly",
+      "06-plans-yearly",
+      "38-agents-plan-ladder"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/subscription/creative",
+    "relatedUrls": [
+      "https://elevenlabs.io/app/subscription/agents"
+    ]
+  },
+  {
+    "id": "el-annual-cadence-framing",
+    "title": "Compare annual savings",
+    "summary": "Annual plans show monthly-equivalent prices, a price comparison, and the billing commitment.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Subscription → billing-cadence comparison",
+    "flowGroup": "Subscription & billing",
+    "growth": {
+      "primary": "monetization",
+      "secondary": [],
+      "audience": "Existing paid customer evaluating billing cadence and plans",
+      "journey": "Subscription → billing-cadence comparison",
+      "mechanisms": [
+        "Savings framing",
+        "Price anchoring",
+        "Compare commitment options with a common monthly unit"
+      ],
+      "format": "Billing-cadence toggle and pricing cards",
+      "measure": "Completed annual subscriptions with comprehension of the annual charge and later refund/cancellation outcomes; proposed, not measured.",
+      "basis": "The billing comparison supports understanding and choosing a commercial commitment. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Switch the plan comparison from Monthly to Yearly",
+    "observed": "The Yearly option advertises two months saved. Annual plan cards show a lower monthly-equivalent amount, strike through the monthly comparator, and state Billed annually.",
+    "nextState": "Both cadence states were inspected. No annual subscription was selected or purchased.",
+    "limit": "An annual commitment is a commercial-exchange pattern; this view alone does not establish incremental account revenue or improved retention. Displayed monthly equivalents are not monthly billing.",
+    "copy": [
+      "Monthly",
+      "Yearly (save 2 months)",
+      "Billed annually"
+    ],
+    "evidenceIds": [
+      "05-plans-monthly",
+      "06-plans-yearly"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/subscription/creative"
+  },
+  {
+    "id": "el-annual-upgrade-intercept",
+    "title": "Offer annual billing",
+    "summary": "An annual-savings offer appears after choosing a monthly upgrade.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Monthly Creator upgrade → annual offer → chosen cadence",
+    "flowGroup": "Subscription & billing",
+    "growth": {
+      "primary": "expansion",
+      "secondary": [
+        "monetization"
+      ],
+      "audience": "Paid Starter customer who selected a monthly Creator upgrade",
+      "journey": "Monthly Creator upgrade → annual offer → chosen cadence",
+      "mechanisms": [
+        "Present a savings alternative at high purchase intent",
+        "Revisit billing commitment without removing the monthly route"
+      ],
+      "format": "Upgrade intercept modal",
+      "measure": "Completed upgrade and annual-selection rates, alongside abandonment caused by the extra step; proposed, not measured.",
+      "basis": "The observed paid-account context supports an increase in plan, seat, or usage capacity. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Click Upgrade on the monthly Creator plan",
+    "observed": "A modal interrupts the upgrade path to propose yearly billing. It pairs a two-month-free badge with a stated 16% discount and offers Continue yearly and Continue monthly actions.",
+    "nextState": "Continue monthly opened the final subscription-upgrade confirmation for Starter Monthly → Creator Monthly.",
+    "limit": "The yearly branch was not followed. No assumption is made about its final price or confirmation state, and no upgrade was purchased.",
+    "copy": [
+      "Pay less with annual billing",
+      "Subscribe to yearly plan",
+      "2 months free",
+      "All annual plans get 16% discount compared to monthly plans",
+      "Continue yearly",
+      "Continue monthly"
+    ],
+    "evidenceIds": [
+      "07-annual-upgrade-intercept",
+      "08-upgrade-confirmation"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/subscription/creative"
+  },
+  {
+    "id": "el-upgrade-commitment-clarity",
+    "title": "Review an upgrade",
+    "summary": "A final review names the plan change and immediate charge before confirmation.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Upgrade offer → final confirmation",
+    "flowGroup": "Subscription & billing",
+    "growth": {
+      "primary": "expansion",
+      "secondary": [],
+      "audience": "Paid Starter customer considering a Creator upgrade",
+      "journey": "Upgrade offer → final confirmation",
+      "mechanisms": [
+        "Make commercial consequences explicit at commitment",
+        "Provide a reversible review step"
+      ],
+      "format": "Subscription-upgrade confirmation dialog",
+      "measure": "Informed completed upgrades and unexpected-charge support contacts, with abandonment as a trade-off; proposed, not measured.",
+      "basis": "The observed paid-account context supports an increase in plan, seat, or usage capacity. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Continue monthly from the annual-billing offer",
+    "observed": "The confirmation names the source and destination plans, states the charge due now, warns of temporary feature loss if payment fails, and separates Cancel from Confirm.",
+    "nextState": "Cancel closed the confirmation without purchase. Confirm was not activated.",
+    "limit": "This is a decision-clarity element within the expansion journey, not evidence that adding a confirmation improves conversion. Payment success and failure states were not observed.",
+    "copy": [
+      "Subscription upgrade",
+      "Starter (Monthly)",
+      "Creator (Monthly)",
+      "You will be charged ₹1,936 now.",
+      "If your payment fails during the upgrade, you'll temporarily lose access to your subscription features until payment is successful.",
+      "Cancel",
+      "Confirm"
+    ],
+    "evidenceIds": [
+      "08-upgrade-confirmation"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/subscription/creative"
+  },
+  {
+    "id": "el-basic-seat-collaboration-bridge",
+    "title": "Invite with Basic Seats",
+    "summary": "A collaboration offer explains Basic Seats and points to the paid Full Seats tier.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Persistent invitation card → Basic Seats invitation",
+    "flowGroup": "Collaboration",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [
+        "expansion"
+      ],
+      "audience": "Existing account user considering collaboration with colleagues or friends",
+      "journey": "Persistent invitation card → Basic Seats invitation",
+      "mechanisms": [
+        "Reduce uncertainty about joining another workspace",
+        "Explain a low-friction collaboration option",
+        "Connect greater collaboration needs to a paid tier"
+      ],
+      "format": "Persistent invitation card and invitation dialog",
+      "measure": "Invite acceptance followed by useful collaboration; separately, Full Seat upgrades attributable to collaboration needs; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Click the persistent Invite team members sidebar card",
+    "observed": "The modal describes Basic Seats, permits up to 20 invitees, explains that invitees retain their current workspace and can collaborate and generate content, and provides an email field. A nearby link says additional Full Seats require Scale.",
+    "nextState": "The invitation dialog was opened and cancelled; no email was entered and no invitation was sent.",
+    "limit": "The modal states an allowance of up to 50,000 credits per billing period for invitees. Fulfilment and recipient experience were not tested. Referral acquisition is not assumed from an invitation control alone.",
+    "copy": [
+      "Invite team members",
+      "Bring your team in to collaborate and share your creations.",
+      "Introducing Basic Seats",
+      "Invite colleague",
+      "Email address",
+      "upgrade to a Scale tier subscription",
+      "Invite"
+    ],
+    "evidenceIds": [
+      "01-home",
+      "09-basic-seats-invite"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/home"
+  },
+  {
+    "id": "el-voice-pathway-effort-guidance",
+    "title": "Choose a voice pathway",
+    "summary": "Creation methods show their input requirements and estimated effort.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Create a voice → creation-method choice",
+    "flowGroup": "Voice creation",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing user exploring how to obtain a suitable voice",
+      "journey": "Create a voice → creation-method choice",
+      "mechanisms": [
+        "Set effort expectations",
+        "Match a route to available inputs",
+        "Offer an easier discovery alternative"
+      ],
+      "format": "Voice-creation method chooser",
+      "measure": "Successful acquisition of a suitable voice after method selection, with time to useful outcome; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Create a voice",
+    "observed": "The chooser describes Voice Design, Instant Voice Clone, Professional Voice Clone and Voice Remixing, with short duration badges and relevant input requirements. Voice Library offers an alternative to creating a new voice.",
+    "nextState": "Voice Design opened its prompt-entry modal; that downstream state is collected separately.",
+    "limit": "The time badges are product claims, not measured completion times. No new voice was generated in this inspection.",
+    "copy": [
+      "Create voice",
+      "Voice Design",
+      "Design an entirely new voice from a text prompt.",
+      "Instant Voice Clone",
+      "Clone your voice with only 10 seconds of audio.",
+      "Less than a minute",
+      "2 minutes",
+      "5 minutes",
+      "Voice Remixing",
+      "Voice Library"
+    ],
+    "evidenceIds": [
+      "10-create-voice-pathways"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/home"
+  },
+  {
+    "id": "el-professional-clone-capability-gate",
+    "title": "Explain a premium gate",
+    "summary": "A visible locked capability names the exact paid tier needed to use it.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Create voice → Professional Voice Clone gate",
+    "flowGroup": "Voice creation",
+    "growth": {
+      "primary": "expansion",
+      "secondary": [],
+      "audience": "Paid Starter customer interested in professional voice cloning",
+      "journey": "Create voice → Professional Voice Clone gate",
+      "mechanisms": [
+        "Connect a desired capability to a specific paid tier",
+        "Explain the gate in context instead of hiding the option"
+      ],
+      "format": "Disabled method card with inline plan requirement",
+      "measure": "Completed upgrades from the gate followed by successful professional-clone creation; proposed, not measured.",
+      "basis": "The observed paid-account context supports an increase in plan, seat, or usage capacity. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open the voice-creation chooser on a tier below Creator",
+    "observed": "Professional Voice Clone remains visible among the methods with its realism claim, clean-audio input requirement and duration badge. The method is disabled, and an attached lock row explicitly identifies Creator as the minimum tier with a Subscribe action.",
+    "nextState": "The gate and Subscribe action were observed; this Subscribe branch was not followed.",
+    "limit": "The Starter account establishes a potential paid expansion context. No claim is made about clone quality, subscription destination or successful unlocking.",
+    "copy": [
+      "Professional Voice Clone",
+      "Create the most realistic digital replica of your voice. Requires at least 30 minutes of clean audio.",
+      "You need to be on at least the Creator plan to use Professional Voice Cloning.",
+      "Subscribe"
+    ],
+    "evidenceIds": [
+      "10-create-voice-pathways"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/home"
+  },
+  {
+    "id": "el-voice-design-prompt-starters",
+    "title": "Start from a voice prompt",
+    "summary": "Editable examples teach voice prompting and show the cost before generation.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Create voice → Voice Design → prompt example",
+    "flowGroup": "Voice creation",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing paid user trying a voice-design capability",
+      "journey": "Create voice → Voice Design → prompt example",
+      "mechanisms": [
+        "Reduce blank-page effort",
+        "Teach useful prompting through a worked example",
+        "Expose generation cost before action"
+      ],
+      "format": "Prompt-entry dialog with example chips",
+      "measure": "Successful usable voice creation after starting from a prompt example, alongside rewrite and retry rates; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Choose Voice Design in the creation-method selector",
+    "observed": "The modal opens with a detailed sample prompt describing vocal character and delivery. Example chips and a Randomize control offer alternative starting points. A Best practices link sits beside the prompt, and Generate voice displays a credit cost.",
+    "nextState": "Selecting Little Mouse replaced the prompt with that example. Generate displayed a cost of 171 credits; generation was not submitted.",
+    "limit": "Prompt replacement is directly observed. No voice result, quality improvement or credit debit was tested. This is feature adoption for an existing account rather than verified new-user activation.",
+    "copy": [
+      "Voice Design",
+      "Prompt",
+      "Best practices",
+      "Evil Ogre",
+      "Little Mouse",
+      "Southern Woman",
+      "Generate voice",
+      "Settings"
+    ],
+    "evidenceIds": [
+      "11-voice-design-starters"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/home"
+  },
+  {
+    "id": "el-instant-clone-guided-prerequisites",
+    "title": "Guide clone setup",
+    "summary": "An upload step explains prerequisites, recording quality, and the remaining setup sequence.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Create voice → Instant Voice Clone → audio upload",
+    "flowGroup": "Voice creation",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing paid user setting up an instant voice clone",
+      "journey": "Create voice → Instant Voice Clone → audio upload",
+      "mechanisms": [
+        "Set expectations for the setup journey",
+        "Prevent unsuitable input before submission",
+        "Offer alternative ways to supply required material"
+      ],
+      "format": "Three-step setup dialog",
+      "measure": "Completed usable clone setup and input-related failure rate, with time to useful output; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Choose Instant Voice Clone",
+    "observed": "A three-step outline shows Upload Audio, Voice Information and Finish up. The first step provides recording-quality tips, an upload target, a Record audio alternative, a visible ten-second minimum and a disabled Next control until an input is supplied.",
+    "nextState": "The upload step was inspected. No audio was uploaded or recorded, and the later information and completion steps were not reached.",
+    "limit": "Only the first step and the visible names of later steps were observed. Validation after upload, consent requirements and the completed clone experience remain uninspected.",
+    "copy": [
+      "Instant Voice Clone",
+      "Upload Audio",
+      "Voice Information",
+      "Finish up",
+      "Avoid noisy environments",
+      "Check microphone quality",
+      "Use consistent equipment",
+      "Click to upload, or drag and drop",
+      "Record audio",
+      "10 seconds of audio required",
+      "Next"
+    ],
+    "evidenceIds": [
+      "12-instant-clone-onboarding"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/home"
+  },
+  {
+    "id": "el-curated-voice-discovery",
+    "title": "Find a suitable voice",
+    "summary": "Use-case collections and previews narrow a large voice library to relevant options.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Voices → Explore → relevant voice or collection",
+    "flowGroup": "Voice discovery",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing user choosing voices for a creation task",
+      "journey": "Voices → Explore → relevant voice or collection",
+      "mechanisms": [
+        "Reduce the size of the choice set",
+        "Match discovery to a use case",
+        "Let users evaluate a voice before committing it to work"
+      ],
+      "format": "Curated library with filters and preview controls",
+      "measure": "Useful voice selection followed by successful creation, plus time from discovery to a suitable voice; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Voice Library Explore",
+    "observed": "Explore presents Trending voices, use-case filters and a Handpicked for your use case collection row. Collections connect choices to v4, TikTok and conversational work. Public voice previews and Add actions were available; My Voices exposed Use actions. A collections tip and voice-availability education were also encountered. In the live inspection, a notice titled Watchout for notice period explained continued availability after a voice owner removes it; that notice is not visible in the saved overview frame.",
+    "nextState": "Discovery and saved-voice surfaces were inspected. Add and Use actions were not activated.",
+    "limit": "Trending and Handpicked are visible product labels; their ranking logic is unknown. No voice was added. The availability notice is recorded as education, not evidence of user retention or supplier continuity. Earnings navigation alone is not treated as a growth pattern. The notice may reassure consumers about continuity, but supplier-retention effects and the precise availability terms were not established.",
+    "copy": [
+      "Explore",
+      "My Voices",
+      "Trending voices",
+      "Handpicked for your use case",
+      "Great voices for Eleven v4",
+      "Popular Tiktok voices",
+      "Studio-Quality Conversational Voices",
+      "Add",
+      "Use"
+    ],
+    "evidenceIds": [
+      "13-voice-library-discovery"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/voice-library"
+  },
+  {
+    "id": "el-inspiration-to-populated-project",
+    "title": "Start from a complete example",
+    "summary": "Selecting an inspiration creates an editable project with existing media and a populated timeline.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Studio Inspirations → Film trailer sample → populated editor",
+    "flowGroup": "Studio",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing user exploring Studio workflows",
+      "journey": "Studio Inspirations → Film trailer sample → populated editor",
+      "mechanisms": [
+        "Demonstrate an achievable outcome",
+        "Remove initial setup work",
+        "Teach through a complete editable example"
+      ],
+      "format": "Inspiration gallery leading to a populated project",
+      "measure": "Meaningful adaptation or completed output from a copied inspiration, rather than counting draft creation alone; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Select Film trailer in the Inspirations gallery",
+    "observed": "An outcome-oriented gallery offers examples such as a film trailer, explainer, product video and audio documentary. Selecting Film trailer immediately created a copied draft with an existing media library, preview and populated multitrack timeline.",
+    "nextState": "The populated Film trailer (Copy) draft opened. Its Share and Export entry points were inspected; no generation or export was performed.",
+    "limit": "Clicking the sample created a draft as a side effect, rather than opening a view-only preview. No generation or spending was initiated. The sample demonstrates available structure, not the user's own work or a measured adoption effect.",
+    "copy": [
+      "Inspirations",
+      "Film trailer",
+      "Explainer video",
+      "Product video",
+      "Audio documentary",
+      "How to tutorial",
+      "Audio podcast",
+      "Captions",
+      "Film trailer (Copy)"
+    ],
+    "evidenceIds": [
+      "14-studio-inspirations",
+      "15-studio-template-project"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/studio/templates"
+  },
+  {
+    "id": "el-studio-agent-task-starters",
+    "title": "Suggest an assistant task",
+    "summary": "Concrete starter prompts explain what a project assistant can help with.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Studio project → Studio Agent panel",
+    "flowGroup": "Studio",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing user in a Studio project who has not started an agent conversation",
+      "journey": "Studio project → Studio Agent panel",
+      "mechanisms": [
+        "Explain capability through concrete starting tasks",
+        "Reduce uncertainty about what to ask",
+        "Make the visible action-permission setting part of the entry state"
+      ],
+      "format": "Assistant-panel empty state and prompt suggestions",
+      "measure": "Useful agent-assisted project progress after a starter prompt, with credit cost and unwanted actions monitored; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "View the Studio Agent's empty conversation panel",
+    "observed": "The panel explains that the agent can inspect the library and help think through the project. Three suggested prompts propose inventory, planning and visual-style tasks. The composer exposes an Auto under 300 credits permission setting beside its input.",
+    "nextState": "The empty-state suggestions and permission label were inspected. No suggestion or agent prompt was submitted.",
+    "limit": "The permission label is observed; its detailed rules and enforcement were not tested. No claim is made that an agent task would be free or would remain within a budget.",
+    "copy": [
+      "Direct the Studio Agent",
+      "Describe what you want. The agent can look through your library and help you think through the project.",
+      "What's in my library?",
+      "Help me plan this project",
+      "Suggest a visual style",
+      "Describe what you want to create...",
+      "Auto under 300 credits"
+    ],
+    "evidenceIds": [
+      "15-studio-template-project"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/studio"
+  },
+  {
+    "id": "el-project-context-collaboration-invite",
+    "title": "Invite while sharing",
+    "summary": "A team invitation appears beside access controls when sharing a project.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Studio project → Share project",
+    "flowGroup": "Collaboration",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing user reviewing access to a Studio project",
+      "journey": "Studio project → Share project",
+      "mechanisms": [
+        "Prompt collaboration at a concrete project handoff",
+        "Connect the invitation to work already available to discuss"
+      ],
+      "format": "Project-sharing dialog with invitation card",
+      "measure": "Invited collaborators who subsequently view or comment usefully on the project; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Share on the populated Studio draft",
+    "observed": "The sharing modal embeds an Invite team members card beneath a user/group search, placing the collaboration proposition next to project access decisions. Workspace access was Restricted and public access No Access. Viewer and Commenter options were visible when inspecting access choices.",
+    "nextState": "Access options were inspected without selecting a new level. No invitation was sent and no public access was enabled.",
+    "limit": "This is a contextual placement of the Basic Seats collaboration theme, linked to a project handoff rather than a new invitation mechanism. Access controls alone are ordinary product functionality. Referral or external distribution cannot be inferred from an unactivated public-access option.",
+    "copy": [
+      "Share project",
+      "Choose who in your workspace can access this project.",
+      "Search for users or groups",
+      "Invite team members",
+      "Bring your team in to collaborate and share your creations.",
+      "Workspace Access",
+      "Restricted",
+      "Public access",
+      "No Access",
+      "Viewer",
+      "Commenter"
+    ],
+    "evidenceIds": [
+      "16-studio-sharing"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/studio"
+  },
+  {
+    "id": "el-flows-first-visit-introduction",
+    "title": "Introduce a new workflow",
+    "summary": "A short benefits modal explains the Flows canvas before its first setup action.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Open Flows → introductory modal → Get started",
+    "flowGroup": "Flows",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing paid customer entering Flows for the first time during this inspection",
+      "journey": "Open Flows → introductory modal → Get started",
+      "mechanisms": [
+        "Introduce the workflow's mental model",
+        "Explain the benefit before asking for setup",
+        "Give a clear entry action"
+      ],
+      "format": "First-visit feature introduction modal",
+      "measure": "First useful connected workflow completed after the introduction, followed by repeat use; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Flows",
+    "observed": "An Introducing Flows modal combines a connected-node example with three benefits: linking image/video/audio generation, working on an infinite canvas, and accessing multiple models without switching tools. A single Get started button advances from the introduction.",
+    "nextState": "Get started was clicked. No node workflow was created or run in this evidence set.",
+    "limit": "The introduction was observed on this visit; its targeting, repeat-display rules and model availability claims were not independently verified. Existing-account feature onboarding is classified as engagement rather than first-product activation.",
+    "copy": [
+      "Introducing Flows",
+      "Add & connect nodes for image, video, and audio generation",
+      "Visually create your content on an infinite canvas",
+      "Access to all the popular AI models without switching tools",
+      "Get started"
+    ],
+    "evidenceIds": [
+      "18-flows-feature-intro"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/flows"
+  },
+  {
+    "id": "el-music-browse-or-create",
+    "title": "Browse or create music",
+    "summary": "Curated tracks sit beside prompt suggestions, model guidance, and generation costs.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Music Marketplace → browse a use case or start a prompt",
+    "flowGroup": "Music",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing paid user seeking music for a creative task",
+      "journey": "Music Marketplace → browse a use case or start a prompt",
+      "mechanisms": [
+        "Reduce discovery effort through use-case curation",
+        "Offer task examples and prompt assistance",
+        "Explain a model change where it is used"
+      ],
+      "format": "Music marketplace, generator, and contextual tooltip",
+      "measure": "Successful use of a suitable track from browsing or generation, with time and credit cost to useful output; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Music",
+    "observed": "The marketplace combines public track previews with use-case collections and genre, instrument and mood discovery. A nearby generator offers prompt chips, visible generation settings, automatic prompt improvement shown on and a pre-action cost estimate. An anchored tooltip introduces the new default Music v2.5 model.",
+    "nextState": "The browse and generator entry were inspected. A cost of 1,800 credits was displayed beside an inactive generation action; no generation, download or publication was initiated.",
+    "limit": "Prompt chips and the improvement setting were visible, but their transformations and model-quality claims were not tested. The cause of the inactive generation control was not established. A filled or example-like input is not assumed to be a product-provided starter.",
+    "copy": [
+      "Marketplace",
+      "Upbeat synthwave",
+      "Acoustic folk ballad",
+      "Energetic electronic dance",
+      "Corporate",
+      "Cinematic",
+      "Podcasts",
+      "Genre",
+      "Instrument",
+      "Mood",
+      "Music v2.5 model is here",
+      "Now on by default. Richer vocals, cleaner production, sharper sound."
+    ],
+    "evidenceIds": [
+      "19-music-discovery"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/music"
+  },
+  {
+    "id": "el-sound-effects-community-reuse",
+    "title": "Reuse community sounds",
+    "summary": "Public effects support discovery while a creation disclosure explains potential community sharing.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Sound Effects Explore → discover effects or create a shareable output",
+    "flowGroup": "Speech & sound",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing creators and consumers of sound effects",
+      "journey": "Sound Effects Explore → discover effects or create a shareable output",
+      "mechanisms": [
+        "Let existing outputs help the next creator",
+        "Make reusable examples discoverable",
+        "Explain a contribution-to-library pathway at creation"
+      ],
+      "format": "Sound library and inline sharing disclosure",
+      "measure": "Generated contributions that receive useful downstream reuse, alongside contributor understanding of sharing and opt-out; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Sound Effects Explore",
+    "observed": "Explore displays public effects with preview controls, categories, trending selection and download counts. The creation composer suggests prompt dimensions such as material and resonance and shows a cost estimate. A disclosure says generated outputs may appear in Explore for others to download, with Disable visible beside it.",
+    "nextState": "Public discovery and the sharing disclosure were inspected. Disable was not clicked; no new sound effect was generated or downloaded.",
+    "limit": "The sharing pathway is observed in disclosure, not through a completed publication. The existing prompt's origin is unknown and is not treated as a starter. Internal reuse does not by itself establish acquisition, referral or a proven growth loop. Personal balances are omitted.",
+    "copy": [
+      "Explore",
+      "Trending",
+      "Downloads",
+      "Object material",
+      "Surface material",
+      "Resonance detail",
+      "Generations may be shared to Explore page for other users to download.",
+      "Disable"
+    ],
+    "evidenceIds": [
+      "20-sound-effects-starters"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/sound-effects"
+  },
+  {
+    "id": "el-image-video-example-to-action",
+    "title": "Build from visual examples",
+    "summary": "Image and video examples offer starting actions that connect to creation tools.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Image & Video introduction → Explore → example actions",
+    "flowGroup": "Image & Video",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing paid customer exploring image and video creation",
+      "journey": "Image & Video introduction → Explore → example actions",
+      "mechanisms": [
+        "Demonstrate possibilities before asking for an original idea",
+        "Provide actions that carry an example into creation",
+        "Connect adjacent creative tools"
+      ],
+      "format": "Feature introduction and actionable sample gallery",
+      "measure": "Useful outputs or meaningful adaptations started from examples, rather than gallery clicks alone; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Enter Image & Video and inspect the Explore gallery",
+    "observed": "A first-entry modal explains switching between image and video, model access, upscaling and lip sync. The Explore page supplies output examples and creation starters. In live inspection, examples exposed Edit, Recreate, Reference, Video, Open Studio and Extend actions.",
+    "nextState": "The introduction and gallery were inspected. The example actions were visible but not activated; no generation or Studio transfer was initiated.",
+    "limit": "The saved overview captures the gallery and composer; the listed example actions come from the live inspection and are not all visible in that frame. Their resulting inputs, permissions, costs and output behavior remain untested. The introductory modal repeats the benefit-summary pattern also seen in Flows.",
+    "copy": [
+      "Introducing Image & Video",
+      "Switch seamlessly between Image and Video",
+      "Access to popular models in one click",
+      "Upscale, Lip Sync and more all in the same flow",
+      "Get started",
+      "Surreal Landscape",
+      "Steampunk City",
+      "Enchanted Forest",
+      "Edit",
+      "Recreate",
+      "Reference",
+      "Open Studio",
+      "Extend"
+    ],
+    "evidenceIds": [
+      "21-image-video-entry",
+      "22-image-video-discovery"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/image-video?modality=video"
+  },
+  {
+    "id": "el-dubbing-launch-sample-entry",
+    "title": "Preview a new capability",
+    "summary": "A dubbing announcement pairs benefit statements with samples and a direct start action.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Dubbing launch modal → samples or creation entry",
+    "flowGroup": "Dubbing",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing user encountering the Dubbing v2 alpha announcement",
+      "journey": "Dubbing launch modal → samples or creation entry",
+      "mechanisms": [
+        "Translate a technical release into user benefits",
+        "Offer evaluation before committing source material",
+        "Provide a direct setup route"
+      ],
+      "format": "Launch modal with sample and setup actions",
+      "measure": "Successful useful dubbing after the introduction, segmented by sample evaluation versus direct start; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Dubbing",
+    "observed": "The launch modal explains preservation of emotion and delivery, natural phrasing in 92 languages and automatic voice cloning and sync. It offers both Play samples and Get started.",
+    "nextState": "The introduction was dismissed and an upload or URL-based entry was inspected. Samples were not played and no source was submitted.",
+    "limit": "Language coverage and output quality are product claims in the announcement, not independently verified results. This is the launch-introduction family also seen in Flows and Image & Video, with an additional sample-evaluation action; it is not a new taxonomy category.",
+    "copy": [
+      "Introducing Dubbing v2 alpha",
+      "Preserves the emotion and delivery of the original speaker",
+      "Adapts phrasing to sound natural in 92 languages",
+      "Automatic voice cloning and sync",
+      "Play samples",
+      "Get started"
+    ],
+    "evidenceIds": [
+      "23-dubbing-launch"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/dubbing"
+  },
+  {
+    "id": "el-audiobook-create-or-publish",
+    "title": "Choose production or publishing",
+    "summary": "Two audiobook pathways distinguish exportable audio from publishing and potential earnings.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Audiobooks → Create an Audiobook or Publish to ElevenReader",
+    "flowGroup": "Audiobooks",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing user considering audiobook creation or contributing a book to ElevenReader",
+      "journey": "Audiobooks → Create an Audiobook or Publish to ElevenReader",
+      "mechanisms": [
+        "Help users choose a path by intended outcome",
+        "Expose the setup sequence and narration trade-off",
+        "Motivate new content contribution with distribution and earnings"
+      ],
+      "format": "Pathway cards and guided setup dialogs",
+      "measure": "Completed useful audiobook production or published books receiving meaningful readership, with the two paths measured separately; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Audiobooks and inspect both entry paths",
+    "observed": "Two top-level cards distinguish producing exportable audio from publishing an eBook with free dynamic narration and an earnings proposition. Creation shows Upload, Formatting, Voice and Pronunciations, explains Single cast versus new Multi cast narration and presents the v4 model. Publishing accepts a document or URL and offers Create and preview book.",
+    "nextState": "Both setup dialogs were inspected. No file or URL was submitted and no book or audio project was created.",
+    "limit": "The pathway screenshot intentionally shows only the top context. Later formatting, voice, pronunciation, preview, publication and payout states are unobserved. Creator earnings are not the same as ElevenLabs purchase monetization; downstream reader acquisition and supplier retention remain hypotheses.",
+    "copy": [
+      "Create an Audiobook",
+      "Create high-quality audio to export and distribute everywhere",
+      "Publish to ElevenReader",
+      "Upload your eBook to ElevenReader with free dynamic narration, start earning",
+      "Upload",
+      "Formatting",
+      "Voice",
+      "Pronunciations",
+      "Single cast",
+      "One narrator voice for the entire book.",
+      "Multi cast",
+      "Distinct voices for narrator and each character.",
+      "Create and preview book"
+    ],
+    "evidenceIds": [
+      "24-audiobook-pathways",
+      "25-audiobook-setup",
+      "26-publish-to-reader"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/audiobooks"
+  },
+  {
+    "id": "el-voice-supplier-earnings-checklist",
+    "title": "Guide contributor setup",
+    "summary": "An earnings proposition becomes a three-step voice contribution checklist.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Voices Earnings → professional clone → payout setup → publish",
+    "flowGroup": "Creator earnings",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [
+        "expansion"
+      ],
+      "audience": "Existing paid Starter customer exploring the voice-supplier role",
+      "journey": "Voices Earnings → professional clone → payout setup → publish",
+      "mechanisms": [
+        "Offer an economic reason to contribute supply",
+        "Break setup into explicit prerequisites",
+        "Connect a supplier capability to a required paid tier"
+      ],
+      "format": "Contributor onboarding checklist",
+      "measure": "Eligible voices published and subsequently used by paying consumers, with contributor earnings and repeat participation assessed separately; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Voices Earnings Payouts",
+    "observed": "The page promises earnings when a published voice is used by a paid user, then presents a zero-of-three checklist: create a Professional Voice Clone, create a payout account and publish the voice. The first step has a Create Voice action. The previously inspected creation chooser requires Creator for Professional Voice Cloning.",
+    "nextState": "The checklist and linked capability requirement were inspected. No clone, payout account or published voice was created.",
+    "limit": "The growth classification is adoption of a supplier role within an existing account; first supplier value has not been reached. The Creator requirement supports a secondary expansion hypothesis, not proof that the earnings page causes upgrades. Repeat earnings might support supplier retention, but no continuity effect or payout amount is established here.",
+    "copy": [
+      "Record your voice. Get paid.",
+      "Publish your voice to the Voice Library and earn every time it is used by a paid user.",
+      "Get Started",
+      "Create a Professional Voice Clone",
+      "Create Payout Account",
+      "Publish Your Voice",
+      "Complete the onboarding steps to start earning."
+    ],
+    "evidenceIds": [
+      "29-voice-earnings-entry",
+      "10-create-voice-pathways"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/voices-earnings/payouts"
+  },
+  {
+    "id": "el-demand-guided-voice-supply",
+    "title": "Show unmet demand",
+    "summary": "A ranked opportunities table helps voice contributors identify gaps in the marketplace.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Voices Earnings → Opportunities",
+    "flowGroup": "Creator earnings",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Potential or existing voice suppliers looking for a useful contribution opportunity",
+      "journey": "Voices Earnings → Opportunities",
+      "mechanisms": [
+        "Reduce uncertainty about where to contribute",
+        "Direct supplier effort toward apparent gaps in the marketplace"
+      ],
+      "format": "Supply-opportunity table with demand indicators",
+      "measure": "New qualified supply in previously under-served segments and subsequent consumer use, alongside supplier value; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Opportunities under Voices Earnings",
+    "observed": "A ranked table describes voice segments by language, accent and use-case category, alongside current library-voice counts and an Opportunity Score with directional indicators. The introduction frames the list as high-demand, low-competition opportunities.",
+    "nextState": "The opportunity table was inspected. No segment row was followed and no voice was created for a listed gap.",
+    "limit": "Scores and demand claims are product-provided signals; their definition, freshness and predictive quality were not verified. Better marketplace matching and supplier retention are possible downstream outcomes, not observed results.",
+    "copy": [
+      "Opportunities",
+      "Discover voices in high demand and low competition.",
+      "Language",
+      "Accent",
+      "Category",
+      "Library voices",
+      "Opportunity Score"
+    ],
+    "evidenceIds": [
+      "30-voice-supply-opportunities"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/voices-earnings/library-gaps"
+  },
+  {
+    "id": "el-affiliate-advocacy-entry",
+    "title": "Reward recommendations",
+    "summary": "An affiliate offer explains rewards and gives established creators a separate partnership route.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Account menu → ElevenLabs Affiliate Program",
+    "flowGroup": "Referral",
+    "growth": {
+      "primary": "referral",
+      "secondary": [],
+      "audience": "Existing users interested in recommending the product, including creators with an established following",
+      "journey": "Account menu → ElevenLabs Affiliate Program",
+      "mechanisms": [
+        "Reward advocacy and referral",
+        "Segment potential partners by audience reach",
+        "Explain the external program handoff"
+      ],
+      "format": "Affiliate-program dialog",
+      "measure": "Qualified referred customers who activate or purchase, alongside affiliate quality and acquisition cost; proposed, not measured.",
+      "basis": "The explicit recommendation reward supports advocacy and new-user distribution. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Choose Become an affiliate from the account menu",
+    "observed": "The modal offers earnings for recommendations and a program information link. Established creators are directed to a contact route for exclusive opportunities. A PartnerStack panel explains third-party management and terms before the sign-up action.",
+    "nextState": "The affiliate modal was inspected. No program sign-up, contact message or third-party handoff was initiated.",
+    "limit": "Commission structure, eligibility, attribution, acceptance and actual referred conversions were not inspected. The visible offer is sufficient to identify referral intent but not its effectiveness.",
+    "copy": [
+      "ElevenLabs Affiliate Program",
+      "Become an affiliate and earn with every recommendation.",
+      "Are you an established creator?",
+      "If you have a large following, contact us for exclusive opportunities.",
+      "PartnerStack",
+      "Sign up for the affiliate program"
+    ],
+    "evidenceIds": [
+      "31-affiliate-program",
+      "04-account-upgrade"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/home"
+  },
+  {
+    "id": "el-product-switcher-positioning",
+    "title": "Explain adjacent products",
+    "summary": "A product switcher describes each platform by the job it helps people do.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Platform switcher",
+    "flowGroup": "Platforms, Agents & API",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [],
+      "audience": "Existing ElevenCreative user considering another product in the suite",
+      "journey": "Platform switcher",
+      "mechanisms": [
+        "Use job-based positioning to introduce adjacent products",
+        "Keep product discovery inside the existing account"
+      ],
+      "format": "Product-switcher menu",
+      "measure": "Qualified adjacent-product starts and first successful use after switching; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open the persistent platform switcher",
+    "observed": "The menu describes three products by their jobs: creating and localizing content, deploying conversational agents, and building with audio models. Selecting ElevenAgents entered the same account and eventually opened its onboarding template gallery.",
+    "nextState": "ElevenAgents opened; no agent was created or deployed.",
+    "limit": "The switch and onboarding were observed. Cross-product activation, paid conversion and shared entitlements were not established by this interaction.",
+    "copy": [
+      "ElevenCreative",
+      "ElevenAgents",
+      "ElevenAPI"
+    ],
+    "evidenceIds": [
+      "32-platform-switcher",
+      "33-agents-get-started"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/home"
+  },
+  {
+    "id": "el-agents-template-assisted-onboarding",
+    "title": "Start an agent from a template",
+    "summary": "Use-case templates and a contextual assistant help users choose a first agent setup.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "ElevenAgents → onboarding templates",
+    "flowGroup": "Platforms, Agents & API",
+    "growth": {
+      "primary": "activation",
+      "secondary": [
+        "engagement"
+      ],
+      "audience": "Existing ElevenLabs user entering first-agent onboarding",
+      "journey": "ElevenAgents → onboarding templates",
+      "mechanisms": [
+        "Translate an abstract platform into concrete jobs",
+        "Make setup options and integration complexity visible",
+        "Offer contextual assistance before configuration"
+      ],
+      "format": "Onboarding template gallery with assistant panel",
+      "measure": "First tested agent by entry template, time to first test, and configuration abandonment; proposed, not measured.",
+      "basis": "Activation refers to first useful use of the adjacent Agents product or API, not new account signup. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Switch to ElevenAgents; the app redirects to a URL marked onboarding",
+    "observed": "An onboarding template gallery appeared with industry/use-case filters, a blank-agent alternative, task-specific descriptions and integration counts. The Architect side panel welcomed the user and offered to help choose a starting template based on the intended job. A workflow preview is visible alongside the gallery with Use template and View details actions.",
+    "nextState": "The gallery and welcome panel were inspected. No template, blank-agent creation, assistant message, integration or call was initiated.",
+    "limit": "Activation is specific to the new Agents product, not new account signup. The template editor, test call, deployment and post-activation prompts remain unobserved.",
+    "copy": [
+      "Browse templates",
+      "Create Blank Agent",
+      "Customer Support",
+      "Language Practice Tutor"
+    ],
+    "evidenceIds": [
+      "33-agents-get-started"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/agents/templates?onboarding=true&trigger=onboarding"
+  },
+  {
+    "id": "el-api-first-request-scaffold",
+    "title": "Scaffold a first API request",
+    "summary": "A code example sits beside documentation, API prerequisites, and useful next actions.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Developers → Overview",
+    "flowGroup": "Platforms, Agents & API",
+    "growth": {
+      "primary": "activation",
+      "secondary": [
+        "engagement"
+      ],
+      "audience": "Existing product user considering first API use",
+      "journey": "Developers → Overview",
+      "mechanisms": [
+        "Reduce the gap between reading documentation and first successful use",
+        "Co-locate prerequisites and next actions"
+      ],
+      "format": "Developer quickstart and contextual links",
+      "measure": "First successful authenticated request after overview entry; proposed, not measured.",
+      "basis": "Activation refers to first useful use of the adjacent Agents product or API, not new account signup. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Developers from the application navigation",
+    "observed": "A developer quickstart includes a visible code example, language selector, Copy code and documentation route. Nearby quick links lead to API keys, model information, SDKs and pricing. A Speech Engine banner positions another API use case.",
+    "nextState": "Overview and billing previews inspected; no code executed and no API key created or revealed.",
+    "limit": "The sample was not validated or run. A first API request and its onboarding follow-up are unobserved.",
+    "copy": [
+      "Developer quickstart",
+      "Copy code",
+      "Create an API Key",
+      "Build voice agents with Speech Engine"
+    ],
+    "evidenceIds": [
+      "34-developer-quickstart"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/developers"
+  },
+  {
+    "id": "el-api-topup-amount-scaffold",
+    "title": "Preview a credit purchase",
+    "summary": "Amount presets and a resulting-balance preview make additional capacity concrete.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Developers → Add credits",
+    "flowGroup": "Platforms, Agents & API",
+    "growth": {
+      "primary": "expansion",
+      "secondary": [],
+      "audience": "Existing paid account considering additional API capacity",
+      "journey": "Developers → Add credits",
+      "mechanisms": [
+        "Reduce amount-selection effort",
+        "Translate spend into capacity",
+        "Clarify the immediate purchase outcome"
+      ],
+      "format": "Credit top-up dialog",
+      "measure": "Completed top-ups, amount choice and payment abandonment, with unwanted-spend complaints; proposed, not measured.",
+      "basis": "The observed paid-account context supports an increase in plan, seat, or usage capacity. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Add credits from the developer overview",
+    "observed": "The dialog shows a currency-to-credit conversion, an editable amount, three preset amounts and the balance after topping up. It discloses possible tax and payment-processing delay before the final Add credits action.",
+    "nextState": "The dialog was captured and cancelled. No preset, amount edit or final payment action was submitted.",
+    "limit": "Amounts and currency reflect this account and observation date. Payment checkout, success and usage effects were not tested.",
+    "copy": [
+      "Top up by",
+      "After top up",
+      "Add credits"
+    ],
+    "evidenceIds": [
+      "35-api-credit-topup"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/developers"
+  },
+  {
+    "id": "el-api-auto-topup-continuity",
+    "title": "Prevent capacity interruption",
+    "summary": "Automatic replenishment offers a balance threshold and an optional spending cap.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "Developers → Auto Top Up",
+    "flowGroup": "Platforms, Agents & API",
+    "growth": {
+      "primary": "retention",
+      "secondary": [
+        "expansion"
+      ],
+      "audience": "API user seeking continuity when prepaid capacity runs low",
+      "journey": "Developers → Auto Top Up",
+      "mechanisms": [
+        "Prevent capacity interruption through optional replenishment",
+        "Expose a user-controlled budget limit"
+      ],
+      "format": "Automatic top-up configuration dialog",
+      "measure": "Capacity-related interruptions and retained API usage, balanced against budget overruns and disputes; proposed, not measured.",
+      "basis": "Optional replenishment suggests continuity of existing API usage; that retention effect remains a hypothesis. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open Auto Top Up from the developer overview",
+    "observed": "A setup dialog explains automatic funding below a balance threshold. Its switch is off, associated fields are disabled, and the controls include top-up amount, triggering threshold and optional monthly spend cap. The cap can be left blank for no limit.",
+    "nextState": "The off-state dialog was captured and cancelled. Automatic charging remains off; Save was not clicked.",
+    "limit": "Retention is a hypothesized continuity mechanism, not measured behavior. Threshold execution, cap enforcement, alerts and billing outcomes were not tested.",
+    "copy": [
+      "Automatic Top up",
+      "Monthly spend cap (leave blank for no limit)",
+      "Save"
+    ],
+    "evidenceIds": [
+      "36-api-auto-topup"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/developers"
+  },
+  {
+    "id": "el-api-time-bounded-model-offer",
+    "title": "Time a model offer",
+    "summary": "A dated price promotion gives users an incentive to consider a new API model.",
+    "collectionId": "elevenlabs",
+    "sourceName": "ElevenLabs",
+    "addedAt": "2026-10-04",
+    "flow": "ElevenAPI → Model Pricing",
+    "flowGroup": "Platforms, Agents & API",
+    "growth": {
+      "primary": "engagement",
+      "secondary": [
+        "expansion"
+      ],
+      "audience": "Existing account comparing API model use and cost",
+      "journey": "ElevenAPI → Model Pricing",
+      "mechanisms": [
+        "Give model trial a time-bounded economic incentive",
+        "Compare discounted and reference unit prices",
+        "Connect capacity needs to a subscription ladder"
+      ],
+      "format": "Model-pricing cards with dated offer",
+      "measure": "New-model trial and continued usage after the offer, with effective cost per successful task; proposed, not measured.",
+      "basis": "The observed existing-user journey supports feature discovery or deeper product use. Mechanism and proposed measures are analytical hypotheses; impact is unmeasured."
+    },
+    "trigger": "Open API Pricing from Developers",
+    "observed": "The v4 and v4 Turbo cards combine a New label, crossed-out per-character price, discounted price and a 72% off until Oct 12 message. Each also lists use-case benefits. The page explains that higher concurrency, quality and voice cloning require an ElevenCreative or ElevenAgents subscription.",
+    "nextState": "Pricing was inspected; no purchase or API use followed.",
+    "limit": "This is an observed promotional claim on 4 October 2026, not verified savings or a promise of current pricing. The page labels these business-tier starting prices and excludes taxes.",
+    "copy": [
+      "New",
+      "72% off until Oct 12",
+      "Model Pricing"
+    ],
+    "evidenceIds": [
+      "37-api-plan-ladder"
+    ],
+    "sourceUrl": "https://elevenlabs.io/app/subscription/api"
+  }
+]

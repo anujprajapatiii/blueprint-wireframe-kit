@@ -1,14 +1,32 @@
-import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowUpRight, Maximize2, RotateCcw } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Maximize2,
+  RotateCcw,
+  Route,
+  X,
+} from "lucide-react";
+import {
+  GrowthLegend,
+  isGrowthGuideMessage,
+  sendGrowthGuide,
+} from "../components/growth-education";
 import {
   Button,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
 } from "../components/kit";
 import type { Experiment } from "./registry";
 import { DesignIntent } from "../components/design-intent";
+import { ReferenceViewer } from "../components/reference-viewer";
 import {
   experimentReferences,
   referenceAssetUrl,
@@ -27,7 +45,7 @@ function currentMode(): ViewMode {
 function directoryHref() {
   const current = new URLSearchParams(location.search);
   const params = new URLSearchParams({ view: "experiments" });
-  for (const key of ["q", "goal", "type", "sort"]) {
+  for (const key of ["q", "goal", "type", "source", "sort"]) {
     const value = current.get(key);
     if (value) params.set(key, value);
   }
@@ -40,6 +58,11 @@ function wireframeHref(id: string) {
     experiment: id,
     embed: "1",
   });
+  const current = new URLSearchParams(location.search);
+  for (const key of ["q", "source", "goal", "type", "sort"]) {
+    const value = current.get(key);
+    if (value) params.set(key, value);
+  }
   if (
     import.meta.env.DEV &&
     new URLSearchParams(location.search).get("tune") === "1"
@@ -147,10 +170,34 @@ export function ExperimentWorkspace({
     () => currentMode() === "wireframe",
   );
   const references = experimentReferences[experiment.id] ?? [];
-  const [assetId, setAssetId] = useState(references[0]?.id ?? "");
+  const [assetId, setAssetId] = useState(
+    () =>
+      new URLSearchParams(location.search).get("reference") ??
+      references[0]?.id ??
+      "",
+  );
+  const [restart, setRestart] = useState(0);
+  const frameRef = useRef<HTMLIFrameElement>(null);
+  const guideButtonRef = useRef<HTMLButtonElement>(null);
+  const [guideActive, setGuideActive] = useState(false);
+  const [growthCount, setGrowthCount] = useState(0);
   const selectedAsset =
     references.find((asset) => asset.id === assetId) ?? references[0];
   const frameHref = wireframeHref(experiment.id);
+
+  useEffect(() => {
+    const receive = (event: MessageEvent) => {
+      if (!isGrowthGuideMessage(event, frameRef.current)) return;
+      if (typeof event.data.active === "boolean")
+        setGuideActive(event.data.active);
+      if (typeof event.data.count === "number")
+        setGrowthCount(event.data.count);
+      if (event.data.focus)
+        guideButtonRef.current?.focus({ preventScroll: true });
+    };
+    window.addEventListener("message", receive);
+    return () => window.removeEventListener("message", receive);
+  }, []);
 
   useEffect(() => {
     const syncMode = () => {
@@ -164,11 +211,19 @@ export function ExperimentWorkspace({
 
   function changeMode(value: string) {
     const next = value as ViewMode;
+    if (next === "reference") sendGrowthGuide(frameRef.current, "stop");
     setMode(next);
     if (next === "wireframe") setWireframeVisited(true);
     const url = new URL(location.href);
     if (next === "reference") url.searchParams.set("mode", "reference");
     else url.searchParams.delete("mode");
+    history.replaceState(history.state, "", url);
+  }
+
+  function changeReference(value: string) {
+    setAssetId(value);
+    const url = new URL(location.href);
+    url.searchParams.set("reference", value);
     history.replaceState(history.state, "", url);
   }
 
@@ -189,12 +244,27 @@ export function ExperimentWorkspace({
             <TabsTrigger value="reference">Original reference</TabsTrigger>
           </TabsList>
           {mode === "wireframe" && (
-            <Button asChild variant="ghost" className="experiment-fullscreen">
-              <a href={frameHref} target="_blank" rel="noreferrer">
-                <Maximize2 aria-hidden="true" /> Full screen
-                <span className="sr-only"> wireframe (opens in a new tab)</span>
-              </a>
-            </Button>
+            <div className="flex flex-wrap items-center gap-1">
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  setGuideActive(false);
+                  setGrowthCount(0);
+                  setRestart((value) => value + 1);
+                }}
+              >
+                <RotateCcw aria-hidden="true" /> Restart
+              </Button>
+              <Button asChild variant="ghost" className="experiment-fullscreen">
+                <a href={frameHref} target="_blank" rel="noreferrer">
+                  <Maximize2 aria-hidden="true" /> Full screen
+                  <span className="sr-only">
+                    {" "}
+                    wireframe (opens in a new tab)
+                  </span>
+                </a>
+              </Button>
+            </div>
           )}
         </div>
 
@@ -205,11 +275,44 @@ export function ExperimentWorkspace({
           inert={mode !== "wireframe"}
           className="experiment-view-panel"
         >
+          <div className="growth-education-bar">
+            <GrowthLegend />
+            <div className="flex flex-wrap items-center gap-3">
+              {guideActive && (
+                <span className="growth-guide-status" role="status">
+                  Guide on · explore to continue
+                </span>
+              )}
+              <Button
+                ref={guideButtonRef}
+                onPointerDown={(event) => event.preventDefault()}
+                variant="outline"
+                size="sm"
+                disabled={!growthCount && !guideActive}
+                onClick={() =>
+                  sendGrowthGuide(
+                    frameRef.current,
+                    guideActive ? "stop" : "start",
+                  )
+                }
+              >
+                {guideActive ? (
+                  <X aria-hidden="true" />
+                ) : (
+                  <Route aria-hidden="true" />
+                )}
+                {guideActive ? "End guide" : "Guide me"}
+              </Button>
+            </div>
+          </div>
           {wireframeVisited && (
             <iframe
+              ref={frameRef}
+              key={restart}
               className="experiment-wireframe"
               src={frameHref}
               title={`${experiment.title} — interactive wireframe`}
+              onLoad={() => sendGrowthGuide(frameRef.current, "status")}
             />
           )}
         </TabsContent>
@@ -217,21 +320,29 @@ export function ExperimentWorkspace({
           {references.length > 1 && (
             <div className="experiment-reference-picker">
               <label htmlFor="reference-asset">Reference</label>
-              <select
-                id="reference-asset"
-                value={assetId}
-                onChange={(event) => setAssetId(event.target.value)}
-              >
-                {references.map((asset) => (
-                  <option key={asset.id} value={asset.id}>
-                    {asset.title}
-                  </option>
-                ))}
-              </select>
+              <Select value={selectedAsset?.id} onValueChange={changeReference}>
+                <SelectTrigger
+                  id="reference-asset"
+                  className="w-full sm:max-w-96"
+                >
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {references.map((asset) => (
+                    <SelectItem key={asset.id} value={asset.id}>
+                      {asset.title}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           )}
           {selectedAsset ? (
-            <OriginalReference key={selectedAsset.id} asset={selectedAsset} />
+            selectedAsset.private ? (
+              <ReferenceViewer key={selectedAsset.id} asset={selectedAsset} />
+            ) : (
+              <OriginalReference key={selectedAsset.id} asset={selectedAsset} />
+            )
           ) : (
             <div className="experiment-reference-empty">
               <h2 className="text-lg font-semibold">Reference not available</h2>
@@ -252,6 +363,35 @@ export function ExperimentWorkspace({
           className="max-w-4xl pb-6"
         />
       </details>
+      {experiment.id.startsWith("el-") && (
+        <details className="mt-4 rounded-md border border-border bg-card px-5 sm:px-6">
+          <summary className="min-h-14 py-4 text-sm font-medium">
+            About this wireframe
+          </summary>
+          <dl className="max-w-4xl space-y-5 pb-6 text-sm leading-6">
+            {[
+              ["Observed behavior", experiment.observations.join(" ")],
+              ["Prototype scope", experiment.assumptions.join(" ")],
+            ].map(([label, value]) => (
+              <div key={label}>
+                <dt className="font-medium">{label}</dt>
+                <dd className="mt-1 text-muted-foreground">{value}</dd>
+              </div>
+            ))}
+          </dl>
+          {import.meta.env.DEV && (
+            <a
+              className="mb-5 inline-flex min-h-10 items-center text-sm underline underline-offset-4"
+              href={referenceAssetUrl(
+                "__private-references/elevenlabs/elevenlabs-growth-patterns-evidence.zip",
+              )}
+              download
+            >
+              Download original research and all 38 references
+            </a>
+          )}
+        </details>
+      )}
     </main>
   );
 }

@@ -1,0 +1,189 @@
+{
+  "date": "2026-10-04",
+  "routes": [
+    {
+      "id": "el-v4-discovery-to-trial",
+      "targets": 2,
+      "contrast": {
+        "count": 44,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-adjacent-tool-discovery",
+      "targets": 1,
+      "contrast": {
+        "count": 35,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-plan-value-ladder",
+      "targets": 3,
+      "contrast": {
+        "count": 67,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-annual-cadence-framing",
+      "targets": 3,
+      "contrast": {
+        "count": 75,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-annual-upgrade-intercept",
+      "targets": 5,
+      "contrast": {
+        "count": 9,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-basic-seat-collaboration-bridge",
+      "targets": 3,
+      "contrast": {
+        "count": 10,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-professional-clone-capability-gate",
+      "targets": 2,
+      "contrast": {
+        "count": 20,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-project-context-collaboration-invite",
+      "targets": 1,
+      "contrast": {
+        "count": 14,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-flows-first-visit-introduction",
+      "targets": 2,
+      "contrast": {
+        "count": 11,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-image-video-example-to-action",
+      "targets": 3,
+      "contrast": {
+        "count": 14,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-dubbing-launch-sample-entry",
+      "targets": 2,
+      "contrast": {
+        "count": 11,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-voice-supplier-earnings-checklist",
+      "targets": 3,
+      "contrast": {
+        "count": 37,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-demand-guided-voice-supply",
+      "targets": 2,
+      "contrast": {
+        "count": 116,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-affiliate-advocacy-entry",
+      "targets": 3,
+      "contrast": {
+        "count": 13,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-agents-template-assisted-onboarding",
+      "targets": 3,
+      "contrast": {
+        "count": 53,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "el-api-time-bounded-model-offer",
+      "targets": 3,
+      "contrast": {
+        "count": 68,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "github-event-banner",
+      "targets": 2,
+      "contrast": {
+        "count": 9,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "notion-feature-modal",
+      "targets": 2,
+      "contrast": {
+        "count": 12,
+        "failures": [],
+        "uncertain": []
+      }
+    },
+    {
+      "id": "steam-growth-banners",
+      "targets": 2,
+      "contrast": {
+        "count": 11,
+        "failures": [],
+        "uncertain": []
+      }
+    }
+  ],
+  "index": {
+    "cards": 19,
+    "yellowTitleVerbs": 16,
+    "yellowGoalBadges": 19,
+    "desktopThumbnailPadding": 32,
+    "mobileThumbnailPadding": 24,
+    "desktopColumnGap": 40,
+    "desktopRowGap": 48,
+    "mobileWidth": 320,
+    "mobilePageWidth": 320,
+    "htmlTextSamples": 477,
+    "contrastFailures": 0
+  }
+}

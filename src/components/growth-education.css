@@ -1,0 +1,159 @@
+.growth-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+.growth-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.growth-legend i {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  border-radius: 3px;
+}
+.growth-key {
+  background: var(--growth-background);
+  border: 1px solid var(--growth-border-strong);
+}
+.context-key {
+  background: var(--blue-700);
+  border: 1px solid var(--blue-200);
+}
+.growth-education-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 0 0 12px;
+}
+.growth-guide-status {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.growth-standalone-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-sunken);
+}
+.growth-modal-guide {
+  position: fixed;
+  inset: 12px auto auto 12px;
+  margin: 0;
+  padding: 4px;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  border: 1px solid var(--context-border-strong);
+  border-radius: var(--corner-md);
+  background: var(--context-surface-sunken);
+  color: var(--context-foreground);
+  box-shadow: 0 4px 16px var(--context-overlay);
+  pointer-events: auto;
+}
+.driver-popover.growth-tour {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  padding: 22px;
+  width: 340px;
+  min-width: 0;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  border: 1px solid var(--growth-border-strong);
+  border-radius: var(--corner-lg);
+  background: var(--growth-popover);
+  color: var(--growth-foreground);
+  box-shadow: 0 16px 56px var(--overlay);
+  font-family: var(--font-sans);
+  pointer-events: auto;
+}
+.driver-popover.growth-tour .driver-popover-title {
+  padding-right: 24px;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+.driver-popover.growth-tour .driver-popover-description {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.driver-popover.growth-tour .growth-tour-continuation {
+  border-top: 1px solid var(--growth-border);
+  padding-top: 12px;
+  margin-top: 12px;
+  color: var(--growth-muted-foreground);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.driver-popover.growth-tour .driver-popover-footer {
+  margin-top: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.driver-popover.growth-tour .driver-popover-progress-text {
+  font-size: 12px;
+  color: var(--growth-muted-foreground);
+}
+.driver-popover.growth-tour .driver-popover-navigation-btns {
+  gap: 6px;
+}
+.driver-popover.growth-tour .driver-popover-footer button {
+  min-height: 36px;
+  border: 1px solid var(--growth-border-strong);
+  border-radius: var(--corner-sm);
+  background: var(--growth-background);
+  color: var(--growth-foreground);
+  padding: 7px 12px;
+  text-shadow: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+.driver-popover.growth-tour .driver-popover-footer .driver-popover-next-btn {
+  background: var(--growth-primary);
+  color: var(--growth-primary-foreground);
+  border-color: var(--growth-primary);
+}
+.driver-popover.growth-tour .driver-popover-footer button:disabled {
+  opacity: 1;
+  background: var(--growth-disabled);
+  color: var(--growth-disabled-foreground);
+  border-color: var(--growth-disabled-border);
+  cursor: default;
+}
+.driver-popover.growth-tour .driver-popover-close-btn {
+  width: 32px;
+  height: 32px;
+  color: var(--growth-foreground);
+  font-size: 24px;
+}
+.driver-popover.growth-tour :focus-visible {
+  outline: 2px solid var(--growth-ring);
+  outline-offset: 3px;
+}
+.driver-popover.growth-tour .driver-popover-arrow {
+  display: none;
+}
+.driver-active [data-growth].driver-active-element {
+  outline: 2px solid var(--growth-border-strong);
+  outline-offset: 3px;
+}
+@media (forced-colors: active) {
+  .growth-key,
+  .context-key,
+  .driver-popover.growth-tour {
+    border: 1px solid CanvasText;
+  }
+}

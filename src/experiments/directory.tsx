@@ -1,5 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BookOpen, ChevronDown, Search, X } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  ChevronDown,
+  Search,
+  X,
+  LayoutGrid,
+  UserPlus,
+  Zap,
+  MousePointerClick,
+  ShieldCheck,
+  RotateCcw,
+  CreditCard,
+  TrendingUp,
+  Share2,
+} from "lucide-react";
 import {
   Badge,
   Button,
@@ -10,8 +25,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  cn,
 } from "../components/kit";
 import { DesignIntent } from "../components/design-intent";
+import { GrowthLegend } from "../components/growth-education";
 import {
   growthCategories,
   growthCategoryById,
@@ -21,6 +38,65 @@ import { experiments, type Experiment, type ExperimentType } from "./registry";
 import { ExperimentPreview } from "./experiment-preview";
 
 const types: ExperimentType[] = ["Screen", "Flow", "Experience"];
+const goalIcons = {
+  acquisition: UserPlus,
+  activation: Zap,
+  engagement: MousePointerClick,
+  retention: ShieldCheck,
+  reactivation: RotateCcw,
+  monetization: CreditCard,
+  expansion: TrendingUp,
+  referral: Share2,
+};
+const goalCounts = Object.fromEntries(
+  growthCategories.map(({ id }) => [
+    id,
+    experiments.filter(
+      ({ growth }) => growth.primary === id || growth.secondary.includes(id),
+    ).length,
+  ]),
+) as Record<GrowthCategoryId, number>;
+
+// Explicit editorial vocabulary: nouns such as “Discovery” and “Feature”
+// remain ordinary title text. Extend this list when adding a new title verb.
+const titleVerbs = new Set([
+  "start",
+  "discover",
+  "choose",
+  "upgrade",
+  "compare",
+  "offer",
+  "review",
+  "invite",
+  "explain",
+  "guide",
+  "find",
+  "suggest",
+  "introduce",
+  "browse",
+  "reuse",
+  "build",
+  "preview",
+  "show",
+  "reward",
+  "scaffold",
+  "prevent",
+  "time",
+]);
+function TitleText({ title }: { title: string }) {
+  const space = title.indexOf(" ");
+  const opening = space < 0 ? title : title.slice(0, space);
+  if (!titleVerbs.has(opening.toLocaleLowerCase())) return title;
+  return (
+    <>
+      <span className="text-growth-highlight">{opening}</span>
+      {space < 0 ? "" : title.slice(space)}
+    </>
+  );
+}
+const sources = [
+  ...new Set(experiments.map((experiment) => experiment.sourceName)),
+].sort();
 const addedDateFormat = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
   month: "long",
@@ -31,12 +107,14 @@ type Filters = {
   query: string;
   goal: GrowthCategoryId | "all";
   type: ExperimentType | "all";
+  source: string;
   sort: "recent" | "title";
 };
 const defaults: Filters = {
   query: "",
   goal: "all",
   type: "all",
+  source: "all",
   sort: "recent",
 };
 
@@ -44,6 +122,7 @@ function readFilters(): Filters {
   const params = new URLSearchParams(location.search);
   const goal = params.get("goal");
   const type = params.get("type");
+  const source = params.get("source");
   return {
     query: params.get("q") ?? "",
     goal: growthCategories.some((item) => item.id === goal)
@@ -52,6 +131,7 @@ function readFilters(): Filters {
     type: types.includes(type as ExperimentType)
       ? (type as ExperimentType)
       : "all",
+    source: source && sources.includes(source) ? source : "all",
     sort: params.get("sort") === "title" ? "title" : "recent",
   };
 }
@@ -61,6 +141,7 @@ function filterParams(filters: Filters) {
   if (filters.query.trim()) params.set("q", filters.query);
   if (filters.goal !== "all") params.set("goal", filters.goal);
   if (filters.type !== "all") params.set("type", filters.type);
+  if (filters.source !== "all") params.set("source", filters.source);
   if (filters.sort !== "recent") params.set("sort", filters.sort);
   return params;
 }
@@ -82,15 +163,17 @@ function ExperimentCard({
   return (
     <article
       aria-labelledby={`${experiment.id}-title`}
-      className="min-w-0 overflow-hidden rounded-lg border border-border bg-surface-raised shadow-sm"
+      className="min-w-0 overflow-hidden rounded-lg border border-border bg-surface-sunken text-foreground shadow-sm"
     >
       <a
         href={experimentLink(experiment, filters)}
         aria-label={`Open ${experiment.title} wireframe`}
         className="group block rounded-t-lg focus-visible:outline-offset-[-4px]"
       >
-        <div className="aspect-[12/7] overflow-hidden border-b border-border bg-surface-deep transition-colors duration-[var(--motion-fast)] group-hover:bg-surface-sunken motion-reduce:transition-none">
-          <ExperimentPreview kind={experiment.preview} />
+        <div className="experiment-thumbnail border-b border-border bg-surface-deep p-6 sm:p-8">
+          <div className="aspect-[12/7]">
+            <ExperimentPreview kind={experiment.preview} />
+          </div>
         </div>
         <div className="p-5 pb-4 sm:p-6 sm:pb-5">
           <div className="flex items-start justify-between gap-4">
@@ -98,7 +181,7 @@ function ExperimentCard({
               id={`${experiment.id}-title`}
               className="text-xl font-semibold tracking-tight sm:text-2xl"
             >
-              {experiment.title}
+              <TitleText title={experiment.title} />
             </h2>
             <ArrowRight
               size={20}
@@ -113,7 +196,7 @@ function ExperimentCard({
             <Badge variant="outline" className="rounded-full px-3 text-xs">
               {experiment.sourceName}
             </Badge>
-            <Badge variant="outline" className="rounded-full px-3 text-xs">
+            <Badge className="growth-scope rounded-full px-3 text-xs">
               {goal.shortName}
             </Badge>
             <Badge
@@ -181,6 +264,10 @@ export function ExperimentDirectory() {
           experiment.sourceName,
           experiment.source,
           ...experiment.focus,
+          experiment.intent,
+          ...experiment.observations,
+          ...experiment.preservedCopy,
+          ...experiment.assumptions,
           growthCategoryById[goal.primary].name,
           ...goal.secondary.map((id) => growthCategoryById[id].name),
           goal.audience,
@@ -188,11 +275,14 @@ export function ExperimentDirectory() {
           ...goal.mechanisms,
           goal.format,
           goal.measure,
+          goal.basis,
         ]
           .join(" ")
           .toLocaleLowerCase();
         return (
           (filters.type === "all" || experiment.type === filters.type) &&
+          (filters.source === "all" ||
+            experiment.sourceName === filters.source) &&
           (filters.goal === "all" ||
             goal.primary === filters.goal ||
             goal.secondary.includes(filters.goal)) &&
@@ -206,7 +296,10 @@ export function ExperimentDirectory() {
       );
   }, [filters]);
   const filtered = Boolean(
-    filters.query.trim() || filters.type !== "all" || filters.goal !== "all",
+    filters.query.trim() ||
+    filters.type !== "all" ||
+    filters.goal !== "all" ||
+    filters.source !== "all",
   );
   return (
     <main
@@ -228,17 +321,75 @@ export function ExperimentDirectory() {
           </a>
         </div>
         <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
-          Product experiences to study, test, and reuse.
+          Growth patterns to study, test, and reuse.
         </p>
       </header>
 
+      <div
+        role="group"
+        aria-label="Filter by growth goal"
+        className="mt-8 flex gap-3 overflow-x-auto px-1 pt-1 pb-3 -mx-1"
+      >
+        {[
+          {
+            id: "all" as const,
+            label: "All goals",
+            count: experiments.length,
+            Icon: LayoutGrid,
+          },
+          ...growthCategories
+            .filter(({ id }) => goalCounts[id] > 0 || filters.goal === id)
+            .map(({ id, shortName }) => ({
+              id,
+              label: shortName,
+              count: goalCounts[id],
+              Icon: goalIcons[id],
+            })),
+        ].map(({ id, label, count, Icon }) => (
+          <Button
+            key={id}
+            variant="outline"
+            aria-pressed={filters.goal === id}
+            aria-label={`${label}, ${count} ${count === 1 ? "experiment" : "experiments"}`}
+            onClick={() => update({ goal: id })}
+            className={cn(
+              "h-auto min-h-24 min-w-36 flex-1 flex-col gap-3 rounded-md px-4 py-4 lg:min-w-0",
+              filters.goal === id
+                ? "growth-scope border-input bg-secondary text-secondary-foreground hover:bg-secondary-hover focus-visible:outline-ring-inverse"
+                : "border-border bg-surface-sunken hover:border-input",
+            )}
+          >
+            <Icon
+              aria-hidden="true"
+              className={cn(
+                "!size-6",
+                filters.goal !== id && "text-growth-highlight",
+              )}
+            />
+            <span className="flex items-center gap-2">
+              {label}
+              <span
+                className={cn(
+                  "text-xs tabular-nums",
+                  filters.goal === id
+                    ? "text-muted-foreground"
+                    : "text-foreground-subtle",
+                )}
+              >
+                {count}
+              </span>
+            </span>
+          </Button>
+        ))}
+      </div>
+
       <form
         role="search"
-        aria-label="Find experiments"
+        aria-label="Search the library"
         onSubmit={(event) => event.preventDefault()}
-        className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-[minmax(180px,1fr)_minmax(160px,.6fr)_minmax(112px,.35fr)]"
+        className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-cols-[minmax(250px,1fr)_minmax(160px,.42fr)_minmax(144px,.36fr)]"
       >
-        <div className="col-span-2 flex min-w-0 flex-col gap-2 sm:col-span-1">
+        <div className="col-span-2 flex min-w-0 flex-col gap-2 lg:col-span-1">
           <Label htmlFor="experiment-search">Search</Label>
           <div className="relative">
             <Search
@@ -256,19 +407,19 @@ export function ExperimentDirectory() {
           </div>
         </div>
         <div className="flex min-w-0 flex-col gap-2">
-          <Label htmlFor="experiment-goal">Goal</Label>
+          <Label htmlFor="experiment-source">Source</Label>
           <Select
-            value={filters.goal}
-            onValueChange={(goal) => update({ goal: goal as Filters["goal"] })}
+            value={filters.source}
+            onValueChange={(source) => update({ source })}
           >
-            <SelectTrigger id="experiment-goal" className="h-11 min-w-0">
+            <SelectTrigger id="experiment-source" className="h-11 min-w-0">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All goals</SelectItem>
-              {growthCategories.map((category) => (
-                <SelectItem key={category.id} value={category.id}>
-                  {category.shortName}
+              <SelectItem value="all">All sources</SelectItem>
+              {sources.map((source) => (
+                <SelectItem key={source} value={source}>
+                  {source}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -295,12 +446,10 @@ export function ExperimentDirectory() {
         </div>
       </form>
 
-      <div className="mt-4 mb-5 flex flex-wrap items-center justify-between gap-3">
+      <div className="mt-4 mb-7 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-3">
           <p role="status" className="text-sm text-muted-foreground">
-            {filtered
-              ? `${results.length} of ${experiments.length} experiments`
-              : `${experiments.length} experiments`}
+            {results.length} {results.length === 1 ? "wireframe" : "wireframes"}
           </p>
           {filtered && (
             <button
@@ -313,6 +462,7 @@ export function ExperimentDirectory() {
             </button>
           )}
         </div>
+        <GrowthLegend className="sm:ml-auto sm:mr-5" />
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <label htmlFor="experiment-sort">Sort</label>
           <Select
@@ -334,7 +484,7 @@ export function ExperimentDirectory() {
       </div>
 
       {results.length ? (
-        <div className="grid items-start gap-6 md:grid-cols-2">
+        <div className="grid items-start gap-x-8 gap-y-10 md:grid-cols-2 lg:gap-x-10 lg:gap-y-12">
           {results.map((experiment) => (
             <ExperimentCard
               key={experiment.id}
@@ -355,8 +505,8 @@ export function ExperimentDirectory() {
           />
           <h2 id="no-results-title" className="text-xl font-semibold">
             {filters.query.trim()
-              ? `No experiments for “${filters.query.trim()}”`
-              : "No experiments match these filters"}
+              ? `No results for “${filters.query.trim()}”`
+              : "Nothing matches these filters"}
           </h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
             Try a different search or clear the filters to browse everything.
@@ -366,7 +516,7 @@ export function ExperimentDirectory() {
             variant="outline"
             onClick={() => setFilters(defaults)}
           >
-            Show all experiments
+            Show everything
           </Button>
         </section>
       )}

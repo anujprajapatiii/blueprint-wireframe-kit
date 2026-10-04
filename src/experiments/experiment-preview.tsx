@@ -1,5 +1,11 @@
+import {
+  ElevenLabsThumbnail,
+  GrowthPreview,
+  type ElevenPreviewKind,
+} from "./elevenlabs/thumbnails";
+
 export type ExperimentPreviewKind =
-  "feature-modal" | "discovery-queue" | "event-banner";
+  "feature-modal" | "discovery-queue" | "event-banner" | ElevenPreviewKind;
 
 const surface = "var(--card)";
 const sunken = "var(--surface-sunken)";
@@ -10,7 +16,7 @@ const muted = "var(--muted-foreground)";
 
 function FeaturePreview() {
   return (
-    <>
+    <GrowthPreview>
       <rect
         x="88"
         y="48"
@@ -47,7 +53,14 @@ function FeaturePreview() {
           )}
         </g>
       ))}
-      <rect x="124" y="405" width="262" height="37" rx="4" fill={ink} />
+      <rect
+        x="124"
+        y="405"
+        width="262"
+        height="37"
+        rx="4"
+        fill="var(--primary)"
+      />
       <text
         x="255"
         y="430"
@@ -125,13 +138,13 @@ function FeaturePreview() {
           strokeWidth="5"
         />
       </svg>
-    </>
+    </GrowthPreview>
   );
 }
 
 function DiscoveryPreview() {
   return (
-    <>
+    <GrowthPreview>
       <rect
         x="64"
         y="62"
@@ -260,11 +273,18 @@ function DiscoveryPreview() {
       <text x="102" y="379" fill={muted} fontSize="17">
         Find your next game.
       </text>
-      <rect x="102" y="413" width="168" height="40" rx="4" fill={ink} />
+      <rect
+        x="102"
+        y="413"
+        width="168"
+        height="40"
+        rx="4"
+        fill="var(--primary)"
+      />
       <text x="122" y="439" fill="var(--primary-foreground)" fontSize="16">
         Explore queue →
       </text>
-    </>
+    </GrowthPreview>
   );
 }
 
@@ -380,52 +400,61 @@ function EventPreview() {
           />
         </g>
       ))}
-      <rect
-        x="1595"
-        y="122"
-        width="370"
-        height="462"
-        rx="15"
-        fill={surface}
-        stroke={line}
-        strokeWidth="2"
-      />
-      <text x="1615" y="165" fill={ink} fontSize="32" fontWeight="600">
-        UNIVERSE’26
-      </text>
-      <path d="m1926 150 10 10m0-10-10 10" stroke={muted} strokeWidth="2" />
-      <rect x="1596" y="186" width="368" height="146" fill={sunken} />
-      <g fill="none" stroke={muted} strokeWidth="2">
-        <rect x="1746" y="232" width="68" height="54" rx="5" />
-        <circle cx="1767" cy="250" r="6" />
-        <path d="m1751 279 19-17 12 10 13-16 14 23" />
-      </g>
-      <g stroke="var(--border)" strokeWidth="2">
-        <path d="M1596 186h368M1596 332h368M1596 392h368M1596 488h368" />
-      </g>
-      <text x="1615" y="367" fill={muted} fontSize="15">
-        OCT 28–29
-      </text>
-      <text x="1731" y="367" fill={muted} fontSize="15">
-        SAN FRANCISCO, CA
-      </text>
-      <text x="1615" y="436" fill={ink} fontSize="24" fontWeight="600">
-        <tspan x="1615">Save $600 with Super Early</tspan>
-        <tspan x="1615" dy="29">
-          Bird passes through July 8.
-        </tspan>
-      </text>
-      <rect x="1615" y="508" width="330" height="56" rx="7" fill={ink} />
-      <text
-        x="1780"
-        y="544"
-        fill="var(--primary-foreground)"
-        textAnchor="middle"
-        fontSize="20"
-        fontWeight="600"
-      >
-        Register now
-      </text>
+      <GrowthPreview>
+        <rect
+          x="1595"
+          y="122"
+          width="370"
+          height="462"
+          rx="15"
+          fill={surface}
+          stroke={line}
+          strokeWidth="2"
+        />
+        <text x="1615" y="165" fill={ink} fontSize="32" fontWeight="600">
+          UNIVERSE’26
+        </text>
+        <path d="m1926 150 10 10m0-10-10 10" stroke={muted} strokeWidth="2" />
+        <rect x="1596" y="186" width="368" height="146" fill={sunken} />
+        <g fill="none" stroke={muted} strokeWidth="2">
+          <rect x="1746" y="232" width="68" height="54" rx="5" />
+          <circle cx="1767" cy="250" r="6" />
+          <path d="m1751 279 19-17 12 10 13-16 14 23" />
+        </g>
+        <g stroke="var(--border)" strokeWidth="2">
+          <path d="M1596 186h368M1596 332h368M1596 392h368M1596 488h368" />
+        </g>
+        <text x="1615" y="367" fill={muted} fontSize="15">
+          OCT 28–29
+        </text>
+        <text x="1731" y="367" fill={muted} fontSize="15">
+          SAN FRANCISCO, CA
+        </text>
+        <text x="1615" y="436" fill={ink} fontSize="24" fontWeight="600">
+          <tspan x="1615">Save $600 with Super Early</tspan>
+          <tspan x="1615" dy="29">
+            Bird passes through July 8.
+          </tspan>
+        </text>
+        <rect
+          x="1615"
+          y="508"
+          width="330"
+          height="56"
+          rx="7"
+          fill="var(--primary)"
+        />
+        <text
+          x="1780"
+          y="544"
+          fill="var(--primary-foreground)"
+          textAnchor="middle"
+          fontSize="20"
+          fontWeight="600"
+        >
+          Register now
+        </text>
+      </GrowthPreview>
     </svg>
   );
 }
@@ -438,7 +467,8 @@ const previews = {
 
 /** A quiet, recognizable overview of the interaction, independent of live state. */
 export function ExperimentPreview({ kind }: { kind: ExperimentPreviewKind }) {
-  const Preview = previews[kind];
+  const Preview =
+    kind in previews ? previews[kind as keyof typeof previews] : null;
   return (
     <svg
       viewBox="0 0 960 560"
@@ -447,7 +477,11 @@ export function ExperimentPreview({ kind }: { kind: ExperimentPreviewKind }) {
       focusable="false"
       fontFamily="var(--font-sans)"
     >
-      <Preview />
+      {Preview ? (
+        <Preview />
+      ) : (
+        <ElevenLabsThumbnail kind={kind as ElevenPreviewKind} />
+      )}
     </svg>
   );
 }

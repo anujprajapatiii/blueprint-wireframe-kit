@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   AlertCircle,
   Check,
@@ -9,7 +9,24 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import tokens from "../tokens.json";
-import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from "./kit";
+import {
+  Badge,
+  Button,
+  Checkbox,
+  Input,
+  Label,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Switch,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  cn,
+} from "./kit";
 
 const palette: Record<string, string> = tokens.palette;
 const colourValues: Record<string, string> = {
@@ -91,9 +108,522 @@ const surfaces = [
   { name: "surface-raised", label: "Raised", use: "Active areas" },
 ];
 
+type ColourFamily = "blue" | "growth";
+
+const pairingRecipes = [
+  { surface: "background", foreground: "foreground", label: "Canvas" },
+  { surface: "card", foreground: "card-foreground", label: "Card" },
+  {
+    surface: "surface-sunken",
+    foreground: "muted-foreground",
+    label: "Supporting text",
+  },
+  {
+    surface: "surface-deep",
+    foreground: "foreground-subtle",
+    label: "Subtle text",
+  },
+  {
+    surface: "popover",
+    foreground: "popover-foreground",
+    label: "Menu or dialog",
+  },
+  { surface: "inverse", foreground: "inverse-foreground", label: "Inverse" },
+  {
+    surface: "primary",
+    foreground: "primary-foreground",
+    label: "Primary · default",
+  },
+  {
+    surface: "primary-hover",
+    foreground: "primary-foreground",
+    label: "Primary · hover",
+  },
+  {
+    surface: "primary-active",
+    foreground: "primary-foreground",
+    label: "Primary · pressed",
+  },
+  {
+    surface: "secondary",
+    foreground: "secondary-foreground",
+    label: "Secondary · default",
+  },
+  {
+    surface: "secondary-hover",
+    foreground: "secondary-foreground",
+    label: "Secondary · hover",
+  },
+  {
+    surface: "secondary-active",
+    foreground: "secondary-foreground",
+    label: "Secondary · pressed",
+  },
+  { surface: "selected", foreground: "selected-foreground", label: "Selected" },
+  { surface: "disabled", foreground: "disabled-foreground", label: "Disabled" },
+  {
+    surface: "surface-sunken",
+    foreground: "input",
+    label: "Input boundary",
+    boundary: true,
+  },
+  { surface: "card", foreground: "ring", label: "Focus ring", boundary: true },
+  {
+    surface: "inverse",
+    foreground: "ring-inverse",
+    label: "Inverse focus",
+    boundary: true,
+  },
+];
+
+function contrastRatio(foreground: string, background: string) {
+  const luminance = (value: string) => {
+    const hex = resolveColour(`{${value}}`);
+    if (!/^#[\da-f]{6}$/i.test(hex)) return Number.NaN;
+    const rgb = [1, 3, 5].map((offset) => {
+      const channel = Number.parseInt(hex.slice(offset, offset + 2), 16) / 255;
+      return channel <= 0.04045
+        ? channel / 12.92
+        : ((channel + 0.055) / 1.055) ** 2.4;
+    });
+    return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
+  };
+  const a = luminance(foreground);
+  const b = luminance(background);
+  return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+}
+
+function ComponentSpecimens({ family }: { family: ColourFamily }) {
+  const [action, setAction] = useState("");
+  const growth = family === "growth";
+  const prefix = `foundation-${family}`;
+  return (
+    <FoundationCard
+      title="Components in context"
+      description="The same shared controls use this theme. Hover, press, tab through, and change selections to inspect the real states."
+    >
+      <div
+        className={cn(
+          growth && "growth-scope",
+          "min-w-0 space-y-6 rounded-md border border-border bg-card p-4 text-card-foreground sm:p-5",
+        )}
+      >
+        <div>
+          <h4 className="text-sm font-medium">Actions</h4>
+          <div className="mt-3 flex flex-wrap gap-3">
+            {(
+              [
+                ["default", "Primary"],
+                ["secondary", "Secondary"],
+                ["outline", "Outline"],
+                ["ghost", "Ghost"],
+              ] as const
+            ).map(([variant, label]) => (
+              <Button
+                key={variant}
+                variant={variant}
+                onClick={() => setAction(`${label} action activated.`)}
+              >
+                {label}
+              </Button>
+            ))}
+            <Button disabled>Disabled</Button>
+          </div>
+          <p
+            className="mt-3 min-h-5 text-sm text-muted-foreground"
+            role="status"
+          >
+            {action || "Interactive examples only; no data is submitted."}
+          </p>
+        </div>
+        <div className="grid min-w-0 gap-5 md:grid-cols-2">
+          <div className="min-w-0 space-y-2">
+            <Label htmlFor={`${prefix}-input`}>Input and placeholder</Label>
+            <Input
+              id={`${prefix}-input`}
+              placeholder="Give your experiment a name"
+            />
+          </div>
+          <div className="min-w-0 space-y-2">
+            <Label htmlFor={`${prefix}-select`}>Menu and selection</Label>
+            <Select defaultValue="activation">
+              <SelectTrigger id={`${prefix}-select`}>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className={growth ? "growth-scope" : undefined}>
+                <SelectItem value="activation">Activation</SelectItem>
+                <SelectItem value="engagement">
+                  Engagement & adoption
+                </SelectItem>
+                <SelectItem value="monetization">
+                  Monetization & purchase
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="min-w-0 space-y-2">
+            <Label htmlFor={`${prefix}-disabled`}>Disabled input</Label>
+            <Input
+              id={`${prefix}-disabled`}
+              value="Unavailable in this state"
+              disabled
+            />
+          </div>
+          <div className="min-w-0 space-y-2">
+            <Label htmlFor={`${prefix}-invalid`}>Validation</Label>
+            <Input
+              id={`${prefix}-invalid`}
+              placeholder="Required name"
+              aria-invalid="true"
+              aria-describedby={`${prefix}-error`}
+            />
+            <p
+              id={`${prefix}-error`}
+              className="flex items-start gap-2 text-sm text-destructive-text"
+            >
+              <AlertCircle
+                className="mt-0.5 size-4 shrink-0"
+                aria-hidden="true"
+              />
+              Enter a name to continue.
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-x-7 gap-y-4">
+          <label className="flex items-center gap-3 text-sm">
+            <Checkbox defaultChecked /> Selected option
+          </label>
+          <label className="flex items-center gap-3 text-sm">
+            <Switch defaultChecked /> Enabled setting
+          </label>
+          <label className="flex items-center gap-3 text-sm text-disabled-foreground">
+            <Checkbox disabled /> Unavailable option
+          </label>
+        </div>
+        <Tabs defaultValue="selected">
+          <TabsList
+            aria-label={`${growth ? "Yellow" : "Blue"} selection example`}
+            className="max-w-full flex-wrap"
+          >
+            <TabsTrigger value="selected">Selected</TabsTrigger>
+            <TabsTrigger value="available">Available</TabsTrigger>
+            <TabsTrigger value="disabled" disabled>
+              Disabled
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent
+            value="selected"
+            className="text-sm text-muted-foreground"
+          >
+            Selection uses a border and label as well as colour.
+          </TabsContent>
+          <TabsContent
+            value="available"
+            className="text-sm text-muted-foreground"
+          >
+            The same component keeps its keyboard and selection behavior.
+          </TabsContent>
+        </Tabs>
+        <div className="flex flex-wrap gap-2">
+          <Badge variant="info">Information</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="error">Error</Badge>
+        </div>
+        {growth && (
+          <div className="growth-context min-w-0 rounded-md border border-border bg-surface-sunken p-4 text-foreground">
+            <h4 className="text-sm font-medium">Product context stays blue</h4>
+            <p className="mt-2 text-sm text-muted-foreground">
+              A nested environment restores its own tokens, surface, and text.
+              Yellow remains on the intervention being studied.
+            </p>
+          </div>
+        )}
+      </div>
+    </FoundationCard>
+  );
+}
+
+function ColourFoundations({
+  family,
+  copiedToken,
+  copyStatus,
+  copyToken,
+  copyAllTokens,
+}: {
+  family: ColourFamily;
+  copiedToken: string;
+  copyStatus: string;
+  copyToken: (name: string) => Promise<void>;
+  copyAllTokens: () => Promise<void>;
+}) {
+  const growth = family === "growth";
+  const nameFor = (name: string) => (growth ? `growth-${name}` : name);
+  const colourName = growth ? "Yellow growth" : "Blue context";
+  const swatchPrefix = growth ? "yellow-" : "blue-";
+  const groups = tokens.groups.filter(
+    (group) => group.id.startsWith("growth-") === growth,
+  );
+  return (
+    <div className="space-y-5">
+      <FoundationCard
+        title={`${colourName} palette`}
+        description={
+          growth
+            ? "A monochromatic yellow family for the growth mechanism. Pale surfaces use dark ink; dark actions use a matching light label. Surrounding product context stays blue."
+            : "The default theme for the product environment, navigation, and library. Light text stays readable across layered blue surfaces."
+        }
+      >
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm text-muted-foreground">
+            Select a shade to copy its CSS variable.
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => void copyAllTokens()}
+          >
+            {copiedToken === "all-colours" ? (
+              <Check aria-hidden="true" />
+            ) : (
+              <Copy aria-hidden="true" />
+            )}
+            Copy colour tokens
+          </Button>
+        </div>
+        <div className="mt-5 grid grid-cols-3 gap-2 sm:grid-cols-6 xl:grid-cols-11">
+          {Object.entries(palette)
+            .filter(([name]) => name.startsWith(swatchPrefix))
+            .sort(
+              ([a], [b]) => Number(a.split("-")[1]) - Number(b.split("-")[1]),
+            )
+            .map(([name, value]) => (
+              <button
+                key={name}
+                type="button"
+                onClick={() => void copyToken(name)}
+                className="min-w-0 rounded-sm text-left hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+                aria-label={`Copy ${name}, ${value}`}
+              >
+                <span
+                  className="block h-14 rounded-sm border border-input/50"
+                  style={{ backgroundColor: `var(--${name})` }}
+                  aria-hidden="true"
+                />
+                <span className="mt-2 flex items-center gap-1 font-mono text-sm">
+                  {name.replace(swatchPrefix, "")}
+                  {copiedToken === name && (
+                    <Check className="size-3.5" aria-hidden="true" />
+                  )}
+                </span>
+                <span className="mt-0.5 block font-mono text-sm break-all text-muted-foreground">
+                  {value.toUpperCase()}
+                </span>
+              </button>
+            ))}
+        </div>
+        <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+          Palette shades are ingredients. Use the semantic roles below in
+          components; a shade alone does not define a safe text-and-surface
+          pairing.
+        </p>
+      </FoundationCard>
+
+      <FoundationCard
+        title="Surface hierarchy"
+        description="Surfaces and their foregrounds are a pair. Choose the component’s purpose first, then use its matching roles."
+      >
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          {[
+            ...surfaces.map(({ name, label, use }) => ({
+              name,
+              label,
+              use,
+              foreground: "foreground",
+            })),
+            {
+              name: "inverse",
+              label: "Inverse",
+              use: "Explicit contrast area",
+              foreground: "inverse-foreground",
+            },
+          ].map(({ name, label, use, foreground }) => (
+            <div key={name} className="min-w-0">
+              <div
+                className="flex min-h-28 flex-col justify-end gap-1 rounded-sm border p-4"
+                style={{
+                  backgroundColor: `var(--${nameFor(name)})`,
+                  color: `var(--${nameFor(foreground)})`,
+                  borderColor: `var(--${nameFor("border")})`,
+                }}
+              >
+                <span className="text-sm font-medium">{label}</span>
+                <span className="text-sm">{use}</span>
+              </div>
+              <p className="mt-2 font-mono text-xs break-all text-muted-foreground">
+                {nameFor(name)} + {nameFor(foreground)}
+              </p>
+            </div>
+          ))}
+        </div>
+      </FoundationCard>
+
+      <ComponentSpecimens family={family} />
+
+      <details className="group rounded-md border border-border bg-card">
+        <summary className="flex list-none items-center justify-between gap-3 rounded-md p-5 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
+          <span>
+            <span className="font-medium">
+              Approved pairings &amp; contrast
+            </span>
+            <span className="mt-1 block text-sm text-muted-foreground">
+              Resolved from the live tokens. Text target 4.5:1; meaningful
+              boundaries and focus 3:1.
+            </span>
+          </span>
+          <ChevronDown
+            className="size-4 shrink-0 text-muted-foreground group-open:rotate-180"
+            aria-hidden="true"
+          />
+        </summary>
+        <div className="border-t border-border px-5">
+          {pairingRecipes.map(({ surface, foreground, label, boundary }) => {
+            const background = nameFor(surface);
+            const ink = nameFor(foreground);
+            const ratio = contrastRatio(ink, background);
+            const minimum = boundary ? 3 : 4.5;
+            return (
+              <div
+                key={`${surface}-${foreground}`}
+                className="grid min-w-0 gap-3 border-b border-border py-4 last:border-0 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_auto] sm:items-center"
+              >
+                <span className="text-sm font-medium">{label}</span>
+                <span className="min-w-0 font-mono text-xs leading-relaxed break-all text-muted-foreground">
+                  {ink}
+                  <span className="mx-1">on</span>
+                  {background}
+                </span>
+                <span
+                  className="w-fit rounded-sm border border-border px-2 py-1 font-mono text-sm"
+                  aria-label={`${label}: ${ratio.toFixed(2)} to one; ${ratio >= minimum ? "meets" : "below"} ${minimum} to one target`}
+                >
+                  {ratio.toFixed(2)}:1{" "}
+                  {ratio >= minimum ? (
+                    <Check
+                      className="ml-1 inline size-3.5"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <TriangleAlert
+                      className="ml-1 inline size-3.5"
+                      aria-hidden="true"
+                    />
+                  )}
+                </span>
+              </div>
+            );
+          })}
+          <p className="py-4 text-sm leading-relaxed text-muted-foreground">
+            These are opaque token pairings, not a conformance certificate for
+            every composition. Decorative borders do not define input
+            boundaries. Check the actual rendered state when using transparency,
+            overlays, or nested themes.
+          </p>
+        </div>
+      </details>
+
+      <div className="space-y-3">
+        {groups.map((group, index) => (
+          <details
+            key={group.id}
+            open={index === 0}
+            className="group rounded-md border border-border bg-card"
+          >
+            <summary className="flex list-none items-center justify-between gap-3 rounded-md p-5 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
+              <span className="min-w-0">
+                <span className="font-medium">{group.title}</span>
+                <span className="ml-3 text-sm text-muted-foreground">
+                  {group.tokens.length} tokens
+                </span>
+                <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
+                  {group.description}
+                </span>
+              </span>
+              <ChevronDown
+                className="size-4 shrink-0 text-muted-foreground group-open:rotate-180"
+                aria-hidden="true"
+              />
+            </summary>
+            <div className="grid gap-1 border-t border-border p-2 md:grid-cols-2">
+              {group.tokens.map(({ name, value, description }) => (
+                <button
+                  key={name}
+                  type="button"
+                  onClick={() => void copyToken(name)}
+                  className="flex min-w-0 items-start gap-3 rounded-sm p-3 text-left hover:bg-muted focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+                  aria-label={`Copy ${name} CSS variable. ${description}`}
+                >
+                  <span
+                    className="mt-0.5 block size-9 shrink-0 rounded-sm border border-input/60"
+                    style={{ backgroundColor: `var(--${name})` }}
+                    aria-hidden="true"
+                  />
+                  <span className="min-w-0 flex-1 text-sm">
+                    <span className="block font-mono break-all">{name}</span>
+                    <span className="mt-1 block text-muted-foreground">
+                      {description}
+                    </span>
+                    <span className="mt-1 block font-mono text-muted-foreground">
+                      {resolveColour(value).toUpperCase()}
+                    </span>
+                  </span>
+                  {copiedToken === name ? (
+                    <Check
+                      className="mt-1 size-4 shrink-0"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <Copy
+                      className="mt-1 size-4 shrink-0 text-muted-foreground"
+                      aria-hidden="true"
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+          </details>
+        ))}
+      </div>
+      <p
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="min-h-5 break-words text-sm text-muted-foreground"
+      >
+        {copyStatus ||
+          "Select a token to copy its CSS variable. Shared components resolve their roles from the active theme."}
+      </p>
+    </div>
+  );
+}
+
 export function Foundations() {
+  const [category, setCategory] = useState(() => {
+    const requested = new URLSearchParams(location.search).get("foundation");
+    return requested &&
+      ["colours", "growth", "layout", "behaviour"].includes(requested)
+      ? requested
+      : "colours";
+  });
   const [copiedToken, setCopiedToken] = useState("");
   const [copyStatus, setCopyStatus] = useState("");
+  useEffect(() => {
+    if (location.hash !== "#foundations") return;
+    const frame = requestAnimationFrame(() =>
+      document.getElementById("foundations")?.scrollIntoView(),
+    );
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   async function copyToken(name: string) {
     try {
@@ -147,167 +677,43 @@ export function Foundations() {
         hierarchy, states, and feedback; keep the underlying palette consistent.
       </p>
 
-      <Tabs defaultValue="colours" className="mt-6">
+      <Tabs
+        value={category}
+        onValueChange={(value) => {
+          setCategory(value);
+          const url = new URL(location.href);
+          url.searchParams.set("foundation", value);
+          history.replaceState(history.state, "", url);
+        }}
+        className="mt-6"
+      >
         <TabsList
           aria-label="Foundation categories"
           className="h-auto max-w-full flex-wrap"
         >
-          <TabsTrigger value="colours">Colours</TabsTrigger>
+          <TabsTrigger value="colours">Blue context</TabsTrigger>
+          <TabsTrigger value="growth">Yellow growth</TabsTrigger>
           <TabsTrigger value="layout">Layout &amp; type</TabsTrigger>
           <TabsTrigger value="behaviour">Behaviour</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="colours" className="mt-6 space-y-5">
-          <div className="rounded-md border border-border bg-card p-5">
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              <div>
-                <h3 className="text-base font-medium">Blueprint palette</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  From paper-light to deep ink. Select a swatch to copy its CSS
-                  variable.
-                </p>
-              </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => void copyAllTokens()}
-              >
-                {copiedToken === "all-colours" ? (
-                  <Check aria-hidden="true" />
-                ) : (
-                  <Copy aria-hidden="true" />
-                )}
-                Copy colour tokens
-              </Button>
-            </div>
-            <div className="mt-5 grid grid-cols-3 gap-2 sm:grid-cols-6 xl:grid-cols-11">
-              {Object.entries(palette)
-                .filter(([name]) => /^blue-\d+$/.test(name))
-                .sort(
-                  ([a], [b]) =>
-                    Number(a.split("-")[1]) - Number(b.split("-")[1]),
-                )
-                .map(([name, value]) => (
-                  <button
-                    key={name}
-                    type="button"
-                    onClick={() => void copyToken(name)}
-                    className="min-w-0 rounded-sm text-left hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-                    aria-label={`Copy ${name}, ${value}`}
-                    title={`Copy var(--${name})`}
-                  >
-                    <span
-                      className="block h-14 rounded-sm border border-input/50"
-                      style={{ backgroundColor: `var(--${name})` }}
-                      aria-hidden="true"
-                    />
-                    <span className="mt-2 flex items-center gap-1 font-mono text-sm">
-                      {name.replace("blue-", "")}
-                      {copiedToken === name && (
-                        <Check className="size-3.5" aria-hidden="true" />
-                      )}
-                    </span>
-                    <span className="mt-0.5 block font-mono text-sm break-all text-muted-foreground">
-                      {value.toUpperCase()}
-                    </span>
-                  </button>
-                ))}
-            </div>
-          </div>
-
-          <FoundationCard
-            title="Surface hierarchy"
-            description="Separate navigation, work areas, cards, and overlays without adding decoration. Text uses the matching foreground token."
-          >
-            <div className="grid overflow-hidden rounded-md border border-border sm:grid-cols-5">
-              {surfaces.map(({ name, label, use }) => (
-                <div
-                  key={name}
-                  style={{ backgroundColor: `var(--${name})` }}
-                  className="flex min-h-28 flex-col justify-end gap-1 border-b border-border p-4 last:border-0 sm:border-r sm:border-b-0"
-                >
-                  <span className="text-sm font-medium">{label}</span>
-                  <span className="text-sm text-muted-foreground">{use}</span>
-                </div>
-              ))}
-            </div>
-          </FoundationCard>
-
-          <div className="space-y-3">
-            {tokens.groups.map((group, index) => (
-              <details
-                key={group.id}
-                open={index === 0}
-                className="group rounded-md border border-border bg-card"
-              >
-                <summary className="flex list-none items-center justify-between gap-3 rounded-md p-5 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
-                  <span className="min-w-0">
-                    <span className="font-medium">{group.title}</span>
-                    <span className="ml-3 text-sm text-muted-foreground">
-                      {group.tokens.length} tokens
-                    </span>
-                    <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
-                      {group.description}
-                    </span>
-                  </span>
-                  <ChevronDown
-                    className="size-4 shrink-0 text-muted-foreground group-open:rotate-180"
-                    aria-hidden="true"
-                  />
-                </summary>
-                <div className="grid gap-1 border-t border-border p-2 md:grid-cols-2">
-                  {group.tokens.map(({ name, value, description }) => (
-                    <button
-                      key={name}
-                      type="button"
-                      onClick={() => void copyToken(name)}
-                      className="flex min-w-0 items-start gap-3 rounded-sm p-3 text-left hover:bg-muted focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
-                      aria-label={`Copy ${name} CSS variable. ${description}`}
-                      title={`Copy var(--${name})`}
-                    >
-                      <span
-                        className="mt-0.5 block size-9 shrink-0 rounded-sm border border-input/60"
-                        style={{ backgroundColor: `var(--${name})` }}
-                        aria-hidden="true"
-                      />
-                      <span className="min-w-0 flex-1 text-sm">
-                        <span className="block font-mono break-all">
-                          {name}
-                        </span>
-                        <span className="mt-1 block text-muted-foreground">
-                          {description}
-                        </span>
-                        <span className="mt-1 block font-mono text-muted-foreground">
-                          {resolveColour(value).toUpperCase()}
-                        </span>
-                      </span>
-                      {copiedToken === name ? (
-                        <Check
-                          className="mt-1 size-4 shrink-0"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <Copy
-                          className="mt-1 size-4 shrink-0 text-muted-foreground"
-                          aria-hidden="true"
-                        />
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </details>
-            ))}
-          </div>
-
-          <p
-            role="status"
-            aria-live="polite"
-            aria-atomic="true"
-            className="min-h-5 break-words text-sm text-muted-foreground"
-          >
-            {copyStatus ||
-              "Use bg-card, text-muted-foreground, or border-input in Tailwind. Select any token to copy its CSS variable."}
-          </p>
+        <TabsContent value="colours" className="mt-6">
+          <ColourFoundations
+            family="blue"
+            copiedToken={copiedToken}
+            copyStatus={copyStatus}
+            copyToken={copyToken}
+            copyAllTokens={copyAllTokens}
+          />
+        </TabsContent>
+        <TabsContent value="growth" className="mt-6">
+          <ColourFoundations
+            family="growth"
+            copiedToken={copiedToken}
+            copyStatus={copyStatus}
+            copyToken={copyToken}
+            copyAllTokens={copyAllTokens}
+          />
         </TabsContent>
 
         <TabsContent value="layout" className="mt-6">

@@ -1,0 +1,206 @@
+.el-create-shell {
+  display: grid;
+  grid-template-columns: 14.8% minmax(0, 1fr);
+  min-height: 640px;
+  font-size: 0.875rem;
+}
+.el-create-sidebar {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+.el-create-topbar {
+  min-height: 40px;
+}
+.el-create-home {
+  width: 78%;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 105px 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+.el-create-goal {
+  width: 57%;
+  min-width: 360px;
+  margin: 0 auto;
+}
+.el-create-task-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin: 110px auto 28px;
+  width: 86%;
+}
+.el-create-launch {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 0.8fr;
+  min-height: 124px;
+}
+.el-create-chat-suggestions {
+  width: 82%;
+  margin: 90px auto 50px;
+}
+.el-create-speech {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, min(38%, 499px));
+  min-height: 650px;
+}
+.el-create-editor {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+.el-create-settings {
+  min-width: 0;
+}
+.el-create-content {
+  position: relative;
+  width: 78%;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 56px 0 28px;
+  min-width: 0;
+}
+.el-create-music-composer {
+  width: 61%;
+  min-width: 430px;
+  margin: 30px auto;
+}
+.el-create-model-tip {
+  position: absolute;
+  right: calc(100% + 8px);
+  bottom: -10px;
+  width: 172px;
+  z-index: 1;
+}
+.el-create-categories {
+  display: grid;
+  grid-template-columns: repeat(var(--el-tile-count, 8), minmax(0, 1fr));
+  gap: 6px;
+  min-width: 0;
+}
+.el-create-categories > button {
+  aspect-ratio: 1;
+}
+.el-create-sound-composer {
+  position: relative;
+  z-index: 1;
+  width: 59%;
+  min-width: 430px;
+  margin: -20px auto 0;
+}
+.el-create-avatars {
+  display: grid;
+  grid-template-columns: 21% minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+}
+.el-create-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+.el-create-visual-composer {
+  position: relative;
+  z-index: 1;
+  width: 59%;
+  min-width: 430px;
+  margin: -165px auto 0;
+}
+@media (max-width: 1023px) {
+  .el-create-launch {
+    grid-template-columns: 1.7fr 1fr;
+  }
+  .el-create-model-tip {
+    position: static;
+    width: auto;
+    margin: 0 12px 12px;
+  }
+}
+@media (max-width: 899px) {
+  .el-create-categories {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .el-create-categories > button {
+    aspect-ratio: 1.6;
+  }
+}
+@media (max-width: 767px) {
+  .el-create-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .el-create-sidebar {
+    display: none;
+  }
+  .el-create-home {
+    width: auto;
+    margin: 0 20px;
+    padding-top: 64px;
+  }
+  .el-create-goal {
+    width: 100%;
+    min-width: 0;
+  }
+  .el-create-task-grid {
+    width: 100%;
+    margin-top: 64px;
+  }
+  .el-create-launch {
+    display: block;
+  }
+  .el-create-content {
+    width: auto;
+    margin: 0 20px;
+    padding-top: 32px;
+  }
+  .el-create-music-composer,
+  .el-create-sound-composer,
+  .el-create-visual-composer {
+    width: 100%;
+    min-width: 0;
+    margin: 24px auto;
+  }
+  .el-create-chat-suggestions {
+    width: 100%;
+    margin-top: 56px;
+  }
+  .el-create-speech {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .el-create-settings {
+    border-left: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .el-create-editor textarea {
+    min-height: 120px;
+  }
+  .el-create-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .el-create-avatars {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+@media (max-width: 479px) {
+  .el-create-home,
+  .el-create-content {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+  .el-create-task-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 36px;
+  }
+  .el-create-categories {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .el-create-categories > button {
+    aspect-ratio: 1.2;
+  }
+  .el-create-sound-composer {
+    margin-top: 20px;
+  }
+}

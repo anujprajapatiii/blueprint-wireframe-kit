@@ -19,6 +19,7 @@ import {
   cn,
 } from "../components/kit";
 import "./discovery-queue.css";
+import { growthTarget } from "../components/growth-education";
 
 const queueLength = 12;
 const games = Array.from({ length: queueLength }, (_, i) => ({
@@ -112,6 +113,12 @@ export function DiscoveryQueue() {
     <DialogContent
       className="discovery-dialog"
       onKeyDown={(event) => {
+        if (
+          document.body.classList.contains("driver-active") ||
+          (event.target instanceof Element &&
+            event.target.closest(".growth-tour"))
+        )
+          return;
         if (collection || event.altKey || event.metaKey || event.ctrlKey)
           return;
         if (event.key === "ArrowRight") {
@@ -268,7 +275,18 @@ export function DiscoveryQueue() {
                         </span>
                       </div>
                     </div>
-                    <div className="discovery-details">
+                    <div
+                      className="growth-scope discovery-details text-card-foreground"
+                      {...(index === gameIndex
+                        ? growthTarget({
+                            id: "steam-recommendation",
+                            title: "Personalized discovery",
+                            description:
+                              "The relevance explanation gives a reason to consider this game. Wishlist and ignore capture a preference with little effort, while visible progress makes the twelve-game sequence finite. The blue trailer is product content; the yellow panel supports the growth action.",
+                            order: 3,
+                          })
+                        : {})}
+                    >
                       <div className="flex items-start gap-4">
                         <div
                           className="h-24 w-16 shrink-0 rounded-sm border border-input bg-surface-sunken"
@@ -376,7 +394,18 @@ export function DiscoveryQueue() {
                   >
                     You've reached the end of this Discovery Queue
                   </h2>
-                  <div className="discovery-reward">
+                  <div
+                    className="growth-scope discovery-reward text-foreground"
+                    {...(complete
+                      ? growthTarget({
+                          id: "steam-completion-reward",
+                          title: "Close the reward loop",
+                          description:
+                            "The completion state confirms the promised reward and makes it available to view. Session statistics acknowledge progress, and Continue offers another round. These are local demonstration rewards; no Steam stickers are granted.",
+                          order: 4,
+                        })
+                      : {})}
+                  >
                     <span className="grid size-16 shrink-0 place-items-center rounded-full border-2 border-input bg-surface-sunken">
                       <Check className="size-7" aria-hidden="true" />
                     </span>
@@ -426,12 +455,16 @@ export function DiscoveryQueue() {
                   </section>
                   <div className="flex gap-3">
                     <DialogClose asChild>
-                      <Button variant="secondary" className="min-w-28">
+                      <Button
+                        variant="outline"
+                        className="min-w-28"
+                      >
                         Done
                       </Button>
                     </DialogClose>
                     <Button
-                      className="min-w-28"
+                      variant="secondary"
+                      className="growth-scope min-w-28 focus-visible:outline-ring-inverse"
                       onClick={() => {
                         setRound(round + 1);
                         move(0);
@@ -481,7 +514,10 @@ export function DiscoveryQueue() {
         </p>
         {!collection && !complete && (
           <>
-            <nav className="discovery-progress" aria-label="Queue progress">
+            <nav
+              className="growth-scope discovery-progress rounded-md border border-border bg-card text-card-foreground px-1"
+              aria-label="Queue progress"
+            >
               {games.map((item, i) => (
                 <button
                   key={i}

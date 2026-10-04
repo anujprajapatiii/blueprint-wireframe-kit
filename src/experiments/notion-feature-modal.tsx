@@ -27,6 +27,7 @@ import {
   TabsTrigger,
 } from "../components/kit";
 import "./notion-feature-modal.css";
+import { growthTarget } from "../components/growth-education";
 
 const features = [
   {
@@ -211,13 +212,22 @@ export function NotionFeatureModal({
             </Button>
           </DialogTrigger>
           <DialogContent
-            className="notion-feature-dialog"
+            className="growth-scope notion-feature-dialog"
+            {...(!destination
+              ? growthTarget({
+                  id: "notion-feature-discovery",
+                  title: "Make new value discoverable",
+                  description:
+                    "The announcement brings new capabilities into an existing user's workflow. Choosing a feature reveals its benefit and changes the blue product preview, so people can understand the value before trying it. The yellow announcement is the growth component; the preview is supporting context.",
+                  order: 1,
+                })
+              : {})}
             onOpenAutoFocus={(event) => {
               event.preventDefault();
               title.current?.focus();
             }}
           >
-            <header className="notion-feature-header">
+            <header className="notion-feature-header flex items-center gap-3">
               <DialogTitle
                 ref={title}
                 tabIndex={-1}
@@ -225,13 +235,23 @@ export function NotionFeatureModal({
               >
                 We’ve been cooking!
               </DialogTitle>
+
               <DialogDescription className="sr-only">
                 Explore newly available features. Choose a feature to read about
                 it and change the preview. Routines is coming soon.
               </DialogDescription>
             </header>
             {destination ? (
-              <section className="notion-try-view">
+              <section
+                className="notion-try-view"
+                {...growthTarget({
+                  id: "notion-feature-handoff",
+                  title: "Feature trial handoff",
+                  description:
+                    "Try for free turns interest in the selected capability into an action. The original recording ends before this destination, so this local placeholder marks the boundary of what is known rather than inventing an activation flow.",
+                  order: 3,
+                })}
+              >
                 <Button
                   variant="ghost"
                   className="mb-6"
@@ -243,13 +263,15 @@ export function NotionFeatureModal({
                   <ArrowLeft aria-hidden="true" />
                   Back to features
                 </Button>
-                <h2
-                  ref={destinationTitle}
-                  tabIndex={-1}
-                  className="text-2xl font-semibold"
-                >
-                  Try {current.title}
-                </h2>
+                <div className="flex items-center gap-3">
+                  <h2
+                    ref={destinationTitle}
+                    tabIndex={-1}
+                    className="text-2xl font-semibold"
+                  >
+                    Try {current.title}
+                  </h2>
+                </div>
                 <p className="mt-4 max-w-md leading-relaxed text-muted-foreground">
                   This is a local destination placeholder. The recording does
                   not show what happens after “Try for free”.
@@ -339,7 +361,7 @@ export function NotionFeatureModal({
                     />
                   </TabsTrigger>
                 </TabsList>
-                <div className="notion-feature-previews">
+                <div className="growth-context notion-feature-previews text-foreground">
                   {features.map((item) => (
                     <TabsContent
                       forceMount
@@ -371,18 +393,29 @@ export function NotionFeatureModal({
                     </TabsContent>
                   ))}
                 </div>
-                <div className="notion-feature-actions">
-                  <Button
-                    className="w-full"
-                    onClick={() => {
-                      setDestination(true);
-                      requestAnimationFrame(() =>
-                        destinationTitle.current?.focus(),
-                      );
-                    }}
-                  >
-                    Try for free <ArrowRight aria-hidden="true" />
-                  </Button>
+                <div
+                  className="notion-feature-actions"
+                  {...growthTarget({
+                    id: "notion-feature-actions",
+                    title: "Act now, or keep it for later",
+                    description:
+                      "Try for free offers the next step for the selected feature. Save for later provides a lower-commitment exit for someone who is busy. The design intent is feature adoption; this wireframe does not establish whether the real product sends a reminder.",
+                    order: 2,
+                  })}
+                >
+                  <div className="flex items-center gap-2">
+                    <Button
+                      className="min-w-0 flex-1"
+                      onClick={() => {
+                        setDestination(true);
+                        requestAnimationFrame(() =>
+                          destinationTitle.current?.focus(),
+                        );
+                      }}
+                    >
+                      Try for free <ArrowRight aria-hidden="true" />
+                    </Button>
+                  </div>
                   <Button
                     variant="secondary"
                     className="w-full"

@@ -2,12 +2,48 @@ import { lazy, Suspense, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "../components/kit";
 import { BlueprintLogo } from "../components/blueprint-logo";
+import { GrowthEducation } from "../components/growth-education";
 import { ExperimentDirectory } from "./directory";
 import { SteamGrowthBanners } from "./steam-growth-banners";
 import { NotionFeatureModal } from "./notion-feature-modal";
 import { GitHubEventBanner } from "./github-event-banner";
 import { experiments } from "./registry";
 import { ExperimentWorkspace } from "./experiment-workspace";
+import { collectionById } from "../collections/registry";
+const CollectionBrowser = lazy(() =>
+  import("../collections/collection-browser").then((module) => ({
+    default: module.CollectionBrowser,
+  })),
+);
+const ElevenLabsWireframe = lazy(() =>
+  import("./elevenlabs/wireframe").then((module) => ({
+    default: module.ElevenLabsWireframe,
+  })),
+);
+
+function LegacyElevenLabsLink() {
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const patternId = params.get("pattern");
+    if (patternId && experiments.some((entry) => entry.id === patternId)) {
+      params.set("experiment", patternId);
+      if (params.get("section") === "references")
+        params.set("mode", "reference");
+    } else {
+      // The source archive is broader than the curated growth library.
+      for (const key of ["experiment", "mode", "embed"]) params.delete(key);
+    }
+    params.set("source", "ElevenLabs");
+    for (const key of ["collection", "pattern", "section", "flow"])
+      params.delete(key);
+    location.replace(`?${params}`);
+  }, []);
+  return (
+    <main id="main-content" role="status" className="p-8">
+      Opening experiments…
+    </main>
+  );
+}
 const SteamWorkbench = import.meta.env.DEV
   ? lazy(() => import("./steam-workbench"))
   : null;
@@ -15,15 +51,37 @@ const SteamWorkbench = import.meta.env.DEV
 export function ExperimentsApp() {
   const params = new URLSearchParams(location.search);
   const id = params.get("experiment");
+  const collectionId = params.get("collection");
+  const collection = collectionId ? collectionById[collectionId] : undefined;
+  const pattern = collection?.patterns.find(
+    (entry) => entry.id === params.get("pattern"),
+  );
   const embedded = params.get("embed") === "1";
   const experiment = experiments.find((entry) => entry.id === id);
   useEffect(() => {
-    document.title = `${experiment?.title ?? "Experiments"} — Blueprint`;
-  }, [experiment]);
+    document.title = `${pattern?.title ?? collection?.title ?? experiment?.title ?? "Experiments"} — Blueprint`;
+  }, [experiment, collection, pattern]);
+  const archivedElevenLabsEntry =
+    id &&
+    !experiment &&
+    collectionById.elevenlabs.patterns.some((entry) => entry.id === id);
+  if (collectionId === "elevenlabs" || archivedElevenLabsEntry)
+    return <LegacyElevenLabsLink />;
   if (embedded && experiment) {
     return (
       <div className="experiment-embedded">
-        {id === "notion-feature-modal" ? (
+        <GrowthEducation experimentId={experiment.id} />
+        {id?.startsWith("el-") ? (
+          <Suspense
+            fallback={
+              <p role="status" className="p-8">
+                Loading wireframe…
+              </p>
+            }
+          >
+            <ElevenLabsWireframe patternId={id} title={experiment.title} />
+          </Suspense>
+        ) : id === "notion-feature-modal" ? (
           <NotionFeatureModal embedded />
         ) : id === "github-event-banner" ? (
           <GitHubEventBanner />
@@ -71,7 +129,7 @@ export function ExperimentsApp() {
             </a>
             <a
               href="?view=experiments"
-              aria-current={id ? undefined : "page"}
+              aria-current={id || collectionId ? undefined : "page"}
               className="flex min-h-10 items-center underline decoration-input underline-offset-8"
             >
               Experiments
@@ -87,7 +145,36 @@ export function ExperimentsApp() {
           </nav>
         </div>
       </header>
-      {!id ? (
+      {collectionId ? (
+        collection ? (
+          <Suspense
+            fallback={
+              <main
+                id="main-content"
+                className="mx-auto max-w-7xl px-5 py-12"
+                role="status"
+              >
+                Loading collection…
+              </main>
+            }
+          >
+            <CollectionBrowser key={collection.id} collection={collection} />
+          </Suspense>
+        ) : (
+          <main
+            id="main-content"
+            className="mx-auto max-w-3xl space-y-5 px-5 py-16"
+          >
+            <h1 className="text-3xl font-semibold">Collection not found</h1>
+            <p className="text-muted-foreground">
+              This collection isn’t in the library.
+            </p>
+            <Button asChild>
+              <a href="?view=experiments">Browse experiments</a>
+            </Button>
+          </main>
+        )
+      ) : !id ? (
         <ExperimentDirectory />
       ) : experiment ? (
         <ExperimentWorkspace key={experiment.id} experiment={experiment} />

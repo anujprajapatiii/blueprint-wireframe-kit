@@ -1,0 +1,61 @@
+.platform-wireframe {
+  overflow-wrap: break-word;
+}
+
+.platform-agent-shell,
+.platform-developer-shell {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+}
+
+.platform-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 16px 8px;
+}
+
+.platform-agent-columns {
+  display: grid;
+  min-height: 730px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.platform-quickstart {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.platform-model-track:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .platform-quickstart {
+    grid-template-columns: minmax(0, 24%) minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .platform-agent-columns {
+    grid-template-columns: minmax(0, 38fr) minmax(0, 44fr) minmax(0, 18fr);
+  }
+
+  .platform-agent-columns-wide {
+    grid-template-columns: minmax(0, 44fr) minmax(0, 56fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .platform-agent-shell,
+  .platform-developer-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .platform-rail {
+    display: none;
+  }
+}

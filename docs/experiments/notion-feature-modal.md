@@ -36,6 +36,8 @@ Source colors, typography, branding, illustrations, and mascot are replaced with
 
 ## User refinements
 
+- 2026-10-04: Use the shared monochromatic yellow growth theme for the announcement and its actions. Keep the abstract product previews blue to distinguish supporting product context. Explain feature discovery, the Try/Save choice, and the unobserved trial destination boundary through **Guide me**, without separate help controls. The guided walkthrough uses these annotations; it does not imply that the original product includes an onboarding tour. Keep the plain backdrop, original wording, fixed modal frame, and source-supported feature changes.
+
 - 2026-10-04: “Remove the background content. Keep it simple and plain.” The source’s document backdrop remains an observation, but the current experiment uses a plain background so the modal is the focus. The experiment’s intent and reference notes remain in this record and the directory registry.
 - 2026-10-03: The index now uses the task-focused title **Feature announcement**, with **Notion** shown separately as its source. Preserve the existing ID and direct URL. The user requested the original reference on each experiment page, so this revision includes the original recording locally in the shared **Original reference** view.
 

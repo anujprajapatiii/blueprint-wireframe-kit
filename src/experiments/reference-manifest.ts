@@ -1,3 +1,6 @@
+import elevenPatterns from "../collections/elevenlabs/patterns.json";
+import elevenEvidence from "../collections/elevenlabs/evidence.json";
+
 export type ReferenceAsset = {
   id: string;
   kind: "video" | "image";
@@ -7,10 +10,23 @@ export type ReferenceAsset = {
   description: string;
   alt?: string;
   duration?: string;
+  private?: boolean;
+  width?: number;
+  height?: number;
 };
 
 /** User-supplied originals. Posters are previews; source files retain their original bytes. */
 export const experimentReferences: Record<string, ReferenceAsset[]> = {
+  ...Object.fromEntries(
+    elevenPatterns.map((pattern) => [
+      pattern.id,
+      pattern.evidenceIds.map((id) => {
+        const asset = elevenEvidence.find((entry) => entry.id === id);
+        if (!asset) throw new Error(`Missing original reference: ${id}`);
+        return { ...asset, kind: "image" as const };
+      }),
+    ]),
+  ),
   "github-event-banner": [
     {
       id: "github-event-screenshot",
