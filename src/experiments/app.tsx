@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "../components/kit";
+import { BlueprintLogo } from "../components/blueprint-logo";
 import { ExperimentDirectory } from "./directory";
 import { SteamGrowthBanners } from "./steam-growth-banners";
 import { NotionFeatureModal } from "./notion-feature-modal";
@@ -57,13 +58,7 @@ export function ExperimentsApp() {
       </a>
       <header className="sticky top-0 z-[var(--layer-sticky)] border-b bg-surface-sunken">
         <div className="mx-auto flex min-h-[72px] max-w-[1440px] flex-wrap items-center justify-between gap-x-6 gap-y-2 px-5 py-3 lg:px-8">
-          <a
-            href="?"
-            className="text-lg font-semibold tracking-tight"
-            aria-label="Blueprint kit home"
-          >
-            blueprint
-          </a>
+          <BlueprintLogo />
           <nav
             aria-label="Main navigation"
             className="flex flex-wrap items-center gap-5 text-sm"

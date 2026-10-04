@@ -30,6 +30,7 @@ This repository is a professional wireframing kit and a lasting directory of exp
 
 ## Implementation
 
+- Use the shared `BlueprintLogo` on every library page: the same symbol and “blueprint” wordmark, with no “/ kit” suffix. Keep component-example headings unnumbered and omit the removed sidebar tagline.
 - Inspect and reuse `src/components/kit.tsx` and `src/components/patterns.tsx` before making a control or local visual variant. Use the shared Select for styled dropdowns and Badge for pills; spacing and interaction corrections should benefit every instance. Put experiment-specific code under `src/experiments/` and register each experiment in the directory.
 - Give each experiment a stable ID, direct URL, clear title, scope, and status. Preserve existing links when revising it.
 - Follow `docs/index-design.md` for directory and reference-viewer changes. Prioritize recognizing, finding, opening, and revisiting experiments; keep full design intent available through progressive disclosure.

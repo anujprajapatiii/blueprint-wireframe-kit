@@ -93,6 +93,7 @@ import {
 } from "./components/patterns";
 
 import { Foundations } from "./components/foundations";
+import { BlueprintLogo } from "./components/blueprint-logo";
 import { GrowthReference } from "./growth/reference";
 
 const repository = "https://github.com/anujprajapatiii/blueprint-wireframe-kit";
@@ -114,11 +115,9 @@ type Spec = {
 
 function Example({
   spec,
-  index,
   notify,
 }: {
   spec: Spec;
-  index: number;
   notify: (s: string) => void;
 }) {
   const [source, setSource] = useState(false);
@@ -137,13 +136,7 @@ function Example({
       className="specimen scroll-mt-24 min-w-0 rounded-md border border-border bg-card"
     >
       <div className="flex min-h-14 items-center justify-between gap-2 border-b border-border px-5">
-        <h2
-          id={`${spec.id}-heading`}
-          className="flex items-center gap-3 text-sm font-medium"
-        >
-          <span className="font-mono text-xs text-muted-foreground">
-            {String(index + 1).padStart(2, "0")}
-          </span>
+        <h2 id={`${spec.id}-heading`} className="text-sm font-medium">
           {spec.name}
         </h2>
         <button
@@ -1102,26 +1095,7 @@ function App() {
         </a>
         <header className="sticky top-0 z-[var(--layer-sticky)] border-b border-border bg-surface-sunken">
           <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-4 px-5 lg:px-8">
-            <a
-              href="#"
-              className="flex items-center gap-3"
-              aria-label="Blueprint kit home"
-            >
-              <span
-                className="grid h-9 w-9 grid-cols-2 gap-1 rounded-sm border border-input p-1.5"
-                aria-hidden="true"
-              >
-                <span className="border border-input" />
-                <span className="border border-input" />
-                <span className="col-span-2 border border-input" />
-              </span>
-              <span className="text-lg font-semibold tracking-tight">
-                blueprint
-                <span className="ml-2 hidden align-middle font-mono text-xs font-normal text-muted-foreground sm:inline">
-                  / kit
-                </span>
-              </span>
-            </a>
+            <BlueprintLogo />
             <nav
               aria-label="Main navigation"
               className="hidden items-center gap-7 text-sm md:flex"
@@ -1239,9 +1213,6 @@ function App() {
             >
               Using the kit
             </a>
-            <p className="mt-auto px-3 text-sm leading-6 text-muted-foreground">
-              Reusable foundations for product exploration.
-            </p>
           </aside>
           <main
             id="main-content"
@@ -1323,12 +1294,7 @@ function App() {
               {filtered.length ? (
                 <div className="grid items-start gap-5 md:grid-cols-2 2xl:grid-cols-3">
                   {filtered.map((s) => (
-                    <Example
-                      key={s.id}
-                      spec={s}
-                      index={specs.indexOf(s)}
-                      notify={notify}
-                    />
+                    <Example key={s.id} spec={s} notify={notify} />
                   ))}
                 </div>
               ) : (
