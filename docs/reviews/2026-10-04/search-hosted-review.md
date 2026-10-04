@@ -1,6 +1,6 @@
 # Hosted Jev Search release
 
-Prepared and first deployed on 4 October 2026 after Anuj asked to publish Jev Search and suggested Cloudflare for its backend. The website remains on GitHub Pages. The Worker is deployed, its secret is configured, and live Jev searches pass. The Pages release is in progress.
+Published and verified on 4 October 2026 after Anuj asked to publish Jev Search and suggested Cloudflare for its backend. The website remains on GitHub Pages. Jev Search now runs through the deployed Cloudflare Worker, with its TypeSafe key stored as a server secret. It works on the public site without Anuj's computer staying on.
 
 ## Changes
 
@@ -28,7 +28,9 @@ Prepared and first deployed on 4 October 2026 after Anuj asked to publish Jev Se
 - The existing TypeSafe key was uploaded successfully as a Worker secret. The hosted status endpoint returned HTTP 200 with `configured: true`.
 - The first inference returned HTTP 502. A constructor-only Miniflare reproduction isolated a Workerd runtime mismatch: `redirect: 'error'` is unsupported. The deployed fix uses `redirect: 'manual'`; existing non-success handling rejects redirect responses without following them. The Workerd constructor probe passed, temporary runtime diagnostics were removed, and repeat live inference succeeded.
 - GitHub repository variable `JEV_SEARCH_API_URL` was set to the deployed Worker URL.
-- The Pages release has not yet been confirmed.
+- GitHub Pages source revision: `209928a9c585d87e0198523583232a4d1816f216`.
+- [Pages workflow run 37200913182](https://github.com/anujprajapatiii/blueprint-wireframe-kit/actions/runs/37200913182) succeeded for that exact revision. Build: 34 seconds; deployment: 8 seconds. The production build used the real hosted endpoint and passed the configured-status deployment gate.
+- Public site: <https://anujprajapatiii.github.io/blueprint-wireframe-kit/?view=experiments>.
 
 ## Live hosted searches
 
@@ -38,6 +40,12 @@ Both requests returned HTTP 200 from the deployed Worker, using model `jev-1.13.
 | --- | --- | --- | --- |
 | `upselling` | 7 | Compare paid tiers (`el-plan-value-ladder`): 0.85; Offer annual billing (`el-annual-upgrade-intercept`): 0.83; Explain a premium gate (`el-professional-clone-capability-gate`): 0.82 | 9.045 s |
 | `getting custoemrs into higher tier plans` | 6 | Compare paid tiers (`el-plan-value-ladder`): 0.89; Explain a premium gate (`el-professional-clone-capability-gate`): 0.87; Invite with Basic Seats (`el-basic-seat-collaboration-bridge`): 0.71 | 682 ms |
+
+## Public browser verification
+
+- Opened the deployed index with `q=upselling&sort=relevance&search=meaning`. The page showed “7 wireframes matching your idea,” led by Compare paid tiers, Offer annual billing, and Explain a premium gate.
+- Entered the exact query `getting custoemrs into higher tier plans` in the public search field and submitted with Enter. The page showed 6 matching wireframes, led by Compare paid tiers and Explain a premium gate.
+- Saved the full visible browser content viewport in [jev-search-published.jpg](jev-search-published.jpg). These checks exercised the published frontend and hosted API together.
 
 ## Authorization history
 
