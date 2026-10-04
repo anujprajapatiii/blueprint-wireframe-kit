@@ -1,14 +1,18 @@
 # Finding an experiment
 
-The large search field is the first control above the goal buttons. It supports both known-item lookup and a description of a design need. Search remains a blue library control. The existing yellow growth markers keep their meaning.
+The large Jev Search field is the first control above the goal buttons. It supports both known-item lookup and a description of a design need. Search remains a blue library control. The existing yellow growth markers keep their meaning.
 
 ## Behavior
 
 - Typing filters by keywords immediately. Submitting with Enter, Search, or a suggested query runs an idea search in the local app. Do not call the model on every keystroke.
 - Best match ranks results by relevance. Source, type, and both primary/secondary goals narrow that set locally without another request. Recently updated and Name A–Z remain available.
 - Preserve `q`, `search=meaning`, `sort`, `goal`, `source`, and `type` through experiment, embedded, related-flow, reference, and return links. Clearing the search restores the normal sort and keeps the other filters. Clearing filters resets the whole search.
-- Loading, no matches, unavailable service, and retry are real states. A newer query must never display a late result for an earlier one. Empty or whitespace-only queries restore browsing.
+- Loading, no matches, unavailable service, and retry are distinct states. A failed idea search must not silently become zero keyword matches; show a recoverable failure panel and an explicit keyword-search option. Recheck service availability on each submitted query and retry, with connection checking included in loading. A newer query must never display a late result for an earlier one. Empty or whitespace-only queries restore browsing.
 - Keyword search remains available when the API is unavailable and in the static GitHub Pages build. Live idea search runs only on the local server; publishing the static UI does not create a hosted inference service.
+
+## Hosted search requirement
+
+Anuj expects Jev Search to work on the published site as well as locally. The current local-only integration does not meet that requirement. Keep the site on GitHub Pages; connect a separately hosted API with a server-side TypeSafe secret before presenting the published search as semantic. The 4 October publication request was paused after this gap was clarified. Backend hosting, access controls and request budgets remain to be configured; do not ship the key in browser code or treat keyword fallback as completed Jev integration.
 
 ## Search data and TypeSafe
 

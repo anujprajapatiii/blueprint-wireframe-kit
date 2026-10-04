@@ -265,6 +265,11 @@ export function ExperimentDirectory() {
     filters.query,
     filters.search === "meaning",
   );
+  const ideaSearch =
+    import.meta.env.DEV &&
+    filters.search === "meaning" &&
+    Boolean(filters.query.trim());
+  const searchUnavailable = ideaSearch && !semantic.loading && !semantic.result;
   const update = (change: Partial<Filters>) =>
     setFilters((current) => ({ ...current, ...change }));
   const search = (query = filters.query) => {
@@ -402,7 +407,7 @@ export function ExperimentDirectory() {
 
       <form
         role="search"
-        aria-label="Search the library"
+        aria-label="Jev Search"
         onSubmit={(event) => {
           event.preventDefault();
           search();
@@ -410,7 +415,7 @@ export function ExperimentDirectory() {
         className="mt-8"
       >
         <Label htmlFor="experiment-search" className="sr-only">
-          Search the library
+          Jev Search
         </Label>
         <div className="flex min-w-0 flex-wrap items-center gap-2 rounded-lg border border-input bg-surface-sunken p-3 text-foreground shadow-sm focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring sm:flex-nowrap sm:gap-4 sm:p-4">
           <Search
@@ -467,7 +472,7 @@ export function ExperimentDirectory() {
             ) : (
               <ArrowRight aria-hidden="true" />
             )}
-            {semantic.loading ? "Searching…" : "Search"}
+            {semantic.loading ? "Searching…" : "Jev Search"}
           </Button>
         </div>
         <p
@@ -475,8 +480,8 @@ export function ExperimentDirectory() {
           className="mt-3 text-sm text-muted-foreground"
         >
           {import.meta.env.DEV
-            ? "Find a pattern by name, or describe what you want people to do."
-            : "Find patterns by name, source, behavior, or growth goal."}
+            ? "Describe what you want people to do, then press Enter to search by meaning."
+            : "Keyword search on this site. Search by meaning with Jev in the local library."}
         </p>
         {import.meta.env.DEV && (
           <div className="mt-1 flex flex-wrap items-center gap-x-1 gap-y-0 text-xs text-muted-foreground">
@@ -507,42 +512,6 @@ export function ExperimentDirectory() {
             ))}
           </div>
         )}
-        {filters.search === "meaning" && semantic.error && (
-          <p
-            role="status"
-            className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted-foreground"
-          >
-            {semantic.error}
-            <button
-              type="button"
-              onClick={semantic.retry}
-              className="min-h-10 rounded-sm px-1 text-foreground underline underline-offset-4"
-            >
-              Try again
-            </button>
-          </p>
-        )}
-        {filters.search === "meaning" &&
-          !semantic.error &&
-          semantic.connection !== "ready" &&
-          semantic.connection !== "checking" && (
-            <p role="status" className="mt-3 text-sm text-muted-foreground">
-              {import.meta.env.DEV ? (
-                <>
-                  Searching by keyword.{" "}
-                  <a
-                    className="text-foreground underline underline-offset-4"
-                    href={`?${filterParams(filters)}&tool=curator`}
-                  >
-                    Connect TypeSafe
-                  </a>{" "}
-                  to search by idea.
-                </>
-              ) : (
-                "Showing keyword matches. Idea search is available in the local library."
-              )}
-            </p>
-          )}
       </form>
 
       <div
@@ -653,6 +622,8 @@ export function ExperimentDirectory() {
           <p role="status" className="text-sm text-muted-foreground">
             {semantic.loading ? (
               "Finding relevant patterns…"
+            ) : searchUnavailable ? (
+              "Idea search unavailable"
             ) : (
               <>
                 {results.length}{" "}
@@ -711,6 +682,45 @@ export function ExperimentDirectory() {
           />
           <p>Looking for the right patterns…</p>
         </div>
+      ) : searchUnavailable ? (
+        <section
+          role="status"
+          className="rounded-lg border border-input bg-surface-sunken px-5 py-14 text-center"
+          aria-labelledby="search-unavailable-title"
+        >
+          <Search
+            aria-hidden="true"
+            className="mx-auto mb-4 size-6 text-muted-foreground"
+          />
+          <h2 id="search-unavailable-title" className="text-xl font-semibold">
+            {semantic.connection === "unconfigured"
+              ? "Connect idea search"
+              : "Idea search couldn’t finish"}
+          </h2>
+          <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-muted-foreground">
+            {semantic.connection === "unconfigured"
+              ? "Connect TypeSafe to find patterns by meaning. Keyword search is available without it."
+              : (semantic.error ??
+                "The search service couldn’t connect. Try again to reconnect.")}
+          </p>
+          <div className="mt-5 flex flex-wrap justify-center gap-3">
+            {semantic.connection === "unconfigured" ? (
+              <Button asChild>
+                <a href={`?${filterParams(filters)}&tool=curator`}>
+                  Connect TypeSafe
+                </a>
+              </Button>
+            ) : (
+              <Button onClick={semantic.retry}>Try again</Button>
+            )}
+            <Button
+              variant="outline"
+              onClick={() => update({ search: "keyword" })}
+            >
+              Search by keyword
+            </Button>
+          </div>
+        </section>
       ) : results.length ? (
         <div className="grid items-start gap-x-8 gap-y-10 md:grid-cols-2 lg:gap-x-10 lg:gap-y-12">
           {results.map((experiment) => (
@@ -733,11 +743,13 @@ export function ExperimentDirectory() {
           />
           <h2 id="no-results-title" className="text-xl font-semibold">
             {filters.query.trim()
-              ? `No results for “${filters.query.trim()}”`
+              ? `${semantic.result ? "No results" : "No keyword matches"} for “${filters.query.trim()}”`
               : "Nothing matches these filters"}
           </h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
-            Try a different search or clear the filters to browse everything.
+            {import.meta.env.DEV && filters.query.trim() && !semantic.result
+              ? "Press Jev Search or Enter to find patterns by meaning, including related words and ideas."
+              : "Try a different search or clear the filters to browse everything."}
           </p>
           <Button
             className="mt-5"

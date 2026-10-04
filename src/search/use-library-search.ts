@@ -19,35 +19,44 @@ export function useLibrarySearch(query: string, byMeaning: boolean) {
   useEffect(() => {
     if (!import.meta.env.DEV) return;
     const controller = new AbortController();
-    fetch(`${import.meta.env.BASE_URL}__search/status`, {
-      signal: controller.signal,
-      cache: "no-store",
-    })
-      .then(async (response) => {
+    let current = true;
+    let timeout: ReturnType<typeof setTimeout>;
+    setConnection("checking");
+    setState({ query: requested });
+
+    async function run() {
+      // Recheck each submitted idea: an unavailable preview may have recovered.
+      // Keep status and inference sequential so stale readiness cannot race this check.
+      timeout = setTimeout(() => controller.abort(), 10_000);
+      try {
+        const response = await fetch(
+          `${import.meta.env.BASE_URL}__search/status`,
+          {
+            signal: controller.signal,
+            cache: "no-store",
+          },
+        );
         if (!response.ok) throw new Error();
         const status = (await response.json()) as SearchStatus;
         if (typeof status?.configured !== "boolean") throw new Error();
+        if (!current) return;
         setConnection(status.configured ? "ready" : "unconfigured");
-      })
-      .catch(() => {
-        if (!controller.signal.aborted) setConnection("unavailable");
-      });
-    return () => controller.abort();
-  }, [attempt]);
+        if (!status.configured || !requested) return;
+      } catch {
+        if (current) setConnection("unavailable");
+        return;
+      } finally {
+        clearTimeout(timeout);
+      }
 
-  useEffect(() => {
-    if (!import.meta.env.DEV || !requested || connection !== "ready") return;
-    const controller = new AbortController();
-    let current = true;
-    const timeout = setTimeout(() => controller.abort(), 90_000);
-    setState({ query: requested });
-    fetch(`${import.meta.env.BASE_URL}__search`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: requested }),
-      signal: controller.signal,
-    })
-      .then(async (response) => {
+      timeout = setTimeout(() => controller.abort(), 90_000);
+      try {
+        const response = await fetch(`${import.meta.env.BASE_URL}__search`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: requested }),
+          signal: controller.signal,
+        });
         const body = await response.json();
         if (!response.ok) {
           throw new Error(
@@ -73,8 +82,7 @@ export function useLibrarySearch(query: string, byMeaning: boolean) {
           );
         if (current)
           setState({ query: requested, result: body as SearchResult });
-      })
-      .catch((error: unknown) => {
+      } catch (error: unknown) {
         if (!current) return;
         setState({
           query: requested,
@@ -84,14 +92,17 @@ export function useLibrarySearch(query: string, byMeaning: boolean) {
               ? error.message
               : "Idea search is unavailable. You can still search by name or keyword.",
         });
-      })
-      .finally(() => clearTimeout(timeout));
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+    void run();
     return () => {
       current = false;
       clearTimeout(timeout);
       controller.abort();
     };
-  }, [requested, connection, attempt]);
+  }, [requested, attempt]);
 
   const result =
     requested && state.query === requested ? state.result : undefined;
@@ -101,8 +112,13 @@ export function useLibrarySearch(query: string, byMeaning: boolean) {
     connection,
     result,
     error,
-    loading: Boolean(requested && connection === "ready" && !result && !error),
+    loading: Boolean(
+      requested &&
+      (connection === "checking" ||
+        (connection === "ready" && !result && !error)),
+    ),
     retry: () => {
+      setConnection(import.meta.env.DEV ? "checking" : "unavailable");
       setState({ query: requested });
       setAttempt((value) => value + 1);
     },

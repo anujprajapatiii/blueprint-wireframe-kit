@@ -34,3 +34,13 @@ The 0.55 inclusion gate is provisional. These checks verify representative retri
 - The full index and search box were reviewed at desktop and an actual 320 CSS pixels. Document width matched viewport width; the goal row scrolls inside its own container. The viewport override was reset afterward.
 
 Full viewport captures: [desktop index](search-index.jpg), [live search](search-live.jpg), and [mobile index](search-mobile.jpg).
+
+## Jev Search recovery follow-up
+
+The local preview on port 5176 was unavailable and was restarted in a foreground session. Before changing any model logic, both reported queries succeeded with `jev-1.13.0` and the unchanged public catalog: “upselling” returned seven entries led by Compare paid tiers (0.86); “getting custoemrs into higher tier plans” returned six, led by Compare paid tiers (0.90) and Explain a premium gate (0.87). Both were verified in the browser. These results do not establish that every lower-ranked result is equally useful. No prompt, threshold, or catalog changes were made.
+
+Fixed connection recovery: each submitted idea rechecks status before inference. Service failure gets its own panel with retry and explicit keyword fallback, instead of an apparently empty semantic result. A separate temporary fixture server reproduced a status outage, verified the failure heading with no false no-results heading, then recovered on a newly submitted query without reloading. Fixture results were used only for recovery checks; live results used the actual local TypeSafe integration. The fixture was not added to the project or published.
+
+Renamed the control to Jev Search. Twelve search tests and the production build passed, including the token checks. [Full viewport of the live local result](jev-search-recovery.png).
+
+Publication is paused: Anuj clarified that Jev must work on the published website. The current GitHub Pages build provides keyword search only, and a hosted server-side API still needs to be connected. No deployment was dispatched for this follow-up.
