@@ -27,6 +27,7 @@ Record intent and assumptions, then proceed with the supported work. Ask only wh
 
 ## Implementation
 
+- Read and follow the installed [TypeSafe skill](.agents/skills/typesafe-ai/SKILL.md) when working on this project, as requested by Anuj. Use its current documentation and typed-decision guidance for TypeSafe/Jev features; preserve the chosen stack and task scope. The skill is installed for Codex through `npx skills`, with its source recorded in `skills-lock.json`.
 - Reuse `src/components/kit.tsx` and `src/components/patterns.tsx` before introducing controls or local variants. Shared Select owns styled dropdowns; Badge owns pills; `DesignIntent` owns its field icons. Put experiment-specific code under `src/experiments/`.
 - Use Tailwind CSS v4 and semantic tokens from `src/tokens.json`. Regenerate `src/tokens.css`; never edit it by hand. Theme scopes only select aliases: paint each boundary with an explicit surface/foreground pair. Fix token, theme, and component problems centrally at their owning layer, then check real rendered states; avoid accumulating local color overrides. Keep motion token-based and support reduced motion.
 - Use the shared `BlueprintLogo` on every library page, without “/ kit.” Keep example headings unnumbered. Do not restore the sidebar tagline, decorative crosses, eyebrows, rulers, card status/type text, separator dots, or reference-count footers.
