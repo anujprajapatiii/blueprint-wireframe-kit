@@ -24,6 +24,8 @@ Save originals once and reuse their asset IDs across related experiments. Put au
 
 **Apply the admission gate before implementation.** Identify a visible growth-specific intervention and the behavior it invites: for example, a feature promotion, trial or premium proposition, savings incentive, contextual invitation, contribution incentive, or evidenced first-value onboarding. A useful input, task chooser, navigation menu, required setup step, payment form, or lower-friction interaction does not qualify on its own. A plausible growth category or proposed metric is not sufficient evidence.
 
+**Event advertising and cross-sell are valid interventions.** An explicit promotion of an event, product, or service with an invited action qualifies even when the next step leaves the product. Admission does not require proof of paid conversion, a purchase flow, or a completed downstream outcome. Inspect the visible proposition and action, preserve destination limits, and classify from the observed audience and commercial relationship. A generic navigation link alone remains insufficient.
+
 When no intervention is established, preserve useful evidence and state the limit instead of inventing a growth rationale or adding ordinary product work to the index. Surrounding product UI may still be reconstructed as blue context inside a qualifying experiment. An explicit request to build or include a specific experience overrides this default; record its scope honestly. The [4 October curation record](reviews/2026-10-04/index-curation.md) documents the boundary applied to existing entries.
 
 ### Review the admission with Jev

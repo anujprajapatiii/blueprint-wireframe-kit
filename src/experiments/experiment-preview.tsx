@@ -3,9 +3,17 @@ import {
   GrowthPreview,
   type ElevenPreviewKind,
 } from "./elevenlabs/thumbnails";
+import {
+  CloudflareThumbnail,
+  type CloudflarePreviewKind,
+} from "./cloudflare/thumbnails";
 
 export type ExperimentPreviewKind =
-  "feature-modal" | "discovery-queue" | "event-banner" | ElevenPreviewKind;
+  | "feature-modal"
+  | "discovery-queue"
+  | "event-banner"
+  | ElevenPreviewKind
+  | CloudflarePreviewKind;
 
 const surface = "var(--card)";
 const sunken = "var(--surface-sunken)";
@@ -479,6 +487,8 @@ export function ExperimentPreview({ kind }: { kind: ExperimentPreviewKind }) {
     >
       {Preview ? (
         <Preview />
+      ) : kind.startsWith("cf-") ? (
+        <CloudflareThumbnail kind={kind as CloudflarePreviewKind} />
       ) : (
         <ElevenLabsThumbnail kind={kind as ElevenPreviewKind} />
       )}

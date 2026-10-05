@@ -108,9 +108,9 @@ function Destination({
       style={designStyle}
       {...growthTarget({
         id: "steam-sticker-destination",
-        title: "Make the reward tangible",
+        title: "Show the reward",
         description:
-          "A collection destination lets people inspect the promised reward. Only the reward strip and queue are evidenced here, so this collection is a local placeholder and does not grant stickers.",
+          "Showing a sticker collection makes the reward easier to picture. It gives people a reason to finish the queue.",
         order: 3,
       })}
     >
@@ -276,9 +276,9 @@ export function SteamGrowthBanners({
               style={designStyle}
               {...growthTarget({
                 id: "steam-reward",
-                title: "Reward-led exploration",
+                title: "Reward game discovery",
                 description:
-                  "A collectible reward gives people a reason to complete the discovery queue. The dated offer adds urgency; the blue store cards are the surrounding shopping context. This is a proposed engagement mechanism, not evidence of measured impact.",
+                  "Free stickers give people a reason to browse the game queue. The end date encourages them to try it soon.",
                 order: 1,
               })}
             >
@@ -314,9 +314,9 @@ export function SteamGrowthBanners({
                     style={designStyle}
                     {...growthTarget({
                       id: "steam-queue-entry",
-                      title: "A clear next step",
+                      title: "Invite people to browse",
                       description:
-                        "The invitation connects the reward promise to one action: open the queue. The moving cards preview browsing without asking people to choose a game first. Open it to explore the recommendation and completion steps.",
+                        "The moving cards show what browsing will feel like. One clear button starts the queue without needing to choose a game first.",
                       order: 2,
                     })}
                     aria-label="Explore Your Discovery Queue"

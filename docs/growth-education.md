@@ -16,15 +16,16 @@ Use the same scopes in index thumbnails. The library shell, card surfaces, sourc
 
 Attach `growthTarget` definitions from `src/components/growth-education.tsx` to the actual focal regions. Each target needs a stable ID, a short mechanism title, and one concise explanation. Use explicit order when reading order differs from the intended lesson. Give materially different flow states distinct target IDs so the shared guide can identify newly available explanations.
 
-Connect three things in the explanation:
+Write for someone seeing the pattern for the first time:
 
-1. **Visible mechanism:** what the element does.
-2. **Invited behavior:** what the user can do next.
-3. **Intended role:** how that action might support the documented goal.
+- Use a plain heading of about 2–5 words: “Show the added benefits” or “Try now or save”.
+- Explain one visible design choice and why it can help someone act. Use one or two short sentences, usually 15–28 words; keep the body under 35 words.
+- Name the actual control or offer. Prefer “paid plan”, “next step”, “try”, and “invite” over “monetization”, “handoff”, “activation”, and “expansion boundary”.
+- Keep detailed classification, evidence limits, proposed metrics, and implementation notes in Design intent or the experiment record. A brief preview limit belongs in a tip only when it explains why the visible flow stops.
+- Describe the design's purpose without claiming measured success. Preserve original product offers, labels, instructions, and calls to action; these tips are a separate library layer.
+- Apply the same standard to starting screens, dialogs, and tips shown after an action. Do not repeat instructions already covered by the guide controls.
 
-Example: “These starter prompts give a new user a concrete first input, reducing the work needed to try voice creation.” This explains an interpretation; it does not assert increased activation.
-
-Prefer names such as “Starter prompts,” “Annual savings,” or “Invite while sharing.” Avoid generic “growth hack” labels, unexplained jargon, and repeated category definitions that do not teach the particular pattern. Preserve original offers, titles, instructions, and calls to action; guide copy is a separate library layer.
+Example: **Show the added benefits** — “Higher limits and added support show what the paid plan offers. This helps people decide whether upgrading is useful.”
 
 ## Keep guidance optional and state-aware
 
@@ -49,3 +50,17 @@ The first education pass introduced the 11-shade yellow scale, 46 growth roles, 
 That earlier pass included inline hints and pinned popovers, now superseded by the Guide me-only contract above. Its checks describe that version and do not verify the subsequent tooltip removal or container cleanup. Record new verification with the affected implementation; do not reuse earlier results as proof.
 
 Driver.js references: [configuration](https://driverjs.com/docs/configuration) and [async tours](https://driverjs.com/docs/async-tour). The project lockfile pins the installed dependency.
+
+## Guide review safeguards
+
+- Treat every guide exit path as a keyboard interaction: toolbar stop, close button and Escape must return focus to the invoking Guide me control (including across the workspace iframe). Do not restore focus to the document body.
+- Inspect the rendered third-party popover semantics. Driver’s header/footer wrappers must not create duplicate page landmarks; its dialog keeps a labeled title. Check an active guide as well as the underlying screen.
+- Transient product feedback must not make an explanation unreadable. A guide may explain the last completed action after a toast disappears, without extending the source toast or advancing the product flow.
+
+## Plain-language review — 5 October 2026
+
+Simplified all 90 guide messages across 84 target definitions, including alternate and follow-up states. Headings are at most five words; bodies are 16–24 words. The repeated final-step paragraph was removed, and the final button now says “Keep exploring”. Original product copy, target IDs, and flow behavior were preserved.
+
+Source review covered all guide definitions. Browser checks sampled the Cloudflare event guide in its workspace at desktop and 320 × 800, and the ElevenLabs annual offer dialog at desktop, including Next, Back, and Escape. The narrow guide had no horizontal overflow and its controls remained visible. This was a focused wording and layout check, not a new audit of every interaction. The final build, token checks, formatting, and `git diff --check` passed. No publication occurred.
+
+Review captures: [event guide](reviews/2026-10-05/guide-copy/event-desktop.jpg), [narrow event guide](reviews/2026-10-05/guide-copy/event-mobile.jpg), and [annual offer guide](reviews/2026-10-05/guide-copy/annual-desktop.jpg).

@@ -280,7 +280,7 @@ export function ExperimentWorkspace({
             <div className="flex flex-wrap items-center gap-3">
               {guideActive && (
                 <span className="growth-guide-status" role="status">
-                  Guide on · explore to continue
+                  Guide on · keep exploring
                 </span>
               )}
               <Button
@@ -363,7 +363,8 @@ export function ExperimentWorkspace({
           className="max-w-4xl pb-6"
         />
       </details>
-      {experiment.id.startsWith("el-") && (
+      {(experiment.observations.length > 0 ||
+        experiment.assumptions.length > 0) && (
         <details className="mt-4 rounded-md border border-border bg-card px-5 sm:px-6">
           <summary className="min-h-14 py-4 text-sm font-medium">
             About this wireframe
@@ -372,14 +373,16 @@ export function ExperimentWorkspace({
             {[
               ["Observed behavior", experiment.observations.join(" ")],
               ["Prototype scope", experiment.assumptions.join(" ")],
-            ].map(([label, value]) => (
-              <div key={label}>
-                <dt className="font-medium">{label}</dt>
-                <dd className="mt-1 text-muted-foreground">{value}</dd>
-              </div>
-            ))}
+            ]
+              .filter(([, value]) => value)
+              .map(([label, value]) => (
+                <div key={label}>
+                  <dt className="font-medium">{label}</dt>
+                  <dd className="mt-1 text-muted-foreground">{value}</dd>
+                </div>
+              ))}
           </dl>
-          {import.meta.env.DEV && (
+          {import.meta.env.DEV && experiment.id.startsWith("el-") && (
             <a
               className="mb-5 inline-flex min-h-10 items-center text-sm underline underline-offset-4"
               href={referenceAssetUrl(

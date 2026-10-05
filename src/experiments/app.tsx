@@ -21,6 +21,12 @@ const ElevenLabsWireframe = lazy(() =>
   })),
 );
 
+const CloudflareWireframe = lazy(() =>
+  import("./cloudflare/wireframe").then((module) => ({
+    default: module.CloudflareWireframe,
+  })),
+);
+
 function LegacyElevenLabsLink() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -75,7 +81,17 @@ export function ExperimentsApp() {
     return (
       <div className="experiment-embedded">
         <GrowthEducation experimentId={experiment.id} />
-        {id?.startsWith("el-") ? (
+        {id?.startsWith("cf-") ? (
+          <Suspense
+            fallback={
+              <p role="status" className="p-8">
+                Loading wireframe…
+              </p>
+            }
+          >
+            <CloudflareWireframe patternId={id} title={experiment.title} />
+          </Suspense>
+        ) : id?.startsWith("el-") ? (
           <Suspense
             fallback={
               <p role="status" className="p-8">

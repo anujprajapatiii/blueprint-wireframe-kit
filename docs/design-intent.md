@@ -60,6 +60,7 @@ These are nested meanings: activation can contribute to the broad retention outc
 - **Engagement / retention:** what people do and the value they receive versus whether the relationship continues over time.
 - **Retention / reactivation:** preserve an active relationship versus restore a lapsed one. An abandoned cart alone does not establish lapse.
 - **Monetization / expansion:** a commercial exchange versus increasing an existing customer relationship's commercial value. A paid CTA alone does not establish expansion.
+- **Promotion / outcome:** event advertising and product/service cross-sell qualify through their visible proposition and invited action, including external handoffs. Paid conversion proof is not required for admission. Choose the goal from the observed audience, journey and commercial evidence; a cross-sell label alone does not establish expansion, and an event promotion alone does not establish paid purchase. State unknown destinations and outcomes in the basis.
 - **Objective / journey / mechanism / format:** keep these independent. For example, expansion → add paid seats → clear incremental value and reduced effort → in-product modal.
 
 Classify ambiguous patterns from their intended behavior. A teammate invitation can support first value, ongoing collaboration, paid-seat expansion, or referral. A pricing page can support evaluation and acquisition or purchase. Failed-payment recovery can preserve a subscription (retention) or rescue a first purchase (monetization).

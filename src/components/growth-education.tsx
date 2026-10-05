@@ -32,6 +32,7 @@ export function GrowthLegend({ className }: { className?: string }) {
   return (
     <div
       className={cn("growth-legend", className)}
+      role="group"
       aria-label="Wireframe colour key"
     >
       <span>
@@ -182,6 +183,19 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
       tour?.destroy();
       tour = null;
       announce();
+      requestAnimationFrame(() => {
+        if (!standalone)
+          window.parent.postMessage(
+            { channel: CHANNEL, focus: true },
+            location.origin,
+          );
+        else
+          document
+            .querySelector<HTMLButtonElement>(
+              ".growth-standalone-toolbar button",
+            )
+            ?.focus({ preventScroll: true });
+      });
     };
     const startTour = (targets: HTMLElement[]) => {
       if (!targets.length || tour?.isActive()) return;
@@ -219,7 +233,7 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
         progressText: "{{current}} of {{total}}",
         nextBtnText: "Next",
         prevBtnText: "Back",
-        doneBtnText: "Explore this flow",
+        doneBtnText: "Keep exploring",
         closeBtnLabel: "End guided walkthrough",
         onHighlighted(element) {
           // Driver decorates its target as a disclosure. A structural region
@@ -246,13 +260,13 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
           popover.wrapper.setAttribute("popover", "manual");
           popover.wrapper.showPopover?.();
           popover.wrapper.setAttribute("aria-live", "polite");
-          if (options.driver.isLastStep()) {
-            const note = document.createElement("p");
-            note.className = "growth-tour-continuation";
-            note.textContent =
-              "Continue the wireframe after this step. The guide explains new patterns as you open them.";
-            popover.description.appendChild(note);
-          }
+          // Driver uses header/footer tags outside a sectioning element. Give
+          // its labelled dialog title no additional page landmark semantics.
+          popover.title.setAttribute("role", "presentation");
+          popover.footer.setAttribute("role", "presentation");
+        },
+        onCloseClick() {
+          stop();
         },
         onDoneClick(_element, _step, options) {
           completedNormally = true;
@@ -265,6 +279,8 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
           requestAnimationFrame(() => {
             if (
               restoreFocus?.isConnected &&
+              restoreFocus !== document.body &&
+              restoreFocus !== document.documentElement &&
               !restoreFocus.closest('[inert], [aria-hidden="true"]')
             )
               restoreFocus.focus({ preventScroll: true });
@@ -371,7 +387,11 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
       />
     );
   return (
-    <div className="growth-standalone-toolbar">
+    <div
+      className="growth-standalone-toolbar"
+      role="region"
+      aria-label="Wireframe guide"
+    >
       <GrowthLegend />
       <Button
         variant="outline"
@@ -385,7 +405,7 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
       </Button>
       {active && (
         <span className="growth-guide-status" role="status">
-          Guide on · explore to continue
+          Guide on · keep exploring
         </span>
       )}
     </div>

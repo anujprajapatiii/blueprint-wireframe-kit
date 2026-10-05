@@ -162,9 +162,9 @@ function InspirationGallery() {
           <div
             {...growthTarget({
               id: "studio-inspiration-gallery",
-              title: "Show an achievable outcome",
+              title: "Choose something to make",
               description:
-                "The gallery labels examples by the thing someone wants to make. Existing media makes the workflow more concrete before the user invests in their own project.",
+                "The gallery groups examples by what you want to make, helping you find a starting point that fits your project.",
               order: 1,
             })}
             className="grid grid-cols-2 gap-x-3 gap-y-5 lg:grid-cols-4"
@@ -177,9 +177,9 @@ function InspirationGallery() {
                     {...(name === "Film trailer"
                       ? growthTarget({
                           id: "studio-sample-entry",
-                          title: "Open a complete editable starting point",
+                          title: "Open a complete example",
                           description:
-                            "Film trailer was the inspected example. In the source it created a copied project with media and a populated timeline; this prototype changes local state without creating an account draft.",
+                            "Film trailer opens a project with media and a filled timeline, so you can explore an example before building your own.",
                           order: 2,
                         })
                       : {})}
@@ -381,9 +381,9 @@ function StudioEditor({
           {...(onBack
             ? growthTarget({
                 id: "studio-seeded-library",
-                title: "Remove the initial setup work",
+                title: "Skip the empty start",
                 description:
-                  "The copied inspiration arrives with existing visual and audio assets. The user can inspect a concrete project before gathering and importing their own media.",
+                  "The example includes video and audio, so you can explore the project before finding and importing your own files.",
                 order: 1,
               })
             : {})}
@@ -442,9 +442,9 @@ function StudioEditor({
           {...(onBack
             ? growthTarget({
                 id: "studio-seeded-timeline",
-                title: "Teach through editable structure",
+                title: "See how it is built",
                 description:
-                  "Populated video and audio tracks expose how the finished example is assembled. Meaningful adaptation would be more informative than counting a copied draft alone; that outcome is not measured here.",
+                  "The filled timeline shows how the video and audio fit together, giving you a structure to learn from and change.",
                 order: 2,
               })
             : {})}
@@ -556,9 +556,9 @@ function SharingDialog({
         <div
           {...growthTarget({
             id: "project-invitation",
-            title: "Invite at a concrete handoff",
+            title: "Invite while sharing",
             description:
-              "The invitation appears while someone is deciding who can access work that already exists. It connects collaboration to a real project; the surrounding access controls are ordinary product context.",
+              "The invitation appears while you choose who can access a project, connecting the request to work you already want to share.",
             order: 1,
           })}
           className="growth-scope relative rounded-md bg-card text-card-foreground"
@@ -726,9 +726,9 @@ function FlowsIntro() {
             <DialogHeader
               {...growthTarget({
                 id: "flows-introduction",
-                title: "Introduce the workflow’s mental model",
+                title: "Show how Flows works",
                 description:
-                  "A connected-node example and three benefits explain what the canvas is for before setup begins. This is a feature introduction for an existing user; repeat-display rules were not established.",
+                  "A connected example and three benefits explain what Flows does, helping you decide whether to try the canvas.",
                 order: 1,
               })}
               className="px-6 pt-6"
@@ -762,9 +762,9 @@ function FlowsIntro() {
             <div
               {...growthTarget({
                 id: "flows-entry",
-                title: "Offer one clear entry action",
+                title: "Start from the introduction",
                 description:
-                  "Get started moves beyond the benefit summary. No node workflow was built or run in the inspected sequence, so the prototype stops at that boundary.",
+                  "Get started gives you one clear next step after the introduction, so you do not need to look for where to begin.",
                 order: 2,
               })}
               className="px-4 pb-4"
@@ -894,9 +894,9 @@ function DubbingIntro() {
             <DialogHeader
               {...growthTarget({
                 id: "dubbing-benefits",
-                title: "Translate a release into user benefits",
+                title: "Explain what is new",
                 description:
-                  "The announcement describes emotional delivery, language adaptation, and automatic synchronization rather than only naming a new version. These remain source marketing claims, not verified performance results.",
+                  "The announcement describes the promised improvements to emotion, language and timing, helping you decide whether the new dubbing tool is useful.",
                 order: 1,
               })}
               className="px-6 pt-3"
@@ -941,9 +941,9 @@ function DubbingIntro() {
             <div
               {...growthTarget({
                 id: "dubbing-evaluate-or-start",
-                title: "Let readiness determine the next step",
+                title: "Listen first or start",
                 description:
-                  "Play samples offers evaluation before supplying material, while Get started goes directly to setup. The samples were not played during inspection and are not fabricated here.",
+                  "Play samples lets you hear examples before providing your own material. Get started takes you straight to setup.",
                 order: 2,
               })}
               className="relative grid grid-cols-2 gap-2 border-t border-border p-3"
@@ -997,9 +997,9 @@ function AudiobookPaths() {
         <div
           {...growthTarget({
             id: "audiobook-pathways",
-            title: "Separate paths by the desired outcome",
+            title: "Choose your goal",
             description:
-              "One route creates audio for export; the other publishes an eBook to ElevenReader with an earnings proposition. Separating these intents helps users choose before entering the setup form.",
+              "One option creates audio to export; the other publishes to ElevenReader. Choosing the outcome first makes the next steps clearer.",
             order: 1,
           })}
           className="grid gap-3 sm:grid-cols-2"
@@ -1112,12 +1112,12 @@ function AudiobookPaths() {
                   id: `audiobook-${route}-guidance`,
                   title:
                     route === "create"
-                      ? "Show the setup sequence before commitment"
-                      : "Connect contribution to distribution",
+                      ? "Show the steps ahead"
+                      : "Show where books go",
                   description:
                     route === "create"
-                      ? "Upload, Formatting, Voice, and Pronunciations make the expected setup visible from the first step. Only the upload stage was inspected; later steps are not invented."
-                      : "The publishing proposition connects an uploaded book to dynamic narration, distribution, and potential earnings. Publication and payouts were not observed, and earnings are not guaranteed.",
+                      ? "Upload, Formatting, Voice and Pronunciations show the steps ahead, so you know what setup involves before you begin."
+                      : "The introduction explains how your book can reach ElevenReader listeners and earn money, giving you a reason to prepare it for publishing.",
                   order: 1,
                 })}
                 className="growth-scope border-b border-border bg-card text-card-foreground px-5 py-5 pr-12"
@@ -1197,9 +1197,9 @@ function AudiobookPaths() {
                     <fieldset
                       {...growthTarget({
                         id: "audiobook-narration-choice",
-                        title: "Explain the trade-off inside the choice",
+                        title: "Compare narrator options",
                         description:
-                          "Single cast and Multi cast describe the difference between one narrator and distinct character voices. The New badge draws attention to the expanded capability while the descriptions help users judge fit.",
+                          "Single cast and Multi cast explain one narrator versus separate character voices, helping you choose the style that suits your book.",
                         order: 2,
                       })}
                       className="min-w-0"
@@ -1351,9 +1351,9 @@ function AudiobookPaths() {
                   {...(route === "publish"
                     ? growthTarget({
                         id: "audiobook-publish-preview",
-                        title: "Make preparation the next commitment",
+                        title: "Preview before publishing",
                         description:
-                          "Create and preview book describes a preparation step after supplying a document or URL. The preview, publication, and payout states were not observed, so this prototype stops before creating a book.",
+                          "Create and preview book offers a way to check the result after adding your document, before deciding to publish it.",
                         order: 2,
                       })
                     : {})}

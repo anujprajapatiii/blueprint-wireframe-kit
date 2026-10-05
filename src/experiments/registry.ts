@@ -1,6 +1,7 @@
 import type { GrowthIntent } from "../growth/taxonomy";
 import type { ExperimentPreviewKind } from "./experiment-preview";
 import { elevenLabsExperiments } from "./elevenlabs/metadata";
+import { cloudflareExperiments } from "./cloudflare/metadata";
 
 export type ExperimentType = "Screen" | "Flow" | "Experience";
 
@@ -31,6 +32,7 @@ export interface Experiment {
 }
 
 export const experiments: Experiment[] = [
+  ...cloudflareExperiments,
   ...elevenLabsExperiments,
   {
     id: "github-event-banner",

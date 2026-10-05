@@ -1,5 +1,90 @@
 [
   {
+    "id": "cf-agent-onboarding",
+    "title": "Agent onboarding promotion",
+    "summary": "A compact dashboard invitation offers a setup prompt for a compatible agent.",
+    "sourceName": "Cloudflare",
+    "type": "Screen",
+    "focus": [
+      "Feature promotion",
+      "Setup prompt",
+      "Dashboard"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Feature discovery",
+      "Compatible-tool cues",
+      "Low-effort starting action"
+    ],
+    "format": "Compact dashboard promotion pill"
+  },
+  {
+    "id": "cf-workers-plans",
+    "title": "Workers paid-plan comparison",
+    "summary": "Free and Paid offers connect a $5 monthly proposition to a bounded checkout preview.",
+    "sourceName": "Cloudflare",
+    "type": "Flow",
+    "focus": [
+      "Plan comparison",
+      "Free to paid",
+      "Checkout boundary"
+    ],
+    "goals": [
+      "monetization"
+    ],
+    "mechanisms": [
+      "Price and benefit framing",
+      "Current-plan comparison",
+      "Explicit capacity differences"
+    ],
+    "format": "Stacked plan offers with feature highlights"
+  },
+  {
+    "id": "cf-containers-gate",
+    "title": "Containers paid capability gate",
+    "summary": "A feature-entry card connects access to Containers with the Workers Paid plan.",
+    "sourceName": "Cloudflare",
+    "type": "Flow",
+    "focus": [
+      "Premium capability gate",
+      "Contextual purchase",
+      "Checkout boundary"
+    ],
+    "goals": [
+      "monetization"
+    ],
+    "mechanisms": [
+      "Capability gating",
+      "Contextual relevance",
+      "Explicit paid-plan requirement"
+    ],
+    "format": "Product-entry premium capability card"
+  },
+  {
+    "id": "cf-event-promotion",
+    "title": "Connect event promotion",
+    "summary": "A dashboard banner advertises Connect and hands off to the paid event website.",
+    "sourceName": "Cloudflare",
+    "type": "Screen",
+    "focus": [
+      "Event advertising",
+      "Cross-sell",
+      "External handoff"
+    ],
+    "goals": [
+      "monetization"
+    ],
+    "mechanisms": [
+      "Contextual event advertising",
+      "Speaker credibility",
+      "Dated event proposition",
+      "External evaluation handoff"
+    ],
+    "format": "Dashboard event promotion banner"
+  },
+  {
     "id": "el-v4-discovery-to-trial",
     "title": "Discover a new model",
     "summary": "Launch messages connect new-model benefits to the speech tool and model settings.",

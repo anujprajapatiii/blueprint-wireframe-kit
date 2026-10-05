@@ -216,9 +216,9 @@ export function NotionFeatureModal({
             {...(!destination
               ? growthTarget({
                   id: "notion-feature-discovery",
-                  title: "Make new value discoverable",
+                  title: "Show what's new",
                   description:
-                    "The announcement brings new capabilities into an existing user's workflow. Choosing a feature reveals its benefit and changes the blue product preview, so people can understand the value before trying it. The yellow announcement is the growth component; the preview is supporting context.",
+                    "The announcement introduces new features. Choosing one shows an example, helping people see how it could be useful before trying it.",
                   order: 1,
                 })
               : {})}
@@ -246,9 +246,9 @@ export function NotionFeatureModal({
                 className="notion-try-view"
                 {...growthTarget({
                   id: "notion-feature-handoff",
-                  title: "Feature trial handoff",
+                  title: "Try the feature",
                   description:
-                    "Try for free turns interest in the selected capability into an action. The original recording ends before this destination, so this local placeholder marks the boundary of what is known rather than inventing an activation flow.",
+                    "Try for free invites people to explore the feature themselves. This preview stops before the real setup.",
                   order: 3,
                 })}
               >
@@ -397,9 +397,9 @@ export function NotionFeatureModal({
                   className="notion-feature-actions"
                   {...growthTarget({
                     id: "notion-feature-actions",
-                    title: "Act now, or keep it for later",
+                    title: "Try now or save",
                     description:
-                      "Try for free offers the next step for the selected feature. Save for later provides a lower-commitment exit for someone who is busy. The design intent is feature adoption; this wireframe does not establish whether the real product sends a reminder.",
+                      "People can try the feature now or save it for later. Both choices let them respond at their own pace.",
                     order: 2,
                   })}
                 >

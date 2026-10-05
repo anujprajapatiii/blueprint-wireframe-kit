@@ -160,9 +160,9 @@ export function GitHubEventBanner() {
                 className="growth-scope github-event-card overflow-hidden bg-surface-raised shadow-sm"
                 {...growthTarget({
                   id: "github-event-offer",
-                  title: "A timely offer in context",
+                  title: "Offer an event discount",
                   description:
-                    "The event promotion sits beside the dashboard without replacing the main task. An explicit $600 saving and a dated early-bird deadline give a reason to consider registering. The yellow card is the promotion; the blue feed and changelog explain its placement.",
+                    "The event sits beside the dashboard. A $600 saving and a clear deadline give people a reason to book early.",
                   order: 1,
                 })}
               >
@@ -200,9 +200,9 @@ export function GitHubEventBanner() {
                   className="github-event-action flex items-center gap-2 p-4"
                   {...growthTarget({
                     id: "github-event-register",
-                    title: "One clear registration action",
+                    title: "Make registration easy to find",
                     description:
-                      "Register now gives the offer one next step. A useful measure would follow through to completed registrations, not just clicks. The reference supplies only this banner, so the preview stops at a local handoff and makes no registration.",
+                      "Register now sits directly below the offer, so interested readers can find the next step without searching elsewhere.",
                     order: 2,
                   })}
                 >
@@ -216,9 +216,9 @@ export function GitHubEventBanner() {
                       className="growth-scope"
                       {...growthTarget({
                         id: "github-registration-handoff",
-                        title: "The evidence stops at the handoff",
+                        title: "Continue toward registration",
                         description:
-                          "The banner promises an event registration step, but no destination was supplied. This local screen keeps that boundary explicit. A complete evaluation would follow registrations or purchases after the click and include dismissals as a diagnostic.",
+                          "The offer leads toward event registration. This preview ends here because the next screen wasn't included in the reference.",
                         order: 3,
                       })}
                     >

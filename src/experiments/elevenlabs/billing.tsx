@@ -234,9 +234,9 @@ function UpgradeFlow({
             <Card
               {...growthTarget({
                 id: "annual-savings",
-                title: "Reframe the commitment",
+                title: "Show the yearly saving",
                 description:
-                  "The offer appears after a monthly upgrade has been chosen. Two months free translates a longer commitment into a concrete saving.",
+                  "After you choose a monthly upgrade, the offer shows two months free, giving you a reason to consider paying yearly.",
                 order: 1,
               })}
               className="flex overflow-hidden"
@@ -259,9 +259,9 @@ function UpgradeFlow({
             <DialogFooter
               {...growthTarget({
                 id: "annual-choice",
-                title: "Keep the original path available",
+                title: "Keep both options open",
                 description:
-                  "Yearly and monthly remain separate choices. Continue monthly advances to the captured charge review; the yearly checkout was not inspected.",
+                  "Yearly and monthly stay available together, so you can consider the saving without losing the monthly option you first chose.",
                 order: 2,
               })}
               className="relative grid grid-cols-1 gap-2 sm:grid-cols-2"
@@ -292,9 +292,9 @@ function UpgradeFlow({
             <div
               {...growthTarget({
                 id: "upgrade-commitment",
-                title: "Make the commitment explicit",
+                title: "Review the charge",
                 description:
-                  "Naming the old plan, new plan and immediate charge gives the user a concrete decision to review before paying.",
+                  "The old plan, new plan and amount due now appear together, so you can check the change before paying.",
                 order: 1,
               })}
               className="space-y-3 text-sm leading-6"
@@ -318,9 +318,9 @@ function UpgradeFlow({
             <DialogFooter
               {...growthTarget({
                 id: "upgrade-control",
-                title: "A deliberate final decision",
+                title: "Confirm or cancel",
                 description:
-                  "Cancel stays available beside Confirm. The source also explains the consequence of a failed payment; this prototype submits nothing.",
+                  "Cancel sits beside Confirm, giving you a clear way to back out after reviewing the plan change and charge.",
                 order: 2,
               })}
             >
@@ -431,9 +431,9 @@ function Plans({
           <div
             {...growthTarget({
               id: "billing-cadence",
-              title: "Frame a longer commitment",
+              title: "Compare yearly and monthly",
               description:
-                "The yearly option leads with the saving. Selecting it shows monthly equivalents alongside the explicit annual billing commitment.",
+                "The yearly option highlights the saving and shows the monthly equivalent, so you can compare costs before choosing how to pay.",
               order: 1,
             })}
             className="growth-scope inline-flex max-w-full items-center gap-1 rounded-md border border-border bg-surface-sunken p-1 text-foreground"
@@ -526,9 +526,9 @@ function Plans({
         <div
           {...growthTarget({
             id: "plan-ladder",
-            title: "Show a path to more value",
+            title: "See what more buys",
             description:
-              "Comparable tiers connect a higher price to additional capacity and capabilities. Each tier carries forward the previous tier's features, making the upgrade difference easier to inspect.",
+              "Each plan shows its price and added features beside the others, making it easier to decide whether an upgrade is useful.",
             order: 2,
           })}
           ref={track}
@@ -543,9 +543,9 @@ function Plans({
               {...(plan.name === "Creator"
                 ? growthTarget({
                     id: "recommended-plan",
-                    title: "Focus the comparison",
+                    title: "Highlight a suggested plan",
                     description:
-                      "The Popular badge and stronger action draw attention to Creator within the broader ladder. This is a recommendation cue in the source, not evidence that this plan is right for every user.",
+                      "The Popular badge and stronger button draw your attention to Creator, giving you a starting point for comparing the plans.",
                     order: 3,
                   })
                 : {})}

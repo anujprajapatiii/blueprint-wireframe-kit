@@ -336,7 +336,7 @@ test("generated deployed catalog matches the current public registry projection"
     `data:text/javascript;base64,${Buffer.from(bundled.outputFiles[0].text).toString("base64")}`
   );
   assert.deepEqual(catalog, current);
-  assert.equal(catalog.length, 19);
+  assert.equal(catalog.length, 23);
   assert.equal(
     catalog.some((entry) => entry.id === "el-balance-context-upgrade"),
     false,

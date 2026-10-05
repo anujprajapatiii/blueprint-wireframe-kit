@@ -194,9 +194,9 @@ function LaunchBanner({
     <div
       {...growthTarget({
         id: "model-announcement",
-        title: "Put discovery in the path of work",
+        title: "Try the new model",
         description:
-          "This announcement exposes an existing user to a new model. Try it out takes the user directly into the speech workspace with v4 selected; adoption and quality are not measured.",
+          "The announcement puts the new model in view. Try it out opens the speech editor with v4 already selected.",
         order: 1,
       })}
       className="growth-scope flex items-center justify-center gap-3 border-b border-border-strong bg-secondary text-secondary-foreground px-3 py-2 text-center text-xs"
@@ -229,9 +229,9 @@ function LaunchFeature({ onTry }: { onTry: () => void }) {
     <section
       {...growthTarget({
         id: "model-feature",
-        title: "Connect the benefit to a trial",
+        title: "A quick way to try",
         description:
-          "The feature card pairs a short model proposition with a direct Try v4 action. Learn more offers a lower-commitment way to inspect the claim before switching tools.",
+          "The card explains what v4 offers and gives you a Try v4 button. Learn more lets you read first.",
         order: 3,
       })}
       className="growth-scope el-create-launch min-w-0 rounded-md border border-border bg-card text-card-foreground"
@@ -650,9 +650,9 @@ function SpeechWireframe({
                   {...(growthFocus === "adjacent-tool"
                     ? growthTarget({
                         id: "adjacent-tool-promotion",
-                        title: "Introduce an adjacent use case in context",
+                        title: "Discover a related tool",
                         description:
-                          "The Image & Video promotion sits beside speech settings, where an existing creator is already working. It connects to a related tool without replacing the current editor; the dismiss action keeps that work available.",
+                          "The Image & Video offer appears beside speech settings, where you already work. You can explore it or dismiss it and continue.",
                         order: 1,
                       })
                     : {})}
@@ -718,9 +718,9 @@ function SpeechWireframe({
                   {...(growthFocus === "model-trial"
                     ? growthTarget({
                         id: "model-trial",
-                        title: "Offer a trial beside the existing choice",
+                        title: "Try without leaving",
                         description:
-                          "The promoted Eleven v4 model has a direct Try action beneath the ordinary model picker. It lets an existing user try a newly announced capability without leaving their speech workspace. The editor and model settings are surrounding product context.",
+                          "A Try button sits beneath the model picker, making the new model easy to test in the same speech editor.",
                         order: 1,
                       })
                     : {})}
@@ -933,9 +933,9 @@ function MusicWireframe() {
         <div
           {...growthTarget({
             id: "music-starter",
-            title: "Offer a starting point beside the cost",
+            title: "Start with a prompt",
             description:
-              "Prompt chips make an original track easier to describe. Duration, prompt improvement, and the displayed credit estimate keep the setup and cost visible before the generation action.",
+              "Suggested prompts help you describe a track. The duration and credit estimate show what you are about to create and spend.",
             order: 1,
           })}
           className="growth-scope el-create-music-composer relative rounded-md border border-border-strong bg-card text-card-foreground shadow-md"
@@ -1015,9 +1015,9 @@ function MusicWireframe() {
             <aside
               {...growthTarget({
                 id: "music-model-introduction",
-                title: "Explain a change where it is used",
+                title: "Explain the update",
                 description:
-                  "The anchored message introduces the new default model beside its control. It gives a reason to notice the update and can be dismissed; its quality claims have not been independently verified.",
+                  "The message introduces the new model beside its setting, so you can understand the change where you choose it.",
                 order: 2,
               })}
               className="el-create-model-tip rounded-md border border-border-strong bg-popover p-3 shadow-md"
@@ -1049,9 +1049,9 @@ function MusicWireframe() {
           <section
             {...growthTarget({
               id: "music-curation",
-              title: "Let the task guide discovery",
+              title: "Browse by purpose",
               description:
-                "Use-case collections and playable track entries offer a browse route alongside creation. They help a user look for a suitable existing output before investing in a new one; preview audio is not available here.",
+                "Collections group tracks by what they suit. You can look for an existing track before spending time making a new one.",
               order: 3,
             })}
             className="relative"
@@ -1269,9 +1269,9 @@ function SoundWireframe() {
         <div
           {...growthTarget({
             id: "sound-community",
-            title: "Make other creators’ outputs useful",
+            title: "Reuse community sounds",
             description:
-              "The public list gives the next creator reusable effects, previews, categories, and download counts. Those are discovery cues; they do not by themselves prove a growth loop or the quality of an effect.",
+              "Categories, previews and download counts help you browse other creators’ sound effects and find one to use in your own work.",
             order: 1,
           })}
           className="mt-5"
@@ -1349,9 +1349,9 @@ function SoundWireframe() {
           <div
             {...growthTarget({
               id: "sound-prompt-guidance",
-              title: "Teach useful prompt dimensions",
+              title: "Help shape the sound",
               description:
-                "Material and resonance suggestions show which details can shape a sound request. They prepare a local draft beside its visible cost; the quality of generated output is not tested.",
+                "Suggestions about material and resonance help you describe the sound you want, so starting a request takes less guesswork.",
               order: 2,
             })}
             className="growth-scope rounded-md border border-border-strong bg-card text-card-foreground shadow-md"
@@ -1395,9 +1395,9 @@ function SoundWireframe() {
           <p
             {...growthTarget({
               id: "sound-sharing",
-              title: "Disclose the contribution pathway",
+              title: "Make sharing clear",
               description:
-                "This notice explains that a generation may become discoverable by other users and keeps a Disable choice beside the statement. It makes the possible reuse pathway visible before creation; no publication was observed.",
+                "The notice says your sound may be available to others. Disable sits beside it so you can choose before creating.",
               order: 3,
             })}
             className="growth-scope mt-2 rounded-md bg-card p-1 text-center text-[11px] leading-5 text-muted-foreground"
@@ -1497,9 +1497,9 @@ function VisualWireframe() {
         <div
           {...growthTarget({
             id: "visual-examples",
-            title: "Start from a visible possibility",
+            title: "Explore what is possible",
             description:
-              "The example gallery demonstrates output types before asking for an original idea. Opening an example reveals possible creation actions; the source inspection did not test those actions’ results.",
+              "The gallery shows examples before you need an idea of your own. Open one to see ways to use it.",
             order: 1,
           })}
           className="el-create-gallery relative mt-4"
@@ -1620,9 +1620,9 @@ function VisualWireframe() {
           <DialogContent
             {...growthTarget({
               id: "visual-introduction",
-              title: "Explain the new capability before setup",
+              title: "Explain the new tools",
               description:
-                "The introduction connects image, video, model access, and related editing tools through three short benefits. This is feature adoption for an existing user, not evidence of first-product activation.",
+                "Three short benefits introduce image, video and editing tools, helping you decide whether to try them before you start.",
               order: 1,
             })}
             className="growth-scope max-h-[90dvh] min-w-0 max-w-lg grid-cols-1 overflow-y-auto p-0"
@@ -1678,9 +1678,9 @@ function VisualWireframe() {
               <div
                 {...growthTarget({
                   id: "visual-introduction-entry",
-                  title: "Give the explanation one next step",
+                  title: "One clear next step",
                   description:
-                    "Get started moves from the benefits summary to the example gallery. The next decision is what to explore or create, keeping this introduction short.",
+                    "Get started takes you from the introduction to examples, so you can explore ideas without setting up a project first.",
                   order: 2,
                 })}
               >
@@ -1698,9 +1698,9 @@ function VisualWireframe() {
           <DialogContent
             {...growthTarget({
               id: "visual-example-detail",
-              title: "Keep the example beside the next decision",
+              title: "Keep the example visible",
               description:
-                "An example remains visible while the user considers what to do with it. Its media is abstracted here; the actions come from the inspected product.",
+                "The example stays beside its actions, making it easier to decide how you might use or adapt it.",
               order: 1,
             })}
             className="growth-scope max-h-[90dvh] min-w-0 max-w-2xl grid-cols-1 overflow-y-auto"
@@ -1717,9 +1717,9 @@ function VisualWireframe() {
             <div
               {...growthTarget({
                 id: "visual-example-actions",
-                title: "Turn an example into a starting action",
+                title: "Start from an example",
                 description:
-                  "Recreate, Reference, and the adjacent editing actions give the example a practical next step. Their downstream inputs and costs were not inspected, so this wireframe only records the local choice.",
+                  "Recreate, Reference and editing actions let you use an example as a starting point instead of beginning with an empty editor.",
                 order: 2,
               })}
               className="flex flex-wrap items-center gap-2"

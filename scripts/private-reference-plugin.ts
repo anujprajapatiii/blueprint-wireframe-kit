@@ -52,14 +52,35 @@ const downloads = new Map([
   ["elevenlabs-growth-patterns-evidence.zip", "application/zip"],
   ["README.txt", "text/plain; charset=utf-8"],
 ]);
-const screenshots = new Set(screenshotFiles);
+const sources = [
+  { id: "elevenlabs", screenshots: new Set(screenshotFiles), downloads },
+  {
+    id: "cloudflare",
+    screenshots: new Set([
+      "01-account-home.jpg",
+      "02-agent-prompt-copied.jpg",
+      "03-workers-plans.jpg",
+      "04-workers-checkout-boundary.jpg",
+      "05-workers-usage.jpg",
+      "06-containers-gate.jpg",
+      "07-containers-checkout-boundary.jpg",
+      "08-workers-comparison-scroll.jpg",
+      "09-workers-highlights.jpg",
+      "10-event-home-entry.jpg",
+      "11-event-home-banner.jpg",
+      "12-event-destination.jpg",
+      "13-event-tickets.jpg",
+    ]),
+    downloads: new Map<string, string>(),
+  },
+];
 const localHosts = new Set(["127.0.0.1", "localhost", "[::1]"]);
 
 /**
  * Authenticated research media is local-only. Nothing is emitted by a build,
  * and configurePreview deliberately has no equivalent middleware.
  * Restore missing originals from the authorized saved research archive into
- * local-references/elevenlabs; never fetch authenticated assets automatically.
+ * the matching allowlisted local-references source; never fetch authenticated assets automatically.
  */
 export function privateReferencePlugin(): Plugin {
   return {
@@ -67,11 +88,6 @@ export function privateReferencePlugin(): Plugin {
     apply: "serve",
     configureServer(server) {
       const route = `${server.config.base}__private-references/`;
-      const collectionRoute = `${route}elevenlabs/`;
-      const directory = resolve(
-        server.config.root,
-        "local-references/elevenlabs",
-      );
 
       server.middlewares.use(async (request, response, next) => {
         const pathname = request.url?.split("?")[0] ?? "";
@@ -107,13 +123,23 @@ export function privateReferencePlugin(): Plugin {
 
         // Exact unencoded filenames only: no traversal, nested paths, listing,
         // or new file access merely because something is copied to this folder.
-        const filename = pathname.startsWith(collectionRoute)
-          ? pathname.slice(collectionRoute.length)
-          : "";
-        if (!screenshots.has(filename) && !downloads.has(filename))
+        const source = sources.find((entry) =>
+          pathname.startsWith(`${route}${entry.id}/`),
+        );
+        if (!source) return send(404, "Reference not found.");
+        const filename = pathname.slice(`${route}${source.id}/`.length);
+        if (
+          !source.screenshots.has(filename) &&
+          !source.downloads.has(filename)
+        )
           return send(404, "Reference not found.");
 
         try {
+          const directory = resolve(
+            server.config.root,
+            "local-references",
+            source.id,
+          );
           const actualDirectory = await realpath(directory);
           const file = await realpath(resolve(directory, filename));
           if (dirname(file) !== actualDirectory)
@@ -121,10 +147,12 @@ export function privateReferencePlugin(): Plugin {
           const body = await readFile(file);
           response.setHeader(
             "Content-Type",
-            screenshots.has(filename) ? "image/jpeg" : downloads.get(filename)!,
+            source.screenshots.has(filename)
+              ? "image/jpeg"
+              : source.downloads.get(filename)!,
           );
           response.setHeader("Content-Length", body.byteLength);
-          if (downloads.has(filename)) {
+          if (source.downloads.has(filename)) {
             response.setHeader(
               "Content-Disposition",
               `attachment; filename="${filename}"`,

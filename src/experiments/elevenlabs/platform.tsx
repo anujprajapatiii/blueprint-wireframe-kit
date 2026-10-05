@@ -151,9 +151,9 @@ function BasicSeats() {
           <div
             {...growthTarget({
               id: "seats-collaboration",
-              title: "Lower the barrier to bringing others in",
+              title: "Bring collaborators into your workspace",
               description:
-                "Basic Seats lets existing users invite collaborators while explaining their access and credit allowance. Collaboration creates a reason for additional people to enter the workspace.",
+                "Basic Seats explains what invited people can access and how many credits they get, making it easier to decide who to invite.",
               order: 1,
             })}
           >
@@ -172,9 +172,9 @@ function BasicSeats() {
           <form
             {...growthTarget({
               id: "seats-invite",
-              title: "Turn the invitation into one clear next step",
+              title: "Invite from this screen",
               description:
-                "An email field and Invite action make the next step concrete within the introduction. Sending and acceptance were not inspected, so the local flow stops before either occurs.",
+                "An email field and Invite button sit inside the introduction, so you can take the next step while the benefits are fresh.",
               order: 2,
             })}
             className="mt-6"
@@ -202,9 +202,9 @@ function BasicSeats() {
             <p
               {...growthTarget({
                 id: "seats-expansion",
-                title: "Explain the paid expansion boundary",
+                title: "Explain when to upgrade",
                 description:
-                  "The note distinguishes Basic Seats from Full Seats and names the tier required for more capability. The upgrade route appears at the moment its relevance can be understood.",
+                  "The note names the Scale plan needed for Full Seats, so you can see how to give collaborators more access.",
                 order: 3,
               })}
               className="mt-4 text-xs leading-4 text-muted-foreground"
@@ -263,9 +263,9 @@ function Affiliate() {
           <div
             {...growthTarget({
               id: "affiliate-incentive",
-              title: "Give advocacy a concrete incentive",
+              title: "Give a reason to share",
               description:
-                "The program connects recommending the product with earning. This is an invitation to join an advocacy program; the capture does not establish referral results.",
+                "The invitation connects recommending ElevenLabs with a chance to earn, giving people a reason to explore the affiliate program.",
               order: 1,
             })}
           >
@@ -289,9 +289,9 @@ function Affiliate() {
           <div
             {...growthTarget({
               id: "affiliate-segment",
-              title: "Provide a route for a different audience",
+              title: "Offer creators a separate option",
               description:
-                "Creators with a large following receive a separate contact path for exclusive opportunities. The source does not expose qualification rules or the offer beyond this entry.",
+                "Creators with a large following get a separate contact link, making it easy to ask about offers suited to them.",
               order: 2,
             })}
           >
@@ -335,9 +335,9 @@ function Affiliate() {
         <div
           {...growthTarget({
             id: "affiliate-handoff",
-            title: "Make the external handoff clear",
+            title: "Explain where sign-up leads",
             description:
-              "The sign-up panel names the third-party manager and places terms beside the action. That disclosure helps the user understand where joining will lead.",
+              "The panel names PartnerStack and links the program terms, so you can see who manages sign-up before you join.",
             order: 3,
           })}
           className="mx-5 mb-5 rounded-md border border-border bg-surface-sunken px-5 py-7 text-center"
@@ -429,14 +429,14 @@ function PlatformSwitcher() {
               {...growthTarget({
                 id: `switcher-${id}`,
                 title: [
-                  "Position products by the job",
-                  "Make an adjacent product discoverable",
-                  "Offer a route for builders",
+                  "Explain what each product does",
+                  "Introduce another useful product",
+                  "Point developers to their tools",
                 ][index],
                 description: [
-                  "A short outcome statement explains the creative product within navigation. The user can compare what each product is for before choosing a destination.",
-                  "The Agents row introduces deploying and monitoring conversational agents alongside creation tools. It creates an entry into a related product without requiring a separate promotion.",
-                  "The API row uses a building task to distinguish its audience. All three rows preserve direct choices rather than forcing a single recommended destination.",
+                  "A short description says what ElevenCreative helps you make, so you can compare it with the other products before choosing.",
+                  "The ElevenAgents row appears alongside creation tools, helping you discover a related product for setting up and managing conversational agents.",
+                  "The ElevenAPI description speaks directly to people building with audio models, helping developers find the product that fits their task.",
                 ][index],
                 order: index + 1,
               })}
@@ -692,9 +692,9 @@ function AgentTemplates() {
                     {...(index === 0
                       ? growthTarget({
                           id: "agents-templates",
-                          title: "Replace the blank start with examples",
+                          title: "Start from a template",
                           description:
-                            "Use-case templates give new users concrete starting points. Search and filtering help connect a task to a candidate template without configuring an agent first.",
+                            "Templates show tasks an agent could handle. Search and filters help you find a useful starting point before setting one up.",
                           order: 1,
                         })
                       : {})}
@@ -743,9 +743,9 @@ function AgentTemplates() {
             <div
               {...growthTarget({
                 id: "agents-preview",
-                title: "Let the user inspect the starting point",
+                title: "Look before you choose",
                 description:
-                  "The selected template is paired with its structure before Use template. Only the Customer Support workflow was captured; other selections show their known gallery descriptions.",
+                  "The preview sits beside the selected template and Use template button, helping you understand the starting point before choosing it.",
                 order: 2,
               })}
               className="growth-scope flex flex-wrap items-center justify-between gap-2 rounded-md border border-border bg-card p-2 text-card-foreground"
@@ -817,9 +817,9 @@ function AgentTemplates() {
             <aside
               {...growthTarget({
                 id: "agents-assistance",
-                title: "Offer help choosing the first step",
+                title: "Offer help getting started",
                 description:
-                  "Architect appears beside the gallery and asks what the user wants an agent to do. It offers an assisted route through the starting decision; a reply was not captured.",
+                  "Architect asks what you want an agent to do, offering help when you are unsure which template to choose.",
                 order: 3,
               })}
               className="growth-scope flex min-w-0 flex-col border-t border-border bg-surface-sunken p-3 text-foreground lg:border-t-0 lg:border-l"
@@ -1067,9 +1067,9 @@ function ApiQuickstart() {
       <Card
         {...growthTarget({
           id: "developer-adjacent-product",
-          title: "Introduce an adjacent capability in context",
+          title: "Introduce a related tool",
           description:
-            "The Speech Engine banner connects a related capability to a developer's existing agent work. Its short benefit statement leads to documentation rather than assuming adoption.",
+            "The Speech Engine banner explains its benefit beside your agent work. A documentation link gives you a way to learn more.",
           order: 1,
         })}
         className="growth-scope mt-4 flex min-w-0 flex-wrap items-center gap-3 p-3"
@@ -1097,9 +1097,9 @@ function ApiQuickstart() {
       <Card
         {...growthTarget({
           id: "developer-quickstart",
-          title: "Make the first request approachable",
+          title: "Make the first step concrete",
           description:
-            "One Get started action and a visible code example turn an open-ended integration task into a concrete starting point. The sample can be inspected and copied without being executed here.",
+            "A code example and Get started button help you make a first API request without starting from scratch.",
           order: 2,
         })}
         className="growth-scope platform-quickstart mt-7 min-w-0 overflow-hidden bg-surface-sunken p-4 text-foreground sm:p-5"
@@ -1168,9 +1168,9 @@ function ApiQuickstart() {
         <section
           {...growthTarget({
             id: "developer-next-actions",
-            title: "Keep the next prerequisites within reach",
+            title: "Keep useful next steps nearby",
             description:
-              "Key creation, model browsing and references sit together below the quickstart. These task-based links support progress after the initial example without inventing a completed integration.",
+              "Links to API keys, models, and reference guides sit below the example, so you can find what you need to keep going.",
             order: 3,
           })}
           className="min-w-0"
@@ -1340,9 +1340,9 @@ function ModelOffer() {
         <Card
           {...growthTarget({
             id: "api-plan-benefits",
-            title: "Connect the plan to useful capabilities",
+            title: "Explain what a plan adds",
             description:
-              "The subscription note names concurrency, audio quality and voice cloning as reasons to consider a paid plan. It explains the capability boundary within the pricing context.",
+              "The note names better audio, voice cloning, and more requests at once, giving you clear reasons to consider a paid plan.",
             order: 1,
           })}
           className="growth-scope p-4"
@@ -1421,12 +1421,12 @@ function ModelOffer() {
                   id: `api-offer-${index}`,
                   title:
                     index === 0
-                      ? "Combine a new capability with a dated offer"
-                      : "Anchor the saving to the original price",
+                      ? "Draw attention to something new"
+                      : "Make savings easy to compare",
                   description:
                     index === 0
-                      ? "The New label and dated discount draw attention to a newer model. The deadline is historical source copy from 4 October 2026, not a current promotion."
-                      : "The crossed-out original price and per-1K-character unit let the user compare the offer. Price framing suggests a reason to try the model; the capture does not establish increased adoption.",
+                      ? "A New label and a discount with an end date give you reasons to look at a newer model and consider trying it."
+                      : "The original and discounted prices use the same unit, so you can compare the saving and judge whether to try the model.",
                   order: index + 2,
                 })
               : {})}

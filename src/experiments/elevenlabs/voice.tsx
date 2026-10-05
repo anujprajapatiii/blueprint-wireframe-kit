@@ -343,9 +343,9 @@ function CreationDialog({
                 {...(!gate
                   ? growthTarget({
                       id: "voice-pathways",
-                      title: "Make effort easy to compare",
+                      title: "Compare time and effort",
                       description:
-                        "Short time estimates and input requirements help someone choose a creation method they can start now. This is intended to reduce uncertainty before the first action.",
+                        "Time estimates and audio requirements let you compare voice creation methods before choosing one that fits your needs.",
                       order: 1,
                     })
                   : {})}
@@ -378,9 +378,9 @@ function CreationDialog({
                 {...(!gate
                   ? growthTarget({
                       id: "voice-upgrade",
-                      title: "Connect a capability to its plan",
+                      title: "Show the paid option",
                       description:
-                        "The unavailable method stays visible with a specific Creator-plan requirement and a Subscribe action. This makes the paid capability discoverable at the moment of interest; conversion impact is not established.",
+                        "Professional Voice Clone stays visible with its Creator plan requirement. Subscribe gives you a way to unlock it.",
                       order: 2,
                     })
                   : {})}
@@ -390,9 +390,9 @@ function CreationDialog({
                   {...(gate
                     ? growthTarget({
                         id: "voice-clone-benefit",
-                        title: "Show what the upgrade unlocks",
+                        title: "What the upgrade adds",
                         description:
-                          "The professional clone's benefit and audio requirement explain the capability before presenting its plan restriction. A visible option can support evaluation even when it cannot be started.",
+                          "The card explains how realistic the clone can be and how much audio it needs, helping you decide whether to upgrade.",
                         order: 1,
                       })
                     : {})}
@@ -419,9 +419,9 @@ function CreationDialog({
                   {...(gate
                     ? growthTarget({
                         id: "voice-clone-requirement",
-                        title: "Explain the gate at the point of need",
+                        title: "Explain how to unlock it",
                         description:
-                          "The lock, minimum plan and Subscribe action sit together. This exposes the reason for the restriction and the next route without sending someone away to look up eligibility. Checkout was not inspected.",
+                          "The lock, Creator plan requirement, and Subscribe button sit together, so you can see why the feature is unavailable and what to do.",
                         order: 2,
                       })
                     : {})}
@@ -467,9 +467,9 @@ function CreationDialog({
                 {...(!gate
                   ? growthTarget({
                       id: "voice-library-alternative",
-                      title: "Offer a lower-effort alternative",
+                      title: "Offer a ready-made option",
                       description:
-                        "A ready-made library gives people another route when creating or cloning a voice feels too demanding. It keeps the next useful action in the same decision space.",
+                        "The voice library gives you something to try when creating or cloning a voice feels like too much work.",
                       order: 3,
                     })
                   : {})}
@@ -582,9 +582,9 @@ function PromptDesign() {
         className="growth-scope rounded-md border border-border bg-card p-3 text-card-foreground"
         {...growthTarget({
           id: "voice-prompt-starters",
-          title: "Give the first attempt a starting point",
+          title: "Start with an example",
           description:
-            "An editable example and reusable prompt chips turn a blank task into something to try or adapt. These starters teach the shape of a voice description while keeping the input under the user's control.",
+            "An editable example and prompt suggestions show how to describe a voice. You can try one as written or make it your own.",
           order: 1,
         })}
       >
@@ -650,9 +650,9 @@ function PromptDesign() {
         className="flex flex-wrap items-center gap-2"
         {...growthTarget({
           id: "voice-generation-cost",
-          title: "Make the next action and its cost visible",
+          title: "Show the cost first",
           description:
-            "Generate voice sits beside the captured credit estimate. Showing the cost before commitment supports an informed first attempt. This prototype does not generate audio or spend credits.",
+            "The credit estimate sits beside Generate voice, so you can weigh the cost before trying your first voice.",
           order: 2,
         })}
       >
@@ -750,9 +750,9 @@ function CloneSetup({ onBack }: { onBack?: () => void }) {
                   className="growth-scope rounded-md border border-border bg-card p-3 text-card-foreground"
                   {...growthTarget({
                     id: "clone-step-outline",
-                    title: "Set expectations for the setup",
+                    title: "Show the steps ahead",
                     description:
-                      "The three-step outline shows the current task and what remains. Breaking a demanding setup into named stages can make the path to a usable clone easier to understand.",
+                      "The three-step outline shows where you are and what remains, making a longer setup easier to take one step at a time.",
                     order: 1,
                   })}
                 >
@@ -806,9 +806,9 @@ function CloneSetup({ onBack }: { onBack?: () => void }) {
                   className="relative grid gap-4 sm:grid-cols-3"
                   {...growthTarget({
                     id: "clone-quality-guidance",
-                    title: "Prevent avoidable input problems",
+                    title: "Help you prepare",
                     description:
-                      "Recording tips appear before the upload. They explain the preparation needed for a useful first result, rather than waiting for someone to submit unsuitable audio. Result quality was not tested here.",
+                      "Recording tips appear before the upload, so you can prepare cleaner audio and give your first voice clone a better starting point.",
                     order: 2,
                   })}
                 >
@@ -893,9 +893,9 @@ function CloneSetup({ onBack }: { onBack?: () => void }) {
                   className="growth-scope mt-4 flex flex-wrap items-center justify-between gap-3 rounded-md border border-border bg-card p-3 text-card-foreground"
                   {...growthTarget({
                     id: "clone-input-requirement",
-                    title: "Show what unlocks the next step",
+                    title: "Show the minimum needed",
                     description:
-                      "The ten-second minimum sits next to the disabled Next action. A visible requirement connects the blocked state to an action the user can take. The local sample demonstrates this requirement only; later setup screens were not captured.",
+                      "The ten-second minimum sits beside the disabled Next button, so you can see how much audio you need to continue.",
                     order: 3,
                   })}
                 >
@@ -1024,9 +1024,9 @@ function VoiceDiscovery() {
         className="mt-4"
         {...growthTarget({
           id: "voice-discovery-filters",
-          title: "Help people narrow a large library",
+          title: "Find a suitable voice",
           description:
-            "Search, language and use-case filters give different entry points into the same catalog. They are intended to reduce the effort of finding a relevant voice. This wireframe filters only the captured subset.",
+            "Search and filters for language and purpose help you narrow the library to voices that could suit your project.",
           order: 1,
         })}
       >
@@ -1097,9 +1097,9 @@ function VoiceDiscovery() {
         className="growth-scope mt-6 rounded-md border border-border bg-card p-3 text-card-foreground"
         {...growthTarget({
           id: "voice-trending-discovery",
-          title: "Provide a short list to evaluate",
+          title: "Offer a short list",
           description:
-            "Trending voices offer a ready-made starting set. Preview and Add keep evaluation close to selection. The source's ranking logic and any effect on activation are unknown.",
+            "Trending voices give you a few options to start with. Preview and Add let you listen before choosing.",
           order: 2,
         })}
       >
@@ -1189,9 +1189,9 @@ function VoiceDiscovery() {
         className="mt-7"
         {...growthTarget({
           id: "voice-curated-collections",
-          title: "Organize discovery around the job",
+          title: "Group voices by purpose",
           description:
-            "Handpicked collections turn a broad catalog into recognizable use cases. They give someone who does not know a voice name a route into relevant options. Actual collection contents were not inspected.",
+            "Handpicked collections group voices by use, giving you a place to start even when you do not know a voice name.",
           order: 3,
         })}
       >
@@ -1270,9 +1270,9 @@ function EarningsChecklist() {
         className="growth-scope rounded-md border border-border bg-card p-3 text-card-foreground"
         {...growthTarget({
           id: "voice-earnings-incentive",
-          title: "Connect contribution to a reward",
+          title: "Explain how you can earn",
           description:
-            "The earnings proposition explains why a voice owner might become a supplier. The reward depends on paid usage; the observed screen does not establish an expected income or a guaranteed payout.",
+            "The earnings message gives voice owners a reason to share a voice: the chance to earn when paid customers use it.",
           order: 1,
         })}
       >
@@ -1289,9 +1289,9 @@ function EarningsChecklist() {
           className="growth-scope rounded-md border border-border bg-card p-3 text-card-foreground"
           {...growthTarget({
             id: "voice-contributor-checklist",
-            title: "Turn contributor setup into a checklist",
+            title: "Show the next task",
             description:
-              "Three prerequisites and a zero-of-three count make the route to publishing explicit. Only the first action is available, directing attention to the next task. Later payout and publishing steps were not inspected.",
+              "Three setup tasks and a progress count show what remains before publishing. Only the first action is available, keeping the next step clear.",
             order: 2,
           })}
         >
@@ -1372,9 +1372,9 @@ function EarningsChecklist() {
             className="growth-scope mt-3 flex min-h-60 flex-col items-center justify-center p-6 text-center"
             {...growthTarget({
               id: "voice-earnings-empty-state",
-              title: "Use the empty state to explain the next step",
+              title: "Give empty reports a purpose",
               description:
-                "An empty payout panel points back to onboarding instead of leaving a blank report. It links the future value of this area to a task the contributor can start now.",
+                "The empty payout panel points you back to setup, giving you a useful next step before you have any earnings to view.",
               order: 3,
             })}
           >
@@ -1520,9 +1520,9 @@ function Opportunities() {
         className="mt-6 flex flex-wrap items-center gap-2"
         {...growthTarget({
           id: "voice-opportunity-filters",
-          title: "Make opportunities relevant to the contributor",
+          title: "Find relevant opportunities",
           description:
-            "Language and category controls let a supplier focus on segments they could serve. This turns a broad set of opportunities into a more specific decision. Filtering here is a local prototype adaptation.",
+            "Language and category filters help you focus on voice types you could offer, making the list easier to compare.",
           order: 1,
         })}
       >
@@ -1561,9 +1561,9 @@ function Opportunities() {
         className="growth-scope relative mt-5 w-full min-w-0 max-w-full overflow-hidden rounded-md border border-border bg-card text-card-foreground"
         {...growthTarget({
           id: "voice-supply-signals",
-          title: "Guide supply with demand and competition signals",
+          title: "Compare gaps in the library",
           description:
-            "Library counts and opportunity scores make gaps in the marketplace visible to voice creators. These are captured source signals, not verified demand or predicted earnings. The calculation and later contributor outcomes are unknown.",
+            "Voice counts and opportunity scores sit side by side, helping you compare categories and consider where your voice might add something different.",
           order: 2,
         })}
       >

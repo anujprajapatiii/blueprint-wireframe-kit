@@ -18,6 +18,8 @@ When Anuj pastes a screenshot, video, or link, Codex still inspects the original
 
 Prepare observations that another reviewer can trace back to the reference. Describe both the candidate intervention and its surroundings. List only actions that are visible or observed; do not turn an inferred business outcome into a selectable action. Add important visible copy verbatim where useful. Do not include account secrets or unrelated personal information.
 
+Include explicit event advertising and product/service cross-sell promotions among candidate interventions. Record their proposition and visible action even if the destination is external; an unobserved purchase or downstream outcome does not make the promotion ordinary navigation. Apply the [canonical admission rule](reference-workflow.md), keep generic links as context, and distinguish uncertainty about the primary goal from evidence that a promotion exists. Preserve the model's original uncertainty when recording a manual decision from the inspected evidence.
+
 Jev receives the extracted text and the project's classification criteria. It does not watch a video, inspect a screenshot, open the source URL, or reconstruct the interface. The optional source URL stays in the local report and is not sent to TypeSafe. Keep private transfer URLs and local capture paths out of the submitted text. The original files remain in their existing reference archive.
 
 ## Read the result

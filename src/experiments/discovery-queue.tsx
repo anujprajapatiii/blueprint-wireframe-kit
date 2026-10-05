@@ -280,9 +280,9 @@ export function DiscoveryQueue() {
                       {...(index === gameIndex
                         ? growthTarget({
                             id: "steam-recommendation",
-                            title: "Personalized discovery",
+                            title: "Find games you might like",
                             description:
-                              "The relevance explanation gives a reason to consider this game. Wishlist and ignore capture a preference with little effort, while visible progress makes the twelve-game sequence finite. The blue trailer is product content; the yellow panel supports the growth action.",
+                              "A short explanation shows why each game might suit you. Wishlist and Ignore let you respond, while the counter shows how many games remain.",
                             order: 3,
                           })
                         : {})}
@@ -399,9 +399,9 @@ export function DiscoveryQueue() {
                     {...(complete
                       ? growthTarget({
                           id: "steam-completion-reward",
-                          title: "Close the reward loop",
+                          title: "Celebrate finishing the queue",
                           description:
-                            "The completion state confirms the promised reward and makes it available to view. Session statistics acknowledge progress, and Continue offers another round. These are local demonstration rewards; no Steam stickers are granted.",
+                            "The finish screen shows the sticker reward and what you explored. Continue invites you to browse another set of games.",
                           order: 4,
                         })
                       : {})}
@@ -455,10 +455,7 @@ export function DiscoveryQueue() {
                   </section>
                   <div className="flex gap-3">
                     <DialogClose asChild>
-                      <Button
-                        variant="outline"
-                        className="min-w-28"
-                      >
+                      <Button variant="outline" className="min-w-28">
                         Done
                       </Button>
                     </DialogClose>
