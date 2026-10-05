@@ -1,8 +1,8 @@
 # Cloudflare growth-pattern intake
 
-Requested on 5 October 2026 (Asia/Calcutta): inspect Cloudflare's product and add qualifying growth design to the library through the established reference workflow. This is local work; publishing this revision has not been requested.
+Requested on 5 October 2026 (Asia/Calcutta): inspect Cloudflare's product and add qualifying growth design to the library through the established reference workflow. The work began locally. The user subsequently requested publication and authorized the Cloudflare permission refresh in this chat.
 
-> **Latest status:** Four Cloudflare patterns are implemented and locally reviewed: the [original three patterns](cloudflare-local-review.md) and the separately admitted [Connect event promotion](cloudflare-event-review.md). Thirteen unchanged source screenshots remain private and local. The blocked intake and initial three-pattern scope below are retained as history; the event omission is corrected in the final continuation.
+> **Latest status:** Four Cloudflare patterns and shorter Guide me explanations across all experiments are published. GitHub Pages deployment succeeded, and the hosted search Worker serves a 23-experiment public catalog. Thirteen unchanged Cloudflare source screenshots remain private and excluded from the release. The [original three-pattern review](cloudflare-local-review.md), [event review](cloudflare-event-review.md), and earlier access and admission entries below remain historical records. The public index, event page, and shortened guide were verified in the browser; the release details are recorded below.
 
 ## Initial evidence and access
 
@@ -68,3 +68,15 @@ The user explicitly requested the home Connect banner as its own growth pattern 
 Four additional unchanged full-viewport references bring the private source archive to 13 images: home entry, scrolled banner, event destination and tickets. No new live Jev review was submitted for the event. The three earlier advisory reports and the rejected refined submission remain separate historical evidence; explicit manual event admission does not imply model endorsement.
 
 The event is Ready for review after desktop/narrow composition, external handoff, state-aware guide, keyboard, reference switching, private asset and focused accessibility checks. The [event review](cloudflare-event-review.md) records completed checks and specific final-check limits. No publishing or deployment action occurred.
+
+## Release — 5 October 2026
+
+After the user explicitly requested “Push to website” and authorized the current-chat Cloudflare permission refresh, the app and hosted search catalog were released. Guide me copy was shortened across all experiments; source product copy and interactions were preserved.
+
+- App source commit: `263c6786c32463b2b9ac0601a8ac1ab908965071`.
+- [GitHub Pages workflow](https://github.com/anujprajapatiii/blueprint-wireframe-kit/actions/runs/37299444748) succeeded: build 33 seconds, deploy 11 seconds.
+- Deployed search Worker version: `2255f1d5-3048-457e-a011-ac37fd3da328`. Its public catalog contains 23 experiments.
+- One live search for “event promotions” returned `github-event-banner` at 0.92 and `cf-event-promotion` at 0.91. This confirms one working search sample, not overall search accuracy.
+- All 13 Cloudflare source images and their private provenance remain excluded from the release.
+
+The public browser check confirmed four experiments in the Cloudflare-filtered index. The hosted UI search for “event promotions” displayed one Cloudflare result, and the Connect experiment page loaded. Guide me showed “Promote an event,” its shortened explanation, and “Keep exploring,” with the repeated explanatory footer removed. See the [published event guide screenshot](cloudflare/published-event-guide.jpg).
