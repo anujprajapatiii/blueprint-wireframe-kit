@@ -33,8 +33,15 @@ export function useLibrarySearch(query: string, byMeaning: boolean) {
         const response = await fetch(`${searchEndpoint}/status`, {
           signal: controller.signal,
           cache: "no-store",
-          credentials: "omit",
+          credentials: "same-origin",
         });
+        if (
+          response.status === 401 &&
+          import.meta.env.VITE_PRIVATE_REFERENCES_ENABLED === "true"
+        ) {
+          window.location.reload();
+          return;
+        }
         if (!response.ok) throw new Error();
         const status = (await response.json()) as SearchStatus;
         if (typeof status?.configured !== "boolean") throw new Error();
@@ -55,7 +62,7 @@ export function useLibrarySearch(query: string, byMeaning: boolean) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ query: requested }),
           signal: controller.signal,
-          credentials: "omit",
+          credentials: "same-origin",
         });
         const body = await response.json();
         if (!response.ok) {

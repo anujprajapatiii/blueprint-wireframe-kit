@@ -2,7 +2,7 @@ name = "blueprint-jev-search"
 main = "index.ts"
 compatibility_date = "2026-10-04"
 compatibility_flags = ["nodejs_compat"]
-workers_dev = true
+workers_dev = false
 preview_urls = false
 
 [build]

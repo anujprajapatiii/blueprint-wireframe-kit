@@ -14,7 +14,7 @@ A pasted screenshot, video, or link starts the [reference-to-index workflow](doc
 
 **Yellow marks the studied growth mechanism; blue retains its product context.** Guide me supplies the optional step-by-step education. Original product copy stays intact, and separate growth tooltip buttons are omitted.
 
-Each experiment includes a distinctive landscape preview, shared Design intent, a stable direct URL, and a **Wireframe / Original reference** toggle. Preserve full-screen surrounding context in captures and thumbnails. Keep original media unchanged, with private account captures available through the local reference viewer. The existing public originals are the Notion and Steam recordings and GitHub event screenshot; the three separate Steam queue screenshots remain unavailable as files.
+Each experiment includes a distinctive landscape preview, shared Design intent, a stable direct URL, and a **Wireframe / Original reference** toggle. Preserve full-screen surrounding context in captures and thumbnails. Keep original media unchanged, with private account captures available locally and inside the password-protected website. One site login covers the wireframes, guides, 51 selected original screenshots and search. See [protected hosting](workers/references/README.md). The existing public originals are the Notion and Steam recordings and GitHub event screenshot; the three separate Steam queue screenshots remain unavailable as files.
 
 Design and review locally, then publish only on an explicit request for the current revision. See [the index contract](docs/index-design.md) for card, filter, and reference-viewer behavior.
 
@@ -208,15 +208,13 @@ A full screen-reader audit, browser zoom testing, and broader browser testing re
 
 The gallery demonstrates real UI interactions with sample data and does not provide a backend. Connect the reusable components to real data and business logic when building a production feature.
 
-## Publish with GitHub Pages
+## Publish the password-protected site
 
-The Vite base path is `/blueprint-wireframe-kit/`, matching a repository named `blueprint-wireframe-kit`.
+The website is hosted at `https://blueprint-private-references.portfolio-v5.workers.dev/blueprint-wireframe-kit/`. The existing GitHub Pages address redirects to it while preserving the path, query and fragment. No app bundle or originals are deployed to Pages.
 
-1. Put the project at the root of that GitHub repository, including `package-lock.json` and `.github/workflows/deploy.yml`.
-2. In the repository's **Settings → Pages**, choose **GitHub Actions** as the build and deployment source.
-3. After Anuj asks to publish, push the reviewed changes to `main`, then manually run **Deploy to GitHub Pages** from the **Actions** tab. A push alone does not deploy with the updated workflow.
+After Anuj explicitly requests the current revision, run `npm run site:build`, the relevant checks, and `npm run site:deploy` from the local checkout that holds the private originals. The Cloudflare Worker checks the signed session before every page, asset, reference and search request. The generated password and server secrets remain in ignored, owner-only local files and Cloudflare secrets. Read [the deployment contract](workers/references/README.md) before changing this gate.
 
-The workflow installs locked dependencies with `npm ci`, builds with Node 22, uploads `dist/`, and deploys through the `github-pages` environment. Deployment is triggered by `workflow_dispatch` only. The successful deployment provides the published URL. No personal access token is needed in the workflow; it uses GitHub's built-in token with Pages permissions.
+Push the reviewed source to `main`. Manually run **Redirect to password-protected Blueprint** only when the Pages redirect needs publication. Its artifact contains only the redirect and fallback pages; a push alone does not deploy anything. The search Worker has no public Workers URL and is reachable only through the protected site's service binding.
 
 For a different repository name, update `base` in `vite.config.ts` to `/<repository-name>/`. For an account root site or a custom domain served at the domain root, use `/`.
 

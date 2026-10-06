@@ -13,3 +13,6 @@ local-curator/
 # Local Cloudflare emulation state and generated worker bundles.
 .wrangler/
 .dev.vars*
+
+# GitHub Pages holds only a generated pointer to the protected site.
+pages-redirect/

@@ -1,3 +1,4 @@
+import { SiteLock } from "../components/site-lock";
 import { lazy, Suspense, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "../components/kit";
@@ -162,6 +163,7 @@ export function ExperimentsApp() {
             >
               Source <ArrowUpRight size={14} aria-hidden="true" />
             </a>
+            <SiteLock />
           </nav>
         </div>
       </header>

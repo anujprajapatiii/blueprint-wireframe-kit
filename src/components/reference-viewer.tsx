@@ -22,10 +22,14 @@ type ViewableReference = ReferenceAsset & {
 };
 
 export function referenceIsAvailable(asset: ViewableReference) {
-  return !asset.private || import.meta.env.DEV;
+  return (
+    !asset.private ||
+    import.meta.env.DEV ||
+    import.meta.env.VITE_PRIVATE_REFERENCES_ENABLED === "true"
+  );
 }
 
-/** Keeps account captures local while public experiment references remain usable. */
+/** Private originals are available locally or behind the whole-site server password gate. */
 export function ReferencePreview({
   asset,
   className,

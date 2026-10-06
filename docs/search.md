@@ -33,3 +33,7 @@ The request has bounded input, catalog, response, and time limits. If the catalo
 ## Checks
 
 Run `npm run search:check` for deterministic transport, data-boundary, ranking, and cache checks, and `npm run search:worker:check` for hosted guards, SQLite quota persistence, retry accounting, and catalog freshness. `npm run search:worker:build` packages the Worker without deploying. Verify live queries separately: upselling, a misspelled higher-tier-plan query, a premium gate, a feature introduction, exploration rewards versus referral rewards, and an unrelated request with no match. Check combined filters, return navigation, whitespace reset, and a narrow viewport. Record the model and the results that actually ran; do not call mocked tests live verification.
+
+## Whole-site password protection — 6 October 2026
+
+Search now runs through the authenticated site's same-origin `/search` and `/search/status` routes. The browser sends only the HttpOnly site session cookie; the gate verifies it before calling the existing search service through a Cloudflare service binding. The search Worker's public `workers.dev` endpoint and preview URLs are disabled. The TypeSafe key, quota and public-field catalog remain in the existing Worker. GitHub Pages no longer hosts the app. The previous public API check script is historical; use the protected-site release verification instead.

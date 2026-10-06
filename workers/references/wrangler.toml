@@ -1,0 +1,31 @@
+name = "blueprint-private-references"
+main = "index.ts"
+compatibility_date = "2026-10-06"
+workers_dev = true
+preview_urls = false
+
+[build]
+command = "node workers/references/build-assets.mjs"
+cwd = "."
+
+[assets]
+directory = "../../.wrangler/protected-site-assets"
+binding = "PRIVATE_ASSETS"
+run_worker_first = true
+not_found_handling = "none"
+html_handling = "none"
+
+[[ratelimits]]
+name = "LOGIN_LIMITER"
+namespace_id = "1006"
+
+[ratelimits.simple]
+limit = 5
+period = 60
+
+[observability]
+enabled = false
+
+[[services]]
+binding = "SEARCH_SERVICE"
+service = "blueprint-jev-search"

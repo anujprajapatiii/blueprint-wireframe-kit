@@ -1,3 +1,4 @@
+import { SiteLock } from "./components/site-lock";
 import { useState, type ReactNode } from "react";
 import {
   ArrowUpRight,
@@ -1132,11 +1133,12 @@ function App() {
               </a>
             </nav>
             <div className="flex items-center gap-2 sm:gap-4">
+              <SiteLock />
               <a
                 href={repository}
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-10 items-center gap-2 rounded-md border border-input px-3 text-sm hover:bg-muted"
+                className={`${import.meta.env.VITE_PRIVATE_REFERENCES_ENABLED === "true" ? "hidden sm:flex" : "flex"} h-10 items-center gap-2 rounded-md border border-input px-3 text-sm hover:bg-muted`}
               >
                 Source <ArrowUpRight size={15} aria-hidden="true" />
               </a>

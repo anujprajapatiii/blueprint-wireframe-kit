@@ -39,13 +39,13 @@ Keep the eight growth categories and three overarching outcomes unchanged. The k
 
 ## Original references
 
-Use one shared **Wireframe / Original reference** experience, driven by asset metadata. Each record identifies the media type, descriptive label, original filename, source, and availability. Base-path-safe URLs must work locally and on GitHub Pages.
+Use one shared **Wireframe / Original reference** experience, driven by asset metadata. Each record identifies the media type, descriptive label, original filename, source, and availability. Base-path-safe URLs must work locally and on the password-protected Cloudflare site. GitHub Pages redirects old links to the protected site.
 
 Videos have native controls, a poster, and no autoplay. Images and videos retain their natural aspect ratio and full frame, without zoom-to-fill cropping. New captures follow the full-viewport contract in [Reference workflow](reference-workflow.md). Multiple assets form a labeled sequence so recordings and screenshots are distinct. Opening a reference directly must not flash or require dismissing the wireframe's modal first. Switching views must not leave hidden video playing.
 
 The user's ongoing request to include each experiment's original reference covers the Notion and Steam recordings and the supplied GitHub event-banner screenshot. Preserve the original files; the reference viewer can show source branding and account/workspace context that the wireframe intentionally removes. Do not expose private attachment URLs or local filesystem paths.
 
-The three separate Steam queue screenshots are currently unavailable as files. Preserve their provenance and state this limitation plainly; do not recreate or replace them with unrelated video frames. The ongoing workflow includes preserving supplied or captured originals locally. Keep private account/workspace media in the development-only viewer, outside public assets and git; availability and inspection status are separate concerns. Public inclusion is governed by [the project rules](../AGENTS.md).
+The three separate Steam queue screenshots are currently unavailable as files. Preserve their provenance and state this limitation plainly; do not recreate or replace them with unrelated video frames. The ongoing workflow includes preserving supplied or captured originals locally. Keep private account/workspace media outside public assets and git; availability and inspection status are separate concerns. On 6 October 2026, Anuj authorized all 51 existing private screenshots behind the same password as the entire website. After login, the shared viewer loads unchanged originals through the protected same-origin endpoint without a second password prompt. Public inclusion is governed by [the project rules](../AGENTS.md).
 
 ## Ownership and publishing
 
@@ -61,11 +61,11 @@ Use restrained schematic previews of each pattern's distinctive structure. Relat
 
 The research catalog may remain the structured source of observations and provenance. It does not replace an interactive wireframe or a reference toggle. Keep all evidence accessible, including coverage-only captures that do not establish a separate growth pattern. Preserve earlier URLs for retained patterns and source filters. A deliberately removed ID must not continue opening an active experiment through a direct, embedded, legacy collection, or related-pattern route; provide the normal unavailable/return-to-index behavior instead. Supporting source states may remain inside a retained flow without restoring a standalone entry.
 
-ElevenLabs account screenshots remain available locally through the development reference endpoint. The public build includes safe research metadata and neutral wireframes, not private originals, reports, or archives. This restriction concerns asset availability, not whether the source was inspected. It does not change the normal placement of these wireframes in the library.
+ElevenLabs account screenshots remain available locally through the development reference endpoint. The website bundle contains metadata and neutral wireframes; the protected Worker adds the selected unchanged original screenshots separately. Reports, provenance and archives remain local. Every page, app asset, reference and search request requires the site session. This restriction concerns asset availability, not whether the source was inspected. It does not change the normal placement of these wireframes in the library.
 
 Registry metadata owns the title, source name, stable added date, update date, preview choice, scope, classification, and asset relationships. Shared components own card composition, design-intent rendering, and media viewing. Individual experiments own their behavior and original copy.
 
-This revision is local first. Including requested reference files does not authorize deployment of the redesigned index. Publish through the existing GitHub Pages workflow only after Anuj explicitly requests the current revision.
+This revision is local first. Including requested reference files does not authorize deployment of the redesigned index. Publish the protected Cloudflare site only after Anuj explicitly requests the current revision. The GitHub Pages workflow publishes a redirect only.
 
 ## Review criteria
 
