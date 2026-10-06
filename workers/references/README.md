@@ -1,6 +1,6 @@
 # Password-protected Blueprint website
 
-This implementation places the entire Blueprint website, its JavaScript and styles, search, public source recordings, and all 51 private original JPEGs behind one password at `https://blueprint-private-references.portfolio-v5.workers.dev/blueprint-wireframe-kit/`. The prepared GitHub Pages artifact contains only a redirect; live deployment verification is in progress. This service uses the same Cloudflare destination explicitly approved by Anuj; it does not publish originals to GitHub Pages or Git.
+This implementation places the entire Blueprint website, its JavaScript and styles, search, public source recordings, and all 51 private original JPEGs behind one password at `https://blueprint-private-references.portfolio-v5.workers.dev/blueprint-wireframe-kit/`. The protected Cloudflare site is deployed and live verification has passed. The GitHub Pages redirect deployment and live redirect verification are also complete. This service uses the same Cloudflare destination explicitly approved by Anuj; it does not publish originals to GitHub Pages or Git.
 
 ## Access contract
 
@@ -49,8 +49,18 @@ An upload without these secrets remains inaccessible. After configuring the secr
 
 ## Release record — 6 October 2026
 
-Anuj explicitly authorized uploading all private references to this Cloudflare destination and then clarified that the entire website must share the password gate. The initial reference-only upload completed as version `0e75ee67-f5ec-445e-9a0b-797f94ab8675` without secrets and remained closed to access. This implementation replaces that upload with the complete protected website; final deployment and browser verification are in progress.
+Anuj explicitly authorized uploading all private references to this Cloudflare destination and then clarified that the entire website must share the password gate. The initial reference-only upload completed as version `0e75ee67-f5ec-445e-9a0b-797f94ab8675` without secrets and remained closed to access. That initial upload has now been replaced by the complete protected website. The deployment and live checks below record its current status.
 
 Local browser verification passed: the native form showed wrong-password feedback, successful login preserved the exact experiment query, the original Cloudflare screenshot loaded at 1271 × 1108, and **Lock site** returned to the login form. All 18 Worker tests passed.
 
-The release scan checked 233 public source/build files and found no credentials or copies of private-original image bytes. The prepared Pages artifact contains exactly `index.html`, `404.html`, and `.nojekyll`. These are local implementation and artifact checks; whole-site deployment and live verification remain in progress.
+The release scan checked 233 public source/build files and found no credentials or copies of private-original image bytes. The prepared Pages artifact contains exactly `index.html`, `404.html`, and `.nojekyll`. These local implementation and artifact checks preceded the live verification below.
+
+The protected website is deployed from application source commit `57b6cd597a26fc5f94465bfd1b1db9a5b9bc2d94` as Worker version `49b5db95-bac5-4148-904e-838218424107`, with both required secrets configured. The internal-only search Worker is version `2d7e1675-25ec-438c-9132-ca0900efa7e8`; its former public endpoint returned HTTP 404.
+
+Live HTTP checks confirmed that pages, JavaScript, original references, search status and unknown paths return HTTP 401 without access. Wrong passwords return 401; valid login returns 303 and sets the expected HttpOnly, Secure, SameSite=Lax cookie with a 3600-second lifetime. All 51 authenticated original images matched the SHA-256 hashes of their local originals. A modified cookie returned 401, and logout returned 303.
+
+The live browser confirmed native login, the decoded Cloudflare Containers original at 1271 × 1108, home navigation, and authenticated “event promotions” search returning both GitHub and Cloudflare experiments. **Lock site** returned to the login form. The login form fits a 320px viewport. The final home lock-control adjustment was checked locally at a 320px viewport with a 320px document width.
+
+The migration is complete. [GitHub Pages redirect workflow 37488481377](https://github.com/anujprajapatiii/blueprint-wireframe-kit/actions/runs/37488481377) succeeded on 6 October 2026 at 21:08:09 IST (`2026-10-06T15:38:09Z`). Live HTTP checks found only the 582-byte redirect HTML at the old Pages base URL, with HTTP 200 and no module script. The old `references/github-event-banner/original.png` URL returned HTTP 404 with that same 582-byte redirect fallback, rather than the original image.
+
+The browser followed the former Pages URL with `?view=experiments&source=Cloudflare&experiment=cf-containers-gate&mode=reference` to the protected Worker, preserving the exact path and query. Logged-out access showed **Unlock Blueprint**. The [live password-gate screenshot](../../docs/reviews/2026-10-06/password-gate-live.jpg) records this result without exposing credentials or private originals.
