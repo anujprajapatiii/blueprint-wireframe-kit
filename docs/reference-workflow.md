@@ -36,7 +36,7 @@ Use the local [growth curator](curator.md) after inspecting the original. Codex 
 
 Measure the important source relationships before styling: app frame, navigation, column shares, focal panel dimensions, gutters, padding, alignment, and visible density. Label estimates. Capture the states and transitions supported by the source, including boundaries such as first/last, dismiss/reopen, completion, and restart where observed.
 
-Decide which regions are the growth mechanism and which are its environment. Keep the smallest complete intervention yellow; retain the context in blue. Abstract inner content while preserving the containers that explain placement. A supplied still does not establish animation, destinations, sticky behavior, responsive rules, or business results. Keep necessary prototype adaptations explicit. Follow [experiment rules](experiment-rules.md).
+Decide which regions are the growth mechanism and which are its environment. Keep the complete visible intervention container yellow, including its header, controls, body, and footer; avoid fragmented yellow insets inside a blue card or modal. Retain separate surrounding context in blue. Guide targets may remain specific to a child region within that coherent yellow container. Abstract inner content while preserving the containers that explain placement. A supplied still does not establish animation, destinations, sticky behavior, responsive rules, or business results. Keep necessary prototype adaptations explicit. Follow [experiment rules](experiment-rules.md).
 
 ## 4. Build the experiment and its guide
 

@@ -1,5 +1,113 @@
 [
   {
+    "id": "tally-referral-reward",
+    "title": "Referral reward invitation",
+    "summary": "A two-sided offer gives friends a discount and rewards the person who refers them.",
+    "sourceName": "Tally",
+    "type": "Flow",
+    "focus": [
+      "Referral reward",
+      "Friend discount",
+      "Share invitation"
+    ],
+    "goals": [
+      "referral"
+    ],
+    "mechanisms": [
+      "Two-sided incentive",
+      "Specific reward cap",
+      "Multiple sharing options",
+      "Reward transparency"
+    ],
+    "format": "Tabbed referral modal with an explanation and reward status"
+  },
+  {
+    "id": "tally-plan-comparison",
+    "title": "Paid plans and annual saving",
+    "summary": "Pro and Business offers pair concrete benefits with monthly or yearly billing and two months off.",
+    "sourceName": "Tally",
+    "type": "Flow",
+    "focus": [
+      "Plan comparison",
+      "Annual saving",
+      "Paid upgrade"
+    ],
+    "goals": [
+      "monetization"
+    ],
+    "mechanisms": [
+      "Benefit comparison",
+      "Annual saving",
+      "Visible billing totals",
+      "Tier differentiation"
+    ],
+    "format": "Full-screen paid-plan comparison with billing-cadence control"
+  },
+  {
+    "id": "tally-custom-domain-gate",
+    "title": "Custom-domain upgrade prompt",
+    "summary": "A branded-link benefit and Pro marker connect an empty domain list to the paid-plan comparison.",
+    "sourceName": "Tally",
+    "type": "Flow",
+    "focus": [
+      "Premium capability gate",
+      "Custom domains",
+      "Contextual upgrade"
+    ],
+    "goals": [
+      "monetization"
+    ],
+    "mechanisms": [
+      "Contextual premium gate",
+      "Visible paid-tier marker",
+      "Concrete branding benefit"
+    ],
+    "format": "Premium-feature empty-state proposition leading to a plan overlay"
+  },
+  {
+    "id": "tally-office-hours",
+    "title": "Founder office-hours invitation",
+    "summary": "A free monthly session invites users to meet the founders, ask questions and get help with forms.",
+    "sourceName": "Tally",
+    "type": "Screen",
+    "focus": [
+      "Community event",
+      "Founder access",
+      "Product help"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Direct founder access",
+      "Free participation",
+      "Specific support benefit",
+      "Community invitation"
+    ],
+    "format": "Office-hours paragraph and event link within a changelog drawer card"
+  },
+  {
+    "id": "tally-review-request",
+    "title": "Customer review invitation",
+    "summary": "A bootstrapped-company appeal asks satisfied users to support Tally by leaving a quick review.",
+    "sourceName": "Tally",
+    "type": "Screen",
+    "focus": [
+      "Customer advocacy",
+      "Review request",
+      "Support appeal"
+    ],
+    "goals": [
+      "referral"
+    ],
+    "mechanisms": [
+      "Customer advocacy",
+      "Bootstrapped-company appeal",
+      "Small requested effort"
+    ],
+    "format": "Linked review request within a changelog drawer card"
+  },
+  {
     "id": "cf-agent-onboarding",
     "title": "Agent onboarding promotion",
     "summary": "A compact dashboard invitation offers a setup prompt for a compatible agent.",

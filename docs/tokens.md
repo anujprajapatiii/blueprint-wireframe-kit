@@ -30,7 +30,7 @@ Keep fixes at the layer that owns the problem. A semantic-role change belongs in
 </section>
 ```
 
-Do not place a yellow text scope on a transparent wrapper over a blue page: its dark ink will sit on the wrong background. Likewise, restoring blue tokens inside a yellow container requires a blue painted surface and its foreground. Keep scope on the smallest meaningful component; layout wrappers do not become coloured panels automatically.
+Do not place a yellow text scope on a transparent wrapper over a blue page: its dark ink will sit on the wrong background. Likewise, restoring blue tokens inside a yellow container requires a blue painted surface and its foreground. Place the palette scope on the complete bounded intervention component, including its internal chrome. Avoid blue fragments inside one yellow card or modal. Unrelated layout wrappers do not become coloured panels automatically.
 
 Portals do not inherit their trigger's DOM scope. Apply the correct scope to the menu/dialog surface; shared `SelectContent`, `DialogContent`, and similar components provide their own paint pair. The scrim remains a separate layer and is not a readable text surface.
 

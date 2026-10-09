@@ -61,7 +61,7 @@ Yellow now identifies the specific growth intervention; blue identifies its prod
 
 - Inspirations: outcome examples and the inspected Film trailer entry; after opening it, the supplied media and populated timeline explain how the example removes setup work. Other editor screens retain blue media and timeline context.
 - Studio Agent: concrete task starters and the visible action-permission setting. The surrounding editing workspace remains blue.
-- Sharing: only the invitation card is yellow. Search, workspace/public access controls, and the dialog surface remain blue because permissions alone are ordinary product functionality. One focused lesson is used rather than manufacturing extra growth mechanisms from those controls.
+- Sharing: the complete sharing dialog is yellow, including its heading, search, permission controls, invitation, and footer. The Guide me lesson still explains the invitation; the broader color boundary keeps one visible modal coherent without classifying each permission control as a separate growth pattern.
 - Flows and Dubbing: the introductory benefits and next-step choices are yellow, including their portal surfaces. The dismissed modal reveals blue product context.
 - Audiobooks: the two outcome routes, setup-sequence/narration guidance, and publishing proposition/preview step are yellow. Upload inputs, navigation, bookshelf, and generic setup controls remain blue. Route-specific lesson IDs ensure the guide updates when the user switches paths.
 
@@ -69,4 +69,4 @@ Copy explains observed placement and intended behavior without claiming measured
 
 Guide mode explains the currently visible growth regions, then lets the user operate the wireframe. New lessons appear when an inspected follow-up panel or dialog opens; the guide does not click through source actions automatically. Explanations are available through Guide me only.
 
-Yellow follows the original component boundaries: individual cards, controls, callouts, rows, and introduction surfaces. Container gaps and headings retain blue context where adding a scope would create an unpadded yellow rectangle. Existing widths, columns, and main spacing remain unchanged.
+Yellow follows complete visible components. As revised on 7 October 2026, the sharing modal uses one yellow surface through its header, body, footer, and portaled permission menus. Flows and Dubbing already use complete yellow introduction dialogs; their dismissed product screens remain blue. Existing widths, columns, copy, spacing, and guide targets are unchanged.

@@ -118,7 +118,7 @@ export const elevenLabsExperiments: Experiment[] = activeElevenLabsIds.map(
       summary: pattern.summary,
       sourceName: pattern.sourceName,
       addedAt: pattern.addedAt,
-      updatedAt: "2026-10-04",
+      updatedAt: "2026-10-07",
       preview: entry.preview,
       type: entry.type,
       focus: [pattern.flowGroup, pattern.flow, pattern.growth.format],
@@ -140,6 +140,7 @@ export const elevenLabsExperiments: Experiment[] = activeElevenLabsIds.map(
       reviewNotes: [
         "Original observations, copy, evidence relationships, and inspection limits are retained in the ElevenLabs research catalog.",
         "The 4 October 2026 growth-only review retains this observed intervention as an individually filterable wireframe. Ordinary product controls remain context, and the original research archive remains intact.",
+        "The 7 October 2026 color-boundary review keeps each highlighted card, modal, or panel yellow as a complete visible component, including its controls and chrome. Surrounding application context remains blue.",
       ],
       growth: pattern.growth,
     };

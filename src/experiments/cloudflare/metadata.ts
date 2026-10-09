@@ -8,7 +8,7 @@ const common = {
   sourceAccess: "Inspected" as const,
   neutralizedVisuals: [
     "Cloudflare branding and decorative treatment become shared blueprint surfaces. Account identifiers, project names and usage values become generic context.",
-    "The desktop shell retains its sidebar, header and content relationships. Yellow identifies only the studied intervention; supporting controls remain blue.",
+    "The desktop shell retains its sidebar, header and content relationships. Yellow identifies the complete bounded intervention, including its own controls; surrounding product regions remain blue.",
   ],
 };
 
@@ -17,6 +17,7 @@ export const cloudflareExperiments: Experiment[] = [
   {
     ...common,
     id: "cf-agent-onboarding",
+    updatedAt: "2026-10-07",
     title: "Agent onboarding promotion",
     summary:
       "A compact dashboard invitation offers a setup prompt for a compatible agent.",

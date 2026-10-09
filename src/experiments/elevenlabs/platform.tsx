@@ -738,7 +738,7 @@ function AgentTemplates() {
           </section>
           <section
             aria-label="Template preview"
-            className="min-w-0 bg-surface-sunken p-3"
+            className="growth-scope min-w-0 bg-surface-sunken p-3 text-foreground"
           >
             <div
               {...growthTarget({
@@ -748,7 +748,7 @@ function AgentTemplates() {
                   "The preview sits beside the selected template and Use template button, helping you understand the starting point before choosing it.",
                 order: 2,
               })}
-              className="growth-scope flex flex-wrap items-center justify-between gap-2 rounded-md border border-border bg-card p-2 text-card-foreground"
+              className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-border bg-card p-2 text-card-foreground"
             >
               <div className="flex items-center gap-1">
                 <Button

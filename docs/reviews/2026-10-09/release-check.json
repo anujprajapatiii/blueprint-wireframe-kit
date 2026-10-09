@@ -1,0 +1,12 @@
+{
+  "originals_byte_identical": 59,
+  "build_assets_byte_identical": 35,
+  "anonymous_gate": "passed",
+  "query_preservation": "passed",
+  "recording_response": "full byte-identical recording; upstream ignored Range",
+  "tally_search": "passed",
+  "tampered_cookie": "denied",
+  "logout": "passed",
+  "github_pages": "redirect only",
+  "public_search": "disabled"
+}

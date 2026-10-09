@@ -452,14 +452,16 @@ function Home({
       <div className="cf-home-intro">
         <div className="cf-promotion-slot">
           {!dismissed && (
-            <div className="cf-promotion-row">
+            <div
+              className={`${eventFocus ? "" : "growth-scope "}cf-promotion-row`}
+            >
               <div className="cf-promotion-anchor">
                 <span className="cf-copy-status" role="status">
                   {copied ? "Setup prompt copied" : ""}
                 </span>
                 <Button
                   variant="secondary"
-                  className={`${eventFocus ? "" : "growth-scope "}cf-agent-pill`}
+                  className="cf-agent-pill"
                   aria-description="Works with Claude, Codex, Cursor, and OpenCode"
                   onClick={() => {
                     setCopied(true);

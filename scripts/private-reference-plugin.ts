@@ -53,6 +53,20 @@ const downloads = new Map([
   ["README.txt", "text/plain; charset=utf-8"],
 ]);
 const sources = [
+  {
+    id: "tally",
+    screenshots: new Set([
+      "01-referral-invite.jpg",
+      "02-referral-how-it-works.jpg",
+      "03-referral-rewards.jpg",
+      "04-plans-monthly.jpg",
+      "05-plans-yearly.jpg",
+      "06-domains-empty.jpg",
+      "07-domains-plan-gate.jpg",
+      "08-community-promotions.jpg",
+    ]),
+    downloads: new Map<string, string>(),
+  },
   { id: "elevenlabs", screenshots: new Set(screenshotFiles), downloads },
   {
     id: "cloudflare",

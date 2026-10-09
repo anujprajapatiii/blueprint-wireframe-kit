@@ -1,6 +1,6 @@
 # Password-protected Blueprint website
 
-This implementation places the entire Blueprint website, its JavaScript and styles, search, public source recordings, and all 51 private original JPEGs behind one password at `https://blueprint-private-references.portfolio-v5.workers.dev/blueprint-wireframe-kit/`. The protected Cloudflare site is deployed and live verification has passed. The GitHub Pages redirect deployment and live redirect verification are also complete. This service uses the same Cloudflare destination explicitly approved by Anuj; it does not publish originals to GitHub Pages or Git.
+This implementation places the entire Blueprint website, its JavaScript and styles, search, public source recordings, and all 59 private original JPEGs behind one password at `https://blueprint-private-references.portfolio-v5.workers.dev/blueprint-wireframe-kit/`. The protected Cloudflare site is deployed and live verification has passed. The GitHub Pages redirect deployment and live redirect verification are also complete. This service uses the same Cloudflare destination explicitly approved by Anuj; it does not publish originals to GitHub Pages or Git.
 
 ## Access contract
 
@@ -10,7 +10,7 @@ Anonymous requests to any website, image, script, recording, search or unknown U
 
 The `__Host-blueprint-access` cookie is `HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=3600`. The frontend never reads the token or stores the password. Access expires after one hour. `POST /logout`, also checked for the exact same origin, expires the cookie and returns to the website. Rotating either server secret invalidates existing sessions.
 
-Once authenticated, requests can fetch only the generated website allowlist and the 51 exact paths in `allowlist.json`: 38 ElevenLabs captures and 13 Cloudflare captures. Originals retain their exact bytes at `/blueprint-wireframe-kit/__private-references/{source}/{filename.jpg}`. Archives, research metadata and provenance are excluded. Authenticated video requests support `Range` and `If-Range`, allowing the existing Notion and Steam recordings to seek.
+Once authenticated, requests can fetch only the generated website allowlist and the 59 exact paths in `allowlist.json`: 38 ElevenLabs captures, 13 Cloudflare captures and 8 Tally captures. Originals retain their exact bytes at `/blueprint-wireframe-kit/__private-references/{source}/{filename.jpg}`. Archives, research metadata and provenance are excluded. Authenticated video requests support `Range` and `If-Range`, allowing the existing Notion and Steam recordings to seek.
 
 ## Search
 
@@ -64,3 +64,10 @@ The live browser confirmed native login, the decoded Cloudflare Containers origi
 The migration is complete. [GitHub Pages redirect workflow 37488481377](https://github.com/anujprajapatiii/blueprint-wireframe-kit/actions/runs/37488481377) succeeded on 6 October 2026 at 21:08:09 IST (`2026-10-06T15:38:09Z`). Live HTTP checks found only the 582-byte redirect HTML at the old Pages base URL, with HTTP 200 and no module script. The old `references/github-event-banner/original.png` URL returned HTTP 404 with that same 582-byte redirect fallback, rather than the original image.
 
 The browser followed the former Pages URL with `?view=experiments&source=Cloudflare&experiment=cf-containers-gate&mode=reference` to the protected Worker, preserving the exact path and query. Logged-out access showed **Unlock Blueprint**. The [live password-gate screenshot](../../docs/reviews/2026-10-06/password-gate-live.jpg) records this result without exposing credentials or private originals.
+
+
+## Release record — 9 October 2026
+
+Anuj authorized publishing the latest revision, including five Tally experiments and eight original screenshots to the existing protected website. The private allowlist now contains 59 images and the internal search catalog contains 28 experiments. Website version `fcd737ac-48ff-4297-a27d-c3009a019fce` and search version `7283703f-2189-4f96-afce-5c24566e7d4a` are deployed with the existing password and service boundaries.
+
+The build, 18 gate tests and 8 search tests passed. Live checks confirmed anonymous denial, valid login and preserved routes, all 59 original hashes, all 35 HTML/JS/CSS build hashes, Tally search, modified-cookie denial, logout, and the retained Pages redirect. Browser review confirmed the Tally original at 1271 × 1108. The recording request returned the complete byte-identical file (200); live partial responses were not verified. See [the release record](../../docs/reviews/2026-10-09/published-release.md) for evidence and limits.

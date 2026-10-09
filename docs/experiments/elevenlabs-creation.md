@@ -70,4 +70,4 @@ Educational copy distinguishes source claims, inferred intent, and the observed 
 
 Guide mode explains the currently visible growth regions, then lets the user operate the wireframe. New lessons appear when an inspected follow-up panel or dialog opens; the guide does not click through source actions automatically. Explanations are available through Guide me only.
 
-Yellow follows the original component boundaries: individual cards, controls, callouts, rows, and introduction surfaces. Container gaps and headings retain blue context where adding a scope would create an unpadded yellow rectangle. Existing widths, columns, and main spacing remain unchanged.
+Yellow follows complete visible components. The 7 October 2026 review makes the joined model selector and trial offer yellow together in the v4 follow-up editor, removing the blue top half from that card. The editor, other settings, and page shell remain blue. Release banners, feature cards, adjacent-tool promotion, visual examples, and their introduction/detail dialogs already use complete yellow surfaces. Existing widths, columns, copy, spacing, and guide targets are unchanged.

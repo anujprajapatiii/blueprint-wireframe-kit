@@ -70,3 +70,7 @@ The shared **Guide me** walkthrough uses `growthTarget` descriptions without sep
 The content distinguishes source claims (savings, Popular) from design interpretation and retains the original payment/annual-checkout boundaries. No payment, account mutation, or claimed lift was introduced. Existing source proportions and responsive behavior remain the basis; explanations stay in the guide so the source layout needs no added help affordances.
 
 Earlier education-pass verification (4 October 2026): formatting and whole-project `tsc --noEmit` passed. That pass included inline help controls, superseded by the Guide me-only contract. Its checks do not verify the subsequent removal or container changes; those require the current integration review.
+
+## Complete component boundary review — 7 October 2026
+
+The active monthly/yearly comparisons already color complete plan cards and the billing-cadence control. Annual-offer and confirmation states already color the entire modal, including headings, actions, and boundary feedback. Their thumbnails now match the live comparison: all plan cards and both cadence choices use yellow, without a blue current-plan card or half-blue cadence control. Source prices, copy, dimensions, actions, and guide targets are unchanged.

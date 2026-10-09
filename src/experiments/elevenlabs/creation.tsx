@@ -708,7 +708,10 @@ function SpeechWireframe({
                 <Label>Model</Label>
                 <Button
                   variant="outline"
-                  className="mt-2 h-9 w-full justify-between rounded-b-none bg-card text-xs"
+                  className={cn(
+                    "mt-2 h-9 w-full justify-between rounded-b-none bg-card text-xs",
+                    growthFocus === "model-trial" && "growth-scope",
+                  )}
                   onClick={() => setSelector(true)}
                 >
                   {selectedModel}

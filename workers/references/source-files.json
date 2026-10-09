@@ -53,5 +53,15 @@
     "11-event-home-banner.jpg",
     "12-event-destination.jpg",
     "13-event-tickets.jpg"
+  ],
+  "tally": [
+    "01-referral-invite.jpg",
+    "02-referral-how-it-works.jpg",
+    "03-referral-rewards.jpg",
+    "04-plans-monthly.jpg",
+    "05-plans-yearly.jpg",
+    "06-domains-empty.jpg",
+    "07-domains-plan-gate.jpg",
+    "08-community-promotions.jpg"
   ]
 }

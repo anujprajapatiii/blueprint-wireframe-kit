@@ -57,16 +57,20 @@ At 320 × 900 px, the opportunity table initially expanded the document to 552 p
 
 The 4 October 2026 revision uses the shared monochromatic yellow growth scope for the studied intervention, keeping surrounding application context blue. The source copy and interaction boundaries above remain unchanged. Educational explanations are library annotations, not source copy or claims of measured impact. Target descriptions are exposed through the shared **Guide me** walkthrough, without separate growth tooltip controls.
 
-| Experiment | Yellow targets and walkthrough sequence | Blue context retained |
-| --- | --- | --- |
-| Creation pathways | Effort/input guidance → professional capability gate → library alternative | Modal frame, back/close controls and prototype boundary notices |
-| Professional clone gate | Capability benefit and input requirements → attached plan requirement and Subscribe route | Other voice methods, library alternative and modal frame |
-| Prompt starters | Editable starter prompt and example chips → generation action with captured credit cost | Modal header, back/close controls and boundary feedback |
-| Clone prerequisites | Step outline → recording-quality guidance → minimum input and Next gate | Upload/recording work area, application backdrop and local demonstration controls |
-| Curated discovery | Search/use-case filters → trending short list with preview/Add → handpicked collections | Application navigation, page headings and the abstracted lower catalog section |
-| Supplier earnings | Contribution incentive → prerequisite checklist → empty-state guidance | Payout amount summaries and application navigation |
-| Supply opportunities | Relevant segment filters → library counts and opportunity signals | Application navigation, page introduction and capture/provenance note |
+| Experiment              | Yellow targets and walkthrough sequence                                                                               | Blue context retained                                                             |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Creation pathways       | Effort/input guidance → professional capability gate → library alternative                                            | Modal frame, back/close controls and prototype boundary notices                   |
+| Professional clone gate | Capability benefit and input requirements → attached plan requirement and Subscribe route                             | Other voice methods, library alternative and modal frame                          |
+| Prompt starters         | Complete Voice Design modal; lessons explain the editable starter prompt, example chips, and captured generation cost | Application backdrop                                                              |
+| Clone prerequisites     | Step outline → recording-quality guidance → minimum input and Next gate                                               | Upload/recording work area, application backdrop and local demonstration controls |
+| Curated discovery       | Search/use-case filters → trending short list with preview/Add → handpicked collections                               | Application navigation, page headings and the abstracted lower catalog section    |
+| Supplier earnings       | Contribution incentive → prerequisite checklist → empty-state guidance                                                | Payout amount summaries and application navigation                                |
+| Supply opportunities    | Relevant segment filters → library counts and opportunity signals                                                     | Application navigation, page introduction and capture/provenance note             |
 
 The chooser changes targets with its observed prompt and clone states, so subsequent screens have their own explanations. The professional gate route intentionally leaves unrelated methods blue. Voice-language and opportunity-language popovers carry the yellow scope through their portal.
 
 The descriptions distinguish intended mechanisms from evidence: activation/conversion effects, ranking logic, opportunity-score calculation, predicted earnings and uninspected branches remain unverified. Source proportions remain the basis for layout. The shared [growth education contract](../growth-education.md) owns guidance and state handling; new layout and guide changes require their own review.
+
+## Complete component boundary review — 7 October 2026
+
+Voice Design, reachable from the professional-clone chooser, now uses one yellow modal surface through its heading, back/close controls, form, actions, and feedback. The professional-clone offer remains a complete yellow card including its requirement and Subscribe footer; the other independently bounded voice methods remain blue. The earnings checklist, incentive, payout empty state, opportunity table, and prerequisite guidance already have complete component surfaces. No guide IDs, copy, source proportions, or behavior changed.

@@ -28,6 +28,12 @@ const CloudflareWireframe = lazy(() =>
   })),
 );
 
+const TallyWireframe = lazy(() =>
+  import("./tally/wireframe").then((module) => ({
+    default: module.TallyWireframe,
+  })),
+);
+
 function LegacyElevenLabsLink() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -82,7 +88,17 @@ export function ExperimentsApp() {
     return (
       <div className="experiment-embedded">
         <GrowthEducation experimentId={experiment.id} />
-        {id?.startsWith("cf-") ? (
+        {id?.startsWith("tally-") ? (
+          <Suspense
+            fallback={
+              <p role="status" className="p-8">
+                Loading wireframe…
+              </p>
+            }
+          >
+            <TallyWireframe patternId={id} title={experiment.title} />
+          </Suspense>
+        ) : id?.startsWith("cf-") ? (
           <Suspense
             fallback={
               <p role="status" className="p-8">

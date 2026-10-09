@@ -336,7 +336,19 @@ test("generated deployed catalog matches the current public registry projection"
     `data:text/javascript;base64,${Buffer.from(bundled.outputFiles[0].text).toString("base64")}`
   );
   assert.deepEqual(catalog, current);
-  assert.equal(catalog.length, 23);
+  assert.equal(catalog.length, 28);
+  for (const id of [
+    "tally-referral-reward",
+    "tally-plan-comparison",
+    "tally-custom-domain-gate",
+    "tally-office-hours",
+    "tally-review-request",
+  ]) {
+    assert.ok(
+      catalog.some((entry) => entry.id === id),
+      `Missing Tally experiment in the deployed search catalog: ${id}`,
+    );
+  }
   assert.equal(
     catalog.some((entry) => entry.id === "el-balance-context-upgrade"),
     false,

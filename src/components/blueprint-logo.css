@@ -1,0 +1,89 @@
+/* The link and wordmark stay fixed; only the decorative 36px mark reacts. */
+.blueprint-logo-mark {
+  overflow: visible;
+  transform-origin: center;
+  transition: transform var(--motion-normal) var(--motion-ease);
+}
+.blueprint-logo-frame,
+.blueprint-logo-plan {
+  stroke: var(--input);
+  stroke-width: 1;
+}
+.blueprint-logo-plan,
+.blueprint-logo-face {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity var(--motion-fast) ease,
+    transform var(--motion-normal) var(--motion-ease);
+}
+.blueprint-logo-face {
+  opacity: 0;
+  transform: translateY(1px) scale(0.94);
+}
+.blueprint-logo-eye {
+  fill: var(--foreground);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform var(--motion-fast) var(--motion-ease);
+}
+.blueprint-logo-smile {
+  stroke: var(--foreground);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .blueprint-logo:hover .blueprint-logo-mark {
+    transform: translateY(-1px) rotate(-6deg);
+  }
+  .blueprint-logo:hover .blueprint-logo-plan {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .blueprint-logo:hover .blueprint-logo-face {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Keyboard focus gets the same friendly state immediately, without movement. */
+.blueprint-logo:focus-visible .blueprint-logo-plan {
+  opacity: 0;
+  transform: none;
+}
+.blueprint-logo:focus-visible .blueprint-logo-face {
+  opacity: 1;
+  transform: none;
+}
+.blueprint-logo:focus-visible .blueprint-logo-mark,
+.blueprint-logo:focus-visible .blueprint-logo-mark * {
+  transition: none;
+}
+.blueprint-logo:focus-visible .blueprint-logo-mark {
+  transform: none;
+}
+
+/* A press winks, including on touch. Native link navigation is never delayed. */
+.blueprint-logo:active .blueprint-logo-mark {
+  transform: scale(0.97);
+  transition-duration: var(--motion-fast);
+}
+.blueprint-logo:active .blueprint-logo-plan {
+  opacity: 0;
+}
+.blueprint-logo:active .blueprint-logo-face {
+  opacity: 1;
+  transform: none;
+}
+.blueprint-logo:active .blueprint-logo-wink {
+  transform: scaleY(0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blueprint-logo .blueprint-logo-mark,
+  .blueprint-logo .blueprint-logo-mark * {
+    transform: none !important;
+    transition-property: opacity;
+  }
+}

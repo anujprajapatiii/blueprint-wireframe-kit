@@ -525,7 +525,7 @@ function SharingDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className="max-w-[576px] gap-5 p-5"
+        className="growth-scope max-w-[576px] gap-5 p-5"
         onCloseAutoFocus={(event) => {
           event.preventDefault();
           restoreFocus();
@@ -561,7 +561,7 @@ function SharingDialog({
               "The invitation appears while you choose who can access a project, connecting the request to work you already want to share.",
             order: 1,
           })}
-          className="growth-scope relative rounded-md bg-card text-card-foreground"
+          className="relative rounded-md bg-card text-card-foreground"
         >
           <Button
             variant="outline"
@@ -628,7 +628,7 @@ function SharingDialog({
                 <SelectTrigger id={x.id} aria-label={x.label}>
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="growth-scope">
                   <SelectItem value={x.key}>{x.first}</SelectItem>
                   <SelectItem value="viewer">Viewer</SelectItem>
                   <SelectItem value="commenter">Commenter</SelectItem>

@@ -1,4 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type RefObject,
+} from "react";
 import { createPortal } from "react-dom";
 import { Route, X } from "lucide-react";
 import { driver, type Driver, type DriveStep } from "driver.js";
@@ -104,10 +110,12 @@ function ModalGuideControl({
   host,
   active,
   onToggle,
+  buttonRef,
 }: {
   host: HTMLElement;
   active: boolean;
   onToggle: () => void;
+  buttonRef: RefObject<HTMLButtonElement | null>;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
@@ -124,6 +132,7 @@ function ModalGuideControl({
       className="growth-context growth-modal-guide"
     >
       <Button
+        ref={buttonRef}
         variant="outline"
         size="sm"
         onPointerDown={(event) => event.preventDefault()}
@@ -144,6 +153,19 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
   const [count, setCount] = useState(0);
   const [guideHost, setGuideHost] = useState<HTMLElement | null>(null);
   const [tourOpen, setTourOpen] = useState(false);
+  const [guideFocusPending, setGuideFocusPending] = useState(false);
+  const guideButtonRef = useRef<HTMLButtonElement>(null);
+  // A modal guide unmounts during the tour. Restore focus only after its
+  // replacement button and top-layer portal have committed, after Driver cleanup.
+  useLayoutEffect(() => {
+    if (!guideFocusPending || tourOpen) return;
+    const frame = requestAnimationFrame(() => {
+      if (!guideButtonRef.current?.isConnected) return;
+      guideButtonRef.current.focus({ preventScroll: true });
+      setGuideFocusPending(false);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [guideFocusPending, tourOpen, guideHost]);
   const startRef = useRef<() => void>(() => {});
   const stopRef = useRef<() => void>(() => {});
   useEffect(() => {
@@ -176,6 +198,16 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
           location.origin,
         );
     };
+    const returnGuideFocus = () => {
+      if (standalone) setGuideFocusPending(true);
+      else
+        requestAnimationFrame(() =>
+          window.parent.postMessage(
+            { channel: CHANNEL, focus: true },
+            location.origin,
+          ),
+        );
+    };
     const stop = () => {
       guided = false;
       startPending = false;
@@ -183,19 +215,7 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
       tour?.destroy();
       tour = null;
       announce();
-      requestAnimationFrame(() => {
-        if (!standalone)
-          window.parent.postMessage(
-            { channel: CHANNEL, focus: true },
-            location.origin,
-          );
-        else
-          document
-            .querySelector<HTMLButtonElement>(
-              ".growth-standalone-toolbar button",
-            )
-            ?.focus({ preventScroll: true });
-      });
+      returnGuideFocus();
     };
     const startTour = (targets: HTMLElement[]) => {
       if (!targets.length || tour?.isActive()) return;
@@ -276,6 +296,10 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
           if (!completedNormally) guided = false;
           tour = null;
           announce();
+          if (!guided) {
+            returnGuideFocus();
+            return;
+          }
           requestAnimationFrame(() => {
             if (
               restoreFocus?.isConnected &&
@@ -284,11 +308,6 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
               !restoreFocus.closest('[inert], [aria-hidden="true"]')
             )
               restoreFocus.focus({ preventScroll: true });
-            else if (!standalone && !guided)
-              window.parent.postMessage(
-                { channel: CHANNEL, focus: true },
-                location.origin,
-              );
           });
         },
       });
@@ -382,6 +401,7 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
     return tourOpen ? null : (
       <ModalGuideControl
         host={guideHost}
+        buttonRef={guideButtonRef}
         active={active}
         onToggle={() => (active ? stopRef.current() : startRef.current())}
       />
@@ -394,6 +414,7 @@ export function GrowthEducation({ experimentId }: { experimentId: string }) {
     >
       <GrowthLegend />
       <Button
+        ref={guideButtonRef}
         variant="outline"
         size="sm"
         onPointerDown={(event) => event.preventDefault()}

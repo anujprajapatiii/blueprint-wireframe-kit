@@ -8,12 +8,15 @@ import {
   type CloudflarePreviewKind,
 } from "./cloudflare/thumbnails";
 
+import { TallyThumbnail, type TallyPreviewKind } from "./tally/thumbnails";
+
 export type ExperimentPreviewKind =
   | "feature-modal"
   | "discovery-queue"
   | "event-banner"
   | ElevenPreviewKind
-  | CloudflarePreviewKind;
+  | CloudflarePreviewKind
+  | TallyPreviewKind;
 
 const surface = "var(--card)";
 const sunken = "var(--surface-sunken)";
@@ -487,6 +490,8 @@ export function ExperimentPreview({ kind }: { kind: ExperimentPreviewKind }) {
     >
       {Preview ? (
         <Preview />
+      ) : kind.startsWith("tally-") ? (
+        <TallyThumbnail kind={kind as TallyPreviewKind} />
       ) : kind.startsWith("cf-") ? (
         <CloudflareThumbnail kind={kind as CloudflarePreviewKind} />
       ) : (

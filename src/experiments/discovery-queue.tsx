@@ -111,7 +111,7 @@ export function DiscoveryQueue() {
 
   return (
     <DialogContent
-      className="discovery-dialog"
+      className="growth-scope discovery-dialog"
       onKeyDown={(event) => {
         if (
           document.body.classList.contains("driver-active") ||
@@ -276,7 +276,7 @@ export function DiscoveryQueue() {
                       </div>
                     </div>
                     <div
-                      className="growth-scope discovery-details text-card-foreground"
+                      className="discovery-details text-card-foreground"
                       {...(index === gameIndex
                         ? growthTarget({
                             id: "steam-recommendation",
@@ -395,7 +395,7 @@ export function DiscoveryQueue() {
                     You've reached the end of this Discovery Queue
                   </h2>
                   <div
-                    className="growth-scope discovery-reward text-foreground"
+                    className="discovery-reward text-foreground"
                     {...(complete
                       ? growthTarget({
                           id: "steam-completion-reward",
@@ -461,7 +461,7 @@ export function DiscoveryQueue() {
                     </DialogClose>
                     <Button
                       variant="secondary"
-                      className="growth-scope min-w-28 focus-visible:outline-ring-inverse"
+                      className="min-w-28 focus-visible:outline-ring-inverse"
                       onClick={() => {
                         setRound(round + 1);
                         move(0);
@@ -512,7 +512,7 @@ export function DiscoveryQueue() {
         {!collection && !complete && (
           <>
             <nav
-              className="growth-scope discovery-progress rounded-md border border-border bg-card text-card-foreground px-1"
+              className="discovery-progress rounded-md border border-border bg-card text-card-foreground px-1"
               aria-label="Queue progress"
             >
               {games.map((item, i) => (

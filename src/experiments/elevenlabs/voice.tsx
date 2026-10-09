@@ -307,7 +307,12 @@ function CreationDialog({
             {initialStage === "design" ? "Open Voice Design" : "Create voice"}
           </Button>
         </DialogTrigger>
-        <DialogContent className="max-h-[calc(100dvh_-_2rem)] max-w-[512px] gap-5 p-5 sm:p-8">
+        <DialogContent
+          className={cn(
+            "max-h-[calc(100dvh_-_2rem)] max-w-[512px] gap-5 p-5 sm:p-8",
+            stage === "design" && "growth-scope",
+          )}
+        >
           <DialogHeader className="pr-8">
             <div className="flex items-center gap-4">
               {stage === "design" ? (

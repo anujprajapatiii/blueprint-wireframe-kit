@@ -16,7 +16,7 @@ Every experiment needs the shared [Design intent](design-intent.md) record: one 
 - Retain hierarchy, sequence, placement, and behavior relevant to the question. Keep surrounding containers, columns, gutters, alignment, neighboring modules, and scroll relationships when they explain the focal component's position.
 - Replace irrelevant inner content with restrained placeholders that occupy comparable space. Simplifying content does not mean floating the focal component alone on a page. Honor an explicit request for a plain backdrop where the context is unnecessary.
 - Replace photography, artwork, logos, gradients, brand typography, and promotional styling with semantic kit surfaces and simple placeholders. No decorative corner crosses, eyebrows, or rulers.
-- Apply [the growth education contract](growth-education.md): yellow identifies the smallest complete studied mechanism; blue preserves its environment. Keep the same distinction in thumbnails. **Guide me** supplies explanations; do not add growth tooltip or `?` controls.
+- Apply [the growth education contract](growth-education.md): yellow fills the complete visible card, modal, banner, or panel containing the studied mechanism; avoid partial yellow insets within that group. Blue preserves the separate surrounding environment. Keep the same distinction in thumbnails. **Guide me** supplies explanations; do not add growth tooltip or `?` controls.
 - Start with shared Select, Button, Badge, and dialog components. Their spacing, focus, and interaction conventions should improve centrally rather than diverge per experiment.
 
 ## Preserve reference proportions

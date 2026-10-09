@@ -111,9 +111,9 @@ async function login(env: Env, time = now, returnTo = base) {
   return { cookie: cookie.split(";")[0], response };
 }
 
-test("the private allowlist contains only the 51 reviewed JPEGs", () => {
-  assert.equal(privatePaths.length, 51);
-  assert.equal(new Set(privatePaths).size, 51);
+test("the private allowlist contains only the 59 reviewed JPEGs", () => {
+  assert.equal(privatePaths.length, 59);
+  assert.equal(new Set(privatePaths).size, 59);
   assert.equal(
     privatePaths.filter((path) => path.includes("/cloudflare/")).length,
     13,
@@ -122,9 +122,13 @@ test("the private allowlist contains only the 51 reviewed JPEGs", () => {
     privatePaths.filter((path) => path.includes("/elevenlabs/")).length,
     38,
   );
+  assert.equal(
+    privatePaths.filter((path) => path.includes("/tally/")).length,
+    8,
+  );
   assert.ok(
     privatePaths.every((path) =>
-      /^\/blueprint-wireframe-kit\/__private-references\/(cloudflare|elevenlabs)\/\d{2}-[a-z0-9-]+\.jpg$/.test(
+      /^\/blueprint-wireframe-kit\/__private-references\/(cloudflare|elevenlabs|tally)\/\d{2}-[a-z0-9-]+\.jpg$/.test(
         path,
       ),
     ),
@@ -143,6 +147,7 @@ test("every unauthenticated URL returns only the inline login page without acces
     scriptPath,
     videoPath,
     privatePath,
+    `${base}__private-references/tally/01-referral-invite.jpg`,
     "/unknown",
     "/assets/cloudflare/06-containers-gate.jpg",
     "/search/status",

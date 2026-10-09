@@ -27,7 +27,7 @@ const staging = join(
 const sourceFiles = JSON.parse(
   await readFile(join(workerDirectory, "source-files.json"), "utf8"),
 );
-const expectedCounts = { elevenlabs: 38, cloudflare: 13 };
+const expectedCounts = { elevenlabs: 38, cloudflare: 13, tally: 8 };
 const excludedKnownFiles = {
   elevenlabs: [
     "catalog.json",
@@ -39,6 +39,7 @@ const excludedKnownFiles = {
     "README.txt",
   ],
   cloudflare: ["provenance.json"],
+  tally: [],
 };
 
 async function ordinaryDirectory(path) {
@@ -114,8 +115,8 @@ for (const [source, filenames] of Object.entries(sourceFiles)) {
     planned.push({ source, filename, path, sha256: sha256(bytes) });
   }
 }
-if (planned.length !== 51)
-  throw new Error("Expected exactly 51 authorized private originals.");
+if (planned.length !== 59)
+  throw new Error("Expected exactly 59 authorized private originals.");
 // The root frontend build must finish before this staging step.
 await ordinaryDirectory(dist);
 const siteFiles = [];

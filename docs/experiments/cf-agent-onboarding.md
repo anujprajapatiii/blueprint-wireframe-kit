@@ -12,7 +12,7 @@ A small “Onboard your agent to Cloudflare” pill sits above “Let's get to w
 
 “Don't show this again” is present but was not selected because it may persist an account preference. The clipboard payload and downstream setup were not inspected. No agent was connected and no first-value outcome was observed.
 
-The sidebar, search, three columns of domain/worker/recent entries, event announcement and analytics are the environment. They stay blue in this experiment. Only the small promotion is yellow; the copied message is ordinary blue feedback. The event banner is separately admitted as [Connect event promotion](cf-event-promotion.md), where the banner is yellow and this agent pill is blue context.
+The sidebar, search, three columns of domain/worker/recent entries, event announcement and analytics are the environment. They stay blue in this experiment. The complete compact promotion is yellow, including its pill, copied feedback, and dismissal control. The event banner is separately admitted as [Connect event promotion](cf-event-promotion.md), where the banner is yellow and this agent pill is blue context.
 
 ## Proportions and context
 
@@ -50,3 +50,7 @@ A refined submission was rejected by automatic approval review because of accoun
 Reviewed locally on 5 October 2026 at the source width (1271px) and at 320px. The dashboard retains its sidebar/header, compact pill, search, three context columns, event panel and analytics. Keyboard activation shows copied feedback; the guide explains the post-action state after the transient toast ends. Local dismissal moves focus to the hero and leaves no growth target; library Restart restores the pill. Mobile menu Escape returns focus to Menu. The home reference loaded at its original 1271 × 1108 dimensions, including within the 320px workspace. Desktop and mobile review captures are linked in the [shared review record](../reviews/2026-10-05/cloudflare-local-review.md).
 
 Source-only and combined directory filter navigation, reference switching, shared guide close/focus, direct route refresh and the build are recorded there. No publication occurred.
+
+## Whole-container colour revision — 7 October 2026
+
+The yellow palette now belongs to the complete promotion row, so copied feedback and dismissal no longer split the same small offer across blue and yellow. The event-focused experiment still keeps this entire agent promotion blue. Placement, copy, timing, and local dismissal behavior are unchanged.

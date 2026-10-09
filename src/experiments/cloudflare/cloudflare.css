@@ -194,6 +194,10 @@
   left: calc(100% + 1px);
   border-radius: 50%;
 }
+.cf-promotion-row.growth-scope .cf-dismiss {
+  background: var(--card);
+  color: var(--card-foreground);
+}
 .cf-copy-status {
   position: absolute;
   bottom: calc(100% + 7px);

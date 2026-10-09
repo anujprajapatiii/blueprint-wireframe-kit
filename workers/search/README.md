@@ -1,7 +1,9 @@
 # Hosted Jev Search
 
-The website stays on GitHub Pages. This separate Cloudflare Worker supplies its
-Jev Search endpoint. `TYPESAFE_API_KEY` is a Worker secret; it must never appear in
+The password-protected Blueprint Worker hosts the website and calls this
+internal-only search Worker through its `SEARCH_SERVICE` binding. GitHub Pages
+only redirects to the protected website. The search Worker has `workers_dev = false`
+and no public endpoint. `TYPESAFE_API_KEY` is a Worker secret; it must never appear in
 Vite variables, browser storage, GitHub Pages output or committed configuration.
 
 Run the commands below **from the repository root** after `npm ci`. Wrangler's
@@ -39,10 +41,11 @@ The secret prompt accepts the existing TypeSafe key. Do not put a key directly i
 a shell command. The initial deploy can happen before setting the secret: the
 status route then reports `configured: false` and searches fail closed.
 
-Set the Pages build's `VITE_SEARCH_API_URL` to the deployed endpoint, for example
-`https://blueprint-jev-search.<account-subdomain>.workers.dev/search`. Only this
-public endpoint belongs in the Pages build. Build and deploy the website after
-the hosted status route is configured and a real search has been verified.
+The protected site build sets `VITE_SEARCH_API_URL` to the protected website's
+`/search` route. The website authenticates requests before proxying to this
+service. Deploy this search Worker whenever the experiment catalog changes,
+then deploy the website; a website deployment does not update the search catalog.
+Keep the existing server-side secret and quotas unchanged.
 
 Workers Free supports the SQLite Durable Object used here. No paid plan is
 required by this architecture; account-level Cloudflare and TypeSafe limits still
@@ -56,11 +59,12 @@ user's approval.
 | `/search/status` | `GET`                                  | `{ "configured": true, "model": "jev-latest" }` |
 | `/search`        | `POST` JSON `{ "query": "upselling" }` | Existing `SearchResult` contract                |
 
-Both routes require the exact Origin `https://anujprajapatiii.github.io`.
-Approved preflights permit the route's method and `Content-Type` only. There are
-no credentialed cookies or browser tokens. CORS is a browser boundary, **not user
-authentication**; non-browser callers can imitate an Origin, so the global API
-cap below is mandatory. Do not broaden the origin list to `*`.
+The internal routes retain the exact Origin `https://anujprajapatiii.github.io`;
+the authenticated website proxy supplies it over the service binding. Browser
+requests use the protected website origin and session cookie. The search Worker
+never receives that cookie. The origin check is not user authentication; the
+website gate enforces access and the quotas below bound upstream use. Do not
+expose this service publicly or broaden the internal origin list.
 
 POST accepts only a `query` field, at most 300 characters and 4 KiB total JSON.
 It reads the body with a five-second deadline. Callers cannot provide a catalog,

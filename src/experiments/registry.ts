@@ -2,6 +2,7 @@ import type { GrowthIntent } from "../growth/taxonomy";
 import type { ExperimentPreviewKind } from "./experiment-preview";
 import { elevenLabsExperiments } from "./elevenlabs/metadata";
 import { cloudflareExperiments } from "./cloudflare/metadata";
+import { tallyExperiments } from "./tally/metadata";
 
 export type ExperimentType = "Screen" | "Flow" | "Experience";
 
@@ -32,6 +33,7 @@ export interface Experiment {
 }
 
 export const experiments: Experiment[] = [
+  ...tallyExperiments,
   ...cloudflareExperiments,
   ...elevenLabsExperiments,
   {
@@ -99,7 +101,7 @@ export const experiments: Experiment[] = [
     summary: "Select a feature to explore its details and preview.",
     sourceName: "Notion",
     addedAt: "2026-10-03",
-    updatedAt: "2026-10-03",
+    updatedAt: "2026-10-07",
     preview: "feature-modal",
     type: "Screen",
     focus: ["Feature announcement", "Modal selection"],
@@ -160,7 +162,7 @@ export const experiments: Experiment[] = [
       "A reward-led discovery flow, from store banners to queue completion.",
     sourceName: "Steam",
     addedAt: "2026-10-03",
-    updatedAt: "2026-10-03",
+    updatedAt: "2026-10-07",
     preview: "discovery-queue",
     type: "Flow",
     focus: ["Sticker reward", "Discovery queue"],

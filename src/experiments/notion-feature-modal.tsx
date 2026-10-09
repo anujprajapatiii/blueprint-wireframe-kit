@@ -361,7 +361,7 @@ export function NotionFeatureModal({
                     />
                   </TabsTrigger>
                 </TabsList>
-                <div className="growth-context notion-feature-previews text-foreground">
+                <div className="notion-feature-previews text-foreground">
                   {features.map((item) => (
                     <TabsContent
                       forceMount

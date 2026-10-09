@@ -274,7 +274,7 @@ function PricingPreview({ annual = false }: { annual?: boolean }) {
       <Text x={96} y={94} size={27} strong>
         Choose your plan
       </Text>
-      <Action x={526} y={71} width={112}>
+      <Action x={526} y={71} width={112} growth>
         Monthly
       </Action>
       <Action x={646} y={71} width={217} primary={annual} growth>
@@ -288,7 +288,7 @@ function PricingPreview({ annual = false }: { annual?: boolean }) {
           width={245}
           height={337}
           fill={i === 1 ? raised : card}
-          growth={i > 0}
+          growth
         >
           <Text x={118 + i * 261} y={183} size={24} strong>
             {name}
@@ -1023,7 +1023,7 @@ export function ElevenLabsThumbnail({ kind }: { kind: ElevenPreviewKind }) {
       );
     case "project-sharing":
       return (
-        <Dialog title="Share project" y={47} height={467}>
+        <Dialog title="Share project" y={47} height={467} growth>
           <Text x={219} y={129} size={16} dim>
             Choose who in your workspace can access this project.
           </Text>
@@ -1032,7 +1032,7 @@ export function ElevenLabsThumbnail({ kind }: { kind: ElevenPreviewKind }) {
               Search for users or groups
             </Text>
           </Panel>
-          <Panel x={219} y={216} width={522} height={101} fill={raised} growth>
+          <Panel x={219} y={216} width={522} height={101} fill={raised}>
             <Text x={239} y={252} size={19} strong>
               Invite team members
             </Text>
@@ -1463,7 +1463,7 @@ export function ElevenLabsThumbnail({ kind }: { kind: ElevenPreviewKind }) {
               />
             </Panel>
           ))}
-          <Panel x={603} y={92} width={298} height={412} fill={inset}>
+          <Panel x={603} y={92} width={298} height={412} fill={inset} growth>
             <Text x={625} y={134} size={22} strong>
               Architect
             </Text>
@@ -1492,7 +1492,7 @@ export function ElevenLabsThumbnail({ kind }: { kind: ElevenPreviewKind }) {
                 stroke={line}
               />
             </Panel>
-            <Action x={625} y={444} width={254} primary growth>
+            <Action x={625} y={444} width={254} primary>
               Use template
             </Action>
           </Panel>
