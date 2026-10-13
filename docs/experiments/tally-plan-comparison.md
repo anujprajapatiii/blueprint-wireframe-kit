@@ -2,7 +2,7 @@
 
 - **Stable ID:** `tally-plan-comparison`
 - **Direct route:** `?view=experiments&experiment=tally-plan-comparison`
-- **User intent and scope:** Study comparison of Pro and Business and the annual savings proposition, retaining the observed toggle and Back behavior. Stop before checkout.
+- **User intent and scope:** Study comparison of Pro and Business and the annual savings proposition, including the observed New workspace entry, toggle and Back behavior. Stop before checkout.
 - **Reference:** Authenticated Tally free account, inspected 7 October 2026. Original captures remain private and local; personal identifiers and referral codes are omitted from this record.
 - **Evidence:** `tally-04-plans-monthly`, `tally-05-plans-yearly`. Every original is an unchanged full-viewport JPEG, 1271 × 1108, captured 7 October 2026.
 
@@ -51,3 +51,27 @@ Before the whole-container color revision, npm run build passed: 1,742 modules, 
 ## Whole-container color revision — 7 October 2026
 
 Anuj requested complete yellow containers instead of partial yellow sections. The referral modal now stays yellow through Invite, How it works and Rewards; the full plan overlay is yellow; both invitations share one yellow community card. The custom-domain proposition remains one yellow group, and surrounding app navigation and release notes stay blue. Guide targets remain specific to the visible behavior. Thumbnails use the same boundaries. Dimensions, source copy and interactions are unchanged. The earlier review evidence above predates this scope-only revision. Completed color checks, the passing build, and current screenshots are recorded in the [whole-container review](../reviews/2026-10-07/whole-yellow-containers.md).
+
+## Workspace entry — 13 October 2026
+
+The empty home’s **New workspace** action was inspected in the same free account. It opens the existing “Do more with Tally” comparison with monthly billing selected: Pro $29 and Business $89. The subtitle remains “Upgrade to access advanced features designed for growing teams and creators.” Back returns to the empty home. No workspace, teammate invitation or purchase was completed.
+
+The relevant Pro benefits are “Collaboration. Invite unlimited team members to shared workspaces.” and “Workspaces & folders. Organize forms into workspaces and folders, and manage team access.” This is evidence of a paid-team offer at a workspace request. It supports the existing **monetization** classification; it does not establish expansion of an existing paid account, a completed team invitation, or a measured result.
+
+The original private files are `local-references/tally-growth-2026-10-13/05-workspace-upgrade-1440.jpg` and `local-references/tally-growth-2026-10-13/04-home-1440.jpg`. Both are unchanged **1440 × 900 full-viewport** JPEGs, checked from the source files. The earlier 1280 × 720 captures remain unchanged in the local archive as supporting evidence and are not the displayed references. The later home capture includes the account’s “My workspace” sidebar row; this is contextual evidence, not proof that New workspace succeeded. They add a connected entry to the same question, so the experiment keeps its stable ID, addition date and direct plans entry. It does not add a duplicate catalog card.
+
+In the local wireframe, choose Back or Close, then **New workspace** in the home header to reproduce this route. The button and empty home remain blue product context; the complete existing plans overlay remains yellow. A short Guide me tip points to Collaboration only when plans were opened from New workspace. Closing or going Back preserves home and returns focus to the invoking control. The narrow version keeps New workspace visible using compact header controls in this experiment only; this is a local mobile adaptation.
+
+The added entry reuses the existing monthly/yearly state, prices and purchase boundaries. Reopening starts monthly. No new TypeSafe transmission, publication or push is part of this revision.
+
+### Local verification — 13 October 2026
+
+The integrating task checked the monthly entry at an actual **1440 × 900** desktop viewport. Back returned home, New workspace opened monthly plans, and Close restored focus to New workspace. Guide me showed the new teamwork explanation as step 3 of 4. The new gate original decoded at **1440 × 900** in the reference viewer.
+
+At an actual **320 × 900** outer viewport, New workspace remained visible inside the **272px-wide experiment iframe**, with no horizontal overflow. The same Back, workspace-entry and focus-return behavior passed. This remains a local narrow-layout adaptation; Tally’s mobile source was not inspected.
+
+`npm run build` passed after integration and again after the final Gamma layout fixes. Detailed evidence and the final combined result belong in the [local growth review](../reviews/2026-10-13/local-growth-review.md).
+
+## Publication addendum — 13 October 2026
+
+Anuj explicitly authorized publishing this Tally workspace-entry update and its 2 registered unchanged originals to the existing password-protected Blueprint website. It is deployed in website version `2005341b-daa9-49fa-be9f-bbd3c71bcd1d`; the internal search catalog is updated. The earlier local review and local-only statements above are retained as history, and the documented evidence and prototype limits still apply. Originals remain excluded from Git and public assets. See the [growth release record](../reviews/2026-10-13/published-growth-release.md) for release scope and live verification status.

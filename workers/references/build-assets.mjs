@@ -27,7 +27,15 @@ const staging = join(
 const sourceFiles = JSON.parse(
   await readFile(join(workerDirectory, "source-files.json"), "utf8"),
 );
-const expectedCounts = { elevenlabs: 38, cloudflare: 13, tally: 8 };
+const expectedCounts = {
+  elevenlabs: 38,
+  cloudflare: 13,
+  tally: 8,
+  gamma: 13,
+  "gamma-growth-2026-10-13": 8,
+  "linear-growth-2026-10-13": 7,
+  "tally-growth-2026-10-13": 2,
+};
 const excludedKnownFiles = {
   elevenlabs: [
     "catalog.json",
@@ -40,7 +48,31 @@ const excludedKnownFiles = {
   ],
   cloudflare: ["provenance.json"],
   tally: [],
+  gamma: [
+    "01-use-selection.jpg",
+    "02-role-selection.jpg",
+    "03-team-size.jpg",
+    "provenance.json",
+  ],
+  "gamma-growth-2026-10-13": [
+    "02-invite-email.jpg",
+    "03-invite-link.jpg",
+    "05-create-folder.jpg",
+    "06-private-folder.jpg",
+    "07-folder-share.jpg",
+    "08-folder-permissions.jpg",
+    "09-home-1440.jpg",
+    "provenance.json",
+  ],
+  "linear-growth-2026-10-13": ["provenance.json"],
+  "tally-growth-2026-10-13": [
+    "01-workspace-upgrade.jpg",
+    "02-empty-home.jpg",
+    "03-first-form-editor.jpg",
+    "provenance.json",
+  ],
 };
+const excludedKnownDirectories = { gamma: ["review"] };
 
 async function ordinaryDirectory(path) {
   const stat = await lstat(path);
@@ -79,6 +111,10 @@ for (const [source, filenames] of Object.entries(sourceFiles)) {
     ...excludedKnownFiles[source],
   ]);
   for (const entry of await readdir(sourceDirectory, { withFileTypes: true })) {
+    if (excludedKnownDirectories[source]?.includes(entry.name)) {
+      await ordinaryDirectory(join(sourceDirectory, entry.name));
+      continue;
+    }
     if (
       !expectedEntries.has(entry.name) ||
       !entry.isFile() ||
@@ -115,8 +151,8 @@ for (const [source, filenames] of Object.entries(sourceFiles)) {
     planned.push({ source, filename, path, sha256: sha256(bytes) });
   }
 }
-if (planned.length !== 59)
-  throw new Error("Expected exactly 59 authorized private originals.");
+if (planned.length !== 89)
+  throw new Error("Expected exactly 89 authorized private originals.");
 // The root frontend build must finish before this staging step.
 await ordinaryDirectory(dist);
 const siteFiles = [];

@@ -28,6 +28,23 @@ const CloudflareWireframe = lazy(() =>
   })),
 );
 
+const GammaCollaborationWireframe = lazy(() =>
+  import("./gamma-collaboration/wireframe").then((module) => ({
+    default: module.GammaCollaborationWireframe,
+  })),
+);
+const LinearWireframe = lazy(() =>
+  import("./linear/wireframe").then((module) => ({
+    default: module.LinearWireframe,
+  })),
+);
+
+const GammaWireframe = lazy(() =>
+  import("./gamma/wireframe").then((module) => ({
+    default: module.GammaWireframe,
+  })),
+);
+
 const TallyWireframe = lazy(() =>
   import("./tally/wireframe").then((module) => ({
     default: module.TallyWireframe,
@@ -88,7 +105,37 @@ export function ExperimentsApp() {
     return (
       <div className="experiment-embedded">
         <GrowthEducation experimentId={experiment.id} />
-        {id?.startsWith("tally-") ? (
+        {id === "gamma-shared-folders" ? (
+          <Suspense
+            fallback={
+              <p role="status" className="p-8">
+                Loading wireframe…
+              </p>
+            }
+          >
+            <GammaCollaborationWireframe />
+          </Suspense>
+        ) : id?.startsWith("linear-") ? (
+          <Suspense
+            fallback={
+              <p role="status" className="p-8">
+                Loading wireframe…
+              </p>
+            }
+          >
+            <LinearWireframe />
+          </Suspense>
+        ) : id?.startsWith("gamma-") ? (
+          <Suspense
+            fallback={
+              <p role="status" className="p-8">
+                Loading wireframe…
+              </p>
+            }
+          >
+            <GammaWireframe patternId={id} />
+          </Suspense>
+        ) : id?.startsWith("tally-") ? (
           <Suspense
             fallback={
               <p role="status" className="p-8">

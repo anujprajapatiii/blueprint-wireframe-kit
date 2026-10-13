@@ -163,9 +163,11 @@ const businessBenefits = [
 function Plans({
   onBack,
   onBoundary,
+  workspaceEntry,
 }: {
   onBack: () => void;
   onBoundary: (boundary: Boundary) => void;
+  workspaceEntry: boolean;
 }) {
   const [yearly, setYearly] = useState(false);
   return (
@@ -245,7 +247,7 @@ function Plans({
                   isPro
                     ? "Pro connects its price to practical benefits such as custom domains and collaboration, helping people judge what upgrading adds."
                     : "Business builds on Pro with controls for organizations. Keeping both plans visible helps people compare the added features and price.",
-                  isPro ? 1 : 2,
+                  isPro ? 1 : workspaceEntry ? 3 : 2,
                 )}
               >
                 <div className="tally-plan-heading">
@@ -279,7 +281,18 @@ function Plans({
                 >
                   {(isPro ? proBenefits : businessBenefits).map(
                     ([Icon, title, copy]) => (
-                      <div className="tally-benefit" key={title}>
+                      <div
+                        className="tally-benefit"
+                        key={title}
+                        {...(workspaceEntry && title === "Collaboration."
+                          ? guide(
+                              "tally-workspace-collaboration",
+                              "Make teamwork a paid benefit",
+                              "Shared workspaces and unlimited team members turn a team task into a reason to consider the paid plan.",
+                              2,
+                            )
+                          : {})}
+                      >
                         <Icon aria-hidden="true" />
                         <p>
                           <strong>{title}</strong> {copy}
@@ -697,6 +710,7 @@ export function TallyWireframe({
   const [plansOpen, setPlansOpen] = useState(
     patternId === "tally-plan-comparison",
   );
+  const [workspaceEntry, setWorkspaceEntry] = useState(false);
   const [newsOpen, setNewsOpen] = useState(isCommunity);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [boundary, setBoundaryState] = useState<Boundary | null>(null);
@@ -731,9 +745,14 @@ export function TallyWireframe({
     else mobileButton.current?.focus();
   };
   const openPlans = () => {
+    setWorkspaceEntry(false);
     rememberFocus();
     setNewsOpen(false);
     setPlansOpen(true);
+  };
+  const openWorkspacePlans = () => {
+    openPlans();
+    setWorkspaceEntry(true);
   };
   const unobserved = (label: string) =>
     setBoundary({
@@ -771,7 +790,13 @@ export function TallyWireframe({
   };
   const domainGrowth = patternId === "tally-custom-domain-gate" && !newsOpen;
   return (
-    <div className="tally-wireframe growth-context">
+    <div
+      className={cn(
+        "tally-wireframe growth-context",
+        patternId === "tally-plan-comparison" &&
+          "tally-workspace-entry-enabled",
+      )}
+    >
       <div className="tally-shell">
         <aside
           className={cn("tally-sidebar", mobileMenu && "is-mobile-open")}
@@ -936,7 +961,7 @@ export function TallyWireframe({
                     variant="ghost"
                     size="sm"
                     className="tally-new-workspace"
-                    onClick={() => unobserved("New workspace")}
+                    onClick={openWorkspacePlans}
                   >
                     <FolderPlus aria-hidden="true" />
                     New workspace
@@ -1048,7 +1073,11 @@ export function TallyWireframe({
             restoreFocus(upgradeButton.current);
           }}
         >
-          <Plans onBack={() => setPlansOpen(false)} onBoundary={setBoundary} />
+          <Plans
+            onBack={() => setPlansOpen(false)}
+            onBoundary={setBoundary}
+            workspaceEntry={workspaceEntry}
+          />
         </DialogContent>
       </Dialog>
       <Dialog

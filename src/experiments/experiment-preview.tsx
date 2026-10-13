@@ -8,6 +8,12 @@ import {
   type CloudflarePreviewKind,
 } from "./cloudflare/thumbnails";
 
+import { GammaPreview, type GammaPreviewKind } from "./gamma/thumbnails";
+import {
+  GammaCollaborationPreview,
+  type GammaCollaborationPreviewKind,
+} from "./gamma-collaboration/thumbnails";
+import { LinearPreview, type LinearPreviewKind } from "./linear/thumbnails";
 import { TallyThumbnail, type TallyPreviewKind } from "./tally/thumbnails";
 
 export type ExperimentPreviewKind =
@@ -16,7 +22,10 @@ export type ExperimentPreviewKind =
   | "event-banner"
   | ElevenPreviewKind
   | CloudflarePreviewKind
-  | TallyPreviewKind;
+  | TallyPreviewKind
+  | GammaPreviewKind
+  | GammaCollaborationPreviewKind
+  | LinearPreviewKind;
 
 const surface = "var(--card)";
 const sunken = "var(--surface-sunken)";
@@ -490,6 +499,12 @@ export function ExperimentPreview({ kind }: { kind: ExperimentPreviewKind }) {
     >
       {Preview ? (
         <Preview />
+      ) : kind === "gamma-shared-folders" ? (
+        <GammaCollaborationPreview />
+      ) : kind.startsWith("linear-") ? (
+        <LinearPreview />
+      ) : kind.startsWith("gamma-") ? (
+        <GammaPreview kind={kind as GammaPreviewKind} />
       ) : kind.startsWith("tally-") ? (
         <TallyThumbnail kind={kind as TallyPreviewKind} />
       ) : kind.startsWith("cf-") ? (

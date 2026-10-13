@@ -1,5 +1,140 @@
 [
   {
+    "id": "linear-interactive-demo",
+    "title": "Try the product before signup",
+    "summary": "A sample workspace lets visitors learn the basics and change an issue’s status before creating an account.",
+    "sourceName": "Linear",
+    "type": "Flow",
+    "focus": [
+      "Interactive demo",
+      "Sample data",
+      "First useful action",
+      "Signup"
+    ],
+    "goals": [
+      "activation",
+      "acquisition"
+    ],
+    "mechanisms": [
+      "Sample work ready to use",
+      "Helpful starting guidance",
+      "Working product trial",
+      "Signup after exploration"
+    ],
+    "format": "Public demo workspace with a welcome document and persistent signup action"
+  },
+  {
+    "id": "gamma-shared-folders",
+    "title": "Shared-folder promotion",
+    "summary": "A sidebar promotion introduces shared folders, explains selective access, and leads into creating a private folder.",
+    "sourceName": "Gamma",
+    "type": "Flow",
+    "focus": [
+      "Feature discovery",
+      "Team collaboration",
+      "Contextual promotion"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Contextual feature promotion",
+      "Concrete team use cases",
+      "One action for related work",
+      "Direct first step"
+    ],
+    "format": "Sidebar promotion with a benefit popover and connected folder flow"
+  },
+  {
+    "id": "gamma-feature-tour",
+    "title": "New-release announcement and tour",
+    "summary": "A release announcement introduces five new capabilities and ends with an invitation to start creating.",
+    "sourceName": "Gamma",
+    "type": "Flow",
+    "focus": [
+      "Feature discovery",
+      "Release announcement",
+      "Product tour"
+    ],
+    "goals": [
+      "engagement"
+    ],
+    "mechanisms": [
+      "Release announcement",
+      "Concrete feature benefits",
+      "Short guided sequence",
+      "Clear next action"
+    ],
+    "format": "Announcement modal followed by a five-slide feature tour"
+  },
+  {
+    "id": "gamma-credit-upsell",
+    "title": "Credit balance upgrade prompt",
+    "summary": "A credit balance pairs the free plan with an offer of more credits that refresh every month.",
+    "sourceName": "Gamma",
+    "type": "Flow",
+    "focus": [
+      "Credit balance",
+      "Contextual upgrade",
+      "Paid credits"
+    ],
+    "goals": [
+      "monetization"
+    ],
+    "mechanisms": [
+      "Offer beside usage",
+      "Recurring-credit benefit",
+      "Direct path to paid plans"
+    ],
+    "format": "Credit-balance popover connected to a plan comparison"
+  },
+  {
+    "id": "gamma-referral-credits",
+    "title": "Referral credit reward",
+    "summary": "A simple offer gives 200 credits to a friend and 200 credits to the person who refers them.",
+    "sourceName": "Gamma",
+    "type": "Flow",
+    "focus": [
+      "Referral incentive",
+      "Two-sided credits",
+      "Copyable invitation"
+    ],
+    "goals": [
+      "referral"
+    ],
+    "mechanisms": [
+      "Two-sided incentive",
+      "Equal reward",
+      "Single sharing action",
+      "Visible signup condition"
+    ],
+    "format": "Compact referral-offer modal with a copyable link"
+  },
+  {
+    "id": "gamma-plan-comparison",
+    "title": "Paid plans and annual saving",
+    "summary": "Three individual plans compare credit allowances and paid features, with an annual saving and a separate business offer.",
+    "sourceName": "Gamma",
+    "type": "Flow",
+    "focus": [
+      "Plan comparison",
+      "Annual saving",
+      "Recommended plan",
+      "Business offer"
+    ],
+    "goals": [
+      "monetization"
+    ],
+    "mechanisms": [
+      "Tier differentiation",
+      "Annual saving",
+      "Recommended plan",
+      "Visible billing totals",
+      "Business segmentation"
+    ],
+    "format": "Scrollable plan overlay with audience tabs, billing toggle and seat count"
+  },
+  {
     "id": "tally-referral-reward",
     "title": "Referral reward invitation",
     "summary": "A two-sided offer gives friends a discount and rewards the person who refers them.",
@@ -24,11 +159,12 @@
   {
     "id": "tally-plan-comparison",
     "title": "Paid plans and annual saving",
-    "summary": "Pro and Business offers pair concrete benefits with monthly or yearly billing and two months off.",
+    "summary": "A workspace request leads to Pro and Business offers with team benefits, monthly or yearly billing, and two months off.",
     "sourceName": "Tally",
     "type": "Flow",
     "focus": [
       "Plan comparison",
+      "Workspace gate",
       "Annual saving",
       "Paid upgrade"
     ],
@@ -36,6 +172,7 @@
       "monetization"
     ],
     "mechanisms": [
+      "Contextual workspace gate",
       "Benefit comparison",
       "Annual saving",
       "Visible billing totals",

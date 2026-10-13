@@ -1,0 +1,191 @@
+import type { ReferenceAsset } from "../reference-manifest";
+
+const assets: Record<string, ReferenceAsset> = {
+  "gamma-04-gamma-five-announcement": {
+    id: "gamma-04-gamma-five-announcement",
+    kind: "image",
+    src: "__private-references/gamma/04-gamma-five-announcement.jpg",
+    title: "Gamma 5 — announcement",
+    description:
+      "The complete first-home announcement and its See what’s new action, with the creator and navigation behind it.",
+    alt: "Gamma full 1440 by 900 viewport: gamma 5 — announcement.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-05-gamma-five-tour": {
+    id: "gamma-05-gamma-five-tour",
+    kind: "image",
+    src: "__private-references/gamma/05-gamma-five-tour.jpg",
+    title: "Feature tour — visual variety",
+    description:
+      "First of five feature slides, with example cards, progress dots, Next and Close.",
+    alt: "Gamma full 1440 by 900 viewport: feature tour — visual variety.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-06-gamma-five-agent": {
+    id: "gamma-06-gamma-five-agent",
+    kind: "image",
+    src: "__private-references/gamma/06-gamma-five-agent.jpg",
+    title: "Feature tour — new agent",
+    description:
+      "Second feature slide promoting brainstorming, research, design and editing with one agent.",
+    alt: "Gamma full 1440 by 900 viewport: feature tour — new agent.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-07-gamma-five-import": {
+    id: "gamma-07-gamma-five-import",
+    kind: "image",
+    src: "__private-references/gamma/07-gamma-five-import.jpg",
+    title: "Feature tour — import",
+    description:
+      "Third feature slide promoting import and redesign of PDF and PPT designs.",
+    alt: "Gamma full 1440 by 900 viewport: feature tour — import.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-08-gamma-five-connect": {
+    id: "gamma-08-gamma-five-connect",
+    kind: "image",
+    src: "__private-references/gamma/08-gamma-five-connect.jpg",
+    title: "Feature tour — connected tools",
+    description:
+      "Fourth feature slide promoting context from connected tools. No connection was made.",
+    alt: "Gamma full 1440 by 900 viewport: feature tour — connected tools.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-09-gamma-five-more": {
+    id: "gamma-09-gamma-five-more",
+    kind: "image",
+    src: "__private-references/gamma/09-gamma-five-more.jpg",
+    title: "Feature tour — final benefits",
+    description:
+      "Final slide with new and now-free capabilities, Back and Start creating.",
+    alt: "Gamma full 1440 by 900 viewport: feature tour — final benefits.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-10-welcome-coach": {
+    id: "gamma-10-welcome-coach",
+    kind: "image",
+    src: "__private-references/gamma/10-welcome-coach.jpg",
+    title: "After the tour — welcome guide",
+    description:
+      "A separate creator guide appeared after Start creating. It was skipped; this downstream guide is preserved as reference context only.",
+    alt: "Gamma full 1440 by 900 viewport: after the tour — welcome guide.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-11-credit-balance": {
+    id: "gamma-11-credit-balance",
+    kind: "image",
+    src: "__private-references/gamma/11-credit-balance.jpg",
+    title: "Credit balance — upgrade and referral routes",
+    description:
+      "The free account’s 400-credit popover, monthly refresh benefit and Upgrade, Refer a friend and Invite teammate actions.",
+    alt: "Gamma full 1440 by 900 viewport: credit balance — upgrade and referral routes.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-12-referral-credits": {
+    id: "gamma-12-referral-credits",
+    kind: "image",
+    src: "__private-references/gamma/12-referral-credits.jpg",
+    title: "Referral — give and earn credits",
+    description:
+      "The two-sided 200-credit offer, invite link, Copy link and Done. No link was copied or sent.",
+    alt: "Gamma full 1440 by 900 viewport: referral — give and earn credits.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-13-plans-annual": {
+    id: "gamma-13-plans-annual",
+    kind: "image",
+    src: "__private-references/gamma/13-plans-annual.jpg",
+    title: "Individual plans — annual billing",
+    description:
+      "The initial annual comparison, saving claim, Plus, Pro and Ultra cards and Most popular marker.",
+    alt: "Gamma full 1440 by 900 viewport: individual plans — annual billing.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-14-plans-monthly": {
+    id: "gamma-14-plans-monthly",
+    kind: "image",
+    src: "__private-references/gamma/14-plans-monthly.jpg",
+    title: "Individual plans — monthly billing",
+    description:
+      "The same plan comparison after selecting monthly billing, with the exact displayed rupee prices.",
+    alt: "Gamma full 1440 by 900 viewport: individual plans — monthly billing.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-15-plans-business": {
+    id: "gamma-15-plans-business",
+    kind: "image",
+    src: "__private-references/gamma/15-plans-business.jpg",
+    title: "Business and Enterprise plans",
+    description:
+      "Business annual seat pricing and Enterprise contact-sales framing. No upgrade was selected.",
+    alt: "Gamma full 1440 by 900 viewport: business and enterprise plans.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+  "gamma-16-home-context": {
+    id: "gamma-16-home-context",
+    kind: "image",
+    src: "__private-references/gamma/16-home-context.jpg",
+    title: "Gamma home — product context",
+    description:
+      "The home creator, navigation, templates, upgrade entry and 400-credit trigger after dismissing the overlays.",
+    alt: "Gamma full 1440 by 900 viewport: gamma home — product context.",
+    private: true,
+    width: 1440,
+    height: 900,
+  },
+};
+
+export const gammaReferences: Record<string, ReferenceAsset[]> = {
+  "gamma-feature-tour": [
+    assets["gamma-04-gamma-five-announcement"],
+    assets["gamma-05-gamma-five-tour"],
+    assets["gamma-06-gamma-five-agent"],
+    assets["gamma-07-gamma-five-import"],
+    assets["gamma-08-gamma-five-connect"],
+    assets["gamma-09-gamma-five-more"],
+    assets["gamma-10-welcome-coach"],
+    assets["gamma-16-home-context"],
+  ],
+  "gamma-credit-upsell": [
+    assets["gamma-11-credit-balance"],
+    assets["gamma-13-plans-annual"],
+    assets["gamma-14-plans-monthly"],
+    assets["gamma-15-plans-business"],
+    assets["gamma-16-home-context"],
+  ],
+  "gamma-referral-credits": [
+    assets["gamma-12-referral-credits"],
+    assets["gamma-11-credit-balance"],
+    assets["gamma-16-home-context"],
+  ],
+  "gamma-plan-comparison": [
+    assets["gamma-13-plans-annual"],
+    assets["gamma-14-plans-monthly"],
+    assets["gamma-15-plans-business"],
+    assets["gamma-16-home-context"],
+  ],
+};

@@ -54,6 +54,59 @@ const downloads = new Map([
 ]);
 const sources = [
   {
+    id: "gamma-growth-2026-10-13",
+    screenshots: new Set([
+      "01-home.jpg",
+      "04-folder-promotion.jpg",
+      "10-create-folder-1440.jpg",
+      "11-invite-email-1440.jpg",
+      "12-invite-link-1440.jpg",
+      "13-private-folder-1440.jpg",
+      "14-folder-share-1440.jpg",
+      "15-folder-permissions-1440.jpg",
+    ]),
+    downloads: new Map<string, string>(),
+  },
+  {
+    id: "tally-growth-2026-10-13",
+    screenshots: new Set(["04-home-1440.jpg", "05-workspace-upgrade-1440.jpg"]),
+    downloads: new Map<string, string>(),
+  },
+  {
+    id: "linear-growth-2026-10-13",
+    screenshots: new Set([
+      "01-demo-entry.jpg",
+      "02-welcome-guide.jpg",
+      "03-sample-issues.jpg",
+      "04-sample-issue.jpg",
+      "05-status-options.jpg",
+      "06-demo-result.jpg",
+      "07-signup-handoff.jpg",
+    ]),
+    downloads: new Map<string, string>(),
+  },
+
+  {
+    id: "gamma",
+    screenshots: new Set([
+      "04-gamma-five-announcement.jpg",
+      "05-gamma-five-tour.jpg",
+      "06-gamma-five-agent.jpg",
+      "07-gamma-five-import.jpg",
+      "08-gamma-five-connect.jpg",
+      "09-gamma-five-more.jpg",
+      "10-welcome-coach.jpg",
+      "11-credit-balance.jpg",
+      "12-referral-credits.jpg",
+      "13-plans-annual.jpg",
+      "14-plans-monthly.jpg",
+      "15-plans-business.jpg",
+      "16-home-context.jpg",
+    ]),
+    downloads: new Map<string, string>(),
+  },
+
+  {
     id: "tally",
     screenshots: new Set([
       "01-referral-invite.jpg",

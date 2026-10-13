@@ -1,6 +1,6 @@
 # Password-protected Blueprint website
 
-This implementation places the entire Blueprint website, its JavaScript and styles, search, public source recordings, and all 59 private original JPEGs behind one password at `https://blueprint-private-references.portfolio-v5.workers.dev/blueprint-wireframe-kit/`. The protected Cloudflare site is deployed and live verification has passed. The GitHub Pages redirect deployment and live redirect verification are also complete. This service uses the same Cloudflare destination explicitly approved by Anuj; it does not publish originals to GitHub Pages or Git.
+This implementation places the entire Blueprint website, its JavaScript and styles, search, public source recordings, and all 89 selected private original JPEGs behind one password at `https://blueprint-private-references.portfolio-v5.workers.dev/blueprint-wireframe-kit/`. The protected Cloudflare site is deployed; release-specific verification is recorded below. The GitHub Pages redirect deployment and live redirect verification are also complete. This service uses the same Cloudflare destination explicitly approved by Anuj; it does not publish originals to GitHub Pages or Git.
 
 ## Access contract
 
@@ -10,11 +10,11 @@ Anonymous requests to any website, image, script, recording, search or unknown U
 
 The `__Host-blueprint-access` cookie is `HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=3600`. The frontend never reads the token or stores the password. Access expires after one hour. `POST /logout`, also checked for the exact same origin, expires the cookie and returns to the website. Rotating either server secret invalidates existing sessions.
 
-Once authenticated, requests can fetch only the generated website allowlist and the 59 exact paths in `allowlist.json`: 38 ElevenLabs captures, 13 Cloudflare captures and 8 Tally captures. Originals retain their exact bytes at `/blueprint-wireframe-kit/__private-references/{source}/{filename.jpg}`. Archives, research metadata and provenance are excluded. Authenticated video requests support `Range` and `If-Range`, allowing the existing Notion and Steam recordings to seek.
+Once authenticated, requests can fetch only the generated website allowlist and the 89 exact paths in `allowlist.json`: 38 ElevenLabs captures, 13 Cloudflare captures, 10 Tally captures, 21 Gamma captures and 7 Linear captures. Originals retain their exact bytes at `/blueprint-wireframe-kit/__private-references/{source}/{filename.jpg}`. Archives, research metadata and provenance are excluded. Authenticated video requests support `Range` and `If-Range`, allowing the existing Notion and Steam recordings to seek.
 
 ## Search
 
-The gate proxies only authenticated `GET /search/status` and same-origin `POST /search` through the `SEARCH_SERVICE` binding to `blueprint-jev-search`. Search bodies are capped at 3 KiB; cookies and arbitrary client headers are never forwarded. The service supplies the upstream's existing origin constant and connecting IP. Search has no public Worker endpoint. A missing search binding disables search without bypassing the website password or blocking other authenticated pages.
+The gate proxies only authenticated `GET /search/status` and same-origin `POST /search` through the `SEARCH_SERVICE` binding to `blueprint-jev-search`. Search bodies are capped at 3 KiB; cookies and arbitrary client headers are never forwarded. The service supplies the upstream's existing origin constant and connecting IP. The current internal search catalog contains 34 experiments. Search has no public Worker endpoint. A missing search binding disables search without bypassing the website password or blocking other authenticated pages.
 
 ## Security boundaries
 
@@ -71,3 +71,16 @@ The browser followed the former Pages URL with `?view=experiments&source=Cloudfl
 Anuj authorized publishing the latest revision, including five Tally experiments and eight original screenshots to the existing protected website. The private allowlist now contains 59 images and the internal search catalog contains 28 experiments. Website version `fcd737ac-48ff-4297-a27d-c3009a019fce` and search version `7283703f-2189-4f96-afce-5c24566e7d4a` are deployed with the existing password and service boundaries.
 
 The build, 18 gate tests and 8 search tests passed. Live checks confirmed anonymous denial, valid login and preserved routes, all 59 original hashes, all 35 HTML/JS/CSS build hashes, Tally search, modified-cookie denial, logout, and the retained Pages redirect. Browser review confirmed the Tally original at 1271 × 1108. The recording request returned the complete byte-identical file (200); live partial responses were not verified. See [the release record](../../docs/reviews/2026-10-09/published-release.md) for evidence and limits.
+
+
+## Release record — 13 October 2026
+
+Anuj selected publishing the four finished Gamma experiments and their registered original screenshots to this same password-protected website, then explicitly confirmed the upload scope. Website version `089172be-e4a0-4aa4-a658-f103ba275e6e` and internal search version `d3ccc263-3dfd-4501-8247-4dec4363305d` are deployed. The released catalog contains 32 experiments and the private allowlist contains 72 images, preserving the previous 59 and adding only Gamma captures 04–16. The three Gamma onboarding captures, provenance and local review images are excluded.
+
+The production build, 18 gate tests, 8 search tests and both dry runs passed. Password, signing secret, quotas and service binding remain unchanged. No inference was invoked during this release. See [the release record](../../docs/reviews/2026-10-13/published-release.md) for completed live checks and their limits.
+
+## Growth release record — 13 October 2026
+
+Anuj explicitly authorized publishing the new Linear interactive demo, Gamma shared-folder experiment and Tally workspace-entry update, then confirmed inclusion of all 17 registered original screenshots on this same password-protected website. Website version `2005341b-daa9-49fa-be9f-bbd3c71bcd1d` and internal search version `4827c0e4-1ad9-471a-a98d-e38b0904d6f8` are deployed. The catalog contains 34 experiments and the staged release contains 61 website files and 89 private originals, preserving the previous 72 and adding only Gamma 8, Linear 7 and Tally 2 registered captures. Supporting captures and provenance remain excluded.
+
+The production build, 18 gate tests, 8 search tests and both deployment dry runs passed. The existing password and service boundaries remain in place. See the [growth release record](../../docs/reviews/2026-10-13/published-growth-release.md) for live verification status and evidence. Earlier release records above retain their original scope and counts.

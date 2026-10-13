@@ -1,3 +1,7 @@
+import { gammaReferences } from "./gamma/references";
+import { gammaCollaborationReferences } from "./gamma-collaboration/references";
+import { linearReferences } from "./linear/references";
+import { tallyWorkspaceReferences } from "./tally/references";
 import elevenPatterns from "../collections/elevenlabs/patterns.json";
 import elevenEvidence from "../collections/elevenlabs/evidence.json";
 
@@ -275,6 +279,9 @@ const cloudflareAssets: Record<string, ReferenceAsset> = {
 
 /** User-supplied originals. Posters are previews; source files retain their original bytes. */
 export const experimentReferences: Record<string, ReferenceAsset[]> = {
+  ...gammaReferences,
+  ...gammaCollaborationReferences,
+  ...linearReferences,
   "tally-referral-reward": [
     tallyAssets["tally-01-referral-invite"],
     tallyAssets["tally-02-referral-how-it-works"],
@@ -283,6 +290,7 @@ export const experimentReferences: Record<string, ReferenceAsset[]> = {
   "tally-plan-comparison": [
     tallyAssets["tally-04-plans-monthly"],
     tallyAssets["tally-05-plans-yearly"],
+    ...tallyWorkspaceReferences,
   ],
   "tally-custom-domain-gate": [
     tallyAssets["tally-06-domains-empty"],

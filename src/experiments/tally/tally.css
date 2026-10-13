@@ -895,6 +895,17 @@
   .tally-new-workspace {
     display: none;
   }
+  .tally-workspace-entry-enabled .tally-new-workspace {
+    display: inline-flex;
+  }
+  .tally-workspace-entry-enabled .tally-top-actions {
+    gap: 4px;
+  }
+  .tally-workspace-entry-enabled .tally-top-actions > button {
+    padding-inline: 6px;
+    gap: 4px;
+    font-size: 12px;
+  }
   .tally-page-content {
     padding: 16px;
   }

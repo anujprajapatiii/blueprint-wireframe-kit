@@ -92,15 +92,23 @@ export const tallyExperiments: Experiment[] = [
     ...common,
     id: "tally-plan-comparison",
     title: "Paid plans and annual saving",
+    updatedAt: "2026-10-13",
     summary:
-      "Pro and Business offers pair concrete benefits with monthly or yearly billing and two months off.",
+      "A workspace request leads to Pro and Business offers with team benefits, monthly or yearly billing, and two months off.",
     preview: "tally-plan-comparison",
     type: "Flow",
-    focus: ["Plan comparison", "Annual saving", "Paid upgrade"],
-    source: "Tally Upgrade plan · private full-viewport references",
+    focus: [
+      "Plan comparison",
+      "Workspace gate",
+      "Annual saving",
+      "Paid upgrade",
+    ],
+    source:
+      "Tally Upgrade plan and New workspace · private full-viewport references",
     intent:
-      "Study the paid-plan comparison and observed billing toggle, stopping before the uninspected purchase destination.",
+      "Study the paid-plan comparison, its workspace entry and observed billing toggle, stopping before the uninspected purchase destination.",
     observations: [
+      "On 13 October 2026, New workspace on the empty home opened the same monthly Pro/Business comparison. Back returned to the empty home; no workspace, invitation or purchase was completed.",
       "Upgrade plan opens a full-screen overlay headed Do more with Tally, with Back and Close above two unequal-width plan panels.",
       "Monthly is selected on entry: Pro shows $29 per month and Pay $29 Every Month; Business shows $89 per month and Pay $89 Every Month.",
       "Pay yearly changes the displayed monthly prices to $24 for Pro and $74 for Business, with Pay $290 Every Year and Pay $890 Every Year. The toggle is accompanied by 2 months off.",
@@ -128,6 +136,7 @@ export const tallyExperiments: Experiment[] = [
       "Remove Tally branding",
       "Custom domains",
       "Collaboration",
+      "Invite unlimited team members to shared workspaces.",
       "Partial submissions",
       "Advanced customization",
       "Custom CSS",
@@ -135,6 +144,8 @@ export const tallyExperiments: Experiment[] = [
       "Custom email domains",
       "Customize link preview",
       "Workspaces & folders",
+      "Organize forms into workspaces and folders, and manage team access.",
+      "New workspace",
       "Unlimited uploads",
       "Form visit analytics",
       "Drop-off analytics",
@@ -148,11 +159,13 @@ export const tallyExperiments: Experiment[] = [
     ],
     assumptions: [
       ...localLimits,
+      "The workspace entry was re-inspected on 13 October 2026 with unchanged full-viewport 1440 × 900 captures. Its visible paid-team offer is a first-paid-plan prompt for a free account; paid-account seat expansion and successful invitations were not observed.",
       "The displayed annual monthly amounts are the observed rounded source prices; they are not recalculated from the annual totals.",
       "Selecting an upgrade in the wireframe opens a local boundary. No checkout, trial, purchase success, billing details or payment state was inspected.",
     ],
     reviewNotes: [
       ...localReview,
+      "13 October 2026 local extension: the existing New workspace control now opens the shared monthly plans surface and returns to home when dismissed. Its collaboration benefit has one state-specific Guide me tip. Existing direct-entry behavior and stable ID are retained; no additional experiment or TypeSafe transmission was created.",
       "Jev report 0e6eab99-49e6-40b0-a212-c2eb344fdb6a returned needs_review: plan framing was identified, but a primary goal, target action and yellow boundary did not pass the provisional gates. The original uncertainty is preserved.",
       "Manual source-based admission: the inspected free account sees explicit Pro/Business prices, benefit lists, upgrade actions and an annual saving. These establish a paid offer with monetization intent; no checkout or conversion outcome is inferred.",
       "Checked monthly/yearly reversal, the exact displayed annual prices and totals, upgrade boundaries, Back and monthly reset on reopening. Guide Next/Back/Escape were checked; after fresh navigation Escape returns focus to Guide me while preserving the plan overlay. At 320px, scrolling reaches the Business boundary.",
@@ -164,8 +177,9 @@ export const tallyExperiments: Experiment[] = [
       secondary: [],
       audience: "A signed-in free Tally account evaluating its first paid plan",
       journey:
-        "Compare paid capabilities, choose monthly or yearly billing, and consider an upgrade",
+        "Request a workspace or open plans, compare paid capabilities and billing choices, and consider an upgrade",
       mechanisms: [
+        "Contextual workspace gate",
         "Benefit comparison",
         "Annual saving",
         "Visible billing totals",

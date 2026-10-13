@@ -2,6 +2,9 @@ import type { GrowthIntent } from "../growth/taxonomy";
 import type { ExperimentPreviewKind } from "./experiment-preview";
 import { elevenLabsExperiments } from "./elevenlabs/metadata";
 import { cloudflareExperiments } from "./cloudflare/metadata";
+import { gammaExperiments } from "./gamma/metadata";
+import { gammaCollaborationExperiments } from "./gamma-collaboration/metadata";
+import { linearExperiments } from "./linear/metadata";
 import { tallyExperiments } from "./tally/metadata";
 
 export type ExperimentType = "Screen" | "Flow" | "Experience";
@@ -33,6 +36,9 @@ export interface Experiment {
 }
 
 export const experiments: Experiment[] = [
+  ...linearExperiments,
+  ...gammaCollaborationExperiments,
+  ...gammaExperiments,
   ...tallyExperiments,
   ...cloudflareExperiments,
   ...elevenLabsExperiments,

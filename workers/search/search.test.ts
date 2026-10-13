@@ -336,8 +336,14 @@ test("generated deployed catalog matches the current public registry projection"
     `data:text/javascript;base64,${Buffer.from(bundled.outputFiles[0].text).toString("base64")}`
   );
   assert.deepEqual(catalog, current);
-  assert.equal(catalog.length, 28);
+  assert.equal(catalog.length, 34);
   for (const id of [
+    "gamma-feature-tour",
+    "gamma-credit-upsell",
+    "gamma-referral-credits",
+    "gamma-plan-comparison",
+    "gamma-shared-folders",
+    "linear-interactive-demo",
     "tally-referral-reward",
     "tally-plan-comparison",
     "tally-custom-domain-gate",
@@ -346,7 +352,7 @@ test("generated deployed catalog matches the current public registry projection"
   ]) {
     assert.ok(
       catalog.some((entry) => entry.id === id),
-      `Missing Tally experiment in the deployed search catalog: ${id}`,
+      `Missing experiment in the deployed search catalog: ${id}`,
     );
   }
   assert.equal(

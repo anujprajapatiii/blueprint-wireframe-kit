@@ -111,9 +111,9 @@ async function login(env: Env, time = now, returnTo = base) {
   return { cookie: cookie.split(";")[0], response };
 }
 
-test("the private allowlist contains only the 59 reviewed JPEGs", () => {
-  assert.equal(privatePaths.length, 59);
-  assert.equal(new Set(privatePaths).size, 59);
+test("the private allowlist contains only the 89 reviewed JPEGs", () => {
+  assert.equal(privatePaths.length, 89);
+  assert.equal(new Set(privatePaths).size, 89);
   assert.equal(
     privatePaths.filter((path) => path.includes("/cloudflare/")).length,
     13,
@@ -126,9 +126,65 @@ test("the private allowlist contains only the 59 reviewed JPEGs", () => {
     privatePaths.filter((path) => path.includes("/tally/")).length,
     8,
   );
+  assert.deepEqual(
+    privatePaths.filter((path) => path.includes("/gamma/")),
+    [
+      "/blueprint-wireframe-kit/__private-references/gamma/04-gamma-five-announcement.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/05-gamma-five-tour.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/06-gamma-five-agent.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/07-gamma-five-import.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/08-gamma-five-connect.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/09-gamma-five-more.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/10-welcome-coach.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/11-credit-balance.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/12-referral-credits.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/13-plans-annual.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/14-plans-monthly.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/15-plans-business.jpg",
+      "/blueprint-wireframe-kit/__private-references/gamma/16-home-context.jpg",
+    ],
+  );
+  assert.deepEqual(
+    privatePaths.filter((path) => path.includes("/gamma-growth-2026-10-13/")),
+    [
+      "01-home.jpg",
+      "04-folder-promotion.jpg",
+      "10-create-folder-1440.jpg",
+      "11-invite-email-1440.jpg",
+      "12-invite-link-1440.jpg",
+      "13-private-folder-1440.jpg",
+      "14-folder-share-1440.jpg",
+      "15-folder-permissions-1440.jpg",
+    ].map(
+      (filename) =>
+        `${base}__private-references/gamma-growth-2026-10-13/${filename}`,
+    ),
+  );
+  assert.deepEqual(
+    privatePaths.filter((path) => path.includes("/linear-growth-2026-10-13/")),
+    [
+      "01-demo-entry.jpg",
+      "02-welcome-guide.jpg",
+      "03-sample-issues.jpg",
+      "04-sample-issue.jpg",
+      "05-status-options.jpg",
+      "06-demo-result.jpg",
+      "07-signup-handoff.jpg",
+    ].map(
+      (filename) =>
+        `${base}__private-references/linear-growth-2026-10-13/${filename}`,
+    ),
+  );
+  assert.deepEqual(
+    privatePaths.filter((path) => path.includes("/tally-growth-2026-10-13/")),
+    ["04-home-1440.jpg", "05-workspace-upgrade-1440.jpg"].map(
+      (filename) =>
+        `${base}__private-references/tally-growth-2026-10-13/${filename}`,
+    ),
+  );
   assert.ok(
     privatePaths.every((path) =>
-      /^\/blueprint-wireframe-kit\/__private-references\/(cloudflare|elevenlabs|tally)\/\d{2}-[a-z0-9-]+\.jpg$/.test(
+      /^\/blueprint-wireframe-kit\/__private-references\/(cloudflare|elevenlabs|tally|gamma|gamma-growth-2026-10-13|linear-growth-2026-10-13|tally-growth-2026-10-13)\/\d{2}-[a-z0-9-]+\.jpg$/.test(
         path,
       ),
     ),
@@ -148,6 +204,10 @@ test("every unauthenticated URL returns only the inline login page without acces
     videoPath,
     privatePath,
     `${base}__private-references/tally/01-referral-invite.jpg`,
+    `${base}__private-references/gamma/04-gamma-five-announcement.jpg`,
+    `${base}__private-references/gamma-growth-2026-10-13/04-folder-promotion.jpg`,
+    `${base}__private-references/linear-growth-2026-10-13/02-welcome-guide.jpg`,
+    `${base}__private-references/tally-growth-2026-10-13/05-workspace-upgrade-1440.jpg`,
     "/unknown",
     "/assets/cloudflare/06-containers-gate.jpg",
     "/search/status",
@@ -432,6 +492,12 @@ test("authenticated root redirects and unknown, encoded, traversing or auxiliary
   for (const path of [
     "/unknown",
     `${base}__private-references/cloudflare/provenance.json`,
+    `${base}__private-references/gamma/01-use-selection.jpg`,
+    `${base}__private-references/gamma-growth-2026-10-13/02-invite-email.jpg`,
+    `${base}__private-references/gamma-growth-2026-10-13/provenance.json`,
+    `${base}__private-references/linear-growth-2026-10-13/provenance.json`,
+    `${base}__private-references/tally-growth-2026-10-13/03-first-form-editor.jpg`,
+    `${base}__private-references/tally-growth-2026-10-13/provenance.json`,
     `${base}__private-references/elevenlabs/elevenlabs-growth-patterns-evidence.zip`,
     `${base}__private-references/cloudflare/%30%36-containers-gate.jpg`,
     `${base}__private-references/../../source-files.json`,
