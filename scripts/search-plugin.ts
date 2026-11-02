@@ -2,6 +2,7 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import { loadEnv, type Plugin } from "vite";
 import { experiments } from "../src/experiments/registry";
 import { buildSearchCatalog } from "../src/search/catalog";
+import { getSearchManifest, SEARCH_DEFAULT_MODEL } from "../src/search/version";
 import {
   createSearchService,
   SearchError,
@@ -137,7 +138,9 @@ export function searchPlugin(): Plugin {
     apply: "serve",
     configureServer(server) {
       const route = `${server.config.base}__search`;
-      const search = createSearchService(buildSearchCatalog(experiments));
+      const catalog = buildSearchCatalog(experiments);
+      const search = createSearchService(catalog);
+      const manifest = getSearchManifest(catalog);
       function configuration() {
         const env = loadEnv(
           server.config.mode,
@@ -146,7 +149,7 @@ export function searchPlugin(): Plugin {
         );
         return {
           key: env.TYPESAFE_API_KEY?.trim() ?? "",
-          model: env.TYPESAFE_MODEL?.trim() || "jev-latest",
+          model: env.TYPESAFE_MODEL?.trim() || SEARCH_DEFAULT_MODEL,
         };
       }
       server.middlewares.use(async (request, response, next) => {
@@ -186,6 +189,7 @@ export function searchPlugin(): Plugin {
             return respond(response, 200, {
               configured: Boolean(config.key),
               model: config.model,
+              ...manifest,
             });
           const query = validateSearchInput(await readJson(request));
           if (!config.key)

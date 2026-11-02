@@ -8,6 +8,7 @@ import { ALLOWED_ORIGIN, clientHash } from "./http.ts";
 import { dailyLimit, SearchLimitError, SearchQuota } from "./quota.ts";
 import type { SearchEnv, SearchStorage } from "./runtime.ts";
 import catalog from "./catalog.generated.json" with { type: "json" };
+import { getSearchManifest } from "../../src/search/version.ts";
 
 function storage() {
   const db = new DatabaseSync(":memory:");
@@ -100,7 +101,8 @@ test("only the approved origin, exact routes and supported methods reach the coo
   const status = await worker.fetch(request("/search/status", "GET"), bindings);
   assert.deepEqual(await status.json(), {
     configured: true,
-    model: "jev-latest",
+    model: "jev-1.13.0",
+    ...getSearchManifest(catalog),
   });
   assert.equal(
     status.headers.get("Access-Control-Allow-Origin"),

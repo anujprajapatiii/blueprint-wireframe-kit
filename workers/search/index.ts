@@ -4,6 +4,10 @@ import {
   SearchError,
 } from "../../scripts/search-core.ts";
 import type { SearchEntry } from "../../src/search/contracts.ts";
+import {
+  getSearchManifest,
+  SEARCH_DEFAULT_MODEL,
+} from "../../src/search/version.ts";
 import catalog from "./catalog.generated.json" with { type: "json" };
 import {
   ALLOWED_ORIGIN,
@@ -16,6 +20,7 @@ import { dailyLimit, SearchQuota } from "./quota.ts";
 import type { SearchEnv, SearchState } from "./runtime.ts";
 
 const COORDINATOR_NAME = "blueprint-search-global-v1";
+const manifest = getSearchManifest(catalog as SearchEntry[]);
 
 function configured(env: SearchEnv): boolean {
   return Boolean(
@@ -82,7 +87,8 @@ export default {
         return jsonResponse(
           {
             configured: configured(env),
-            model: env.TYPESAFE_MODEL || "jev-latest",
+            model: env.TYPESAFE_MODEL?.trim() || SEARCH_DEFAULT_MODEL,
+            ...manifest,
           },
           200,
           true,
@@ -178,7 +184,7 @@ export class SearchCoordinator {
       const result = await this.search(
         query,
         this.env.TYPESAFE_API_KEY ?? "",
-        this.env.TYPESAFE_MODEL || "jev-latest",
+        this.env.TYPESAFE_MODEL?.trim() || SEARCH_DEFAULT_MODEL,
       );
       return jsonResponse(result);
     } catch (error) {

@@ -3,6 +3,8 @@ const hostedEndpoint = import.meta.env.VITE_SEARCH_API_URL?.trim();
 
 function validHostedEndpoint(value: string | undefined): string | undefined {
   if (!value) return undefined;
+  // The protected site keeps search on the current host and its session cookie.
+  if (value === "/search") return value;
   try {
     const url = new URL(value);
     if (

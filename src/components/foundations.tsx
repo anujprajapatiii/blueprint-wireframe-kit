@@ -200,7 +200,7 @@ function ComponentSpecimens({ family }: { family: ColourFamily }) {
   return (
     <FoundationCard
       title="Components in context"
-      description="The same shared controls use this theme. Hover, press, tab through, and change selections to inspect the real states."
+      description="Try the controls with a pointer or keyboard to see how they look in this theme."
     >
       <div
         className={cn(
@@ -222,7 +222,7 @@ function ComponentSpecimens({ family }: { family: ColourFamily }) {
               <Button
                 key={variant}
                 variant={variant}
-                onClick={() => setAction(`${label} action activated.`)}
+                onClick={() => setAction(`${label} button selected.`)}
               >
                 {label}
               </Button>
@@ -233,19 +233,16 @@ function ComponentSpecimens({ family }: { family: ColourFamily }) {
             className="mt-3 min-h-5 text-sm text-muted-foreground"
             role="status"
           >
-            {action || "Interactive examples only; no data is submitted."}
+            {action || "These examples do not save or send data."}
           </p>
         </div>
         <div className="grid min-w-0 gap-5 md:grid-cols-2">
           <div className="min-w-0 space-y-2">
-            <Label htmlFor={`${prefix}-input`}>Input and placeholder</Label>
-            <Input
-              id={`${prefix}-input`}
-              placeholder="Give your experiment a name"
-            />
+            <Label htmlFor={`${prefix}-input`}>Experiment name</Label>
+            <Input id={`${prefix}-input`} placeholder="Upgrade prompt" />
           </div>
           <div className="min-w-0 space-y-2">
-            <Label htmlFor={`${prefix}-select`}>Menu and selection</Label>
+            <Label htmlFor={`${prefix}-select`}>Growth goal</Label>
             <Select defaultValue="activation">
               <SelectTrigger id={`${prefix}-select`}>
                 <SelectValue />
@@ -270,10 +267,12 @@ function ComponentSpecimens({ family }: { family: ColourFamily }) {
             />
           </div>
           <div className="min-w-0 space-y-2">
-            <Label htmlFor={`${prefix}-invalid`}>Validation</Label>
+            <Label htmlFor={`${prefix}-invalid`}>
+              Experiment name (required)
+            </Label>
             <Input
               id={`${prefix}-invalid`}
-              placeholder="Required name"
+              placeholder="Upgrade prompt"
               aria-invalid="true"
               aria-describedby={`${prefix}-error`}
             />
@@ -334,8 +333,8 @@ function ComponentSpecimens({ family }: { family: ColourFamily }) {
           <div className="growth-context min-w-0 rounded-md border border-border bg-surface-sunken p-4 text-foreground">
             <h4 className="text-sm font-medium">Product context stays blue</h4>
             <p className="mt-2 text-sm text-muted-foreground">
-              A nested environment restores its own tokens, surface, and text.
-              Yellow remains on the intervention being studied.
+              Use blue for surrounding product content. Use yellow for the
+              complete growth card, modal, or banner being studied.
             </p>
           </div>
         )}
@@ -370,8 +369,8 @@ function ColourFoundations({
         title={`${colourName} palette`}
         description={
           growth
-            ? "A monochromatic yellow family for the growth mechanism. Pale surfaces use dark ink; dark actions use a matching light label. Surrounding product context stays blue."
-            : "The default theme for the product environment, navigation, and library. Light text stays readable across layered blue surfaces."
+            ? "Yellow highlights the complete growth pattern. Use dark text on light backgrounds and light text on dark buttons. Keep surrounding content blue."
+            : "Blue is the default for the library, navigation, and surrounding product content. Use light text on blue backgrounds."
         }
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -423,15 +422,13 @@ function ColourFoundations({
             ))}
         </div>
         <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-          Palette shades are ingredients. Use the semantic roles below in
-          components; a shade alone does not define a safe text-and-surface
-          pairing.
+          Use the named background and text pairs below to keep text readable.
         </p>
       </FoundationCard>
 
       <FoundationCard
-        title="Surface hierarchy"
-        description="Surfaces and their foregrounds are a pair. Choose the component’s purpose first, then use its matching roles."
+        title="Backgrounds and text"
+        description="Choose a background for the component, then use its matching text colour."
       >
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {[
@@ -444,7 +441,7 @@ function ColourFoundations({
             {
               name: "inverse",
               label: "Inverse",
-              use: "Explicit contrast area",
+              use: "High-contrast area",
               foreground: "inverse-foreground",
             },
           ].map(({ name, label, use, foreground }) => (
@@ -473,12 +470,10 @@ function ColourFoundations({
       <details className="group rounded-md border border-border bg-card">
         <summary className="flex list-none items-center justify-between gap-3 rounded-md p-5 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
           <span>
-            <span className="font-medium">
-              Approved pairings &amp; contrast
-            </span>
+            <span className="font-medium">Colour pairs and contrast</span>
             <span className="mt-1 block text-sm text-muted-foreground">
-              Resolved from the live tokens. Text target 4.5:1; meaningful
-              boundaries and focus 3:1.
+              Current contrast ratios. Text target: 4.5:1. Control edges and
+              focus indicators: 3:1.
             </span>
           </span>
           <ChevronDown
@@ -524,10 +519,10 @@ function ColourFoundations({
             );
           })}
           <p className="py-4 text-sm leading-relaxed text-muted-foreground">
-            These are opaque token pairings, not a conformance certificate for
-            every composition. Decorative borders do not define input
-            boundaries. Check the actual rendered state when using transparency,
-            overlays, or nested themes.
+            These ratios use solid colours. Check the finished screen when using
+            transparency, overlays, or mixed themes. Decorative borders are not
+            enough to identify an input. Colour checks alone do not establish
+            accessibility.
           </p>
         </div>
       </details>
@@ -600,14 +595,13 @@ function ColourFoundations({
         aria-atomic="true"
         className="min-h-5 break-words text-sm text-muted-foreground"
       >
-        {copyStatus ||
-          "Select a token to copy its CSS variable. Shared components resolve their roles from the active theme."}
+        {copyStatus || "Select a token to copy its CSS variable."}
       </p>
     </div>
   );
 }
 
-export function Foundations() {
+export function Foundations({ standalone = false }: { standalone?: boolean }) {
   const [category, setCategory] = useState(() => {
     const requested = new URLSearchParams(location.search).get("foundation");
     return requested &&
@@ -651,9 +645,7 @@ export function Foundations() {
     try {
       await navigator.clipboard.writeText(`:root {\n${lines.join("\n")}\n}`);
       setCopiedToken("all-colours");
-      setCopyStatus(
-        "Copied the complete colour palette and semantic variables.",
-      );
+      setCopyStatus("Copied all colour tokens.");
     } catch {
       setCopiedToken("");
       setCopyStatus("Copy unavailable. Colour values are listed below.");
@@ -664,17 +656,21 @@ export function Foundations() {
     <section
       id="foundations"
       aria-labelledby="foundations-heading"
-      className="mt-20 scroll-mt-28 border-t border-border pt-8"
+      className={
+        standalone
+          ? "scroll-mt-28"
+          : "mt-20 scroll-mt-28 border-t border-border pt-8"
+      }
     >
       <h2
         id="foundations-heading"
         className="text-2xl font-semibold tracking-tight"
       >
-        Foundations
+        Styles
       </h2>
       <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
-        A shared language for every wireframe. Use semantic tokens for surfaces,
-        hierarchy, states, and feedback; keep the underlying palette consistent.
+        Shared colours, spacing, type, and interaction styles for every
+        wireframe.
       </p>
 
       <Tabs
@@ -688,7 +684,7 @@ export function Foundations() {
         className="mt-6"
       >
         <TabsList
-          aria-label="Foundation categories"
+          aria-label="Style categories"
           className="h-auto max-w-full flex-wrap"
         >
           <TabsTrigger value="colours">Blue context</TabsTrigger>
@@ -720,7 +716,7 @@ export function Foundations() {
           <div className="grid gap-5 lg:grid-cols-2">
             <FoundationCard
               title="Spacing"
-              description="A 4px base rhythm. Keep related content close and separate distinct tasks."
+              description="Use multiples of 4px. Keep related content close and leave more space between tasks."
             >
               <div className="flex flex-wrap gap-2">
                 {tokens.foundations.spacing.map((value) => (
@@ -735,13 +731,13 @@ export function Foundations() {
               <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
                 Start with 8px within a control, 16px between related fields,
                 24px inside panels, and 32px between sections. Adjust for the
-                information hierarchy.
+                importance of each section.
               </p>
             </FoundationCard>
 
             <FoundationCard
               title="Control sizes"
-              description="Use one density consistently within a form or toolbar. Keep touch controls comfortably sized."
+              description="Use consistent sizes within a form or toolbar. Leave enough room to tap comfortably."
             >
               <TokenTable
                 values={tokens.foundations.controlSizes}
@@ -751,7 +747,7 @@ export function Foundations() {
 
             <FoundationCard
               title="Typography"
-              description="Sans-serif for interface content. Monospace for code, values, and technical annotations."
+              description="Use sans-serif for interface text and monospace for code and values."
             >
               <TokenTable
                 values={tokens.foundations.typeScale}
@@ -760,8 +756,8 @@ export function Foundations() {
             </FoundationCard>
 
             <FoundationCard
-              title="Corner radius"
-              description="Small, consistent corners keep the interface quiet. Reserve a full radius for avatars, toggles, and pills."
+              title="Rounded corners"
+              description="Keep corners small and consistent. Use fully rounded edges for avatars, switches, and pills."
             >
               <div className="flex flex-wrap gap-4">
                 {Object.entries(tokens.foundations.radii).map(
@@ -787,30 +783,31 @@ export function Foundations() {
         <TabsContent value="behaviour" className="mt-6">
           <div className="grid gap-5 lg:grid-cols-2">
             <FoundationCard
-              title="Feedback has meaning"
-              description="Use status accents only when the message needs them. Pair every colour with an icon and clear wording."
+              title="Status messages"
+              description="Use colour, an icon, and clear text together to explain a status."
             >
               <div className="space-y-2">
                 {[
                   {
                     name: "info",
                     icon: Info,
-                    message: "Information: a draft is available.",
+                    message: "A draft is available.",
                   },
                   {
                     name: "success",
                     icon: CheckCircle2,
-                    message: "Success: your changes were saved.",
+                    message: "Changes saved.",
                   },
                   {
                     name: "warning",
                     icon: TriangleAlert,
-                    message: "Warning: review before continuing.",
+                    message: "Review the draft before continuing.",
                   },
                   {
                     name: "destructive",
                     icon: AlertCircle,
-                    message: "Error: enter a valid email address.",
+                    message:
+                      "Enter an email address, such as name@example.com.",
                   },
                 ].map(({ name, icon: Icon, message }) => (
                   <div
@@ -834,13 +831,13 @@ export function Foundations() {
 
             <FoundationCard
               title="Interaction requirements"
-              description="These are foundations to preserve when composing new screens."
+              description="Check these when building a screen."
             >
               <ul className="space-y-3 text-sm leading-relaxed text-muted-foreground">
                 {[
-                  "Give every input a visible label, useful help, and a recoverable error state.",
+                  "Give each input a visible label. Explain how to fix errors beside the field.",
                   "Keep focus visible. Support keyboard navigation and return focus after closing overlays.",
-                  "Represent default, hover, pressed, selected, disabled, loading, and error states.",
+                  "Check default, hover, pressed, selected, disabled, loading, and error states.",
                   "Design for narrow screens, text enlargement, reduced motion, and forced colours.",
                 ].map((item) => (
                   <li key={item} className="flex gap-2.5">
@@ -854,14 +851,14 @@ export function Foundations() {
               </ul>
               <p className="mt-5 border-t border-border pt-4 text-sm leading-relaxed text-muted-foreground">
                 Contrast targets: 4.5:1 for body text and 3:1 for large text and
-                essential control boundaries. Assess WCAG 2.2 AA in the
-                completed flow; tokens alone do not establish conformance.
+                essential control edges. Check the completed flow against WCAG
+                2.2 AA; passing colour checks alone is not enough.
               </p>
             </FoundationCard>
 
             <FoundationCard
               title="Motion"
-              description="Short feedback transitions; no decorative movement. Respect the user’s reduced-motion preference."
+              description="Keep transitions brief and useful. Respect reduced-motion settings."
             >
               <TokenTable
                 values={tokens.foundations.motion}
@@ -870,8 +867,8 @@ export function Foundations() {
             </FoundationCard>
 
             <FoundationCard
-              title="Stacking layers"
-              description="Named layers keep sticky navigation, menus, dialogs, and feedback in a predictable order."
+              title="Layer order"
+              description="Use these layers to keep navigation, menus, dialogs, and messages in the right order."
             >
               <TokenTable
                 values={tokens.foundations.layers}

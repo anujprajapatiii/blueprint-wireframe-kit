@@ -6,7 +6,7 @@ import worker, { handleRequest, safeReturnTo, type Env } from "./index.ts";
 import privatePaths from "./allowlist.json" with { type: "json" };
 import sitePaths from "./site-allowlist.json" with { type: "json" };
 
-const origin = "https://blueprint-private-references.example";
+const origin = "https://blueprint-patterns.pages.dev";
 const base = "/blueprint-wireframe-kit/";
 const privatePath = `${base}__private-references/cloudflare/06-containers-gate.jpg`;
 const password = "test-only-password-not-a-real-credential";
@@ -678,9 +678,7 @@ test("Worker entry point handles runtime context separately from the clock", asy
 test("HTTP upgrades before showing login, while loopback remains available for local review", async () => {
   const { env, assetCalls } = fixture();
   const response = await handleRequest(
-    new Request(
-      `http://blueprint-private-references.example${base}?view=experiments`,
-    ),
+    new Request(`http://blueprint-patterns.pages.dev${base}?view=experiments`),
     env,
     now,
   );
@@ -719,4 +717,26 @@ test("HTML keeps same-origin form Origin headers without leaking external referr
     ),
     "no-referrer",
   );
+});
+
+test("legacy navigation redirects to the generic domain without serving assets or copying sessions", async () => {
+  const { env, assetCalls, searchCalls } = fixture();
+  const path = `${base}?view=experiments&source=Gamma&experiment=gamma-shared-folders&mode=reference`;
+  for (const method of ["GET", "HEAD"]) {
+    const response = await handleRequest(
+      new Request(
+        `https://blueprint-private-references.portfolio-v5.workers.dev${path}`,
+        { method, headers: { Cookie: "legacy-session=must-not-be-copied" } },
+      ),
+      env,
+      now,
+    );
+    assert.equal(response.status, 308);
+    assert.equal(response.headers.get("Location"), `${origin}${path}`);
+    assert.equal(response.headers.get("Set-Cookie"), null);
+    assert.equal(response.headers.get("Cache-Control"), "private, no-store");
+    assert.equal(await response.text(), "");
+  }
+  assert.equal(assetCalls.length, 0);
+  assert.equal(searchCalls.length, 0);
 });

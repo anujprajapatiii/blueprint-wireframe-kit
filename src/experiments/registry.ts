@@ -46,7 +46,7 @@ export const experiments: Experiment[] = [
     id: "github-event-banner",
     title: "Event promotion",
     summary:
-      "An event offer in the dashboard’s right rail, with registration and dismissal.",
+      "An event card on the right of the dashboard offers registration and can be dismissed.",
     sourceName: "GitHub",
     addedAt: "2026-10-04",
     updatedAt: "2026-10-04",
@@ -163,9 +163,9 @@ export const experiments: Experiment[] = [
   },
   {
     id: "steam-growth-banners",
-    title: "Discovery queue & rewards",
+    title: "Discovery queue and rewards",
     summary:
-      "A reward-led discovery flow, from store banners to queue completion.",
+      "Store banners offer a reward for exploring a queue of recommended games.",
     sourceName: "Steam",
     addedAt: "2026-10-03",
     updatedAt: "2026-10-07",

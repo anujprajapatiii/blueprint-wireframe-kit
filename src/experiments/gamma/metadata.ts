@@ -29,9 +29,9 @@ export const gammaExperiments: Experiment[] = [
   {
     ...common,
     id: "gamma-feature-tour",
-    title: "New-release announcement and tour",
+    title: "New feature announcement and tour",
     summary:
-      "A release announcement introduces five new capabilities and ends with an invitation to start creating.",
+      "A short tour introduces five new features and invites people to start creating.",
     preview: "gamma-feature-tour",
     type: "Flow",
     focus: ["Feature discovery", "Release announcement", "Product tour"],
@@ -100,9 +100,9 @@ export const gammaExperiments: Experiment[] = [
   {
     ...common,
     id: "gamma-credit-upsell",
-    title: "Credit balance upgrade prompt",
+    title: "Upgrade for more credits",
     summary:
-      "A credit balance pairs the free plan with an offer of more credits that refresh every month.",
+      "The credit balance shows an upgrade offer for more credits each month.",
     preview: "gamma-credit-upsell",
     type: "Flow",
     focus: ["Credit balance", "Contextual upgrade", "Paid credits"],
@@ -159,9 +159,9 @@ export const gammaExperiments: Experiment[] = [
   {
     ...common,
     id: "gamma-referral-credits",
-    title: "Referral credit reward",
+    title: "Referral credit rewards",
     summary:
-      "A simple offer gives 200 credits to a friend and 200 credits to the person who refers them.",
+      "An offer gives 200 credits to a friend and 200 to the person who invites them.",
     preview: "gamma-referral-credits",
     type: "Flow",
     focus: ["Referral incentive", "Two-sided credits", "Copyable invitation"],
@@ -215,9 +215,9 @@ export const gammaExperiments: Experiment[] = [
   {
     ...common,
     id: "gamma-plan-comparison",
-    title: "Paid plans and annual saving",
+    title: "Paid plans and yearly savings",
     summary:
-      "Three individual plans compare credit allowances and paid features, with an annual saving and a separate business offer.",
+      "Compare credits and features across three plans, with yearly savings and a separate offer for businesses.",
     preview: "gamma-plan-comparison",
     type: "Flow",
     focus: [

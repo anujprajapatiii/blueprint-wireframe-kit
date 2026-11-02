@@ -19,6 +19,8 @@ type ConfiguredEnv = Required<Omit<Env, "SEARCH_SERVICE">> &
   Pick<Env, "SEARCH_SERVICE">;
 
 const BASE = "/blueprint-wireframe-kit/";
+const CANONICAL_ORIGIN = "https://blueprint-patterns.pages.dev";
+const LEGACY_HOST = "blueprint-private-references.portfolio-v5.workers.dev";
 const PRIVATE_PREFIX = `${BASE}__private-references/`;
 const PRIVATE_PATHS = new Set<string>(privatePaths);
 const SITE_PATHS = new Set<string>(sitePaths);
@@ -351,6 +353,18 @@ export async function handleRequest(
   now = Date.now(),
 ): Promise<Response> {
   const url = new URL(request.url);
+  // Redirect navigation only; never forward submitted passwords across origins.
+  if (
+    url.hostname === LEGACY_HOST &&
+    (request.method === "GET" || request.method === "HEAD")
+  ) {
+    const redirectHeaders = headers();
+    redirectHeaders.set(
+      "Location",
+      `${CANONICAL_ORIGIN}${url.pathname}${url.search}`,
+    );
+    return new Response(null, { status: 308, headers: redirectHeaders });
+  }
   if (
     url.protocol === "http:" &&
     !["localhost", "127.0.0.1", "[::1]"].includes(url.hostname)

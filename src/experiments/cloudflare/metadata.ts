@@ -18,9 +18,9 @@ export const cloudflareExperiments: Experiment[] = [
     ...common,
     id: "cf-agent-onboarding",
     updatedAt: "2026-10-07",
-    title: "Agent onboarding promotion",
+    title: "Agent setup invitation",
     summary:
-      "A compact dashboard invitation offers a setup prompt for a compatible agent.",
+      "A dashboard invitation offers a prompt to help set up a compatible agent.",
     preview: "cf-agent-onboarding",
     type: "Screen",
     focus: ["Feature promotion", "Setup prompt", "Dashboard"],
@@ -71,9 +71,9 @@ export const cloudflareExperiments: Experiment[] = [
   {
     ...common,
     id: "cf-workers-plans",
-    title: "Workers paid-plan comparison",
+    title: "Compare Workers plans",
     summary:
-      "Free and Paid offers connect a $5 monthly proposition to a bounded checkout preview.",
+      "Compare the Free plan with a $5 monthly plan, then review the upgrade.",
     preview: "cf-workers-plans",
     type: "Flow",
     focus: ["Plan comparison", "Free to paid", "Checkout boundary"],
@@ -145,9 +145,9 @@ export const cloudflareExperiments: Experiment[] = [
   {
     ...common,
     id: "cf-containers-gate",
-    title: "Containers paid capability gate",
+    title: "Upgrade to use Containers",
     summary:
-      "A feature-entry card connects access to Containers with the Workers Paid plan.",
+      "A locked feature explains which paid plan is needed and offers an upgrade.",
     preview: "cf-containers-gate",
     type: "Flow",
     focus: [
@@ -209,7 +209,7 @@ export const cloudflareExperiments: Experiment[] = [
     id: "cf-event-promotion",
     title: "Connect event promotion",
     summary:
-      "A dashboard banner advertises Connect and hands off to the paid event website.",
+      "A home-page banner promotes Connect, a paid event, and links to its website.",
     preview: "cf-event-promotion",
     type: "Screen",
     status: "Ready for review",

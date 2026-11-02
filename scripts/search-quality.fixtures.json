@@ -1,0 +1,80 @@
+[
+  {
+    "query": "Let my users make money",
+    "include": [
+      "tally-referral-reward",
+      "el-affiliate-advocacy-entry",
+      "el-voice-supplier-earnings-checklist"
+    ],
+    "exclude": [
+      "gamma-referral-credits",
+      "steam-growth-banners",
+      "gamma-credit-upsell",
+      "cf-workers-plans"
+    ]
+  },
+  {
+    "query": "Explain which paid plan unlocks a feature and offer an upgrade",
+    "include": [
+      "cf-containers-gate",
+      "tally-custom-domain-gate",
+      "el-professional-clone-capability-gate"
+    ],
+    "exclude": [
+      "tally-referral-reward",
+      "el-affiliate-advocacy-entry",
+      "gamma-referral-credits"
+    ]
+  },
+  {
+    "query": "Pay people cash for recommending the product to friends",
+    "include": ["tally-referral-reward", "el-affiliate-advocacy-entry"],
+    "exclude": [
+      "gamma-referral-credits",
+      "steam-growth-banners",
+      "el-voice-supplier-earnings-checklist"
+    ]
+  },
+  {
+    "query": "Give users free credits when a friend signs up",
+    "include": ["gamma-referral-credits"],
+    "exclude": [
+      "tally-referral-reward",
+      "el-affiliate-advocacy-entry",
+      "gamma-credit-upsell",
+      "steam-growth-banners"
+    ]
+  },
+  {
+    "query": "Encourage people to pay yearly instead of monthly",
+    "include": [
+      "el-annual-cadence-framing",
+      "el-annual-upgrade-intercept",
+      "gamma-plan-comparison",
+      "tally-plan-comparison"
+    ],
+    "exclude": [
+      "cf-workers-plans",
+      "tally-referral-reward",
+      "gamma-referral-credits"
+    ]
+  },
+  {
+    "query": "Promote an event to people already using the product",
+    "include": [
+      "cf-event-promotion",
+      "github-event-banner",
+      "tally-office-hours"
+    ],
+    "exclude": [
+      "gamma-feature-tour",
+      "gamma-shared-folders",
+      "notion-feature-modal",
+      "tally-review-request"
+    ]
+  },
+  {
+    "query": "Let patients book a doctor appointment and request prescription refills",
+    "none": true
+  }
+]

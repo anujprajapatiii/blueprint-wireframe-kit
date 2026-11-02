@@ -1,5 +1,6 @@
 import type { Experiment } from "../experiments/registry";
 import type { SearchEntry } from "./contracts";
+import { searchDescriptions } from "./descriptions.ts";
 
 /** Public index fields only: exclude reference notes, audiences, journeys and assets. */
 export function buildSearchCatalog(
@@ -10,7 +11,7 @@ export function buildSearchCatalog(
     .map((experiment) => ({
       id: experiment.id,
       title: experiment.title,
-      summary: experiment.summary,
+      summary: searchDescriptions[experiment.id] ?? experiment.summary,
       sourceName: experiment.sourceName,
       type: experiment.type,
       focus: [...experiment.focus],

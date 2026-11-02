@@ -25,12 +25,12 @@ export const tallyExperiments: Experiment[] = [
   {
     ...common,
     id: "tally-referral-reward",
-    title: "Referral reward invitation",
+    title: "Referral rewards",
     summary:
-      "A two-sided offer gives friends a discount and rewards the person who refers them.",
+      "Friends get a discount, and the person who invites them can earn up to $150.",
     preview: "tally-referral-reward",
     type: "Flow",
-    focus: ["Referral reward", "Friend discount", "Share invitation"],
+    focus: ["Cash referral reward", "Friend discount", "Share invitation"],
     source: "Tally Rewards widget · private full-viewport references",
     intent:
       "Study the referral proposition, sharing choices, explanation and empty rewards state in their dashboard context.",
@@ -76,8 +76,8 @@ export const tallyExperiments: Experiment[] = [
       journey:
         "Understand the two-sided offer and choose a way to share a referral invitation",
       mechanisms: [
-        "Two-sided incentive",
-        "Specific reward cap",
+        "Offer friends a discount and referrers money",
+        "Cap referral earnings at $150",
         "Multiple sharing options",
         "Reward transparency",
       ],
@@ -91,10 +91,10 @@ export const tallyExperiments: Experiment[] = [
   {
     ...common,
     id: "tally-plan-comparison",
-    title: "Paid plans and annual saving",
+    title: "Paid plans and yearly savings",
     updatedAt: "2026-10-13",
     summary:
-      "A workspace request leads to Pro and Business offers with team benefits, monthly or yearly billing, and two months off.",
+      "Choosing New workspace opens paid plans with team features and two months off yearly billing.",
     preview: "tally-plan-comparison",
     type: "Flow",
     focus: [
@@ -195,9 +195,9 @@ export const tallyExperiments: Experiment[] = [
   {
     ...common,
     id: "tally-custom-domain-gate",
-    title: "Custom-domain upgrade prompt",
+    title: "Custom domain upgrade prompt",
     summary:
-      "A branded-link benefit and Pro marker connect an empty domain list to the paid-plan comparison.",
+      "An empty domain page explains custom links and invites people to compare paid plans.",
     preview: "tally-custom-domain-gate",
     type: "Flow",
     focus: ["Premium capability gate", "Custom domains", "Contextual upgrade"],
@@ -255,9 +255,9 @@ export const tallyExperiments: Experiment[] = [
   {
     ...common,
     id: "tally-office-hours",
-    title: "Founder office-hours invitation",
+    title: "Meet the founders",
     summary:
-      "A free monthly session invites users to meet the founders, ask questions and get help with forms.",
+      "A free monthly session invites people to meet the founders, ask questions and get help with forms.",
     preview: "tally-office-hours",
     type: "Screen",
     focus: ["Community event", "Founder access", "Product help"],
@@ -316,9 +316,9 @@ export const tallyExperiments: Experiment[] = [
   {
     ...common,
     id: "tally-review-request",
-    title: "Customer review invitation",
+    title: "Customer review request",
     summary:
-      "A bootstrapped-company appeal asks satisfied users to support Tally by leaving a quick review.",
+      "A message asks people to support Tally by leaving a review.",
     preview: "tally-review-request",
     type: "Screen",
     focus: ["Customer advocacy", "Review request", "Support appeal"],

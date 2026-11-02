@@ -3,9 +3,9 @@ import type { Experiment } from "../registry";
 export const gammaCollaborationExperiments: Experiment[] = [
   {
     id: "gamma-shared-folders",
-    title: "Shared-folder promotion",
+    title: "Shared folder promotion",
     summary:
-      "A sidebar promotion introduces shared folders, explains selective access, and leads into creating a private folder.",
+      "A sidebar message introduces shared folders and shows how to create one with limited access.",
     sourceName: "Gamma",
     addedAt: "2026-10-13",
     updatedAt: "2026-10-13",

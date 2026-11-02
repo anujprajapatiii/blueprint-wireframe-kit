@@ -1,8 +1,6 @@
-import { SiteLock } from "../components/site-lock";
+import { SiteHeader } from "../components/site-header";
 import { lazy, Suspense, useEffect } from "react";
-import { ArrowUpRight } from "lucide-react";
 import { Button } from "../components/kit";
-import { BlueprintLogo } from "../components/blueprint-logo";
 import { GrowthEducation } from "../components/growth-education";
 import { ExperimentDirectory } from "./directory";
 import { SteamGrowthBanners } from "./steam-growth-banners";
@@ -198,38 +196,7 @@ export function ExperimentsApp() {
       >
         Skip to content
       </a>
-      <header className="sticky top-0 z-[var(--layer-sticky)] border-b bg-surface-sunken">
-        <div className="mx-auto flex min-h-[72px] max-w-[1440px] flex-wrap items-center justify-between gap-x-6 gap-y-2 px-5 py-3 lg:px-8">
-          <BlueprintLogo />
-          <nav
-            aria-label="Main navigation"
-            className="flex flex-wrap items-center gap-5 text-sm"
-          >
-            <a
-              href="?"
-              className="flex min-h-10 items-center text-muted-foreground hover:text-foreground"
-            >
-              Kit
-            </a>
-            <a
-              href="?view=experiments"
-              aria-current={id || collectionId ? undefined : "page"}
-              className="flex min-h-10 items-center underline decoration-input underline-offset-8"
-            >
-              Experiments
-            </a>
-            <a
-              href="https://github.com/anujprajapatiii/blueprint-wireframe-kit"
-              target="_blank"
-              rel="noreferrer"
-              className="flex min-h-10 items-center gap-1 text-muted-foreground hover:text-foreground"
-            >
-              Source <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
-            <SiteLock />
-          </nav>
-        </div>
-      </header>
+      <SiteHeader active="experiments" />
       {curator && CuratorPage ? (
         <Suspense
           fallback={
@@ -280,7 +247,8 @@ export function ExperimentsApp() {
         >
           <h1 className="text-3xl font-semibold">Experiment not found</h1>
           <p className="text-muted-foreground">
-            This link does not match an experiment in the directory.
+            This experiment isn’t in the library. Browse all experiments to find
+            another.
           </p>
           <Button asChild>
             <a href="?view=experiments">Browse experiments</a>

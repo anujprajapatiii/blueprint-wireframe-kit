@@ -1,0 +1,10 @@
+name = "blueprint-patterns"
+pages_build_output_dir = "../../.wrangler/generic-gateway"
+compatibility_date = "2026-10-06"
+
+[vars]
+CANONICAL_HOST = "blueprint-patterns.pages.dev"
+
+[[services]]
+binding = "PROTECTED_SITE"
+service = "blueprint-private-references"

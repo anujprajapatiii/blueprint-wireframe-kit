@@ -2,7 +2,7 @@
   {
     "id": "linear-interactive-demo",
     "title": "Try the product before signup",
-    "summary": "A sample workspace lets visitors learn the basics and change an issue’s status before creating an account.",
+    "summary": "A public sample workspace lets prospective users try Linear before creating an account. A pinned welcome guide explains the basics, and visitors can open a sample issue and change its status. A persistent Sign up action leads to workspace signup choices after exploration. Demo changes stay local and reset on refresh.",
     "sourceName": "Linear",
     "type": "Flow",
     "focus": [
@@ -25,8 +25,8 @@
   },
   {
     "id": "gamma-shared-folders",
-    "title": "Shared-folder promotion",
-    "summary": "A sidebar promotion introduces shared folders, explains selective access, and leads into creating a private folder.",
+    "title": "Shared folder promotion",
+    "summary": "A sidebar promotion encourages Gamma users to group related work in folders and share it together. A nearby explainer describes giving selected people access to every item in a folder, with team spaces and private work as examples. Create a folder leads to naming a private folder, followed by sharing and permission choices.",
     "sourceName": "Gamma",
     "type": "Flow",
     "focus": [
@@ -47,8 +47,8 @@
   },
   {
     "id": "gamma-feature-tour",
-    "title": "New-release announcement and tour",
-    "summary": "A release announcement introduces five new capabilities and ends with an invitation to start creating.",
+    "title": "New feature announcement and tour",
+    "summary": "An announcement modal introduces a new Gamma release to people inside the product. See what’s new opens a five-slide tour explaining new creation, editing, import and integration capabilities. Users can move forward or back, close the tour, or select Start creating at the end to return to the home screen.",
     "sourceName": "Gamma",
     "type": "Flow",
     "focus": [
@@ -69,8 +69,8 @@
   },
   {
     "id": "gamma-credit-upsell",
-    "title": "Credit balance upgrade prompt",
-    "summary": "A credit balance pairs the free plan with an offer of more credits that refresh every month.",
+    "title": "Upgrade for more credits",
+    "summary": "Opening the credit balance reveals a popover explaining that credits power AI creation and editing. The Free plan message offers more credits that refresh monthly, with an Upgrade action leading to paid plans. Refer a friend is a separate route to a credit reward. The upgrade appears while credits are still available.",
     "sourceName": "Gamma",
     "type": "Flow",
     "focus": [
@@ -90,8 +90,8 @@
   },
   {
     "id": "gamma-referral-credits",
-    "title": "Referral credit reward",
-    "summary": "A simple offer gives 200 credits to a friend and 200 credits to the person who refers them.",
+    "title": "Referral credit rewards",
+    "summary": "A referral modal offers product credits to both people: a new friend receives 200 credits and the person inviting them earns 200 credits when that friend signs up for Gamma. The offer states the signup condition beside a copyable invitation link. Users can dismiss it with Done or Close.",
     "sourceName": "Gamma",
     "type": "Flow",
     "focus": [
@@ -112,8 +112,8 @@
   },
   {
     "id": "gamma-plan-comparison",
-    "title": "Paid plans and annual saving",
-    "summary": "Three individual plans compare credit allowances and paid features, with an annual saving and a separate business offer.",
+    "title": "Paid plans and yearly savings",
+    "summary": "A plan comparison overlay helps users choose a paid Gamma subscription by comparing AI credit allowances and features. Individual plans have monthly and annual billing choices, visible annual totals, a yearly saving and a Most popular label on Pro. A separate Business tab presents seat-based pricing and an Enterprise contact-sales option.",
     "sourceName": "Gamma",
     "type": "Flow",
     "focus": [
@@ -136,12 +136,12 @@
   },
   {
     "id": "tally-referral-reward",
-    "title": "Referral reward invitation",
-    "summary": "A two-sided offer gives friends a discount and rewards the person who refers them.",
+    "title": "Referral rewards",
+    "summary": "A referral dialog invites Tally users to earn money by recommending the product. Friends receive 50% off a paid plan for three months, while referrers earn 20% of the subscription cost, up to $150 per referral. A link and sharing options support invitations; explanation and rewards tabs describe the offer and track rewards.",
     "sourceName": "Tally",
     "type": "Flow",
     "focus": [
-      "Referral reward",
+      "Cash referral reward",
       "Friend discount",
       "Share invitation"
     ],
@@ -149,8 +149,8 @@
       "referral"
     ],
     "mechanisms": [
-      "Two-sided incentive",
-      "Specific reward cap",
+      "Offer friends a discount and referrers money",
+      "Cap referral earnings at $150",
       "Multiple sharing options",
       "Reward transparency"
     ],
@@ -158,8 +158,8 @@
   },
   {
     "id": "tally-plan-comparison",
-    "title": "Paid plans and annual saving",
-    "summary": "A workspace request leads to Pro and Business offers with team benefits, monthly or yearly billing, and two months off.",
+    "title": "Paid plans and yearly savings",
+    "summary": "Choosing New workspace or Members leads free Tally users to a paid-plan comparison for team and creator features. Pro and Business show benefits, upgrade actions and billing totals. A monthly-to-yearly toggle advertises two months off. Collaboration, shared workspaces, branding removal and custom domains help explain what the paid subscription unlocks.",
     "sourceName": "Tally",
     "type": "Flow",
     "focus": [
@@ -182,8 +182,8 @@
   },
   {
     "id": "tally-custom-domain-gate",
-    "title": "Custom-domain upgrade prompt",
-    "summary": "A branded-link benefit and Pro marker connect an empty domain list to the paid-plan comparison.",
+    "title": "Custom domain upgrade prompt",
+    "summary": "The Domains page explains how users can personalize form links with their own domain. A Pro badge marks the feature as paid, beside an Add domain action and a help link. Selecting Add domain opens the paid-plan comparison, connecting the branding benefit to an upgrade decision before domain setup.",
     "sourceName": "Tally",
     "type": "Flow",
     "focus": [
@@ -203,8 +203,8 @@
   },
   {
     "id": "tally-office-hours",
-    "title": "Founder office-hours invitation",
-    "summary": "A free monthly session invites users to meet the founders, ask questions and get help with forms.",
+    "title": "Meet the founders",
+    "summary": "A community card in Tally’s What’s new drawer invites existing users to free monthly office hours with the founders. The invitation offers a place to ask questions, share feedback and get help with forms. A Join our next office hours link takes people to an external event page.",
     "sourceName": "Tally",
     "type": "Screen",
     "focus": [
@@ -225,8 +225,8 @@
   },
   {
     "id": "tally-review-request",
-    "title": "Customer review invitation",
-    "summary": "A bootstrapped-company appeal asks satisfied users to support Tally by leaving a quick review.",
+    "title": "Customer review request",
+    "summary": "A message in Tally’s What’s new drawer asks people who enjoy the product to support its growth by leaving a quick public review. The appeal explains that the company is bootstrapped and grows through customer support. A linked review request takes users to G2 to consider writing their review.",
     "sourceName": "Tally",
     "type": "Screen",
     "focus": [
@@ -246,8 +246,8 @@
   },
   {
     "id": "cf-agent-onboarding",
-    "title": "Agent onboarding promotion",
-    "summary": "A compact dashboard invitation offers a setup prompt for a compatible agent.",
+    "title": "Agent setup invitation",
+    "summary": "A compact promotion on the Cloudflare dashboard invites users to onboard an AI coding agent. It names compatible tools to explain who can use it. Selecting the invitation displays Setup prompt copied feedback while keeping the dashboard in place. A Don’t show this again option is also available.",
     "sourceName": "Cloudflare",
     "type": "Screen",
     "focus": [
@@ -267,8 +267,8 @@
   },
   {
     "id": "cf-workers-plans",
-    "title": "Workers paid-plan comparison",
-    "summary": "Free and Paid offers connect a $5 monthly proposition to a bounded checkout preview.",
+    "title": "Compare Workers plans",
+    "summary": "A Workers plan comparison places Free, Paid and Enterprise offers together, with differences in request allowances, compute time, support and included features. The Paid offer shows a monthly base price plus usage. Upgrade opens a billing and payment checkout, while Exit checkout returns to the Workers area without completing a purchase.",
     "sourceName": "Cloudflare",
     "type": "Flow",
     "focus": [
@@ -288,8 +288,8 @@
   },
   {
     "id": "cf-containers-gate",
-    "title": "Containers paid capability gate",
-    "summary": "A feature-entry card connects access to Containers with the Workers Paid plan.",
+    "title": "Upgrade to use Containers",
+    "summary": "At the Containers feature entry, an Enable Containers card explains that access requires the Workers Paid plan. Users can select Purchase Workers Paid to open checkout or follow View pricing for more information. The message ties a specific capability to a paid upgrade before users can start using Containers.",
     "sourceName": "Cloudflare",
     "type": "Flow",
     "focus": [
@@ -310,7 +310,7 @@
   {
     "id": "cf-event-promotion",
     "title": "Connect event promotion",
-    "summary": "A dashboard banner advertises Connect and hands off to the paid event website.",
+    "summary": "A banner on the Cloudflare dashboard advertises the Connect community event to existing product users. Event dates, location, speaker cues and a learning-and-collaboration invitation support the offer. Learn more opens the event website, where paid tickets and registration are presented, carrying interest from the product into an external event purchase path.",
     "sourceName": "Cloudflare",
     "type": "Screen",
     "focus": [
@@ -332,7 +332,7 @@
   {
     "id": "el-v4-discovery-to-trial",
     "title": "Discover a new model",
-    "summary": "Launch messages connect new-model benefits to the speech tool and model settings.",
+    "summary": "A launch banner on Home, a feature card, and an inline speech-settings prompt introduce a new speech model to existing users. Each explains the advertised benefits and offers a way to try the model. The announcement links directly to speech creation with that model selected.",
     "sourceName": "ElevenLabs",
     "type": "Flow",
     "focus": [
@@ -352,8 +352,8 @@
   },
   {
     "id": "el-adjacent-tool-discovery",
-    "title": "Discover adjacent tools",
-    "summary": "An in-tool promotion introduces image and video creation alongside speech settings.",
+    "title": "Discover more tools",
+    "summary": "A dismissible promotion above the voice and model controls introduces image and video creation to people using speech tools. It connects images, video, and lip sync in one workflow, showing another use for the product while the user is working in a familiar tool.",
     "sourceName": "ElevenLabs",
     "type": "Screen",
     "focus": [
@@ -372,8 +372,8 @@
   },
   {
     "id": "el-plan-value-ladder",
-    "title": "Compare paid tiers",
-    "summary": "A capability ladder, popular tier, and sales route make larger plans easier to compare.",
+    "title": "Compare paid plans",
+    "summary": "Subscription cards help existing paid customers compare larger plans by the extra features and capacity they unlock. A current-plan label, a Popular badge, and prominent Upgrade actions distinguish the choices. Creative and agent plans use relevant units, such as credits, call minutes, and seats, with a sales-contact route for larger needs.",
     "sourceName": "ElevenLabs",
     "type": "Flow",
     "focus": [
@@ -393,8 +393,8 @@
   },
   {
     "id": "el-annual-cadence-framing",
-    "title": "Compare annual savings",
-    "summary": "Annual plans show monthly-equivalent prices, a price comparison, and the billing commitment.",
+    "title": "Compare yearly savings",
+    "summary": "A Monthly and Yearly switch lets customers compare billing commitments on the subscription page. Choosing Yearly shows a lower monthly-equivalent price beside the crossed-out monthly price, advertises two months saved, and states that payment is billed annually. The comparison makes the yearly offer and payment schedule visible together.",
     "sourceName": "ElevenLabs",
     "type": "Screen",
     "focus": [
@@ -414,8 +414,8 @@
   },
   {
     "id": "el-annual-upgrade-intercept",
-    "title": "Offer annual billing",
-    "summary": "An annual-savings offer appears after choosing a monthly upgrade.",
+    "title": "Offer yearly billing",
+    "summary": "After a paid customer selects a monthly upgrade, a modal offers yearly billing before the upgrade continues. It presents two months free and a stated annual discount, with separate Continue yearly and Continue monthly actions. The customer can review the savings while keeping the original monthly route available.",
     "sourceName": "ElevenLabs",
     "type": "Flow",
     "focus": [
@@ -436,7 +436,7 @@
   {
     "id": "el-basic-seat-collaboration-bridge",
     "title": "Invite with Basic Seats",
-    "summary": "A collaboration offer explains Basic Seats and points to the paid Full Seats tier.",
+    "summary": "A persistent sidebar invitation card opens a dialog explaining how colleagues can join with Basic Seats. It says invitees can keep their existing workspace while collaborating and generating content, then provides email entry for invitations. A nearby link identifies Scale as the plan required for additional Full Seats.",
     "sourceName": "ElevenLabs",
     "type": "Flow",
     "focus": [
@@ -457,8 +457,8 @@
   },
   {
     "id": "el-professional-clone-capability-gate",
-    "title": "Explain a premium gate",
-    "summary": "A visible locked capability names the exact paid tier needed to use it.",
+    "title": "Explain a paid feature",
+    "summary": "The voice-creation chooser keeps Professional Voice Cloning visible to customers on lower paid plans, with a description of the method and its audio requirements. The disabled option carries a lock message naming Creator as the minimum plan and a Subscribe action, connecting the blocked feature to a specific upgrade.",
     "sourceName": "ElevenLabs",
     "type": "Screen",
     "focus": [
@@ -478,7 +478,7 @@
   {
     "id": "el-project-context-collaboration-invite",
     "title": "Invite while sharing",
-    "summary": "A team invitation appears beside access controls when sharing a project.",
+    "summary": "A Studio project's sharing dialog places an Invite team members card below the user and group search. The invitation appears while someone is deciding who can access a draft, alongside viewer and commenter choices. It introduces team collaboration at a project handoff, with the work being shared as context.",
     "sourceName": "ElevenLabs",
     "type": "Flow",
     "focus": [
@@ -498,7 +498,7 @@
   {
     "id": "el-flows-first-visit-introduction",
     "title": "Introduce a new workflow",
-    "summary": "A short benefits modal explains the Flows canvas before its first setup action.",
+    "summary": "Opening Flows presents an introduction modal with a connected-node example and a single Get started action. The explanation shows existing users how to link image, video, and audio generation on an infinite canvas and use multiple models together. It introduces the feature before the user enters the tool.",
     "sourceName": "ElevenLabs",
     "type": "Flow",
     "focus": [
@@ -519,7 +519,7 @@
   {
     "id": "el-image-video-example-to-action",
     "title": "Build from visual examples",
-    "summary": "Image and video examples offer starting actions that connect to creation tools.",
+    "summary": "An introduction explains image and video tools, followed by an Explore gallery of example outputs and creation starters. Example actions include Edit, Recreate, Reference, Video, Open Studio, and Extend. Existing users can move from seeing an example to choosing how to use it as a starting point for their own work.",
     "sourceName": "ElevenLabs",
     "type": "Flow",
     "focus": [
@@ -539,8 +539,8 @@
   },
   {
     "id": "el-dubbing-launch-sample-entry",
-    "title": "Preview a new capability",
-    "summary": "A dubbing announcement pairs benefit statements with samples and a direct start action.",
+    "title": "Try a new feature",
+    "summary": "A launch modal introduces a new dubbing capability when an existing user opens Dubbing. It describes the advertised language, voice, and delivery benefits, then offers Play samples alongside Get started. The sample route lets people hear an example before choosing to enter the tool.",
     "sourceName": "ElevenLabs",
     "type": "Flow",
     "focus": [
@@ -561,7 +561,7 @@
   {
     "id": "el-voice-supplier-earnings-checklist",
     "title": "Guide contributor setup",
-    "summary": "An earnings proposition becomes a three-step voice contribution checklist.",
+    "summary": "The Voices Earnings page invites creators to publish a voice and earn money whenever a paid user uses it. A three-step checklist covers creating a Professional Voice Clone, setting up payouts, and publishing the voice. The required cloning capability is available on Creator or higher plans.",
     "sourceName": "ElevenLabs",
     "type": "Flow",
     "focus": [
@@ -574,7 +574,7 @@
       "expansion"
     ],
     "mechanisms": [
-      "Offer an economic reason to contribute supply",
+      "Offer creator earnings when paid users use a published voice",
       "Break setup into explicit prerequisites",
       "Connect a supplier capability to a required paid tier"
     ],
@@ -582,8 +582,8 @@
   },
   {
     "id": "el-demand-guided-voice-supply",
-    "title": "Show unmet demand",
-    "summary": "A ranked opportunities table helps voice contributors identify gaps in the marketplace.",
+    "title": "Show which voices are needed",
+    "summary": "An Opportunities table within Voices Earnings helps voice contributors choose what to supply. It lists language, accent, and use-case categories alongside existing library counts and an Opportunity Score. The product presents these as high-demand, low-competition gaps, giving prospective contributors a direction for their next voice contribution.",
     "sourceName": "ElevenLabs",
     "type": "Screen",
     "focus": [
@@ -603,7 +603,7 @@
   {
     "id": "el-affiliate-advocacy-entry",
     "title": "Reward recommendations",
-    "summary": "An affiliate offer explains rewards and gives established creators a separate partnership route.",
+    "summary": "An affiliate dialog reached from the account menu offers users the opportunity to earn money by recommending ElevenLabs. It provides program information and a sign-up action, explains that PartnerStack manages the program, and gives established creators a separate contact route for partnership opportunities based on their audience reach.",
     "sourceName": "ElevenLabs",
     "type": "Screen",
     "focus": [
@@ -615,7 +615,7 @@
       "referral"
     ],
     "mechanisms": [
-      "Reward advocacy and referral",
+      "Offer money for recommending the product",
       "Segment potential partners by audience reach",
       "Explain the external program handoff"
     ],
@@ -624,7 +624,7 @@
   {
     "id": "el-agents-template-assisted-onboarding",
     "title": "Start an agent from a template",
-    "summary": "Use-case templates and a contextual assistant help users choose a first agent setup.",
+    "summary": "People entering ElevenAgents see a template gallery organized by industry and use case, with task descriptions, integration counts, and workflow previews. An assistant offers help choosing a starting template, while a blank-agent option remains available. This is onboarding into an adjacent product for existing users, guiding them toward setting up their first agent.",
     "sourceName": "ElevenLabs",
     "type": "Experience",
     "focus": [
@@ -645,8 +645,8 @@
   },
   {
     "id": "el-api-time-bounded-model-offer",
-    "title": "Time a model offer",
-    "summary": "A dated price promotion gives users an incentive to consider a new API model.",
+    "title": "Offer a limited-time discount",
+    "summary": "Model-pricing cards introduce new API models with advertised benefits, crossed-out unit prices, and discounted prices carrying an explicit end date. The dated offer gives developers a reason to try a model during the promotion. Nearby copy connects higher concurrency and additional capabilities to a paid Creative or Agents subscription.",
     "sourceName": "ElevenLabs",
     "type": "Screen",
     "focus": [
@@ -668,7 +668,7 @@
   {
     "id": "github-event-banner",
     "title": "Event promotion",
-    "summary": "An event offer in the dashboard’s right rail, with registration and dismissal.",
+    "summary": "A dismissible right-side dashboard card promotes a paid developer event, with its date, location, an early-bird ticket discount and a deadline. A Register now button invites existing GitHub users to the event.",
     "sourceName": "GitHub",
     "type": "Screen",
     "focus": [
@@ -690,7 +690,7 @@
   {
     "id": "notion-feature-modal",
     "title": "Feature announcement",
-    "summary": "Select a feature to explore its details and preview.",
+    "summary": "A new-feature announcement modal introduces interactive HTML blocks, reusable agent instructions and connected tools. Selecting a feature updates its description and preview inside the same dialog. Try for free and Save for later offer immediate or deferred exploration, while an upcoming feature is marked Coming soon.",
     "sourceName": "Notion",
     "type": "Screen",
     "focus": [
@@ -709,8 +709,8 @@
   },
   {
     "id": "steam-growth-banners",
-    "title": "Discovery queue & rewards",
-    "summary": "A reward-led discovery flow, from store banners to queue completion.",
+    "title": "Discovery queue and rewards",
+    "summary": "A store banner offers free collectible stickers for going through a discovery queue of recommended games. The connected game carousel and reward summary make progress toward the sticker visible, giving players a reason to explore titles.",
     "sourceName": "Steam",
     "type": "Flow",
     "focus": [

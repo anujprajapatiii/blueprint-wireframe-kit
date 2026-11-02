@@ -47,6 +47,12 @@ service. Deploy this search Worker whenever the experiment catalog changes,
 then deploy the website; a website deployment does not update the search catalog.
 Keep the existing server-side secret and quotas unchanged.
 
+For an explicitly approved combined release, `npm run release:deploy` prepares
+both the public catalog and protected website assets, then deploys this Worker
+and the existing protected site Worker sequentially. The generic Pages gateway
+continues to use the same service binding. `npm run release:prepare` prepares
+files locally without deployment.
+
 Workers Free supports the SQLite Durable Object used here. No paid plan is
 required by this architecture; account-level Cloudflare and TypeSafe limits still
 apply. Do not accept a paid plan or billing change as part of setup without the
@@ -56,7 +62,7 @@ user's approval.
 
 | Route            | Request                                | Response                                        |
 | ---------------- | -------------------------------------- | ----------------------------------------------- |
-| `/search/status` | `GET`                                  | `{ "configured": true, "model": "jev-latest" }` |
+| `/search/status` | `GET`                                  | Configuration, model, catalog version/count and prompt version |
 | `/search`        | `POST` JSON `{ "query": "upselling" }` | Existing `SearchResult` contract                |
 
 The internal routes retain the exact Origin `https://anujprajapatiii.github.io`;

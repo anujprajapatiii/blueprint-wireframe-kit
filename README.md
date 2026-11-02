@@ -210,7 +210,7 @@ The gallery demonstrates real UI interactions with sample data and does not prov
 
 ## Publish the password-protected site
 
-The website is hosted at `https://blueprint-private-references.portfolio-v5.workers.dev/blueprint-wireframe-kit/`. The existing GitHub Pages address redirects to it while preserving the path, query and fragment. No app bundle or originals are deployed to Pages.
+The website is hosted at `https://blueprint-patterns.pages.dev/blueprint-wireframe-kit/`. The existing GitHub Pages address redirects to it while preserving the path, query and fragment. The generic Cloudflare Pages address is a small gateway to the existing protected Worker; no app bundle or originals are copied to Pages. See [the gateway contract](workers/gateway/README.md).
 
 After Anuj explicitly requests the current revision, run `npm run site:build`, the relevant checks, and `npm run site:deploy` from the local checkout that holds the private originals. The Cloudflare Worker checks the signed session before every page, asset, reference and search request. The generated password and server secrets remain in ignored, owner-only local files and Cloudflare secrets. Read [the deployment contract](workers/references/README.md) before changing this gate.
 

@@ -47,7 +47,7 @@
   {
     "id": "el-v4-discovery-to-trial",
     "title": "Discover a new model",
-    "summary": "Launch messages connect new-model benefits to the speech tool and model settings.",
+    "summary": "A launch message explains a new speech model and shows where to try it.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -88,8 +88,8 @@
   },
   {
     "id": "el-adjacent-tool-discovery",
-    "title": "Discover adjacent tools",
-    "summary": "An in-tool promotion introduces image and video creation alongside speech settings.",
+    "title": "Discover more tools",
+    "summary": "A promotion beside speech settings introduces image and video creation.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -203,8 +203,8 @@
   },
   {
     "id": "el-plan-value-ladder",
-    "title": "Compare paid tiers",
-    "summary": "A capability ladder, popular tier, and sales route make larger plans easier to compare.",
+    "title": "Compare paid plans",
+    "summary": "A plan comparison shows added features, highlights a popular plan and offers a sales contact.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -250,8 +250,8 @@
   },
   {
     "id": "el-annual-cadence-framing",
-    "title": "Compare annual savings",
-    "summary": "Annual plans show monthly-equivalent prices, a price comparison, and the billing commitment.",
+    "title": "Compare yearly savings",
+    "summary": "Yearly plans show the monthly price equivalent, the saving and when payment is due.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -288,8 +288,8 @@
   },
   {
     "id": "el-annual-upgrade-intercept",
-    "title": "Offer annual billing",
-    "summary": "An annual-savings offer appears after choosing a monthly upgrade.",
+    "title": "Offer yearly billing",
+    "summary": "After someone chooses a monthly upgrade, an offer shows how much they could save by paying yearly.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -458,8 +458,8 @@
   },
   {
     "id": "el-professional-clone-capability-gate",
-    "title": "Explain a premium gate",
-    "summary": "A visible locked capability names the exact paid tier needed to use it.",
+    "title": "Explain a paid feature",
+    "summary": "A locked feature names the paid plan needed to use it.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -755,7 +755,7 @@
   {
     "id": "el-flows-first-visit-introduction",
     "title": "Introduce a new workflow",
-    "summary": "A short benefits modal explains the Flows canvas before its first setup action.",
+    "summary": "A short introduction explains what Flows can do and offers a first setup step.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -882,7 +882,7 @@
   {
     "id": "el-image-video-example-to-action",
     "title": "Build from visual examples",
-    "summary": "Image and video examples offer starting actions that connect to creation tools.",
+    "summary": "Image and video examples link directly to tools for creating something similar.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -929,8 +929,8 @@
   },
   {
     "id": "el-dubbing-launch-sample-entry",
-    "title": "Preview a new capability",
-    "summary": "A dubbing announcement pairs benefit statements with samples and a direct start action.",
+    "title": "Try a new feature",
+    "summary": "An announcement explains dubbing, provides samples and offers a way to start.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -1019,7 +1019,7 @@
   {
     "id": "el-voice-supplier-earnings-checklist",
     "title": "Guide contributor setup",
-    "summary": "An earnings proposition becomes a three-step voice contribution checklist.",
+    "summary": "A three-step checklist invites creators to publish a voice and earn money when paid users use it.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -1033,7 +1033,7 @@
       "audience": "Existing paid Starter customer exploring the voice-supplier role",
       "journey": "Voices Earnings → professional clone → payout setup → publish",
       "mechanisms": [
-        "Offer an economic reason to contribute supply",
+        "Offer creator earnings when paid users use a published voice",
         "Break setup into explicit prerequisites",
         "Connect a supplier capability to a required paid tier"
       ],
@@ -1062,8 +1062,8 @@
   },
   {
     "id": "el-demand-guided-voice-supply",
-    "title": "Show unmet demand",
-    "summary": "A ranked opportunities table helps voice contributors identify gaps in the marketplace.",
+    "title": "Show which voices are needed",
+    "summary": "A ranked list shows voice contributors which kinds of voices are in demand.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -1103,7 +1103,7 @@
   {
     "id": "el-affiliate-advocacy-entry",
     "title": "Reward recommendations",
-    "summary": "An affiliate offer explains rewards and gives established creators a separate partnership route.",
+    "summary": "People can earn money by recommending ElevenLabs, with a separate partnership option for established creators.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -1115,7 +1115,7 @@
       "audience": "Existing users interested in recommending the product, including creators with an established following",
       "journey": "Account menu → ElevenLabs Affiliate Program",
       "mechanisms": [
-        "Reward advocacy and referral",
+        "Offer money for recommending the product",
         "Segment potential partners by audience reach",
         "Explain the external program handoff"
       ],
@@ -1181,7 +1181,7 @@
   {
     "id": "el-agents-template-assisted-onboarding",
     "title": "Start an agent from a template",
-    "summary": "Use-case templates and a contextual assistant help users choose a first agent setup.",
+    "summary": "Templates and an assistant help people choose and set up their first agent.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",
@@ -1334,8 +1334,8 @@
   },
   {
     "id": "el-api-time-bounded-model-offer",
-    "title": "Time a model offer",
-    "summary": "A dated price promotion gives users an incentive to consider a new API model.",
+    "title": "Offer a limited-time discount",
+    "summary": "A price promotion with an end date invites people to try a new API model.",
     "collectionId": "elevenlabs",
     "sourceName": "ElevenLabs",
     "addedAt": "2026-10-04",

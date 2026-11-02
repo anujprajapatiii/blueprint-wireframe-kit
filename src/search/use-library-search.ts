@@ -1,6 +1,17 @@
 import { useEffect, useState } from "react";
 import type { SearchResult, SearchStatus } from "./contracts";
 import { searchEndpoint, supportsIdeaSearch } from "./config";
+import { buildSearchCatalog } from "./catalog";
+import { getSearchManifest } from "./version";
+import { experiments } from "../experiments/registry";
+
+const catalog = buildSearchCatalog(experiments);
+const expectedManifest = getSearchManifest(catalog);
+const knownIds = new Set(catalog.map(({ id }) => id));
+const sameCatalog = (value: SearchStatus | SearchResult) =>
+  value.catalogVersion === expectedManifest.catalogVersion &&
+  value.catalogCount === expectedManifest.catalogCount &&
+  value.promptVersion === expectedManifest.promptVersion;
 
 type SearchState = {
   query: string;
@@ -10,6 +21,7 @@ type SearchState = {
 
 /** Ranking stays on the API server; the browser never receives the API key. */
 export function useLibrarySearch(query: string, byMeaning: boolean) {
+  const [status, setStatus] = useState<SearchStatus>();
   const [connection, setConnection] = useState<
     "checking" | "ready" | "unconfigured" | "unavailable"
   >(supportsIdeaSearch ? "checking" : "unavailable");
@@ -44,8 +56,23 @@ export function useLibrarySearch(query: string, byMeaning: boolean) {
         }
         if (!response.ok) throw new Error();
         const status = (await response.json()) as SearchStatus;
-        if (typeof status?.configured !== "boolean") throw new Error();
+        if (
+          typeof status?.configured !== "boolean" ||
+          typeof status.model !== "string" ||
+          !/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,79}$/.test(status.model)
+        )
+          throw new Error();
         if (!current) return;
+        if (!sameCatalog(status)) {
+          setConnection("unavailable");
+          setState({
+            query: requested,
+            error:
+              "Search records are out of date. Reload the page or use keyword search.",
+          });
+          return;
+        }
+        setStatus(status);
         setConnection(status.configured ? "ready" : "unconfigured");
         if (!status.configured || !requested) return;
       } catch {
@@ -70,7 +97,7 @@ export function useLibrarySearch(query: string, byMeaning: boolean) {
             typeof body?.code === "string" ? body.code : body?.error?.code;
           throw new Error(
             code === "daily_limit" || code === "client_daily_limit"
-              ? "Jev Search has reached its daily limit. Please try later or use keyword search."
+              ? "Idea search has reached its daily limit. Try later, or search by keyword."
               : response.status === 409 || response.status === 429
                 ? "Idea search is busy. Try again shortly."
                 : "Idea search couldn’t connect. You can still search by name or keyword.",
@@ -78,10 +105,16 @@ export function useLibrarySearch(query: string, byMeaning: boolean) {
         }
         if (
           body?.query !== requested ||
+          !sameCatalog(body) ||
+          typeof body.model !== "string" ||
+          !/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,79}$/.test(body.model) ||
           !Array.isArray(body.matches) ||
+          new Set(body.matches.map((match: { id: string }) => match?.id))
+            .size !== body.matches.length ||
           body.matches.some(
             (match: { id?: unknown; score?: unknown }) =>
               typeof match?.id !== "string" ||
+              !knownIds.has(match.id) ||
               typeof match.score !== "number" ||
               !Number.isFinite(match.score) ||
               match.score < 0 ||
@@ -121,6 +154,7 @@ export function useLibrarySearch(query: string, byMeaning: boolean) {
     requested && state.query === requested ? state.error : undefined;
   return {
     connection,
+    status,
     result,
     error,
     loading: Boolean(

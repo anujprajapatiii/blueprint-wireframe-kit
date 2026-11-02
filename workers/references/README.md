@@ -1,6 +1,6 @@
 # Password-protected Blueprint website
 
-This implementation places the entire Blueprint website, its JavaScript and styles, search, public source recordings, and all 89 selected private original JPEGs behind one password at `https://blueprint-private-references.portfolio-v5.workers.dev/blueprint-wireframe-kit/`. The protected Cloudflare site is deployed; release-specific verification is recorded below. The GitHub Pages redirect deployment and live redirect verification are also complete. This service uses the same Cloudflare destination explicitly approved by Anuj; it does not publish originals to GitHub Pages or Git.
+This implementation places the entire Blueprint website, its JavaScript and styles, search, public source recordings, and all 89 selected private original JPEGs behind one password at `https://blueprint-patterns.pages.dev/blueprint-wireframe-kit/`. A generic Cloudflare Pages gateway forwards requests through a service binding to the existing protected Worker; it holds no private assets or credentials. The former workers.dev address redirects to the generic address. GitHub Pages reaches it through that existing redirect. Blueprint has no personal-domain attachment. Release-specific verification is recorded below.
 
 ## Access contract
 
@@ -36,7 +36,7 @@ npm run site:check
 npx wrangler deploy --config workers/references/wrangler.toml --dry-run
 ```
 
-`site:build` builds the frontend with private references enabled and the protected search URL, then runs asset staging. `site:check` type-checks the Worker and runs its 18 tests. `site:dev` runs the local protected Worker on port 8788; run `site:build` first and provide local-only development secrets. `site:deploy` rebuilds the protected site and deploys it.
+`site:build` builds the frontend with private references enabled and the protected search URL, then runs asset staging. `site:check` type-checks the Worker and runs its 19 tests. `site:dev` runs the local protected Worker on port 8788; run `site:build` first and provide local-only development secrets. `site:deploy` rebuilds the protected site and deploys it.
 
 The staging script consumes that finished `dist` directory and the selected private originals. It rejects symlinks, unexpected local source entries, unsupported frontend file types and source metadata. It verifies unchanged bytes for every copy and stages the complete site in the gitignored `.wrangler/protected-site-assets` directory. It generates only non-secret path lists for the Worker. The original screenshots remain gitignored under `local-references/`.
 
@@ -84,3 +84,17 @@ The production build, 18 gate tests, 8 search tests and both dry runs passed. Pa
 Anuj explicitly authorized publishing the new Linear interactive demo, Gamma shared-folder experiment and Tally workspace-entry update, then confirmed inclusion of all 17 registered original screenshots on this same password-protected website. Website version `2005341b-daa9-49fa-be9f-bbd3c71bcd1d` and internal search version `4827c0e4-1ad9-471a-a98d-e38b0904d6f8` are deployed. The catalog contains 34 experiments and the staged release contains 61 website files and 89 private originals, preserving the previous 72 and adding only Gamma 8, Linear 7 and Tally 2 registered captures. Supporting captures and provenance remain excluded.
 
 The production build, 18 gate tests, 8 search tests and both deployment dry runs passed. The existing password and service boundaries remain in place. See the [growth release record](../../docs/reviews/2026-10-13/published-growth-release.md) for live verification status and evidence. Earlier release records above retain their original scope and counts.
+
+
+## URL migration — 15 October 2026
+
+Anuj requested removing “portfolio” from the live address. The existing Worker now serves `https://blueprint.anujprajapati.com/blueprint-wireframe-kit/`, with the same password and protected assets. The former workers.dev address redirects navigation to the custom domain while preserving paths and queries. Search now uses the current origin's `/search` endpoint. The account subdomain and portfolio custom domains remain unchanged.
+
+The production build, 19 gate tests and deployment dry run passed. Live checks verified the same-password login, anonymous denial, all 150 asset hashes, configured search, invalid-session denial, logout and old-link redirects. The browser confirmed the new-host login form. Worker version: `68f04a93-9201-4c43-80d4-33c13d1ea4a1`. See the [migration record](../../docs/reviews/2026-10-15/url-migration.md).
+
+
+## Generic address — 15 October 2026
+
+Anuj clarified that the live address must use neither his personal domain nor “portfolio”. The live website is now `https://blueprint-patterns.pages.dev/blueprint-wireframe-kit/`, connected through a minimal Pages gateway to the same protected Worker. Anuj explicitly approved adding Pages write access; the existing permissions were retained.
+
+The personal `blueprint.anujprajapati.com` attachment was removed and is unreachable. The portfolio's own apex and www custom domains remain unchanged. The previous workers.dev link redirects to the generic address. See [the final generic-address record](../../docs/reviews/2026-10-15/generic-url.md) and [gateway setup](../gateway/README.md).

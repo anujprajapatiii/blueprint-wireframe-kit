@@ -10,7 +10,7 @@ command = "node workers/search/build-catalog.mjs"
 cwd = "."
 
 [vars]
-TYPESAFE_MODEL = "jev-latest"
+TYPESAFE_MODEL = "jev-1.13.0"
 DAILY_UPSTREAM_LIMIT = "100"
 
 [[durable_objects.bindings]]

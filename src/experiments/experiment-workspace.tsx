@@ -230,7 +230,7 @@ export function ExperimentWorkspace({
   return (
     <main id="main-content" className="experiment-workspace">
       <a href={directoryHref()} className="experiment-back-link">
-        <ArrowLeft size={16} aria-hidden="true" /> All experiments
+        <ArrowLeft size={16} aria-hidden="true" /> Back to experiments
       </a>
       <header className="experiment-workspace-heading">
         <h1>{experiment.title}</h1>
@@ -280,7 +280,7 @@ export function ExperimentWorkspace({
             <div className="flex flex-wrap items-center gap-3">
               {guideActive && (
                 <span className="growth-guide-status" role="status">
-                  Guide on · keep exploring
+                  Guide is on
                 </span>
               )}
               <Button
@@ -371,8 +371,8 @@ export function ExperimentWorkspace({
           </summary>
           <dl className="max-w-4xl space-y-5 pb-6 text-sm leading-6">
             {[
-              ["Observed behavior", experiment.observations.join(" ")],
-              ["Prototype scope", experiment.assumptions.join(" ")],
+              ["What the original shows", experiment.observations.join(" ")],
+              ["Wireframe limits", experiment.assumptions.join(" ")],
             ]
               .filter(([, value]) => value)
               .map(([label, value]) => (

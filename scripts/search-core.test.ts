@@ -119,7 +119,7 @@ test("catalog projection excludes private provenance, research-only items and ou
 
 test("one batched request judges every supplied candidate with explicit query-data boundaries", () => {
   const request = buildSearchRequest("Find upgrade prompts", catalog);
-  assert.equal(request.model, "jev-latest");
+  assert.equal(request.model, "jev-1.13.0");
   assert.equal(Object.keys(request.questions).length, catalog.length);
   assert.deepEqual(request.state.catalog, catalog);
   for (const [index, question] of Object.values(request.questions).entries()) {

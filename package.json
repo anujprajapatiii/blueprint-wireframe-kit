@@ -12,6 +12,7 @@
     "tokens:check": "node scripts/check-tokens.mjs",
     "curator:check": "node --experimental-strip-types --test scripts/curator-core.test.ts",
     "search:check": "node --experimental-strip-types --test scripts/search-core.test.ts",
+    "search:quality": "node scripts/check-search-quality.mjs --fixtures scripts/search-quality.fixtures.json",
     "predev": "npm run tokens:build",
     "prebuild": "npm run tokens:build && npm run tokens:check",
     "search:worker:check": "node workers/search/build-catalog.mjs && tsc --project workers/search/tsconfig.json && node --experimental-strip-types --test workers/search/*.test.ts",
@@ -21,7 +22,9 @@
     "site:build": "node scripts/build-protected-site.mjs",
     "site:check": "tsc --project workers/references/tsconfig.json && node --experimental-strip-types --test workers/references/*.test.ts",
     "site:dev": "wrangler dev --config workers/references/wrangler.toml --local --port 8788",
-    "site:deploy": "npm run site:build && wrangler deploy --config workers/references/wrangler.toml",
+    "site:deploy": "npm run release:deploy",
+    "release:prepare": "node workers/search/build-catalog.mjs && npm run site:build",
+    "release:deploy": "npm run release:prepare && npm run search:worker:deploy && wrangler deploy --config workers/references/wrangler.toml",
     "pages:redirect": "node scripts/build-pages-redirect.mjs"
   },
   "dependencies": {

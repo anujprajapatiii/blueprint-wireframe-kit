@@ -6,6 +6,12 @@ This is a curated growth-pattern reference library for Anuj's design practice. I
 
 This document owns the directory and reference-viewer contract. Follow [Reference workflow](reference-workflow.md) for the end-to-end process from a pasted reference to a locally reviewed index item.
 
+## Page structure
+
+The experiment library is the default homepage. Every library page shares three main links: **Experiments**, **Growth guide**, and **UI kit**. The logo returns to the experiment library. The UI kit has its own Components, Styles, and How to use sections; it does not repeat the growth guide or show duplicate component category controls.
+
+Use `?view=experiments` for the library, `?view=guide` for growth definitions, and `?view=kit` for the kit. Preserve old experiment links and legacy kit/guide anchors. Keep search and filters in experiment return links.
+
 ## Composition and writing
 
 - Use a two-column desktop gallery and one column on narrow screens. Keep preview aspect ratios consistent and landscape, with enough space to reveal the experiment's distinctive structure.
@@ -21,21 +27,21 @@ This document owns the directory and reference-viewer contract. Follow [Referenc
 
 Use **Design intent**, not the nutritional metaphor. Preserve the structured classification and its distinctions in [the data contract](design-intent.md).
 
-Show the primary goal in a yellow pill beside the source and date. Keep the disclosure summary to **Design intent** and its chevron. Put the complete record inside: Goal, Also supports when present, Audience, Journey, Mechanism, Format, and Proposed measure. Show reasoning and measurement limits as a plain footnote, without a second nested disclosure. Do not make the classification table taller or more visually dominant than the recognition preview by default.
+Show the primary goal in a yellow pill beside the source and date. Keep the disclosure summary to **Design intent** and its chevron. Put the complete record inside: Goal, Also supports when present, Who it’s for, What people do, How it may help, Format, and What to measure. The underlying classification fields stay unchanged. Show reasoning and measurement limits as a plain footnote, without a second nested disclosure. Do not make the classification table taller or more visually dominant than the recognition preview by default.
 
-Use the shared `DesignIntent` renderer on cards, experiment pages, and examples. Its Lucide icons identify each field consistently: Target for Goal, GitBranch for Also supports, Users for Audience, Route for Journey, Cog for Mechanism, PanelsTopLeft for Format, and ChartColumn for Proposed measure. Keep these icons decorative beside visible labels; they do not replace the labels.
+Use the shared `DesignIntent` renderer on cards, experiment pages, and examples. Its Lucide icons identify each field consistently: Target for Goal, GitBranch for Also supports, Users for Who it’s for, Route for What people do, Cog for How it may help, PanelsTopLeft for Format, and ChartColumn for What to measure. Keep these icons decorative beside visible labels; they do not replace the labels.
 
-Keep the eight growth categories and three overarching outcomes unchanged. The kit's **Growth definitions** remain the shared source for their meaning. Proposed outcomes are hypotheses, not claims of observed improvement.
+Keep the eight growth categories and three overarching outcomes unchanged. The **Growth guide** remains the shared source for their meaning. Proposed outcomes are hypotheses, not claims of observed improvement.
 
 ## Find and return
 
 - Search titles, source names, summaries, focus, observed behavior, original copy, inspection limits, and design-intent fields. Match both primary and secondary goals. Use stable goal and type values from the shared definitions.
-- Put a large, full-width search field above the rectangular goal buttons. Support finding a known name and describing a design need. Keep the search surface blue; it is a library control. Follow it with the goal row, then finer Source/Type/sort controls. Include **All** and only categories with coverage in the active catalog, including supported secondary goals. Use the shared taxonomy for labels and ordering so newly represented goals appear automatically; do not maintain a separate hard-coded category list or show empty taxonomy categories.
+- Put a large, full-width search field above the rectangular goal buttons. Support finding a known name and describing a design need. Keep the search surface blue; it is a library control. Follow it with the goal row, then Company/Format/sort controls. Company and Format are the visible labels for the existing source and type filters; their URL values remain unchanged. Include **All** and only categories with coverage in the active catalog, including supported secondary goals. Use the shared taxonomy for labels and ordering so newly represented goals appear automatically; do not maintain a separate hard-coded category list or show empty taxonomy categories.
 - Keep the goal row keyboard-operable with visible selection and focus, and let it scroll within its own container on narrow screens. Icons accompany visible labels. Do not duplicate goal selection in a dropdown below it.
-- Use the kit's shared Select for Source, Type, and sort controls so icon spacing, keyboard behavior, and menu styling stay consistent with the component library.
+- Use the kit's shared Select for Company, Format, and sort controls so icon spacing, keyboard behavior, and menu styling stay consistent with the component library.
 - Show the result count and a useful empty state with one clear reset action. Preserve selected filters while editing the query.
 - Keep search, search mode, sort, and filters in the URL. Opening either an experiment or its original reference, then returning to the directory, should preserve that context. Existing unfiltered experiment links must continue to work.
-- Offer recently updated and alphabetical order, plus Best match while a query is present. Typing gives keyword matches; submitting an idea in the local library uses TypeSafe to rank the active catalog. Goal, source, and type refine those ranked results without extra inference. Never apply the old literal-query filter again after semantic retrieval. A meaningful no-match is preferable to forced unrelated suggestions. See [Search behavior](search.md).
+- Use **Experiments** consistently for library entries and result counts. Label the search **Search experiments**, with a **Search** button and example placeholder. Keep service/model names out of ordinary search controls. Use **Clear search and filters** for actions that reset both. Offer recently updated and alphabetical order, plus Best match while a query is present. Typing gives keyword matches; submitting an idea in the local library uses TypeSafe to rank the active catalog. Goal, source, and type refine those ranked results without extra inference. Never apply the old literal-query filter again after semantic retrieval. A meaningful no-match is preferable to forced unrelated suggestions. See [Search behavior](search.md).
 
 ## Original references
 

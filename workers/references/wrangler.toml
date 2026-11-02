@@ -4,6 +4,9 @@ compatibility_date = "2026-10-06"
 workers_dev = true
 preview_urls = false
 
+# Blueprint uses a generic Pages gateway, with no personal-domain routes.
+routes = []
+
 [build]
 command = "node workers/references/build-assets.mjs"
 cwd = "."

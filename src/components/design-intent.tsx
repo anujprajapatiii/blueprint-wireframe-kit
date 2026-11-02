@@ -17,18 +17,18 @@ import {
 const fieldIcons = {
   Goal: Target,
   "Also supports": GitBranch,
-  Audience: Users,
-  Journey: Route,
-  Mechanism: Cog,
+  "Who it’s for": Users,
+  "What people do": Route,
+  "How it may help": Cog,
   Format: PanelsTopLeft,
-  "Proposed measure": ChartColumn,
+  "What to measure": ChartColumn,
 };
 type IntentRow = [keyof typeof fieldIcons, ReactNode];
 
 function CategoryLink({ id }: { id: GrowthCategoryId }) {
   return (
     <a
-      href={`?#growth-category-${id}`}
+      href={`?view=guide#growth-category-${id}`}
       className="underline decoration-input underline-offset-4 hover:decoration-foreground"
     >
       {growthCategoryById[id].name}
@@ -60,11 +60,11 @@ export function DesignIntent({
           ],
         ] as IntentRow[])
       : []),
-    ["Audience", intent.audience],
-    ["Journey", intent.journey],
-    ["Mechanism", intent.mechanisms.join(" · ")],
+    ["Who it’s for", intent.audience],
+    ["What people do", intent.journey],
+    ["How it may help", intent.mechanisms.join(" · ")],
     ["Format", intent.format],
-    ["Proposed measure", intent.measure],
+    ["What to measure", intent.measure],
   ];
   return (
     <div className={`min-w-0 text-sm ${className}`}>
@@ -92,7 +92,7 @@ export function DesignIntent({
         {intent.basis}
       </p>
       <p className="mt-2 text-xs leading-5 text-muted-foreground">
-        A working hypothesis. Results haven’t been measured.
+        This explains the design. Its effect has not been measured.
       </p>
     </div>
   );

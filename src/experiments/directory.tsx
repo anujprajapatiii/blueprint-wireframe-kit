@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
-  BookOpen,
   ChevronDown,
   Search,
   X,
@@ -40,6 +39,8 @@ import { experiments, type Experiment, type ExperimentType } from "./registry";
 import { ExperimentPreview } from "./experiment-preview";
 import { useLibrarySearch } from "../search/use-library-search";
 import { supportsIdeaSearch } from "../search/config";
+import { searchDescriptions } from "../search/descriptions";
+import { SearchFeedback } from "../search/search-feedback";
 
 const types: ExperimentType[] = ["Screen", "Flow", "Experience"];
 const goalIcons = {
@@ -299,7 +300,7 @@ export function ExperimentDirectory() {
     return () => removeEventListener("popstate", restore);
   }, []);
 
-  const results = useMemo(() => {
+  const matches = useMemo(() => {
     const query = filters.query.trim().toLocaleLowerCase();
     const terms = query.split(/\s+/).filter(Boolean);
     const ranked = semantic.result
@@ -312,6 +313,7 @@ export function ExperimentDirectory() {
         const searchable = [
           experiment.title,
           experiment.summary,
+          searchDescriptions[experiment.id] ?? "",
           experiment.sourceName,
           experiment.source,
           ...experiment.focus,
@@ -346,12 +348,7 @@ export function ExperimentDirectory() {
             ),
         );
         return (
-          (filters.type === "all" || experiment.type === filters.type) &&
-          (filters.source === "all" ||
-            experiment.sourceName === filters.source) &&
-          (filters.goal === "all" ||
-            goal.primary === filters.goal ||
-            goal.secondary.includes(filters.goal)) &&
+          experiment.status !== "Archived" &&
           (ranked
             ? ranked.has(experiment.id)
             : terms.every((term) => searchable.includes(term)))
@@ -366,7 +363,23 @@ export function ExperimentDirectory() {
               a.title.localeCompare(b.title)
             : b.updatedAt.localeCompare(a.updatedAt),
       );
-  }, [filters, semantic.result]);
+  }, [filters.query, filters.sort, semantic.result]);
+  const results = useMemo(
+    () =>
+      matches.filter(
+        (experiment) =>
+          (filters.type === "all" || experiment.type === filters.type) &&
+          (filters.source === "all" ||
+            experiment.sourceName === filters.source) &&
+          (filters.goal === "all" ||
+            experiment.growth.primary === filters.goal ||
+            experiment.growth.secondary.includes(filters.goal)),
+      ),
+    [matches, filters.type, filters.source, filters.goal],
+  );
+  const hiddenMatches = matches.length - results.length;
+  const clearFilters = () =>
+    update({ goal: "all", source: "all", type: "all" });
   const filtered = Boolean(
     filters.query.trim() ||
     filters.type !== "all" ||
@@ -391,32 +404,25 @@ export function ExperimentDirectory() {
                 </a>
               </Button>
             )}
-            <a
-              href="?#growth"
-              aria-label="Growth definitions"
-              className="inline-flex min-h-11 items-center gap-2 rounded-md px-1 text-xs text-muted-foreground hover:text-foreground sm:px-3 sm:text-sm"
-            >
-              <BookOpen size={16} aria-hidden="true" />
-              Definitions
-            </a>
           </div>
         </div>
         <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
-          Growth patterns to study, test, and reuse.
+          Explore how real products encourage sign-ups, upgrades, and continued
+          use.
         </p>
       </header>
 
       <form
         role="search"
-        aria-label="Jev Search"
+        aria-label="Search experiments"
         onSubmit={(event) => {
           event.preventDefault();
           search();
         }}
         className="mt-8"
       >
-        <Label htmlFor="experiment-search" className="sr-only">
-          Jev Search
+        <Label htmlFor="experiment-search" className="mb-3 block">
+          Search experiments
         </Label>
         <div className="flex min-w-0 flex-wrap items-center gap-2 rounded-lg border border-input bg-surface-sunken p-3 text-foreground shadow-sm focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring sm:flex-nowrap sm:gap-4 sm:p-4">
           <Search
@@ -440,8 +446,8 @@ export function ExperimentDirectory() {
             }
             placeholder={
               supportsIdeaSearch
-                ? "Search patterns or ideas"
-                : "Search names or goals"
+                ? "e.g. compare plans"
+                : "e.g. Tally or upgrade"
             }
             className="h-12 w-0 flex-1 rounded-none border-0 bg-transparent px-1 text-base shadow-none focus-visible:outline-none sm:h-14 sm:text-xl [&::-webkit-search-cancel-button]:hidden"
           />
@@ -473,7 +479,7 @@ export function ExperimentDirectory() {
             ) : (
               <ArrowRight aria-hidden="true" />
             )}
-            {semantic.loading ? "Searching…" : "Jev Search"}
+            {semantic.loading ? "Searching…" : "Search"}
           </Button>
         </div>
         <p
@@ -481,8 +487,8 @@ export function ExperimentDirectory() {
           className="mt-3 text-sm text-muted-foreground"
         >
           {supportsIdeaSearch
-            ? "Describe what you want people to do, then press Enter to search by meaning."
-            : "Find patterns by name, source, behavior, or growth goal."}
+            ? "Keywords match as you type. Select Search or press Enter to search by meaning with Jev."
+            : "Search by company, feature, or growth goal."}
         </p>
         {supportsIdeaSearch && (
           <div className="mt-1 flex flex-wrap items-center gap-x-1 gap-y-0 text-xs text-muted-foreground">
@@ -579,7 +585,7 @@ export function ExperimentDirectory() {
         className="mt-5 grid grid-cols-2 gap-4 sm:max-w-lg"
       >
         <div className="flex min-w-0 flex-col gap-2">
-          <Label htmlFor="experiment-source">Source</Label>
+          <Label htmlFor="experiment-source">Company</Label>
           <Select
             value={filters.source}
             onValueChange={(source) => update({ source })}
@@ -588,7 +594,7 @@ export function ExperimentDirectory() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All sources</SelectItem>
+              <SelectItem value="all">All companies</SelectItem>
               {sources.map((source) => (
                 <SelectItem key={source} value={source}>
                   {source}
@@ -598,7 +604,7 @@ export function ExperimentDirectory() {
           </Select>
         </div>
         <div className="flex min-w-0 flex-col gap-2">
-          <Label htmlFor="experiment-type">Type</Label>
+          <Label htmlFor="experiment-type">Format</Label>
           <Select
             value={filters.type}
             onValueChange={(type) => update({ type: type as Filters["type"] })}
@@ -607,10 +613,14 @@ export function ExperimentDirectory() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All types</SelectItem>
+              <SelectItem value="all">All formats</SelectItem>
               {types.map((type) => (
                 <SelectItem key={type} value={type}>
-                  {type}
+                  {type === "Screen"
+                    ? "Single screen"
+                    : type === "Flow"
+                      ? "Multi-step flow"
+                      : "Interactive experience"}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -622,21 +632,36 @@ export function ExperimentDirectory() {
         <div className="flex flex-wrap items-center gap-3">
           <p role="status" className="text-sm text-muted-foreground">
             {semantic.loading ? (
-              "Finding relevant patterns…"
+              "Finding related experiments…"
             ) : searchUnavailable ? (
               "Idea search unavailable"
             ) : (
               <>
                 {results.length}{" "}
-                {results.length === 1 ? "wireframe" : "wireframes"}
+                {results.length === 1 ? "experiment" : "experiments"}
                 {semantic.result
                   ? " matching your idea"
                   : filters.query.trim()
                     ? " matching your keywords"
                     : ""}
+                {filters.query.trim() &&
+                  hiddenMatches > 0 &&
+                  ` · ${hiddenMatches} more outside these filters`}
               </>
             )}
           </p>
+          {!semantic.loading &&
+            !searchUnavailable &&
+            filters.query.trim() &&
+            hiddenMatches > 0 && (
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="min-h-10 rounded-sm px-2 text-xs underline underline-offset-4 hover:text-foreground"
+              >
+                Show all matches
+              </button>
+            )}
           {filtered && (
             <button
               type="button"
@@ -644,7 +669,7 @@ export function ExperimentDirectory() {
               className="inline-flex min-h-10 items-center gap-1.5 rounded-sm px-2 text-xs hover:bg-secondary"
             >
               <X size={13} aria-hidden="true" />
-              Clear filters
+              Clear search and filters
             </button>
           )}
         </div>
@@ -681,7 +706,7 @@ export function ExperimentDirectory() {
             aria-hidden="true"
             className="size-5 motion-safe:animate-spin"
           />
-          <p>Looking for the right patterns…</p>
+          <p>Finding related experiments…</p>
         </div>
       ) : searchUnavailable ? (
         <section
@@ -695,20 +720,19 @@ export function ExperimentDirectory() {
           />
           <h2 id="search-unavailable-title" className="text-xl font-semibold">
             {semantic.connection === "unconfigured" && import.meta.env.DEV
-              ? "Connect idea search"
+              ? "Idea search isn’t connected"
               : "Idea search couldn’t finish"}
           </h2>
           <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-muted-foreground">
             {semantic.connection === "unconfigured" && import.meta.env.DEV
-              ? "Connect TypeSafe to find patterns by meaning. Keyword search is available without it."
-              : (semantic.error ??
-                "The search service couldn’t connect. Try again to reconnect.")}
+              ? "You can still search by company, feature, or keyword."
+              : (semantic.error ?? "Try again, or search by keyword.")}
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             {semantic.connection === "unconfigured" && import.meta.env.DEV ? (
               <Button asChild>
                 <a href={`?${filterParams(filters)}&tool=curator`}>
-                  Connect TypeSafe
+                  Set up idea search
                 </a>
               </Button>
             ) : (
@@ -748,18 +772,49 @@ export function ExperimentDirectory() {
               : "Nothing matches these filters"}
           </h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
-            {supportsIdeaSearch && filters.query.trim() && !semantic.result
-              ? "Press Jev Search or Enter to find patterns by meaning, including related words and ideas."
-              : "Try a different search or clear the filters to browse everything."}
+            {hiddenMatches > 0
+              ? "There are matching experiments outside these filters."
+              : supportsIdeaSearch && filters.query.trim() && !semantic.result
+                ? "Select Search to include related ideas, or clear the search and filters."
+                : "Try another search, or clear the search and filters to see all experiments."}
           </p>
           <Button
             className="mt-5"
             variant="outline"
-            onClick={() => setFilters(defaults)}
+            onClick={() =>
+              hiddenMatches > 0 ? clearFilters() : setFilters(defaults)
+            }
           >
-            Show everything
+            {hiddenMatches > 0
+              ? "Show all matches"
+              : "Clear search and filters"}
           </Button>
         </section>
+      )}
+      {semantic.result && (
+        <SearchFeedback
+          key={`${semantic.result.query}:${semantic.result.catalogVersion}`}
+          query={semantic.result.query}
+          result={semantic.result}
+          experiments={experiments}
+        />
+      )}
+      {import.meta.env.DEV && semantic.status && (
+        <details className="mt-8 text-xs text-muted-foreground">
+          <summary className="w-fit cursor-pointer rounded-sm py-2">
+            Search details
+          </summary>
+          <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 break-all">
+            <dt>Model</dt>
+            <dd>{semantic.result?.model ?? semantic.status.model}</dd>
+            <dt>Records</dt>
+            <dd>{semantic.status.catalogCount}</dd>
+            <dt>Catalog</dt>
+            <dd>{semantic.status.catalogVersion}</dd>
+            <dt>Matching rules</dt>
+            <dd>{semantic.status.promptVersion}</dd>
+          </dl>
+        </details>
       )}
     </main>
   );

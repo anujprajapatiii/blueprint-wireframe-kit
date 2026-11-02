@@ -1,7 +1,5 @@
-import { SiteLock } from "./components/site-lock";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
-  ArrowUpRight,
   Check,
   CheckCheck,
   Code2,
@@ -10,12 +8,10 @@ import {
   ExternalLink,
   Grid2X2,
   LayoutGrid,
-  Menu,
   Minus,
   Plus,
   Search,
   SlidersHorizontal,
-  X,
 } from "lucide-react";
 import {
   Accordion,
@@ -94,8 +90,12 @@ import {
 } from "./components/patterns";
 
 import { Foundations } from "./components/foundations";
-import { BlueprintLogo } from "./components/blueprint-logo";
-import { GrowthReference } from "./growth/reference";
+import { SiteHeader } from "./components/site-header";
+import {
+  componentAnchors,
+  resolveKitSection,
+  useSiteLocation,
+} from "./site-navigation";
 
 const repository = "https://github.com/anujprajapatiii/blueprint-wireframe-kit";
 const categories = [
@@ -134,7 +134,7 @@ function Example({
     <section
       id={spec.id}
       aria-labelledby={`${spec.id}-heading`}
-      className="specimen scroll-mt-24 min-w-0 rounded-md border border-border bg-card"
+      className="specimen scroll-mt-36 min-w-0 rounded-md border border-border bg-card"
     >
       <div className="flex min-h-14 items-center justify-between gap-2 border-b border-border px-5">
         <h2 id={`${spec.id}-heading`} className="text-sm font-medium">
@@ -283,6 +283,11 @@ function ModalDemo({ notify }: { notify: (s: string) => void }) {
 }
 
 function App() {
+  const location = useSiteLocation();
+  const section = resolveKitSection(location.hash);
+  useEffect(() => {
+    document.title = "UI kit — Blueprint";
+  }, []);
   const [category, setCategory] = useState<Category>("All components");
   const [query, setQuery] = useState("");
   const [grid, setGrid] = useState(true);
@@ -291,8 +296,25 @@ function App() {
   const [slider, setSlider] = useState([60]);
   const [progress, setProgress] = useState(64);
   const [selectedTab, setSelectedTab] = useState("overview");
-  const [mobileNav, setMobileNav] = useState(false);
   const [taskOne, setTaskOne] = useState(true);
+  useEffect(() => {
+    const anchor = location.hash.slice(1);
+    if (componentAnchors.has(anchor)) {
+      setCategory("All components");
+      setQuery("");
+    }
+    const frame = window.requestAnimationFrame(() => {
+      if (["components", "foundations", "usage"].includes(anchor)) {
+        window.scrollTo({ top: 0, behavior: "instant" });
+        return;
+      }
+      document.getElementById(anchor)?.scrollIntoView({
+        behavior: "instant",
+        block: "start",
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [location.hash]);
   const notify = (text: string) => setMessage(text);
   const specs: Spec[] = [
     {
@@ -1089,151 +1111,61 @@ function App() {
     <TooltipProvider delayDuration={250}>
       <div className={cn("min-h-screen", grid && "blueprint-grid")}>
         <a
-          href="#main-content"
+          href={`?view=kit#${section}`}
+          onClick={(event) => {
+            event.preventDefault();
+            const main = document.getElementById("main-content");
+            main?.focus({ preventScroll: true });
+            main?.scrollIntoView({ behavior: "instant", block: "start" });
+          }}
           className="fixed left-4 top-4 z-[100] -translate-y-24 rounded bg-primary px-4 py-3 text-primary-foreground focus:translate-y-0"
         >
-          Skip to components
+          Skip to content
         </a>
-        <header className="sticky top-0 z-[var(--layer-sticky)] border-b border-border bg-surface-sunken">
-          <div className="mx-auto flex h-[72px] max-w-[1800px] items-center justify-between gap-4 px-5 lg:px-8">
-            <BlueprintLogo />
-            <nav
-              aria-label="Main navigation"
-              className="hidden items-center gap-7 text-sm md:flex"
-            >
-              <a
-                href="#components"
-                className="underline underline-offset-8 decoration-input"
-              >
-                Components
-              </a>
-              <a
-                href="#foundations"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Foundations
-              </a>
-              <a
-                href="#growth"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Growth
-              </a>
-              <a
-                href="#usage"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                How to use
-              </a>
-              <a
-                href="?view=experiments"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Experiments
-              </a>
-            </nav>
-            <div className="flex items-center gap-2 sm:gap-4">
-              <SiteLock />
-              <a
-                href={repository}
-                target="_blank"
-                rel="noreferrer"
-                className={`${import.meta.env.VITE_PRIVATE_REFERENCES_ENABLED === "true" ? "hidden sm:flex" : "flex"} h-10 items-center gap-2 rounded-md border border-input px-3 text-sm hover:bg-muted`}
-              >
-                Source <ArrowUpRight size={15} aria-hidden="true" />
-              </a>
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="Toggle navigation"
-                aria-expanded={mobileNav}
-                onClick={() => setMobileNav(!mobileNav)}
-                className="md:hidden"
-              >
-                {mobileNav ? <X size={18} /> : <Menu size={18} />}
-              </Button>
-            </div>
-          </div>
-          {mobileNav && (
-            <nav
-              aria-label="Mobile navigation"
-              className="flex flex-wrap gap-5 border-t px-5 py-4 text-sm md:hidden"
-            >
-              {[
-                ["Components", "components"],
-                ["Foundations", "foundations"],
-                ["Growth", "growth"],
-                ["How to use", "usage"],
-              ].map(([a, b]) => (
-                <a key={b} href={`#${b}`} onClick={() => setMobileNav(false)}>
-                  {a}
-                </a>
-              ))}
-              <a href="?view=experiments">Experiments</a>
-            </nav>
-          )}
-        </header>
-        <div className="mx-auto flex max-w-[1800px]">
-          <aside className="no-print sticky top-[72px] hidden h-[calc(100dvh-72px)] w-[216px] shrink-0 flex-col border-r border-border bg-surface-sunken px-5 py-8 lg:flex">
-            <nav aria-label="Component categories" className="space-y-1">
-              {categories.map((c, i) => (
-                <button
-                  key={c}
-                  onClick={() => {
-                    setCategory(c);
-                    setQuery("");
-                    document.getElementById("components")?.scrollIntoView();
-                  }}
-                  className="sidebar-link flex min-h-10 w-full items-center justify-between rounded-md border border-transparent px-3 text-left text-sm text-muted-foreground hover:bg-muted/60"
-                  aria-current={category === c ? "true" : undefined}
-                >
-                  <span>{c === "All components" ? "Overview" : c}</span>
-                  <span className="font-mono text-xs">
-                    {i === 0
-                      ? specs.length
-                      : specs.filter((s) => s.category === c).length}
-                  </span>
-                </button>
-              ))}
-            </nav>
-            <Separator className="my-6" />
-            <a
-              href="#foundations"
-              className="px-3 py-3 text-sm text-muted-foreground hover:text-foreground"
-            >
-              Design tokens
-            </a>
-            <a
-              href="#growth"
-              className="px-3 py-3 text-sm text-muted-foreground hover:text-foreground"
-            >
-              Growth definitions
-            </a>
-            <a
-              href="#usage"
-              className="px-3 py-3 text-sm text-muted-foreground hover:text-foreground"
-            >
-              Using the kit
-            </a>
-          </aside>
+        <SiteHeader active="kit" />
+        <div className="mx-auto max-w-[1440px]">
           <main
             id="main-content"
-            className="min-w-0 flex-1 px-5 pb-12 pt-8 sm:px-8 lg:px-10"
+            tabIndex={-1}
+            className="min-w-0 scroll-mt-36 px-5 pb-12 pt-8 sm:px-8"
           >
-            <section id="components" className="scroll-mt-28">
-              <div className="mb-8 flex flex-wrap items-end justify-between gap-5">
-                <div>
-                  <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                    Wireframe components
-                    <span className="text-muted-foreground">.</span>
-                  </h1>
-                  <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
-                    Reusable components and foundations for professional
-                    wireframing.
-                  </p>
-                </div>
-              </div>
-              <div className="mb-6 flex flex-col justify-between gap-4 border-b border-border pb-5 xl:flex-row xl:items-center">
+            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              UI kit
+            </h1>
+            <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
+              Reusable components and styles for building wireframes.
+            </p>
+            <nav
+              aria-label="UI kit sections"
+              className="mb-8 mt-6 flex flex-wrap gap-5 border-b border-border"
+            >
+              {[
+                ["components", "Components"],
+                ["foundations", "Styles"],
+                ["usage", "How to use"],
+              ].map(([id, label]) => (
+                <a
+                  key={id}
+                  href={`?view=kit#${id}`}
+                  aria-current={section === id ? "page" : undefined}
+                  className={cn(
+                    "flex min-h-11 items-center border-b-2 px-1 text-sm",
+                    section === id
+                      ? "border-foreground text-foreground"
+                      : "border-transparent text-muted-foreground hover:text-foreground",
+                  )}
+                >
+                  {label}
+                </a>
+              ))}
+            </nav>
+            <section
+              id="components"
+              hidden={section !== "components"}
+              aria-label="Components"
+              className="scroll-mt-36"
+            >
+              <div className="mb-6 flex flex-col justify-between gap-4 border-b border-border pb-5 xl:flex-row xl:items-end">
                 <div
                   className="flex flex-wrap gap-1.5"
                   aria-label="Filter components"
@@ -1259,34 +1191,39 @@ function App() {
                     </button>
                   ))}
                 </div>
-                <div className="flex gap-3">
-                  <div className="relative min-w-0 flex-1 xl:w-48">
-                    <Search
-                      size={15}
-                      aria-hidden="true"
-                      className="absolute left-3 top-3.5 text-muted-foreground"
-                    />
-                    <Input
-                      aria-label="Find a component"
-                      placeholder="Find a component…"
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                      className="h-10 pl-9 text-sm"
-                    />
+                <div className="flex items-end gap-3">
+                  <div className="min-w-0 flex-1 xl:w-56">
+                    <Label htmlFor="component-search" className="mb-2 block">
+                      Find a component
+                    </Label>
+                    <div className="relative">
+                      <Search
+                        size={15}
+                        aria-hidden="true"
+                        className="absolute left-3 top-3.5 text-muted-foreground"
+                      />
+                      <Input
+                        id="component-search"
+                        placeholder="Button, dialog…"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        className="h-10 pl-9 text-sm"
+                      />
+                    </div>
                   </div>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button
                         variant="outline"
                         size="icon"
-                        aria-label="Toggle blueprint grid"
+                        aria-label="Show blueprint grid"
                         aria-pressed={grid}
                         onClick={() => setGrid(!grid)}
                       >
                         <Grid2X2 size={17} />
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>Toggle blueprint grid</TooltipContent>
+                    <TooltipContent>Show blueprint grid</TooltipContent>
                   </Tooltip>
                 </div>
               </div>
@@ -1302,8 +1239,12 @@ function App() {
               ) : (
                 <div className="rounded-md border border-dashed border-input bg-card py-12">
                   <EmptyState
-                    title="No components found"
-                    description="Try a different name or category."
+                    title={
+                      query.trim()
+                        ? `No components for “${query.trim()}”`
+                        : "No components found"
+                    }
+                    description="Try another name, or clear the search and filters."
                   >
                     <Button
                       variant="outline"
@@ -1312,7 +1253,7 @@ function App() {
                         setCategory("All components");
                       }}
                     >
-                      Clear filters
+                      Clear search and filters
                     </Button>
                   </EmptyState>
                 </div>
@@ -1322,40 +1263,41 @@ function App() {
                 <span>React · Tailwind · Radix</span>
               </div>
             </section>
-            <Foundations />
-            <GrowthReference />
+            <div hidden={section !== "foundations"}>
+              <Foundations standalone />
+            </div>
             <section
               id="usage"
-              className="mt-16 scroll-mt-28 border-t border-border pt-8"
+              hidden={section !== "usage"}
+              className="scroll-mt-36"
             >
               <h2 className="text-2xl font-semibold tracking-tight">
-                Using the kit
+                How to use
               </h2>
               <div className="mt-5 grid gap-8 lg:grid-cols-2">
                 <div>
                   <p className="max-w-lg text-base leading-7 text-muted-foreground">
-                    Use the components as building blocks. Keep the theme in one
-                    place, compose a screen, and spend your energy on the
-                    problem.
+                    Start with a component, copy its code, and adapt it to your
+                    screen. Shared styles keep the examples consistent.
                   </p>
                   <ol className="mt-6 space-y-4 text-sm">
                     <li className="flex gap-3">
                       <span className="font-mono text-muted-foreground">
                         01
                       </span>
-                      Get the source from the repository.
+                      Download the kit from GitHub.
                     </li>
                     <li className="flex gap-3">
                       <span className="font-mono text-muted-foreground">
                         02
                       </span>
-                      Copy a component example from any tile.
+                      Open a component’s Code view and copy the example.
                     </li>
                     <li className="flex gap-3">
                       <span className="font-mono text-muted-foreground">
                         03
                       </span>
-                      Compose, question, and change it.
+                      Combine components and change the copy for your design.
                     </li>
                   </ol>
                   <a
@@ -1364,7 +1306,7 @@ function App() {
                     rel="noreferrer"
                     className="mt-6 inline-flex h-10 items-center gap-2 rounded-md border border-input px-4 text-sm hover:bg-muted"
                   >
-                    Open repository
+                    Open kit on GitHub
                     <ExternalLink size={14} />
                   </a>
                 </div>
